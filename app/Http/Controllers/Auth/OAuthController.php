@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -24,10 +25,13 @@ class OAuthController extends Controller
             return $this->sendFailedResponse("{$driver} is not currently supported");
         }
 
+        if (Auth::user() && !empty(Auth::user()->discord_user_id)) {
+            return $this->sendFailedResponse("You are already logged in!");
+        }
+
         try {
             return Socialite::driver($driver)->redirect();
         } catch (Exception $e) {
-            dd($e);
             return $this->sendFailedResponse($e->getMessage());
         }
     }
@@ -41,18 +45,20 @@ class OAuthController extends Controller
             return $this->sendFailedResponse($e->getMessage());
         }
 
-        if($user->quaver_user_id??null) {
-            $this->loginOrCreateQuaverAccount($user);
-        } elseif($user->discord_user_id??null) {
-            $this->loginOrCreateDiscordAccount($user);
+        if ($user->quaver_user_id ?? null) {
+            return $this->loginOrCreateQuaverAccount($user);
         }
 
-        return $this->sendFailedResponse("No email id returned from {$driver} provider.");
+        if ($user->discord_user_id ?? null) {
+            return $this->loginOrCreateDiscordAccount($user);
+        }
+
+        return $this->sendFailedResponse("No user returned from {$driver} provider.");
     }
 
     protected function sendFailedResponse($msg = null)
     {
-        return redirect(route('home'));
+        return redirect(route('home'))->with('error', $msg);
     }
 
     protected function loginOrCreateQuaverAccount($providerUser)
@@ -62,18 +68,23 @@ class OAuthController extends Controller
         if (empty($user)) {
             $user = User::create([
                 'quaver_user_id' => $providerUser->quaver_user_id,
-                'quaver_username' => $providerUser->quaver_username
+                'quaver_username' => $providerUser->quaver_username,
+                'quaver_avatar' => $providerUser->quaver_avatar
             ]);
         }
 
         Auth::login($user, true);
+
+        if (empty($user->discord_user_id)) {
+            return redirect(route('oauth', 'discord'));
+        }
 
         return redirect(route('home'));
     }
 
     protected function loginOrCreateDiscordAccount($providerUser)
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             return redirect(route('home'));
         }
 
@@ -94,5 +105,13 @@ class OAuthController extends Controller
     private function isProviderAllowed($driver)
     {
         return in_array($driver, $this->providers) && config()->has("services.{$driver}");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect(route('home'))->with(['success' => __('Logged out successfully!')]);
     }
 }

@@ -43,7 +43,8 @@ class QuaverSocialiteProvider extends AbstractProvider
     {
         return (new User())->setRaw($user)->map([
             'quaver_user_id' => $user['user']['id'],
-            'quaver_username' => $user['user']['username']
+            'quaver_username' => $user['user']['username'],
+            'quaver_avatar' => $user['user']['avatar']??null
         ]);
     }
 }

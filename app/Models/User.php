@@ -13,6 +13,7 @@ class User extends Authenticatable
     protected $fillable = [
         'quaver_user_id',
         'quaver_username',
+        'quaver_avatar',
         'discord_user_id',
         'discord_username',
         'timezone'

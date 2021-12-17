@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('quaver_username');
             $table->string('discord_username')->nullable()->default(null);
 
+            $table->string('quaver_avatar')->nullable()->default(null);
+
             $table->integer('timezone')->nullable()->default(null);
 
             $table->rememberToken();
