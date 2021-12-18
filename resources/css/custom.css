@@ -112,6 +112,37 @@ select:focus {
     color: white !important;
 }
 
+#prizes .first-place {
+    border-top: 4px solid #fadd40;
+}
+
+#prizes .second-place {
+    margin-top: 30px;
+    border-top: 4px solid #D1D7DA;
+}
+
+#prizes .third-place {
+    margin-top: 30px;
+    border-top: 4px solid #DF7E06;
+}
+
+#prizes .medal {
+    font-size: 100px;
+    text-align: center;
+    line-height: 1;
+}
+
+#prizes .list-group {
+    margin-top: 20px;
+}
+
+#prizes .list-group .list-group-item {
+    background: transparent !important;
+    color: #ffffff;
+    text-align: center;
+    border-color: #ccc;
+}
+
 footer {
     color: #ffffff;
     margin-bottom: 20px;
