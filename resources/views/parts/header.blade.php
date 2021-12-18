@@ -20,7 +20,11 @@
                 <ul class="navbar-nav ms-md-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">{{ $loggedUser['quaver_username'] }}</a>
+                           aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ $loggedUser['quaver_avatar'] }}" alt="{{ $loggedUser['quaver_username'] }}"
+                                 class="rounded" width="30" height="30">
+                            {{ $loggedUser['quaver_username'] }}
+                        </a>
                         <div class="dropdown-menu">
                             @if(!Auth::user()->discord_user_id)
                                 <a class="dropdown-item" href="#">{{ __('Connect with Discord') }}</a>
