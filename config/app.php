@@ -232,4 +232,7 @@ return [
 
     ],
 
+    'force_lock' => env('FORCE_LOCK', false),
+    'auth_user' => env('AUTH_USER', ''),
+    'auth_password' => env('AUTH_PASSWORD', '')
 ];

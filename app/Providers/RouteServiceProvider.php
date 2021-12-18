@@ -37,6 +37,16 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        if (config('app.force_lock') === true) {
+            if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != config('app.auth_user')
+                || $_SERVER['PHP_AUTH_PW'] != config('app.auth_password')) {
+                header('WWW-Authenticate: Basic realm="qot.ovh"');
+                header('HTTP/1.0 401 Unauthorized');
+                die('Access Denied - btw aya sucks at html');
+            }
+        }
+
+
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')
