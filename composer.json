@@ -2,15 +2,19 @@
     "name": "aiae/qot",
     "type": "project",
     "description": "Qauver Official Tournament",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-json": "*",
+        "dyanakiev/html": "^6.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
-        "laravel/socialite": "^5.2",
-      "ext-json": "*"
+        "laravel/socialite": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -21,7 +25,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/General.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [

@@ -1,5 +1,20 @@
+* {
+    overflow-anchor: none !important;
+    -webkit-appearance: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+button, input {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
 body {
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 1);
 }
 
 a {
@@ -20,9 +35,25 @@ a {
 }
 
 .card {
-    background-color: rgb(24, 26, 27);
+    background-color: #242424;
     border-color: rgba(140, 130, 115, 0.13);
     color: #ffffff;
+}
+
+.card .card-header {
+    text-align: center;
+    font-size: 20px;
+}
+
+.card .card-footer {
+    text-align: center;
+}
+
+.staff-header {
+    text-align: center;
+    font-size: 30px;
+    color: #ffffff;
+    margin: 30px 0 10px 0;
 }
 
 .btn-primary {
@@ -47,6 +78,41 @@ a {
     color: #ffffff;
 }
 
+#cover {
+    width: 100%;
+    background: url("/img/cover.jpg") center center;
+}
+
+#cover .title {
+    text-align: center;
+    padding: 80px 0;
+    color: #ffffff;
+    font-size: 40px;
+}
+
+input[type=text], textarea, .form-check-input {
+    background-color: #181818 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    transition: .5s !important;
+    color: #ffffff !important;
+}
+
+#filters input::placeholder {
+    color: #666;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background-color: #393939 !important;
+    border-color: #393939 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    color: white !important;
+}
+
 footer {
     color: #ffffff;
+    margin-bottom: 20px;
 }

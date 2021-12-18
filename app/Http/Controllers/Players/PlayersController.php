@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Players;
 
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class PlayersController extends Controller
 {
-
     public function page()
     {
         $pageData[] = "";
-        $pageData['seo']['title'] = "Quaver Official Tournament";
+        $pageData['seo']['title'] = "Players";
         $pageData['seo']['description'] = "Official 4 Keys Tournament Registrations Open!";
 
-        return view('home', $pageData);
+        return view('players/players', $pageData);
     }
-
 }
