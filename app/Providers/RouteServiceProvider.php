@@ -37,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        if (config('app.force_lock') === true) {
+        if (config('app.force_lock') === true && !app()->runningInConsole()) {
             if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != config('app.auth_user')
                 || $_SERVER['PHP_AUTH_PW'] != config('app.auth_password')) {
                 header('WWW-Authenticate: Basic realm="qot.ovh"');
