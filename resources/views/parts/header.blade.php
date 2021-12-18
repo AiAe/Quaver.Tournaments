@@ -14,6 +14,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">{{ __('Mappool') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ __('Players') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ __('Team') }}</a>
+                </li>
             </ul>
 
             @auth

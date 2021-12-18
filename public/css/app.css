@@ -8,6 +8,11 @@ body {
     background: #1a1a1a;
 }
 
+a {
+    color: #09a4c6;
+    text-decoration: none;
+}
+
 .bg-qot {
     background: #242424;
     color: #ffffff;
@@ -45,6 +50,10 @@ body {
 }
 
 .dropdown-item {
+    color: #ffffff;
+}
+
+footer {
     color: #ffffff;
 }
 
