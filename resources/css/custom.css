@@ -81,6 +81,7 @@ a {
 #cover {
     width: 100%;
     background: url("/img/cover.jpg") center center;
+    background-size: cover;
 }
 
 #cover .title {
@@ -141,6 +142,19 @@ select:focus {
     color: #ffffff;
     text-align: center;
     border-color: #ccc;
+}
+
+.table-schedule tr td, .table-rules tr td {
+    background: transparent !important;
+    border: none;
+}
+
+.table-schedule tr td:first-child {
+    text-align: right;
+}
+
+.table-schedule tr td:last-child {
+    text-align: left;
 }
 
 footer {

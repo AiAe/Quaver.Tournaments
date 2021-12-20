@@ -17,18 +17,110 @@
                 </div>
                 <hr>
                 <div class="p-3">
-                    <h3 class="mb-4">Schedule</h3>
-                    <div><strong>Registration phase:</strong> January 16th - January 30th</div>
-                    <div><strong>Qualifiers Mappool Showcase:</strong> January 30th</div>
-                    <div><strong>Qualifiers:</strong> February 5th - February 6th</div>
-                    <div><strong>Round of 128:</strong> February 12th - February 13th</div>
-                    <div><strong>Round of 64:</strong> February 19th - February 20th</div>
-                    <div><strong>Round of 32:</strong> February 26th - February 27th</div>
-                    <div><strong>Round of 16:</strong> March 5th - March 6th</div>
-                    <div><strong>Quarterfinals:</strong> March 12th - March 13th</div>
-                    <div><strong>Semifinals:</strong> March 19th - March 20th</div>
-                    <div><strong>Finals:</strong> March 26th - March 27th</div>
-                    <div><strong>Grand Finals:</strong> April 2nd - April 3rd</div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h3 class="mb-4">Schedule</h3>
+                            <table class="table table-dark table-schedule">
+                                <tbody>
+                                <tr>
+                                    <td>Registration phase</td>
+                                    <td>January 16th - January 30th</td>
+                                </tr>
+                                <tr>
+                                    <td>Qualifiers Mappool Showcase</td>
+                                    <td>January 30th</td>
+                                </tr>
+                                <tr>
+                                    <td>Qualifiers</td>
+                                    <td>February 5th - February 6th</td>
+                                </tr>
+                                <tr>
+                                    <td>Round of 128</td>
+                                    <td>February 12th - February 13th</td>
+                                </tr>
+                                <tr>
+                                    <td>Round of 64</td>
+                                    <td>February 19th - February 20th</td>
+                                </tr>
+                                <tr>
+                                    <td>Round of 32</td>
+                                    <td>February 26th - February 27th</td>
+                                </tr>
+                                <tr>
+                                    <td>Round of 16</td>
+                                    <td>March 5th - March 6th</td>
+                                </tr>
+                                <tr>
+                                    <td>Quarterfinals</td>
+                                    <td>March 12th - March 13th</td>
+                                </tr>
+                                <tr>
+                                    <td>Semifinals</td>
+                                    <td>March 19th - March 20th</td>
+                                </tr>
+                                <tr>
+                                    <td>Finals</td>
+                                    <td>March 26th - March 27th</td>
+                                </tr>
+                                <tr>
+                                    <td>Grand Finals</td>
+                                    <td>April 2nd - April 3rd</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3 class="mb-4">Rules</h3>
+                            <table class="table table-dark table-rules">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        Double Elimination - This means there is a loser's bracket.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Each player is allowed to ban <strong>one</strong> maps from the map pool per
+                                        match.<br>
+                                        You can only ban one map per category.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Each player may choose one warm-up map to play before the match.<br>
+                                        The warm-up must not exceed 4 minutes in length, and it must be uploaded on
+                                        Quaver's website.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Free rate will be turned off (you must use the rate specified for each map)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        If you are thinking of rescheduling your match, please do it up to 24 hours
+                                        before your match time.<br>We will give you more information on how to
+                                        reschedule
+                                        in the coming days.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        If a disconnect happens up to 30 seconds into a match, it will be restarted.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        The tie-breaker map will only be played in the case of a tie (both players being
+                                        one away from the point limit)
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="pb-4">
