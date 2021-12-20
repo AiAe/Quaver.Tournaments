@@ -1,4 +1,4 @@
-/usr/bin/git pull
+#/usr/bin/git pull
 
 /usr/sbin/composer install --no-dev
 
