@@ -144,7 +144,7 @@ select:focus {
     border-color: #ccc;
 }
 
-.table-schedule tr td, .table-rules tr td {
+.table-schedule tr td {
     background: transparent !important;
     border: none;
 }
@@ -155,6 +155,11 @@ select:focus {
 
 .table-schedule tr td:last-child {
     text-align: left;
+}
+
+.list-rules ol li {
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 footer {

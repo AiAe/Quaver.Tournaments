@@ -19,12 +19,12 @@
                     <a class="nav-link {{ routeIs('signupStaff') }}"
                        href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('prizes') }}" href="{{ route('prizes') }}">{{ __('Prizes') }}</a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('mapsSuggestion') }}" href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
+                </li>
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>--}}
 {{--                </li>--}}

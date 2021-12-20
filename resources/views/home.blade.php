@@ -12,12 +12,13 @@
                         Until we are ready to open registrations for the second edition of QOT and
                         you're only wanting to play, <br>please check the schedule and come back around then to
                         register!<br><br>
-                        <strong>In the meantime you can suggest maps for the tournament <a href="#">here</a>.</strong>
+                        <strong>In the meantime you can suggest maps for the tournament <a
+                                href="{{ route('mapsSuggestion') }}">here</a>.</strong>
                     </p>
                 </div>
                 <hr>
                 <div class="p-3">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <h3 class="mb-4">Schedule</h3>
                             <table class="table table-dark table-schedule">
@@ -65,56 +66,6 @@
                                 <tr>
                                     <td>Grand Finals</td>
                                     <td>April 2nd - April 3rd</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-lg-6">
-                            <h3 class="mb-4">Rules</h3>
-                            <table class="table table-dark table-rules">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Double Elimination - This means there is a loser's bracket.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Each player is allowed to ban <strong>one</strong> maps from the map pool per
-                                        match.<br>
-                                        You can only ban one map per category.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Each player may choose one warm-up map to play before the match.<br>
-                                        The warm-up must not exceed 4 minutes in length, and it must be uploaded on
-                                        Quaver's website.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Free rate will be turned off (you must use the rate specified for each map)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        If you are thinking of rescheduling your match, please do it up to 24 hours
-                                        before your match time.<br>We will give you more information on how to
-                                        reschedule
-                                        in the coming days.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        If a disconnect happens up to 30 seconds into a match, it will be restarted.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        The tie-breaker map will only be played in the case of a tie (both players being
-                                        one away from the point limit)
-                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
