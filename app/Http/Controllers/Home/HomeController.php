@@ -11,7 +11,6 @@ class HomeController extends Controller
     {
         $pageData[] = "";
         $pageData['seo']['title'] = "Quaver Official Tournament";
-        $pageData['seo']['description'] = "Official 4 Keys Tournament Registrations Open!";
 
         return view('home', $pageData);
     }

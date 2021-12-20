@@ -17,7 +17,6 @@
                 </div>
                 <hr>
                 <div class="p-3">
-
                     <div class="row">
                         <div class="col-lg-6">
                             <h3 class="mb-4">Schedule</h3>

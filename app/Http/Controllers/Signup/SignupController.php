@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class SignupController extends Controller
 {
-    private array $types = ['player', 'staff'];
+    private array $types = [
+//        'player',
+        'staff'
+    ];
 
     public function staff()
     {
         $pageData[] = "";
         $pageData['seo']['title'] = "Join Staff";
-        $pageData['seo']['description'] = "Official 4 Keys Tournament Registrations Open!";
 
         return view('signup/staff', $pageData);
     }
@@ -25,7 +27,6 @@ class SignupController extends Controller
     {
         $pageData[] = "";
         $pageData['seo']['title'] = "Join Tournament";
-        $pageData['seo']['description'] = "Official 4 Keys Tournament Registrations Open!";
 
         return view('signup/player', $pageData);
     }

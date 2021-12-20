@@ -16,7 +16,7 @@ class StaffController extends Controller
         'mappoolers' => array(),
         'mappers' => array(170),
         'referees' => array(),
-        'streamers' => array(5, 41404),
+        'streamers' => array(5, 7104),
         'commentators' => array()
     );
 

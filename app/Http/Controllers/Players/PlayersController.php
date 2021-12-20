@@ -10,7 +10,6 @@ class PlayersController extends Controller
     {
         $pageData[] = "";
         $pageData['seo']['title'] = "Players";
-        $pageData['seo']['description'] = "Official 4 Keys Tournament Registrations Open!";
 
         return view('players/players', $pageData);
     }
