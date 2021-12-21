@@ -12,12 +12,12 @@ class StaffController extends Controller
     protected array $staff = array(
         'organisers' => array(7, 26),
         'spreadsheeters' => array(293),
-        'graphics' => array(),
-        'mappoolers' => array(),
+        'graphics' => array(313219),
+        'mappoolers' => array(43490),
         'mappers' => array(170),
-        'referees' => array(),
+        'referees' => array(356, 426, 34006, 978),
         'streamers' => array(5, 7104),
-        'commentators' => array()
+        'commentators' => array(356, 73939, 6143)
     );
 
     private function fetchStaff()
