@@ -27,6 +27,11 @@ Route::middleware('verify.user')->group(function () {
     Route::post('/signup/{type}', [SignupController::class, 'save'])->name('signupPost');
 });
 
+// Admin
+Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\Dashboard\DashboardController::class, 'page'])->name('dashboard');
+});
+
 // Redirects
 Route::get('/quaver/{id}', function ($id) {
     return redirect('https://quavergame.com/user/' . $id);

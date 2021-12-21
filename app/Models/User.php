@@ -10,13 +10,20 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const ROLES = [
+        1 => 'User',
+        2 => 'Referee',
+        100 => 'Admin',
+    ];
+
     protected $fillable = [
         'quaver_user_id',
         'quaver_username',
         'quaver_avatar',
         'discord_user_id',
         'discord_username',
-        'timezone'
+        'timezone',
+        'role'
     ];
 
     protected $hidden = [
@@ -25,4 +32,8 @@ class User extends Authenticatable
 
     protected $casts = [
     ];
+
+    public function getRoleNameAttribute() {
+        return self::ROLES[$this->role];
+    }
 }

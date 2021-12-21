@@ -11,26 +11,27 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('tournament') }}"--}}
-{{--                       href="{{ route('tournament') }}">{{ __('Join Tournament') }}</a>--}}
-{{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link {{ routeIs('tournament') }}"--}}
+                {{--                       href="{{ route('tournament') }}">{{ __('Join Tournament') }}</a>--}}
+                {{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('signupStaff') }}"
                        href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('mapsSuggestion') }}" href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
+                    <a class="nav-link {{ routeIs('mapsSuggestion') }}"
+                       href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>--}}
-{{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>--}}
+                {{--                </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>--}}
+                {{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('staff') }}" href="{{ route('staff') }}">{{ __('Staff') }}</a>
                 </li>
@@ -46,7 +47,11 @@
                             {{ $loggedUser['quaver_username'] }}
                         </a>
                         <div class="dropdown-menu">
-                            @if(!Auth::user()->discord_user_id)
+                            @if($loggedUser['role'] === 100)
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Admin') }}</a>
+                                <div class="dropdown-divider"></div>
+                            @endif
+                            @if(empty($loggedUser['discord_user_id']))
                                 <a class="dropdown-item" href="#">{{ __('Connect with Discord') }}</a>
                                 <div class="dropdown-divider"></div>
                             @endif
