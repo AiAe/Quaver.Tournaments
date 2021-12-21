@@ -56,8 +56,9 @@
                         </div>
 
                         <div class="mt-3">
-                            <label class="form-label">{{ __('Previous Experience') }}</label>
-                            <div class="form-text mb-3">Not mandatory, but will be beneficial!</div>
+                            <label class="form-label">{{ __('Tell us more') }}</label>
+                            <div class="form-text mb-3">Explain why we should pick you.</div>
+                            <div class="form-text mb-3">For <strong>Streamers</strong> please link <a href="https://speedtest.net/">SpeedTest</a> results and your <strong>Twitch channel</strong>.</div>
                             {{ Form::textarea('previous_experience', '', ['class' => 'form-control', 'rows' => 3]) }}
                         </div>
 
