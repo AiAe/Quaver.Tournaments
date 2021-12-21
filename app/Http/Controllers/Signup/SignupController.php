@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Signup;
 
 use App\Http\Controllers\Controller;
 use App\Models\Forms;
+use App\Rules\StaffRoleValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -40,7 +41,7 @@ class SignupController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'roles' => 'array|min:1|required',
+            'roles' => ["array", "min:1", "required", new StaffRoleValidation()],
             'previous_experience' => 'required'
         ]);
 

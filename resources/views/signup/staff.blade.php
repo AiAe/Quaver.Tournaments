@@ -43,7 +43,7 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                {{ Form::checkbox('roles[]', 'straemer', false, ['class' => 'form-check-input', 'id' => 'streamer']) }}
+                                {{ Form::checkbox('roles[]', 'streamer', false, ['class' => 'form-check-input', 'id' => 'streamer']) }}
                                 <label class="form-check-label" for="streamer">
                                     {{ __('Streamer') }}
                                 </label>
