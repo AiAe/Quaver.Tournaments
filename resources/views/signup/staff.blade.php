@@ -48,6 +48,12 @@
                                     {{ __('Streamer') }}
                                 </label>
                             </div>
+                            <div class="form-check">
+                                {{ Form::checkbox('roles[]', 'commentator', false, ['class' => 'form-check-input', 'id' => 'commentator']) }}
+                                <label class="form-check-label" for="commentator">
+                                    {{ __('Commentator') }}
+                                </label>
+                            </div>
                             @if($errors->has('roles'))
                                 <span class="invalid-feedback  d-block" role="alert">
                                 <strong>{{ $errors->first('roles') }}</strong>
@@ -57,7 +63,8 @@
 
                         <div class="mt-3">
                             <label class="form-label">{{ __('Tell us more') }}</label>
-                            <div class="form-text mb-3">Explain why we should pick you.</div>
+                            <div class="form-text mb-1">Explain why we should pick you.</div>
+                            <div class="form-text mb-1">For <strong>Commentators</strong> please make sure your microphone is clear.</div>
                             <div class="form-text mb-3">For <strong>Streamers</strong> please link <a href="https://speedtest.net/">SpeedTest</a> results and your <strong>Twitch channel</strong>.</div>
                             {{ Form::textarea('previous_experience', '', ['class' => 'form-control', 'rows' => 3]) }}
                         </div>
