@@ -24,7 +24,8 @@ class Mapsuggestions extends Authenticatable
         'map' => 'array'
     ];
 
-    public static function fetchMap($url) {
+    public static function fetchMap($url)
+    {
         $match_map = preg_match('/https:\/\/quavergame\.com\/mapset\/map\/([0-9]*)/', $url, $matches);
 
         if ($match_map === 1) {
@@ -35,5 +36,10 @@ class Mapsuggestions extends Authenticatable
             return $response->json();
 
         }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

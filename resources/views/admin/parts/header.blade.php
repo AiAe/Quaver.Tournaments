@@ -11,7 +11,15 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('admin.dashboard') }}" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.mapsSuggestions') }}" href="{{ route('admin.mapsSuggestions') }}">{{ __('Map suggestions') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.staffApplications') }}" href="{{ route('admin.staffApplications') }}">{{ __('Staff applications') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.users') }}" href="{{ route('admin.users') }}">{{ __('Users') }}</a>
+                </li>
             </ul>
 
             @auth

@@ -12,6 +12,7 @@
 @include('admin.parts.alerts')
 @yield('content')
 @include('admin.parts.footer')
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" defer></script>
 <script src="{{ mix('js/app.js') }}" defer></script>
 @stack('scripts')
 </body>

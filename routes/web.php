@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Mappool\MappoolController;
 use App\Http\Controllers\Signup\SignupController;
@@ -30,6 +31,12 @@ Route::middleware('verify.user')->group(function () {
 // Admin
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\Dashboard\DashboardController::class, 'page'])->name('dashboard');
+
+    Route::get('/mappool/suggestions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'suggestions'])->name('mapsSuggestions');
+    Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
+
+    Route::get('/users', [UsersController::class, 'page'])->name('users');
+
 });
 
 // Redirects

@@ -15,13 +15,25 @@ class Forms extends Authenticatable
         'player' => 2
     ];
 
+    const STATUS = [
+        'new' => 1,
+        'rejected' => 2,
+        'accepted' => 3
+    ];
+
     protected $fillable = [
         'user_id',
         'data',
-        'type'
+        'type',
+        'status'
     ];
 
     protected $casts = [
         'data' => 'array'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

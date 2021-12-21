@@ -162,6 +162,10 @@ select:focus {
     font-size: 18px;
 }
 
+.table-qot tr td, .table-qot tr th {
+    background: transparent;
+}
+
 footer {
     color: #ffffff;
     margin-bottom: 20px;

@@ -22,7 +22,6 @@ class User extends Authenticatable
         'quaver_avatar',
         'discord_user_id',
         'discord_username',
-        'timezone',
         'role'
     ];
 
@@ -33,7 +32,7 @@ class User extends Authenticatable
     protected $casts = [
     ];
 
-    public function getRoleNameAttribute() {
+    public function getRole() {
         return self::ROLES[$this->role];
     }
 }
