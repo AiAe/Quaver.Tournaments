@@ -38,7 +38,7 @@
                             {{ implode(', ', $application['data']['roles']) }}
                         </td>
                         <td>
-                            {{ Str::limit($application['data']['previous_experience'], 200) }}
+                            {{ $application['data']['previous_experience'] }}
                         </td>
                     </tr>
                 @endforeach
