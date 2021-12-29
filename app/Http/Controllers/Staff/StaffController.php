@@ -13,11 +13,11 @@ class StaffController extends Controller
         'organisers' => array(7, 26),
         'spreadsheeters' => array(293),
         'graphics' => array(313219),
-        'mappoolers' => array(43490),
-        'mappers' => array(170),
-        'referees' => array(356, 426, 34006, 978),
-        'streamers' => array(5, 7104),
-        'commentators' => array(356, 73939, 6143)
+        'mappoolers' => array(170, 43490, 42898, 1084),
+        'mappers' => array(170, 43490, 42898, 1084, 656, 1661, 1268),
+        'referees' => array(356, 426, 34006, 978, 20747, 73520, 144645, 27392, 37458, 314224, 9, 1084, 1223, 38118, 45749, 170, 7, 26),
+        'streamers' => array(5, 7104, 26, 129205, 314237, 9, 41404),
+        'commentators' => array(356, 73939, 6143, 7, 129205, 1628, 73939, 29951, 1223, 45749)
     );
 
     private function fetchStaff()
