@@ -25,7 +25,8 @@ Route::middleware('verify.user')->group(function () {
     Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
 //    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
 
-    Route::post('/signup/{type}', [SignupController::class, 'save'])->name('signupPost');
+    Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
+    Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
 
 //    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
 });

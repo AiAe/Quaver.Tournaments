@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class SignupController extends Controller
 {
-    private array $types = [
-        'player',
-        'staff'
-    ];
-
     public function staff()
     {
         $pageData[] = "";
@@ -67,31 +62,33 @@ class SignupController extends Controller
         return back()->with('success', 'Successfully verified. If you still continue to have issue contact Organizators!');
     }
 
-    public function save(Request $request)
+    public function saveStaff(Request $request)
     {
-        $type = $request->route('type');
-        $msg = null;
-        $rules = [];
+        $rules = [
+            'roles' => ["array", "min:1", "required", new StaffRoleValidation()],
+            'previous_experience' => 'required'
+        ];
+        $msg = 'You applied successfully!';
 
-        if (!in_array($type, $this->types)) {
-            return redirect(route('signupStaff'))->with('error', 'Form type not found!');
-        }
+        $validator = Validator::make($request->all(), $rules);
 
-        switch ($type) {
-            case 'staff':
-                $rules = [
-                    'roles' => ["array", "min:1", "required", new StaffRoleValidation()],
-                    'previous_experience' => 'required'
-                ];
-                $msg = 'You applied successfully!';
-                break;
-            case 'player':
-                $rules = [
-                    'timezone' => ["required", "numeric"]
-                ];
-                $msg = 'You registered successfully!';
-                break;
-        }
+        $validator->validate();
+        $validated = $validator->validated();
+
+        Form::create([
+            'user_id' => Auth::user()->id,
+            'type' => Form::TYPE['staff'],
+            'data' => $validated
+        ]);
+
+        return back()->with('success', $msg);
+    }
+
+    public function savePlayer(Request $request)
+    {
+        $rules = [
+            'timezone' => ["required", "numeric"]
+        ];
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -107,10 +104,8 @@ class SignupController extends Controller
             'status' => 1
         ]);
 
-        if ($type == "player") {
-            $this->verifyPlayer();
-        }
+        $this->verifyPlayer();
 
-        return back()->with('success', $msg);
+        return back()->with('success', "You registered successfully!");
     }
 }

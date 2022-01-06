@@ -11,8 +11,7 @@ class Form extends Authenticatable
     use HasFactory, Notifiable;
 
     const TYPE = [
-        'staff' => 1,
-        'player' => 2
+        'staff' => 1
     ];
 
     const STATUS = [

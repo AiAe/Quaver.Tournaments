@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Staff Registration') }}</div>
                     <div class="card-body">
-                        {{ Form::open(['url' => route('signupPost', 'staff')]) }}
+                        {{ Form::open(['url' => route('signupStaffPost')]) }}
                         <div>
                             <label class="form-label">{{ __('Quaver Username') }}</label>
                             {{ Form::text('', $loggedUser['quaver_username'], ['class' => 'form-control', 'disabled' => 'true', 'readonly' => 'true']) }}
@@ -65,8 +65,13 @@
                         <div class="mt-3">
                             <label class="form-label">{{ __('Tell us more') }}</label>
                             <div class="form-text mb-1">Explain why we should pick you.</div>
-                            <div class="form-text mb-1">For <strong>Commentators</strong> please make sure your microphone is clear.</div>
-                            <div class="form-text mb-3">For <strong>Streamers</strong> please link <a href="https://speedtest.net/">SpeedTest</a> results and your <strong>Twitch channel</strong>.</div>
+                            <div class="form-text mb-1">For <strong>Commentators</strong> please make sure your
+                                microphone is clear.
+                            </div>
+                            <div class="form-text mb-3">For <strong>Streamers</strong> please link <a
+                                    href="https://speedtest.net/">SpeedTest</a> results and your <strong>Twitch
+                                    channel</strong>.
+                            </div>
                             {{ Form::textarea('previous_experience', '', ['class' => 'form-control', 'rows' => 3]) }}
                         </div>
 

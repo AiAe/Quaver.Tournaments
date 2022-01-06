@@ -9,7 +9,7 @@
                     <div class="card-header">{{ __('Tournament Registration') }}</div>
                     <div class="card-body">
                         @if(!$has_registered)
-                            {{ Form::open(['url' => route('signupPost', 'player')]) }}
+                            {{ Form::open(['url' => route('signupPlayerPost')]) }}
 
                             <div>
                                 <label class="form-label">{{ __('Quaver Username') }}</label>
