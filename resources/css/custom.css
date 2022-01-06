@@ -91,7 +91,7 @@ a {
     font-size: 40px;
 }
 
-input, textarea, .form-check-input {
+input, textarea, .form-check-input, select {
     background-color: #181818 !important;
     border: none !important;
     border-radius: 4px !important;

@@ -9,7 +9,6 @@
 <body>
 @include('parts.header')
 @include('parts.cover')
-@include('parts.alerts')
 @yield('content')
 @include('parts.footer')
 <script src="{{ mix('js/app.js') }}" defer></script>

@@ -6,25 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Forms extends Authenticatable
+class Player extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    const TYPE = [
-        'staff' => 1,
-        'player' => 2
-    ];
-
     const STATUS = [
+        'resign' => 0,
         'new' => 1,
-        'rejected' => 2,
-        'accepted' => 3
+        'added' => 2
     ];
 
     protected $fillable = [
         'user_id',
         'data',
-        'type',
         'status'
     ];
 

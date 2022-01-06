@@ -11,10 +11,10 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>
                 </li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link {{ routeIs('tournament') }}"--}}
-                {{--                       href="{{ route('tournament') }}">{{ __('Join Tournament') }}</a>--}}
-                {{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link {{ routeIs('signupPlayer') }}"--}}
+{{--                       href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('signupStaff') }}"
                        href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
@@ -26,9 +26,10 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
                 </li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>--}}
-                {{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link {{ routeIs('players') }}"--}}
+{{--                       href="{{ route('players') }}">{{ __('Players') }}</a>--}}
+{{--                </li>--}}
                 {{--                <li class="nav-item">--}}
                 {{--                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>--}}
                 {{--                </li>--}}

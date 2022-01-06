@@ -10,17 +10,18 @@ This project aims to be useful for everyone who is interested in hosting tournam
 1. Login with Quaver
 2. Link Discord
 3. Join staff form
-4. Suggest maps form
-5. Basic rules page
-6. Staff page (manual)
-7. Basic admin panel with information and form data
+4. Player registration
+5. Suggest maps form
+6. Basic rules page
+7. Staff page (manual)
+8. Basic admin panel with information and form data
+9. [QOT.Bot](https://github.com/AiAe/qot.bot) to give player tournament role and change thair nick to quaver username
 
 ## ToDos
-1. Implement player registrations
-2. Mappool - Creating/Editing/View
-3. Give all players tourney role and change their nick to Quaver username
-4. API for easier spreadsheeting
-5. Edit pages from admin panel
+1. Mappool - Creating/Editing/View
+2. API for easier spreadsheeting
+3. Edit pages from admin panel
+4. Support both modes (needed for api)
 
 ## Install
 1. Clone the project
@@ -31,5 +32,4 @@ This project aims to be useful for everyone who is interested in hosting tournam
 6. Run `php artisan migrate`
 
 ## Deploying
-1. `git pull`
-2. `sh deploy.sh`
+`sh deploy.sh`

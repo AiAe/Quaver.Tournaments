@@ -234,5 +234,10 @@ return [
 
     'force_lock' => env('FORCE_LOCK', false),
     'auth_user' => env('AUTH_USER', ''),
-    'auth_password' => env('AUTH_PASSWORD', '')
+    'auth_password' => env('AUTH_PASSWORD', ''),
+
+    'challonge_api' => env('CHALLONGE_API', ''),
+    'challonge_slug' => env('CHALLONGE_SLUG', ''),
+
+    'discord_bot' => env('DISCORD_BOT', false)
 ];

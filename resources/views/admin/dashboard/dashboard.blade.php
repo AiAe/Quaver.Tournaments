@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">Tourney signups</div>
                     <div class="card-body text-center">
-                        <h4>{{ \App\Models\Forms::query()->where('type', \App\Models\Forms::TYPE['player'])->count()|number_format(0) }}</h4>
+                        <h4>{{ \App\Models\Form::query()->where('type', \App\Models\Form::TYPE['player'])->count()|number_format(0) }}</h4>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">Suggested maps</div>
                     <div class="card-body text-center">
-                        <h4>{{ \App\Models\Mapsuggestions::query()->count()|number_format(0) }}</h4>
+                        <h4>{{ \App\Models\Mapsuggestion::query()->count()|number_format(0) }}</h4>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header">Staff applications</div>
                     <div class="card-body text-center">
-                        <h4>{{ \App\Models\Forms::query()->where('type', \App\Models\Forms::TYPE['staff'])->count()|number_format(0) }}</h4>
+                        <h4>{{ \App\Models\Form::query()->where('type', \App\Models\Form::TYPE['staff'])->count()|number_format(0) }}</h4>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 {
     "name": "aiae/qot",
     "type": "project",
-    "description": "Qauver Official Tournament",
+    "description": "Quaver Official Tournament",
     "keywords": [
         "framework",
         "laravel"
@@ -14,7 +14,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
-        "laravel/socialite": "^5.2"
+        "laravel/socialite": "^5.2",
+        "jackiedo/timezonelist": "5.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

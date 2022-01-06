@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Staff;
 
 use App\Http\Controllers\Controller;
-use App\Models\Forms;
+use App\Models\Form;
 
 class StaffController extends Controller
 {
@@ -12,8 +12,8 @@ class StaffController extends Controller
         $pageData[] = "";
         $pageData['seo']['title'] = "Map suggestions";
 
-        $pageData['applications'] = Forms::query()->where('type', Forms::TYPE['staff'])
-            ->where('status', Forms::STATUS['new'])
+        $pageData['applications'] = Form::query()->where('type', Form::TYPE['staff'])
+            ->where('status', Form::STATUS['new'])
             ->orderBy('created_at', 'desc')->paginate(50);
 
         return view('admin/staff/staff', $pageData);

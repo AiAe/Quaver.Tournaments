@@ -23,9 +23,11 @@ Route::middleware('verify.user')->group(function () {
     Route::post('/mappool/suggestion', [MappoolController::class, 'save'])->name('mapsSuggestionPOST');
 
     Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
-    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
+//    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
 
     Route::post('/signup/{type}', [SignupController::class, 'save'])->name('signupPost');
+
+//    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
 });
 
 // Admin

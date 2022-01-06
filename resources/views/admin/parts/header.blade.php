@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-qot">
     <div class="container">
-        <a class="navbar-brand" href="#">{{ __('QOT Admin') }}</a>
+        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">{{ __('QOT Admin') }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                 aria-controls="navbar" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -19,6 +19,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('admin.users') }}" href="{{ route('admin.users') }}">{{ __('Users') }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        Mappool
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('home') }}">{{ __('Rounds') }}</a>
+                    </div>
                 </li>
             </ul>
 

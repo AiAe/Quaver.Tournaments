@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Http;
 
 class User extends Authenticatable
 {
@@ -34,5 +35,20 @@ class User extends Authenticatable
 
     public function getRole() {
         return self::ROLES[$this->role];
+    }
+
+    public function updateQuaverUsername() {
+        $response = Http::get('https://api.quavergame.com/v1/users?id=' . $this->quaver_user_id);
+        $user = $response->json()['users'][0];
+
+        $this->quaver_username = $user['username'];
+        $this->save();
+    }
+
+    public function createChallongePlayer() {
+        Http::post('https://api.challonge.com/v1/tournaments/'.config('app.challonge_slug').'/participants.json', [
+            'api_key' => config('app.challonge_api'),
+            'name' => $this->quaver_username
+        ]);
     }
 }

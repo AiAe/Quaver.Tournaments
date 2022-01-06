@@ -4,6 +4,7 @@
     <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="col-lg-6">
+                @include('parts.alerts')
                 <div class="card">
                     <div class="card-header">{{ __('Staff Registration') }}</div>
                     <div class="card-body">

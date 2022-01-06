@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container mt-3">
+        @include('parts.alerts')
         <div class="card">
             <div class="card-body">
                 <div class="list-rules">

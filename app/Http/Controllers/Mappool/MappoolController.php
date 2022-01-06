@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Mappool;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mapsuggestions;
+use App\Models\Mapsuggestion;
 use App\Rules\MapStageValidation;
 use App\Rules\MapTypeValidation;
 use App\Rules\MapValidation;
@@ -41,9 +41,9 @@ class MappoolController extends Controller
         $validator->validate();
         $validated = $validator->validated();
 
-        $map = Mapsuggestions::fetchMap($validated['map'])['map'];
+        $map = Mapsuggestion::fetchMap($validated['map'])['map'];
 
-        Mapsuggestions::create([
+        Mapsuggestion::create([
             'user_id' => Auth::user()->id,
             'map_id' => $map['id'],
             'map_type' => $validated['type'],

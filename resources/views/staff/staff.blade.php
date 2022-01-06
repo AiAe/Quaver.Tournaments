@@ -3,6 +3,9 @@
 @section('content')
     <div class="container mt-3">
         <div class="row">
+            <div class="col-lg-12">
+                @include('parts.alerts')
+            </div>
             <div class="col-lg-6">
                 @if(isset($staff['organisers']))
                     <div class="card mb-4">
