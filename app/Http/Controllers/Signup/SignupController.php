@@ -28,11 +28,6 @@ class SignupController extends Controller
 
         $pageData['has_registered'] = Player::query()->where('user_id', Auth::user()->id)->exists();
 
-        Redis::publish('discord', json_encode([
-            "discord_id" => "108616029294301184",
-            "discord_nick" => "AyyAyye"
-        ]));
-
         return view('signup/player', $pageData);
     }
 
