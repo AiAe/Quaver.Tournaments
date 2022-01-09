@@ -41,7 +41,7 @@ class SignupController extends Controller
 
         if (config('app.discord_bot'))
             Redis::publish('discord', json_encode([
-                "discord_id" => $player['discord_user_id'],
+                "discord_id" => (string) $player['discord_user_id'],
                 "discord_nick" => $player['quaver_username']
             ]));
     }
