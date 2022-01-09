@@ -23,12 +23,12 @@ Route::middleware('verify.user')->group(function () {
     Route::post('/mappool/suggestion', [MappoolController::class, 'save'])->name('mapsSuggestionPOST');
 
     Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
-//    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
+    Route::middleware('admin')->get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
 
     Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
     Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
 
-//    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+    Route::middleware('admin')->post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
 });
 
 // Admin
@@ -39,7 +39,6 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
 
     Route::get('/users', [UsersController::class, 'page'])->name('users');
-
 });
 
 // Redirects
