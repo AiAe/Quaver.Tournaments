@@ -13,7 +13,7 @@ Route::get('/oauth/{driver}/callback', [OAuthController::class, 'handleProviderC
 Route::get('/logout', [OAuthController::class, 'logout'])->name('logout');
 
 // Pages
-Route::get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
+Route::middleware('admin')->get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
 Route::get('/players', [\App\Http\Controllers\Players\PlayersController::class, 'page'])->name('players');
 Route::get('/rules', [\App\Http\Controllers\Rules\RulesController::class, 'page'])->name('rules');
 Route::get('/staff', [\App\Http\Controllers\Staff\StaffController::class, 'page'])->name('staff');
@@ -35,9 +35,13 @@ Route::middleware('verify.user')->group(function () {
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\Dashboard\DashboardController::class, 'page'])->name('dashboard');
 
-    Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
+    // Organizers only
+    Route::middleware('organizer')->group(function () {
+        Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
+        Route::get('/users', [UsersController::class, 'page'])->name('users');
+    });
 
-    Route::prefix('mappool')->as('mappool.')->group(function () {
+    Route::middleware('mappoolselector')->prefix('mappool')->as('mappool.')->group(function () {
         Route::get('suggestions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'suggestions'])->name('suggestions');
 
         Route::get('rounds', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'rounds'])->name('rounds');
@@ -51,10 +55,7 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
         Route::post('round/{round}', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectSave'])->name('roundSelectSave');
         Route::post('round/{round}/positions', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectPositionsSave'])->name('roundSelectPositionsSave');
         Route::post('round/{round}/delete', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectDelete'])->name('roundSelectDeletePOST');
-
     });
-
-    Route::get('/users', [UsersController::class, 'page'])->name('users');
 });
 
 // Redirects

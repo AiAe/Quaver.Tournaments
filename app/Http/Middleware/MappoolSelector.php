@@ -7,13 +7,12 @@ use Closure;
 use Illuminate\Http\Request;
 use View;
 
-class Admin
+class MappoolSelector
 {
     public function handle(Request $request, Closure $next) {
         $user = Auth::user();
-
         // Verify permissions
-        if ($user['role'] == 1) {
+        if (!($user['role'] >= 3)) {
             abort(403);
         }
 

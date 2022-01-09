@@ -7,13 +7,13 @@ use Closure;
 use Illuminate\Http\Request;
 use View;
 
-class Admin
+class Organizer
 {
     public function handle(Request $request, Closure $next) {
         $user = Auth::user();
 
         // Verify permissions
-        if ($user['role'] == 1) {
+        if ($user['role'] !== 100) {
             abort(403);
         }
 

@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\MappoolSelector;
+use App\Http\Middleware\Organizer;
 use App\Http\Middleware\VerifyUser;
 use App\Http\Middleware\Site;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -68,6 +70,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verify.user' => VerifyUser::class,
-        'admin' => Admin::class
+        'admin' => Admin::class,
+        'organizer' => Organizer::class,
+        'mappoolselector' => MappoolSelector::class
     ];
 }
