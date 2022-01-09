@@ -166,6 +166,31 @@ select:focus {
     background: transparent;
 }
 
+.page-link {
+    background-color: rgb(24, 26, 27);
+    border-color: rgb(56, 61, 63);
+    color: rgb(35, 148, 253);
+    text-decoration-color: initial;
+}
+
+.page-link:hover {
+    background: rgb(35, 148, 253);
+    border-color: rgb(56, 61, 63);
+    color: #ffffff;
+}
+
+.page-item.active .page-link {
+    color: #ffffff;
+    background-color: rgb(35, 148, 253);
+    border-color: rgb(56, 61, 63);
+}
+
+.page-item.disabled .page-link {
+    color: rgb(158, 150, 137);
+    background-color: rgb(24, 26, 27);
+    border-color: rgb(56, 61, 63);
+}
+
 footer {
     color: #ffffff;
     margin-bottom: 20px;

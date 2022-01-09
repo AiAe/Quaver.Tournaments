@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class User extends Authenticatable
@@ -35,6 +36,21 @@ class User extends Authenticatable
 
     public function getRole() {
         return self::ROLES[$this->role];
+    }
+
+    public function fetchUserStats() {
+        return Cache::remember('quaver_user_' . $this->quaver_user_id, 600, function () {
+            // ToDo support both modes
+            $mode = 'keys4';
+
+            $response = Http::get('https://api.quavergame.com/v1/users/full/' . $this->quaver_user_id);
+            $user = $response->json()['user'];
+
+            return [
+                "globalRank" => $user[$mode]['globalRank'],
+                "country" => $user['info']['country']
+            ];
+        });
     }
 
     public function updateQuaverUsername() {
