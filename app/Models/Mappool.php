@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Http;
 
-class MappoolRound extends Authenticatable
+class Mappool extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
+        'mappool_round_id',
+        'category',
+        'type',
+        'map',
+        'data',
         'position'
     ];
 
-    public function maps() {
-        return $this->hasMany(Mappool::class, 'mappool_round_id', 'id');
-    }
+    protected $casts = [
+        'map' => 'array',
+        'data' => 'array'
+    ];
+
 }

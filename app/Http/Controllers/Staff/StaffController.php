@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class StaffController extends Controller
 {
 
-    protected array $staff = array(
+    public static array $staff = array(
         'organisers' => array(7, 26),
         'spreadsheeters' => array(293),
         'graphics' => array(313219),
@@ -25,7 +25,7 @@ class StaffController extends Controller
         return Cache::rememberForever('staff', function () {
             $staff = [];
 
-            foreach ($this->staff as $name => $type) {
+            foreach (self::$staff as $name => $type) {
                 if (is_array($type) && count($type)) {
                     $prepareGet = "";
                     foreach ($type as $player) {

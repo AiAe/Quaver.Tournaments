@@ -166,6 +166,19 @@ select:focus {
     background: transparent;
 }
 
+.table-qot-mappool td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
+.table-delete {
+    position: absolute;
+    right: -70px;
+    top: 0;
+    padding: 20px 0 20px 0;
+}
+
 .page-link {
     background-color: rgb(24, 26, 27);
     border-color: rgb(56, 61, 63);
@@ -189,6 +202,22 @@ select:focus {
     color: rgb(158, 150, 137);
     background-color: rgb(24, 26, 27);
     border-color: rgb(56, 61, 63);
+}
+
+.mapset {
+    position: relative;
+    background-size: cover;
+    border-color: rgb(56, 61, 63);
+}
+
+.mapset-map {
+    padding: 16px;
+    color: white;
+}
+
+.mapset-info {
+    background: #181818;
+    bottom: 0;
 }
 
 footer {

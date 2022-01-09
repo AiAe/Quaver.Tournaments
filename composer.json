@@ -13,9 +13,10 @@
         "dyanakiev/html": "^6.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "itsgoingd/clockwork": "^5.1",
+        "jackiedo/timezonelist": "5.*",
         "laravel/framework": "^8.65",
-        "laravel/socialite": "^5.2",
-        "jackiedo/timezonelist": "5.*"
+        "laravel/socialite": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -15,6 +15,7 @@ class User extends Authenticatable
     public const ROLES = [
         1 => 'User',
         2 => 'Referee',
+        3 => 'Mappool Selector',
         100 => 'Admin',
     ];
 

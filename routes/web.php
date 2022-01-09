@@ -13,7 +13,7 @@ Route::get('/oauth/{driver}/callback', [OAuthController::class, 'handleProviderC
 Route::get('/logout', [OAuthController::class, 'logout'])->name('logout');
 
 // Pages
-//Route::get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
+Route::get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
 Route::get('/players', [\App\Http\Controllers\Players\PlayersController::class, 'page'])->name('players');
 Route::get('/rules', [\App\Http\Controllers\Rules\RulesController::class, 'page'])->name('rules');
 Route::get('/staff', [\App\Http\Controllers\Staff\StaffController::class, 'page'])->name('staff');
@@ -44,16 +44,27 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
         Route::post('rounds', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundsSave'])->name('roundsPOST');
 
         Route::post('rounds/positions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundsPositionsSave'])->name('rounds.positionsPOST');
-        Route::post('rounds/delete/{id}', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundDelete'])->name('rounds.deletePOST');
+        Route::post('rounds/status/{round}', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'statusPOST'])->name('rounds.statusPOST');
+        Route::post('rounds/delete/{round}', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundDelete'])->name('rounds.deletePOST');
+
+        Route::get('round/{round}', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'select'])->name('roundSelect');
+        Route::post('round/{round}', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectSave'])->name('roundSelectSave');
+        Route::post('round/{round}/positions', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectPositionsSave'])->name('roundSelectPositionsSave');
+        Route::post('round/{round}/delete', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectDelete'])->name('roundSelectDeletePOST');
+
     });
 
     Route::get('/users', [UsersController::class, 'page'])->name('users');
 });
 
 // Redirects
-Route::get('/quaver/{id}', function ($id) {
+Route::get('/quaver/user/{id}', function ($id) {
     return redirect('https://quavergame.com/user/' . $id);
 })->name('quaver');
+
+Route::get('/quaver/map/{id}', function ($id) {
+    return redirect('https://quavergame.com/mapset/map/' . $id);
+})->name('quaverMap');
 
 // Default
 Route::get('/', [\App\Http\Controllers\Home\HomeController::class, 'page'])->name('home');

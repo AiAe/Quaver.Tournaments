@@ -21,6 +21,12 @@ if (!function_exists('routeIsWithin')) {
     }
 }
 
+if(!function_exists('arrayCombine')) {
+    function arrayCombine($array) {
+        return array_combine($array, $array);
+    }
+}
+
 if (!function_exists('timezoneList')) {
     function timezoneList()
     {

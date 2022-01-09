@@ -15,3 +15,5 @@
 /usr/bin/php artisan route:cache
 /usr/bin/php artisan config:cache
 /usr/bin/php artisan storage:link
+
+/usr/bin/php artisan user:roles

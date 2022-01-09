@@ -30,20 +30,35 @@
                         <thead>
                         <tr>
                             <th>Round</th>
-                            <th style="width: 10%">Position</th>
-                            <th style="width: 10%">Action</th>
+                            <th style="width: 10%">Maps</th>
+                            <th style="width: 10%">Order</th>
+                            <th style="width: 20%">Action</th>
                         </tr>
                         </thead>
                         <tbody id="better-sort-boxes">
                         @foreach($rounds as $round)
                             <tr data-id="{{ $round['id'] }}" data-trigger="hover">
-                                <td>{{ $round['name'] }}</td>
-                                <th class="position">{{ $round['position'] }}</th>
-                                <th>
-                                    {{ Form::open(['url' => route('admin.mappool.rounds.deletePOST', $round['id'])]) }}
+                                <td>
+                                    <a href="{{ route('admin.mappool.roundSelect', $round['id']) }}">
+                                        {{ $round['name'] }}
+                                    </a>
+                                </td>
+                                <td>{{ $round->maps->count() }}</td>
+                                <td class="position">{{ $round['position'] }}</td>
+                                <td>
+                                    {{ Form::open(['url' => route('admin.mappool.rounds.statusPOST', $round['id']), 'class' => 'd-inline']) }}
+                                    @if($round->status)
+                                        <button type="submit"
+                                                class="btn btn-success btn-sm">{{ __('Enabled') }}</button>
+                                    @else
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm">{{ __('Disabled') }}</button>
+                                    @endif
+                                    {{ Form::close() }}
+                                    {{ Form::open(['url' => route('admin.mappool.rounds.deletePOST', $round['id']), 'class' => 'd-inline']) }}
                                     <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>
                                     {{ Form::close() }}
-                                </th>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

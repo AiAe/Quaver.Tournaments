@@ -27,6 +27,10 @@
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ routeIs('mappool') }}"
+                       href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ routeIs('players') }}"
                        href="{{ route('players') }}">{{ __('Players') }}</a>
                 </li>
