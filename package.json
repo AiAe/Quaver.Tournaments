@@ -16,7 +16,6 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "laravel-mix-purgecss": "^6.0.0",
-        "postcss-purgecss-laravel": "^2.0.0"
+        "laravel-mix-purgecss": "^6.0.0"
     }
 }

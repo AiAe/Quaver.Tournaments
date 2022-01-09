@@ -12,7 +12,7 @@
                     <a class="nav-link {{ routeIs('admin.dashboard') }}" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('admin.mapsSuggestions') }}" href="{{ route('admin.mapsSuggestions') }}">{{ __('Map suggestions') }}</a>
+                    <a class="nav-link {{ routeIs('admin.mappool.suggestions') }}" href="{{ route('admin.mappool.suggestions') }}">{{ __('Map suggestions') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('admin.staffApplications') }}" href="{{ route('admin.staffApplications') }}">{{ __('Staff applications') }}</a>
@@ -26,7 +26,7 @@
                         Mappool
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('home') }}">{{ __('Rounds') }}</a>
+                        <a class="dropdown-item" href="{{ route('admin.mappool.rounds') }}">{{ __('Rounds') }}</a>
                     </div>
                 </li>
             </ul>

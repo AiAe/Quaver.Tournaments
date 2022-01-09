@@ -35,8 +35,17 @@ Route::middleware('verify.user')->group(function () {
 Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\Dashboard\DashboardController::class, 'page'])->name('dashboard');
 
-    Route::get('/mappool/suggestions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'suggestions'])->name('mapsSuggestions');
     Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
+
+    Route::prefix('mappool')->as('mappool.')->group(function () {
+        Route::get('suggestions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'suggestions'])->name('suggestions');
+
+        Route::get('rounds', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'rounds'])->name('rounds');
+        Route::post('rounds', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundsSave'])->name('roundsPOST');
+
+        Route::post('rounds/positions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundsPositionsSave'])->name('rounds.positionsPOST');
+        Route::post('rounds/delete/{id}', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'roundDelete'])->name('rounds.deletePOST');
+    });
 
     Route::get('/users', [UsersController::class, 'page'])->name('users');
 });
