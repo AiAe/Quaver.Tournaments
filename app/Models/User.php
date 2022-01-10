@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function getQuaverPlayerAttribute()
     {
-        return Cache::remember('quaver_user_' . $this->quaver_user_id, 600, function () {
+        return Cache::remember('quaver_user_' . $this->quaver_user_id, 86400, function () {
 
             $response = Http::get('https://api.quavergame.com/v1/users/full/' . $this->quaver_user_id);
             $user = $response->json()['user'];
