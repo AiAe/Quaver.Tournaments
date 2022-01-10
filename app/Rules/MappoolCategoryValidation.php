@@ -10,8 +10,7 @@ class MappoolCategoryValidation implements Rule
 
     public static array $categories = array(
         'SV',
-        'Rice 1',
-        'Rice 2',
+        'Rice',
         'Hybrid',
         'LN',
         'TB'
