@@ -17,11 +17,11 @@ This project aims to be useful for everyone who is interested in hosting tournam
 8. Basic admin panel with information and form data
 9. [QOT.Bot](https://github.com/AiAe/qot.bot) to give player tournament role and change thair nick to quaver username
 10. Mappool manage
+11. API - Players, Mappoo, Staff
+12. Supports both modes (keys4, keys7) - only one can be selected
 
 ## ToDos
-2. API for easier spreadsheeting
-3. Edit pages from admin panel
-4. Support both modes (needed for api)
+1. Edit pages from admin panel
 
 ## Install
 1. Clone the project

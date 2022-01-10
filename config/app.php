@@ -239,5 +239,7 @@ return [
     'challonge_api' => env('CHALLONGE_API', ''),
     'challonge_slug' => env('CHALLONGE_SLUG', ''),
 
-    'discord_bot' => env('DISCORD_BOT', false)
+    'discord_bot' => env('DISCORD_BOT', false),
+
+    'game_mode' => env('GAME_MODE', 'keys4')
 ];

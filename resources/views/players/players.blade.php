@@ -14,19 +14,19 @@
                             <div class="row">
                                 @foreach($players as $player)
                                     <div class="col-lg-6 mb-4">
-                                        <a href="{{ route('quaver', $player->user->quaver_user_id) }}" target="_blank">
+                                        <a href="{{ route('quaverUser', $player->user->quaver_user_id) }}" target="_blank">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ $player->user->quaver_avatar }}" width="70" height="70"
                                                      alt="{{ $player->user->quaver_username }}">
                                                 <div style="margin-left: 10px;">
                                                     <div>
                                                         <img
-                                                            src="https://static.quavergame.com/img/flags/{{ $player->user->fetchUserStats()['country'] }}.png"
-                                                            alt="{{ $player->user->fetchUserStats()['country'] }}">
+                                                            src="https://static.quavergame.com/img/flags/{{ $player->user['quaver_player']['country'] }}.png"
+                                                            alt="{{ $player->user['quaver_player']['country'] }}">
                                                         {{ $player->user->quaver_username }}
                                                     </div>
                                                     <div class="text-white">Rank:
-                                                        #{{ number_format($player->user->fetchUserStats()['globalRank']) }}</div>
+                                                        #{{ number_format($player->user['quaver_player'][config('app.game_mode')]['globalRank']) }}</div>
                                                     <div class="text-white">
                                                         {{ $player->data['timezone'] }}
                                                     </div>

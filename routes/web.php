@@ -61,7 +61,7 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
 // Redirects
 Route::get('/quaver/user/{id}', function ($id) {
     return redirect('https://quavergame.com/user/' . $id);
-})->name('quaver');
+})->name('quaverUser');
 
 Route::get('/quaver/map/{id}', function ($id) {
     return redirect('https://quavergame.com/mapset/map/' . $id);

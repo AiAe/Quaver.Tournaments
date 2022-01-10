@@ -40,7 +40,7 @@ class MapValidation implements Rule
             $map = $response->json();
 
             if ($map['status'] === 200) {
-                if ($map['map']['game_mode'] === 1) {
+                if ($map['map']['game_mode'] === gameModeToInt()) {
                     return true;
                 } else {
                     $this->error = "Map is not 4 keys!";

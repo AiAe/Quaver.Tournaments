@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\JsonResponse;
 use App\Http\Middleware\MappoolSelector;
 use App\Http\Middleware\Organizer;
 use App\Http\Middleware\VerifyUser;
@@ -69,9 +70,12 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
         'verify.user' => VerifyUser::class,
         'admin' => Admin::class,
         'organizer' => Organizer::class,
-        'mappoolselector' => MappoolSelector::class
+        'mappoolselector' => MappoolSelector::class,
+        'json.response' => JsonResponse::class
+
     ];
 }

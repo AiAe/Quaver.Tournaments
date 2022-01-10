@@ -20,7 +20,7 @@ class StaffController extends Controller
         'commentators' => array(356, 73939, 7, 129205, 1628, 73939, 29951, 1223, 45749)
     );
 
-    private function fetchStaff()
+    public static function fetchStaff()
     {
         return Cache::rememberForever('staff', function () {
             $staff = [];

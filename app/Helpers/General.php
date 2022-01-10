@@ -27,6 +27,15 @@ if(!function_exists('arrayCombine')) {
     }
 }
 
+if(!function_exists('gameModeToInt')) {
+    function gameModeToInt() {
+        if(config('app.game_mode') == "keys4")
+            return 1;
+        else
+            return 2;
+    }
+}
+
 if (!function_exists('timezoneList')) {
     function timezoneList()
     {

@@ -114,6 +114,7 @@ class MappoolController extends Controller
             'type' => ['required', new MappoolTypeValidation()],
             'rate' => ['required', new MappoolRateValidation()],
             'mods' => ['required', new MappoolModsValidation()],
+            'overwrite_difficulty_rating' => ['nullable', 'numeric'],
             'offset' => ['required'],
             'position' => ['required', 'numeric']
         ]);
@@ -122,6 +123,11 @@ class MappoolController extends Controller
         $validated = $validator->validated();
 
         $map = Mapsuggestion::fetchMap($validated['map'])['map'];
+
+        // Replace difficulty rating if one is provided
+        if(isset($validated['overwrite_difficulty_rating'])) {
+            $map['difficulty_rating'] = (float) $validated['overwrite_difficulty_rating'];
+        }
 
         Mappool::create([
             'mappool_round_id' => $round_id,

@@ -28,24 +28,31 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="mt-3">
                             <label class="form-label">{{ __('Rate') }}</label>
                             {{ Form::select('rate', arrayCombine(\App\Rules\MappoolRateValidation::$rates), "1x", ['class' => 'form-control']) }}
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="mt-3">
                             <label class="form-label">{{ __('Mods') }}</label>
                             {{ Form::select('mods', arrayCombine(\App\Rules\MappoolModsValidation::$mods), null, ['class' => 'form-control']) }}
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="mt-3">
                             <label class="form-label">{{ __('Offset') }}</label>
                             {{ Form::text('offset', 0, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="mt-3">
+                            <label class="form-label">Difficulty Rating (if rate is not 1x)</label>
+                            {{ Form::text('overwrite_difficulty_rating', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
 
