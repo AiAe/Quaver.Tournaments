@@ -12,20 +12,20 @@
                         <table class="table text-white text-center table-qot-mappool" style="font-size: 15px">
                             <thead>
                             <tr>
-                                <th>Category</th>
-                                <th>Type</th>
-                                <th>Map</th>
-                                <th>Rate</th>
-                                <th>Mods</th>
-                                <th>Offset</th>
-                                <th>Rating</th>
-                                <th>Length</th>
-                                <th>BPM</th>
+                                <th>{{ __('Category') }}</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Map') }}</th>
+                                <th>{{ __('Rate') }}</th>
+                                <th>{{ __('Mods') }}</th>
+                                <th>{{ __('Offset') }}</th>
+                                <th>{{ __('Rating') }}</th>
+                                <th>{{ __('Length') }}</th>
+                                <th>{{ __('BPM') }}</th>
                             </tr>
                             </thead>
-                            <tbody id="better-sort-boxes">
+                            <tbody>
                             @foreach($round->maps as $map)
-                                <tr data-id="{{ $map['id'] }}" data-trigger="hover"
+                                <tr data-id="{{ $map['id'] }}"
                                     style="background-size: cover; background-image:
                                         linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)),
                                         url('https://cdn.quavergame.com/mapsets/{{ $map->map['mapset_id'] }}.jpg');">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-3">
         <div class="card">
-            <div class="card-header">Submit map</div>
+            <div class="card-header">{{ __('Submit map') }}</div>
             <div class="card-body">
                 {{ Form::open(['url' => route('admin.mappool.roundSelectSave', $round['id'])]) }}
                 <div>
@@ -55,13 +55,6 @@
                             {{ Form::text('overwrite_difficulty_rating', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
-
-                    {{--                    <div class="col-lg-3">--}}
-                    {{--                        <div class="mt-3">--}}
-                    {{--                            <label class="form-label">{{ __('LN%') }}</label>--}}
-                    {{--                            {{ Form::text('lns', 0, ['class' => 'form-control']) }}--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
                 </div>
 
                 <div class="mt-3">
@@ -76,20 +69,20 @@
             </div>
         </div>
         <div class="card mt-3">
-            <div class="card-header">Maps (drag to reorder)</div>
+            <div class="card-header">{{ __('Maps (drag to reorder)') }}</div>
             <table class="table text-white text-center table-qot-mappool" style="font-size: 15px">
                 <thead>
                 <tr>
-                    <th>Category</th>
-                    <th>Type</th>
-                    <th>Map</th>
-                    <th>Rate</th>
-                    <th>Mods</th>
-                    <th>Offset</th>
-                    <th>Rating</th>
-                    <th>Length</th>
-                    <th>BPM</th>
-                    <th>Order</th>
+                    <th>{{ __('Category') }}</th>
+                    <th>{{ __('Type') }}</th>
+                    <th>{{ __('Map') }}</th>
+                    <th>{{ __('Rate') }}</th>
+                    <th>{{ __('Mods') }}</th>
+                    <th>{{ __('Offset') }}</th>
+                    <th>{{ __('Rating') }}</th>
+                    <th>{{ __('Length') }}</th>
+                    <th>{{ __('BPM') }}</th>
+                    <th>{{ __('Order') }}</th>
                 </tr>
                 </thead>
                 <tbody id="better-sort-boxes">

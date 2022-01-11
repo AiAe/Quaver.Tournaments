@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-3">
         <div class="card">
-            <div class="card-header">Create round</div>
+            <div class="card-header">{{ __('Create round') }}</div>
             <div class="card-body">
                 {{ Form::open(['url' => route('admin.mappool.roundsPOST')]) }}
                 <div class="mt-3">
@@ -23,16 +23,16 @@
             </div>
         </div>
         <div class="card mt-3">
-            <div class="card-header">Mappool rounds (drag to reorder)</div>
+            <div class="card-header">{{ __('Mappool rounds (drag to reorder)') }}</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table text-white">
                         <thead>
                         <tr>
-                            <th>Round</th>
-                            <th style="width: 10%">Maps</th>
-                            <th style="width: 10%">Order</th>
-                            <th style="width: 20%">Action</th>
+                            <th>{{ __('Round') }}</th>
+                            <th style="width: 10%">{{ __('Maps') }}</th>
+                            <th style="width: 10%">{{ __('Order') }}</th>
+                            <th style="width: 20%">{{ __('Action') }}</th>
                         </tr>
                         </thead>
                         <tbody id="better-sort-boxes">

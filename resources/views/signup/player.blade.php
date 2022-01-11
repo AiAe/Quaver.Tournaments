@@ -33,13 +33,12 @@
                             {{ Form::close() }}
                         @else
                             <div class="alert alert-info">
-                                You already applied for the tournament!<br>
-                                If you wish to resign from it contact Organizer!<br>
+                                {{ __("You already applied for the tournament!") }}<br>
+                                {{ __("If you wish to resign from it contact Organizer!") }}<br>
                             </div>
                             <hr>
                             <div class="alert alert-dark">
-                                If you don't have <strong>Tournament</strong> role or you are not added to <strong>Challonge</strong>,
-                                please click the button below.
+                                {{ __("If you don't have Tournament role, or you are not added to Challonge, please click the button below.") }}
                             </div>
 
                             {{ Form::open(['url' => route('verifyPlayerPost')]) }}
@@ -47,7 +46,6 @@
                                 <button type="submit" class="btn btn-primary">{{ __('Verify') }}</button>
                             </div>
                             {{ Form::close() }}
-
                         @endif
                     </div>
                 </div>

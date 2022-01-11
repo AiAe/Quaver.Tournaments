@@ -22,8 +22,7 @@
                         <div class="mt-3">
                             <label class="form-label">{{ __('Staff Roles') }}</label>
                             <div class="form-text mb-3">
-                                Please select all the roles you'd like to apply for.
-                                Make sure you have the time to commit to the role(s) you are applying for.
+                                {{ __("Please select all the roles you'd like to apply for. Make sure you have the time to commit to the role(s) you are applying for.") }}
                             </div>
                             <div class="form-check">
                                 {{ Form::checkbox('roles[]', 'referee', false, ['class' => 'form-check-input', 'id' => 'referee']) }}
@@ -64,10 +63,8 @@
 
                         <div class="mt-3">
                             <label class="form-label">{{ __('Tell us more') }}</label>
-                            <div class="form-text mb-1">Explain why we should pick you.</div>
-                            <div class="form-text mb-1">For <strong>Commentators</strong> please make sure your
-                                microphone is clear.
-                            </div>
+                            <div class="form-text mb-1">{{ __("Explain why we should pick you.") }}</div>
+                            <div class="form-text mb-1">For <strong>Commentators</strong> please make sure your microphone is clear.</div>
                             <div class="form-text mb-3">For <strong>Streamers</strong> please link <a
                                     href="https://speedtest.net/">SpeedTest</a> results and your <strong>Twitch
                                     channel</strong>.

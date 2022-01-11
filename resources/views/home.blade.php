@@ -21,7 +21,7 @@
                 <div class="p-3">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
-                            <h3 class="mb-4">Schedule</h3>
+                            <h3 class="mb-4">{{ __('Schedule') }}</h3>
                             <table class="table table-dark table-schedule">
                                 <tbody>
                                 <tr>

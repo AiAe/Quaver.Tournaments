@@ -9,7 +9,7 @@
                     <div class="card-header">{{ __('Players') }}</div>
                     <div class="card-body">
                         @if(!count($players))
-                            No players have sign up yet!
+                            {{ __('No players have sign up yet!') }}
                         @else
                             <div class="row">
                                 @foreach($players as $player)
@@ -25,7 +25,7 @@
                                                             alt="{{ $player->user['quaver_player']['country'] }}">
                                                         {{ $player->user->quaver_username }}
                                                     </div>
-                                                    <div class="text-white">Rank:
+                                                    <div class="text-white">{{ __('Rank') }}:
                                                         #{{ number_format($player->user['quaver_player'][config('app.game_mode')]['globalRank']) }}</div>
                                                     <div class="text-white">
                                                         {{ $player->data['timezone'] }}

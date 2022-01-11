@@ -6,10 +6,10 @@
             <table class="table table-dark table-qot table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 15%;">Player</th>
-                    <th style="width: 20%;">Discord</th>
-                    <th style="width: 20%;">Roles</th>
-                    <th>Previous experience</th>
+                    <th style="width: 15%;">{{ __('Player') }}</th>
+                    <th style="width: 20%;">{{ __('Discord') }}</th>
+                    <th style="width: 20%;">{{ __('Roles') }}</th>
+                    <th>{{ __('Previous experience') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,13 +24,13 @@
                             <a href="javascript:void(0)"
                                onclick="copyToClipboard(this)"
                                data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Click to copy">
+                               data-bs-placement="top" title="{{ __('Click to copy') }}">
                                 {{ $application->user->discord_username }}
                             </a> -
                             <a href="javascript:void(0)"
                                onclick="copyToClipboard(this, '{{ '<@' . $application->user->discord_user_id . '>' }}')"
                                data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Click to copy">
+                               data-bs-placement="top" title="{{ __('Click to copy') }}">
                                 ID
                             </a>
                         </td>
@@ -54,7 +54,7 @@
 @push('scripts')
     <script>
         function copyToClipboard(element, text = null) {
-            $(element).attr('data-bs-original-title', "Copied!").tooltip('show');
+            $(element).attr('data-bs-original-title', "{{ __('Copied!') }}").tooltip('show');
             let $temp = $("<input>");
             $("body").append($temp);
             if (!text) $temp.val($(element).text().trim()).select();
@@ -63,7 +63,7 @@
             $temp.remove();
 
             setInterval(function () {
-                $(element).attr('data-bs-original-title', "Click to copy").tooltip('show');
+                $(element).attr('data-bs-original-title', "{{ __('Click to copy') }}").tooltip('show');
             }, 1000);
         }
     </script>

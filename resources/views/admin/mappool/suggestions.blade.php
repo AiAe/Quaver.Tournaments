@@ -6,11 +6,11 @@
             <table class="table table-dark table-qot table-hover">
                 <thead>
                 <tr>
-                    <th style="width: 10%">Suggested by</th>
-                    <th>Map</th>
-                    <th style="width: 15%;">Map Type</th>
-                    <th style="width: 15%;">Intended stage</th>
-                    <th style="width: 5%">Suggested</th>
+                    <th style="width: 10%">{{ __('Suggested by') }}</th>
+                    <th>{{ __('Map') }}</th>
+                    <th style="width: 15%;">{{ __('Map Type') }}</th>
+                    <th style="width: 15%;">{{ __('Intended stage') }}</th>
+                    <th style="width: 5%">{{ __('Suggested') }}</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        KKomelin\TranslatableStringExporter\Providers\ExporterServiceProvider::class,
         /*
          * Application Service Providers...
          */
