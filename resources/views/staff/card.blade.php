@@ -4,7 +4,7 @@
     </a>
     <div class="card-footer">
         <a href="{{ route('quaverUser', $player['id']) }}" target="_blank">
-            {{ $player['username'] }}
+            {{ Str::limit($player['username'], 12) }}
         </a>
     </div>
 </div>
