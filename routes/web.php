@@ -13,7 +13,7 @@ Route::get('/oauth/{driver}/callback', [OAuthController::class, 'handleProviderC
 Route::get('/logout', [OAuthController::class, 'logout'])->name('logout');
 
 // Pages
-Route::middleware('admin')->get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
+Route::get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
 Route::get('/players', [\App\Http\Controllers\Players\PlayersController::class, 'page'])->name('players');
 Route::get('/rules', [\App\Http\Controllers\Rules\RulesController::class, 'page'])->name('rules');
 Route::get('/staff', [\App\Http\Controllers\Staff\StaffController::class, 'page'])->name('staff');
@@ -23,12 +23,12 @@ Route::middleware('verify.user')->group(function () {
     Route::post('/mappool/suggestion', [MappoolController::class, 'save'])->name('mapsSuggestionPOST');
 
     Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
-    Route::middleware('admin')->get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
-
     Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
+
+    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
     Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
 
-    Route::middleware('admin')->post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
 });
 
 // Admin
@@ -41,6 +41,7 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
         Route::get('/users', [UsersController::class, 'page'])->name('users');
     });
 
+    // Mappool selectors only
     Route::middleware('mappoolselector')->prefix('mappool')->as('mappool.')->group(function () {
         Route::get('suggestions', [App\Http\Controllers\Admin\Mappool\MappoolController::class, 'suggestions'])->name('suggestions');
 

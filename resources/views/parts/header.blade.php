@@ -8,13 +8,13 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto">
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link {{ routeIs('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>
+                    <a class="nav-link {{ routeIs('signupPlayer') }}"
+                       href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>
                 </li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link {{ routeIs('signupPlayer') }}"--}}
-                {{--                       href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>--}}
-                {{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('signupStaff') }}"
                        href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
@@ -26,10 +26,10 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('mappool') }}"--}}
-{{--                       href="{{ route('mappool') }}">{{ __('Mappool') }}</a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('mappool') }}"
+                       href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('players') }}"
                        href="{{ route('players') }}">{{ __('Players') }}</a>

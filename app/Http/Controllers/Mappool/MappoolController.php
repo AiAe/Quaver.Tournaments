@@ -22,9 +22,13 @@ class MappoolController extends Controller
         $pageData['round'] = MappoolRound::query()->where('status', 1)
             ->orderBy('position', 'desc')->with('maps')->first();
 
-        $pageData['previous_rounds'] = MappoolRound::query()->where('status', 1)
-            ->whereNotIn('id', [$pageData['round']->id])
-            ->orderBy('position', 'desc')->with('maps')->get();
+        if ($pageData['round']) {
+            $pageData['previous_rounds'] = MappoolRound::query()->where('status', 1)
+                ->whereNotIn('id', [$pageData['round']->id])
+                ->orderBy('position', 'desc')->with('maps')->get();
+        } else {
+            $pageData['previous_rounds'] = [];
+        }
 
         return view('mappool/mappool', $pageData);
     }
