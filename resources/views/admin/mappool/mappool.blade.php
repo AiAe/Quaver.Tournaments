@@ -82,7 +82,6 @@
                     <th>{{ __('Rating') }}</th>
                     <th>{{ __('Length') }}</th>
                     <th>{{ __('BPM') }}</th>
-                    <th>{{ __('Order') }}</th>
                 </tr>
                 </thead>
                 <tbody id="better-sort-boxes">
@@ -103,9 +102,8 @@
                         <td>{{ $map->data['offset'] }}</td>
                         <td>{{ number_format($map->map['difficulty_rating'], 2) }}</td>
                         <td>{{ date("i:s", $map->map['length'] / 1000) }}</td>
-                        <td>{{ $map->map['bpm'] }}</td>
                         <td class="position-relative">
-                            {{ $map['position'] }}
+                            {{ $map->map['bpm'] }}
                             <div class="table-delete">
                                 {{ Form::open(['url' => route('admin.mappool.roundSelectDeletePOST', $map->id)]) }}
                                 <button type="submit" class="btn btn-danger btn-sm">{{ __('Delete') }}</button>

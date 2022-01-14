@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Mappool;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mappool;
 use App\Models\MappoolRound;
 use App\Models\Mapsuggestion;
 use App\Rules\MapStageValidation;
@@ -20,9 +19,12 @@ class MappoolController extends Controller
         $pageData[] = "";
         $pageData['seo']['title'] = "Mappool";
 
-        $pageData['rounds'] = MappoolRound::query()->where('status', 1)
-            ->orderBy('position', 'asc')->with('maps')
-            ->get();
+        $pageData['round'] = MappoolRound::query()->where('status', 1)
+            ->orderBy('position', 'desc')->with('maps')->first();
+
+        $pageData['previous_rounds'] = MappoolRound::query()->where('status', 1)
+            ->whereNotIn('id', [$pageData['round']->id])
+            ->orderBy('position', 'desc')->with('maps')->get();
 
         return view('mappool/mappool', $pageData);
     }
