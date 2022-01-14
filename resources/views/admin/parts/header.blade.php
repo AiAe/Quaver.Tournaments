@@ -9,25 +9,25 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('admin.dashboard') }}" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                    <a class="nav-link {{ routeIs('admin.dashboard') }}"
+                       href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('admin.mappool.suggestions') }}" href="{{ route('admin.mappool.suggestions') }}">{{ __('Map suggestions') }}</a>
+                    <a class="nav-link {{ routeIs('admin.mappool.suggestions') }}"
+                       href="{{ route('admin.mappool.suggestions') }}">{{ __('Map suggestions') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('admin.staffApplications') }}" href="{{ route('admin.staffApplications') }}">{{ __('Staff applications') }}</a>
+                    <a class="nav-link {{ routeIs('admin.staffApplications') }}"
+                       href="{{ route('admin.staffApplications') }}">{{ __('Staff applications') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('admin.users') }}" href="{{ route('admin.users') }}">{{ __('Users') }}</a>
+                    <a class="nav-link {{ routeIs('admin.users') }}"
+                       href="{{ route('admin.users') }}">{{ __('Users') }}</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.mappool.rounds') }}" href="{{ route('admin.mappool.rounds') }}">
                         Mappool
                     </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('admin.mappool.rounds') }}">{{ __('Rounds') }}</a>
-                    </div>
                 </li>
             </ul>
 
