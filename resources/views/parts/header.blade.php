@@ -8,40 +8,43 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto">
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link {{ routeIs('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>--}}
-{{--                </li>--}}
+                @if(config('app.tourney_signups'))
+                    <li class="nav-item">
+                        <a class="nav-link {{ routeIs('signupPlayer') }}"
+                           href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('signupPlayer') }}"
-                       href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>
+                    <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('signupStaff') }}"
-                       href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
+                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mapsSuggestion') }}"
                        href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ routeIs('mappool') }}"
-                       href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ routeIs('players') }}"
-                       href="{{ route('players') }}">{{ __('Players') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>
+                    <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://challonge.com/QOT2022" target="_blank">{{ __('Bracket') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('staff') }}" href="{{ route('staff') }}">{{ __('Staff') }}</a>
+                    <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="qot_dropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        QOT
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="qot_dropdown">
+                        <a class="dropdown-item {{ routeIs('staff') }}"
+                           href="{{ route('staff') }}">{{ __('Staff') }}</a>
+                        <a class="dropdown-item {{ routeIs('signupStaff') }}"
+                           href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
+                    </div>
                 </li>
             </ul>
 
