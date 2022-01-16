@@ -17,7 +17,8 @@
         "jackiedo/timezonelist": "5.*",
         "kkomelin/laravel-translatable-string-exporter": "^1.14",
         "laravel/framework": "^8.65",
-        "laravel/socialite": "^5.2"
+        "laravel/socialite": "^5.2",
+        "jackiedo/dotenv-editor": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

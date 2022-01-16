@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Mappool\MappoolController;
@@ -44,6 +45,11 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::middleware('organizer')->group(function () {
         Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
         Route::get('/users', [UsersController::class, 'page'])->name('users');
+
+        Route::prefix('settings')->as('settings.')->group(function () {
+            Route::get('/', [SettingsController::class, 'page'])->name('settings');
+            Route::post('/toggle/{key}', [SettingsController::class, 'toggleBoolean'])->name('toggle');
+        });
     });
 
     // Mappool selectors only

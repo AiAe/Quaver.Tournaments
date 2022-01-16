@@ -29,6 +29,10 @@
                         Mappool
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.settings.settings') }}"
+                       href="{{ route('admin.settings.settings') }}">{{ __('Settings') }}</a>
+                </li>
             </ul>
 
             @auth
