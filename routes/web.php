@@ -25,10 +25,15 @@ Route::middleware('verify.user')->group(function () {
     Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
     Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
 
-    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
-    Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
+    // Check if tournament signups are enabled or admin
+    Route::middleware('tournament.enabled')->group(function() {
+        Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
+        Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
 
-    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+        Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+    });
+
+    Route::get('/signup/closed', [SignupController::class, 'closed'])->name('signupClosed');
 });
 
 // Admin

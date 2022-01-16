@@ -241,5 +241,6 @@ return [
 
     'discord_bot' => env('DISCORD_BOT', false),
 
-    'game_mode' => env('GAME_MODE', 'keys4')
+    'game_mode' => env('GAME_MODE', 'keys4'),
+    'tourney_signups' => env('TOURNEY_SIGNUPS', false)
 ];

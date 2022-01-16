@@ -79,9 +79,10 @@ server {
 
 ## ENV
 1. `GAME_MODE=keys4` - Which mode the tournament is for. Supports **keys4** or **keys7**
-2. `FORCE_LOCK=false` - If true it will lock the site with user and password
-3. `AUTH_USER=qot` - Username (used if `FORCE_LOCK` is set to true)
-4. `AUTH_PASSWORD=qot` - Password (used if `FORCE_LOCK` is set to true)
+2. `TOURNEY_SIGNUPS=true` - This will enable tournament signups
+3. `FORCE_LOCK=false` - If true it will lock the site with user and password
+4. `AUTH_USER=qot` - Username (used if `FORCE_LOCK` is set to true)
+5. `AUTH_PASSWORD=qot` - Password (used if `FORCE_LOCK` is set to true)
 
 For [QOT.Bot](https://github.com/AiAe/qot.bot)
 1. `DISCORD_BOT=false` - change to `true` if bot is set up

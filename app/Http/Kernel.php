@@ -6,6 +6,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\JsonResponse;
 use App\Http\Middleware\MappoolSelector;
 use App\Http\Middleware\Organizer;
+use App\Http\Middleware\TournamentEnabled;
 use App\Http\Middleware\VerifyUser;
 use App\Http\Middleware\Site;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -75,7 +76,8 @@ class Kernel extends HttpKernel
         'admin' => Admin::class,
         'organizer' => Organizer::class,
         'mappoolselector' => MappoolSelector::class,
-        'json.response' => JsonResponse::class
+        'json.response' => JsonResponse::class,
+        'tournament.enabled' => TournamentEnabled::class,
 
     ];
 }

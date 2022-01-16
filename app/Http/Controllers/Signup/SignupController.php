@@ -31,6 +31,15 @@ class SignupController extends Controller
         return view('signup/player', $pageData);
     }
 
+    public function closed()
+    {
+        $pageData[] = "";
+        $pageData['seo']['title'] = "Closed!";
+        $pageData['text'] = "Tournament registration is not started yet!";
+
+        return view('signup.closed', $pageData);
+    }
+
     private function verifyPlayer()
     {
         $player = Auth::user();

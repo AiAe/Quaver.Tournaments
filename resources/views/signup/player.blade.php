@@ -33,7 +33,7 @@
                             {{ Form::close() }}
                         @else
                             <div class="alert alert-info">
-                                {{ __("You already applied for the tournament!") }}<br>
+                                {{ __("You already registered for the tournament!") }}<br>
                                 {{ __("If you wish to resign from it contact Organizer!") }}<br>
                             </div>
                             <hr>
