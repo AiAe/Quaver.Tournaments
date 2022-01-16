@@ -1,6 +1,6 @@
 /usr/bin/git pull
 
-/usr/sbin/composer install --no-dev
+/usr/bin/composer install --no-dev
 
 /usr/bin/php artisan migrate --force
 
