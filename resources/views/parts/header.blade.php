@@ -17,9 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{{ __('Schedules') }}</a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="#" rel="noreferrer">{{ __('Schedules') }}</a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mapsSuggestion') }}"
                        href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
@@ -28,7 +28,7 @@
                     <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://challonge.com/QOT2022" target="_blank">{{ __('Bracket') }}</a>
+                    <a class="nav-link" href="https://challonge.com/QOT2022" target="_blank" rel="noreferrer">{{ __('Bracket') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>
