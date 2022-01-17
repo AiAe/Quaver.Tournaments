@@ -10,11 +10,8 @@
                     <p style="font-size: 18px;">
                         If you're a 4K player looking to show off your skills, this tournament will be the perfect place
                         to do so once again!<br>
-                        Until we are ready to open registrations for the second edition of QOT and
-                        you're only wanting to play, <br>please check the schedule and come back around then to
-                        register!<br><br>
-                        <strong>In the meantime you can suggest maps for the tournament <a
-                                href="{{ route('mapsSuggestion') }}">here</a>.</strong>
+                        Registrations for this year's Quaver Official 4K Tournament are now opened!<br><br>
+                        <strong>You can register to the tournament <a href="{{ route('signupPlayer') }}">{{ __('here') }}</a>.</strong>
                     </p>
                 </div>
                 <hr>
@@ -26,7 +23,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Registration phase</td>
-                                    <td>January 16th - January 30th</td>
+                                    <td>January 17th - January 30th</td>
                                 </tr>
                                 <tr>
                                     <td>Qualifiers Mappool Showcase</td>
@@ -120,8 +117,8 @@
                 <hr>
                 <div class="p-3">
                     <p style="font-size: 17px;" class="text-warning">
-                        Until we are ready to open registrations, we are looking for people who want to join our staff.
-                        We are looking for referees, streamers, commentators, mappool selectors and mappers.
+                        Registrations have now opened, but the positions written under are the ones needing the most of people in there, so we'll keep staff applications open just in case.
+                        We are looking for referees, streamers, commentators.
                         If you are interested in helping, <a href="{{ route('signupStaff') }}">apply here</a>.
                     </p>
                 </div>
