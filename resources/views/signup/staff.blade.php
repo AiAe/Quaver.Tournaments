@@ -31,18 +31,6 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                {{ Form::checkbox('roles[]', 'mappool', false, ['class' => 'form-check-input', 'id' => 'mappool']) }}
-                                <label class="form-check-label" for="mappool">
-                                    {{ __('Mappool') }}
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                {{ Form::checkbox('roles[]', 'mapper', false, ['class' => 'form-check-input', 'id' => 'mapper']) }}
-                                <label class="form-check-label" for="mapper">
-                                    {{ __('Mapper') }}
-                                </label>
-                            </div>
-                            <div class="form-check">
                                 {{ Form::checkbox('roles[]', 'streamer', false, ['class' => 'form-check-input', 'id' => 'streamer']) }}
                                 <label class="form-check-label" for="streamer">
                                     {{ __('Streamer') }}
