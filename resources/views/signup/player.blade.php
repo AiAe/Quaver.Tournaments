@@ -38,7 +38,7 @@
                             </div>
                             <hr>
                             <div class="alert alert-dark">
-                                {{ __("If you don't have Tournament role, or you are not added to Challonge, please click the button below.") }}
+                                {{ __("If you don't have Tournament role, please click the button below.") }}
                             </div>
 
                             {{ Form::open(['url' => route('verifyPlayerPost')]) }}
