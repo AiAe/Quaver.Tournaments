@@ -117,8 +117,7 @@
                 <hr>
                 <div class="p-3">
                     <p style="font-size: 17px;" class="text-warning">
-                        Registrations have now opened, but the positions written under are the ones needing the most of people in there, so we'll keep staff applications open just in case.
-                        We are looking for referees, streamers, commentators.
+                        We are looking for more referees, streamers and commentators.
                         If you are interested in helping, <a href="{{ route('signupStaff') }}">apply here</a>.
                     </p>
                 </div>
