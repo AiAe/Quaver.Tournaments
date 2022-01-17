@@ -10,8 +10,8 @@ class StaffRoleValidation implements Rule
 
     private $staff_role = array(
         'referee',
-        'mappool',
-        'mapper',
+//        'mappool',
+//        'mapper',
         'streamer',
         'commentator'
     );
