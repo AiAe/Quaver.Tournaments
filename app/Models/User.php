@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function player()
     {
-        return $this->belongsTo(Player::class, 'id', 'user_id');
+        return $this->belongsTo(Player::class, 'id', 'user_id')->where('status', '=', 1);
     }
 
     public function getRole()
@@ -58,6 +58,8 @@ class User extends Authenticatable
 
             $response = Http::get('https://api.quavergame.com/v1/users/full/' . $this->quaver_user_id);
             $user = $response->json()['user'];
+
+            if(!$user) return [];
 
             return [
                 "keys4" => [

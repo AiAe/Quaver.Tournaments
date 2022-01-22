@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Tourney signups') }}</div>
                     <div class="card-body text-center">
-                        <h4>{{ \App\Models\Player::query()->where('status', '!=', 0)->count()|number_format(0) }}</h4>
+                        <h4>{{ \App\Models\Player::query()->where('status', '=', 1)->count()|number_format(0) }}</h4>
                     </div>
                 </div>
             </div>
