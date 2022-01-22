@@ -12,6 +12,6 @@ class PlayersController extends Controller
         return User::query()
             ->with('player')
             ->has('player')
-            ->get();
+            ->paginate(100);
     }
 }
