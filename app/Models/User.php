@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -59,7 +60,26 @@ class User extends Authenticatable
             $response = Http::get('https://api.quavergame.com/v1/users/full/' . $this->quaver_user_id);
             $user = $response->json();
 
-            if(!isset($user['user'])) return [];
+            if(!isset($user['user'])) {
+                Log::error($this->quaver_user_id);
+                return [
+                    "keys4" => [
+                        "globalRank" => -1,
+                        "countryRank" => -1,
+                        "stats" => [
+                            "overall_performance_rating" => 0
+                        ]
+                    ],
+                    "keys7" => [
+                        "globalRank" => -1,
+                        "countryRank" => -1,
+                        "stats" => [
+                            "overall_performance_rating" => 0
+                        ]
+                    ],
+                    "country" => "XX"
+                ];
+            }
 
             $user = $user['user'];
 
