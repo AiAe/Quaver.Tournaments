@@ -23,7 +23,7 @@
                                 <tbody>
                                 <tr>
                                     <td>Registration phase</td>
-                                    <td>January 17th - January 30th</td>
+                                    <td>January 17th - January 28th</td>
                                 </tr>
                                 <tr>
                                     <td>Qualifiers Mappool Showcase</td>
@@ -31,7 +31,7 @@
                                 </tr>
                                 <tr>
                                     <td>Qualifiers</td>
-                                    <td>February 5th - February 6th</td>
+                                    <td>February 4th - February 6th</td>
                                 </tr>
                                 <tr>
                                     <td>Round of 128</td>
