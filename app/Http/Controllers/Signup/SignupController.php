@@ -26,7 +26,7 @@ class SignupController extends Controller
         $pageData[] = "";
         $pageData['seo']['title'] = "Join Tournament";
 
-        $pageData['has_registered'] = Player::query()->where('user_id', Auth::user()->id)->exists();
+        $pageData['has_registered'] = Player::query()->where('user_id', Auth::user()->id)->first();
 
         return view('signup/player', $pageData);
     }
@@ -111,5 +111,30 @@ class SignupController extends Controller
         $this->verifyPlayer();
 
         return back()->with('success', "You registered successfully!");
+    }
+
+    public function updateTimezone(Request $request) {
+        $rules = [
+            'timezone' => ["required", "numeric"]
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        $validator->validate();
+        $validated = $validator->validated();
+
+        // Convert timezone to text
+        $validated['timezone'] = timezoneList()[$validated['timezone']]['label'];
+
+        $player = Player::where('user_id', Auth::user()->id)->first();
+
+        $data = $player->data;
+
+        $data['timezone'] = $validated['timezone'];
+        $player->data = $data;
+
+        $player->save();
+
+        return back()->with('success', 'Updated timezone successfully!');
     }
 }

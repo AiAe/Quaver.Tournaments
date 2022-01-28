@@ -32,6 +32,8 @@ Route::middleware('verify.user')->group(function () {
         Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
 
         Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+
+        Route::post('/update/timezone', [SignupController::class, 'updateTimezone'])->name('updateTimezonePost');
     });
 
     Route::get('/signup/closed', [SignupController::class, 'closed'])->name('signupClosed');
@@ -45,6 +47,8 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::middleware('organizer')->group(function () {
         Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
         Route::get('/users', [UsersController::class, 'page'])->name('users');
+        Route::get('/players', [\App\Http\Controllers\Admin\Players\PlayersController::class, 'page'])->name('players');
+        Route::post('/players/status/{id}', [\App\Http\Controllers\Admin\Players\PlayersController::class, 'status'])->name('players.status.update');
 
         Route::prefix('settings')->as('settings.')->group(function () {
             Route::get('/', [SettingsController::class, 'page'])->name('settings');

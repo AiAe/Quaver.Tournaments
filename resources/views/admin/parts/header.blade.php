@@ -25,6 +25,10 @@
                        href="{{ route('admin.users') }}">{{ __('Users') }}</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ routeIs('admin.players') }}"
+                       href="{{ route('admin.players') }}">{{ __('Players') }}</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ routeIs('admin.mappool.rounds') }}" href="{{ route('admin.mappool.rounds') }}">
                         Mappool
                     </a>
