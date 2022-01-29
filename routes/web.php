@@ -28,13 +28,12 @@ Route::middleware('verify.user')->group(function () {
 
     // Check if tournament signups are enabled or admin
     Route::middleware('tournament.enabled')->group(function() {
-        Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
         Route::post('/signup/player', [SignupController::class, 'savePlayer'])->name('signupPlayerPost');
-
-        Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
-
-        Route::post('/update/timezone', [SignupController::class, 'updateTimezone'])->name('updateTimezonePost');
     });
+
+    Route::get('/signup/player', [SignupController::class, 'player'])->name('signupPlayer');
+    Route::post('/player/verify', [SignupController::class, 'updatePlayer'])->name('verifyPlayerPost');
+    Route::post('/update/timezone', [SignupController::class, 'updateTimezone'])->name('updateTimezonePost');
 
     Route::get('/signup/closed', [SignupController::class, 'closed'])->name('signupClosed');
 });

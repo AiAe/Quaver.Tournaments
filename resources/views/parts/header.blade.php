@@ -15,12 +15,12 @@
                         </a>
                     </li>
                 @endguest
-                @if(config('app.tourney_signups'))
+{{--                @if(config('app.tourney_signups'))--}}
                     <li class="nav-item">
                         <a class="nav-link {{ routeIs('signupPlayer') }}"
-                           href="{{ route('signupPlayer') }}">{{ __('Join Tournament') }}</a>
+                           href="{{ route('signupPlayer') }}">{{ __('Tournament') }}</a>
                     </li>
-                @endif
+{{--                @endif--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
