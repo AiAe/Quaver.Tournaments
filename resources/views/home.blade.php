@@ -8,10 +8,12 @@
                 <div class="p-2">
                     <h1 class="pb-3">Welcome to the website for the Quaver Official Tournament!</h1>
                     <p style="font-size: 18px;">
-                        If you're a 4K player looking to show off your skills, this tournament will be the perfect place
-                        to do so once again!<br>
-                        Registrations for this year's Quaver Official 4K Tournament are now opened!<br><br>
-                        <strong>You can register to the tournament <a href="{{ route('signupPlayer') }}">{{ __('here') }}</a>.</strong>
+                        Registrations for this year's Quaver Official 4K Tournament are now closed!<br><br>
+                        For more up-to-date information about the tournament please join our
+                        <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server
+                        and make sure to follow our
+                        <a href="https://www.twitch.tv/quavergame" target="_blank" rel="noreferrer">Twitch</a>
+                        channel for coverage on the Tournament.
                     </p>
                 </div>
                 <hr>
