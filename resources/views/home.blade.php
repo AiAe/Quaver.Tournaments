@@ -10,7 +10,7 @@
                     <p style="font-size: 18px;">
                         Registrations for this year's Quaver Official 4K Tournament are now closed!<br><br>
                         For more up-to-date information about the tournament please join our
-                        <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server
+                        <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server <br>
                         and make sure to follow our
                         <a href="https://www.twitch.tv/quavergame" target="_blank" rel="noreferrer">Twitch</a>
                         channel for coverage on the Tournament.
