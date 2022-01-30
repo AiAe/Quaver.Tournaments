@@ -18,14 +18,18 @@ body {
 }
 
 a {
-    color: #09a4c6;
+    color: #21cbed;
     text-decoration: none;
+}
+
+a:hover {
+    color: #44dfff;
 }
 
 .bg-qot {
     background: #242424;
     color: #ffffff;
-    border-bottom: 1px solid #09a4c6;
+    border-bottom: 1px solid #21cbed;
 }
 
 .alert-danger {
@@ -218,6 +222,55 @@ select:focus {
 .mapset-info {
     background: #181818;
     bottom: 0;
+}
+
+.map .map-background {
+    width: 100%;
+    height: 200px;
+    background-position: top center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.map img {
+    max-width: 100%;
+    height: 300px;
+}
+
+.map .table-dark tr th,
+.map .table-dark tr td {
+    background: transparent;
+    border: none;
+}
+
+.map .table-dark tr th {
+    text-align: right;
+}
+
+.map .table-dark tbody {
+    border: none;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+@media (max-width: 991px) {
+    .col-lg-5 {
+        margin-top: 20px;
+    }
+
+    .row.mt-4 {
+        margin-top: 5px !important;
+    }
 }
 
 footer {

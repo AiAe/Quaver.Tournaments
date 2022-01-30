@@ -46,7 +46,7 @@
                             </div>
                             {{ Form::close() }}
                             <hr>
-                            <div class="alert alert-dark">
+                            <div class="alert alert-warning">
                                 If you don't have <strong>Tournament role</strong>, make sure that you are in
                                 <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer"><strong>Quaver's
                                         discord</strong></a>

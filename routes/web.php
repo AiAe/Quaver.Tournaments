@@ -15,6 +15,7 @@ Route::get('/logout', [OAuthController::class, 'logout'])->name('logout');
 
 // Pages
 Route::get('/mappool', [\App\Http\Controllers\Mappool\MappoolController::class, 'page'])->name('mappool');
+Route::get('/mappool/qualifiers', [\App\Http\Controllers\Mappool\MappoolController::class, 'qualifers_mappool'])->name('mappool.qualifiers');
 Route::get('/players', [\App\Http\Controllers\Players\PlayersController::class, 'page'])->name('players');
 Route::get('/rules', [\App\Http\Controllers\Rules\RulesController::class, 'page'])->name('rules');
 Route::get('/staff', [\App\Http\Controllers\Staff\StaffController::class, 'page'])->name('staff');

@@ -33,6 +33,59 @@ class MappoolController extends Controller
         return view('mappool/mappool', $pageData);
     }
 
+    public function qualifers_mappool()
+    {
+        $pageData[] = "";
+        $pageData['seo']['title'] = "Qualifiers Mappool";
+
+        $pageData['maps'] = [
+            [
+                [
+                    'background' => asset('img/qualifiers/sv.png'),
+                    'song' => "Morimori Atsushi - Realization [Stage 1: Truth]",
+                    "url" => "https://quavergame.com/mapset/map/73468",
+                    "type" => "SV",
+                    "rating" => "12.43",
+                    "length" => "01:59",
+                    "bpm" => "140"
+                ],
+                [
+                    'background' => asset('img/qualifiers/tech.jpeg'),
+                    'song' => "yvk1n0 - Yukinopapurika [Stage 2: Paranoia]",
+                    "url" => "https://quavergame.com/mapset/map/73471",
+                    "type" => "Accuracy",
+                    "rating" => "24.77",
+                    "length" => "01:36",
+                    "bpm" => "180"
+                ],
+            ],
+            [
+                [
+                    'background' => asset('img/qualifiers/ln.jpeg'),
+                    'song' => "Sakuzyo - Imprinting [Stage 3: Illuminating]",
+                    "url" => "https://quavergame.com/mapset/map/73467",
+                    "type" => "LN",
+                    "rating" => "25.10",
+                    "length" => "01:53",
+                    "bpm" => "175"
+                ],
+                [
+                    'background' => asset('img/qualifiers/rice.png'),
+                    'song' => "Aoi - γuarδina [Stage 4: Luminescence]",
+                    "url" => "https://quavergame.com/mapset/map/73466",
+                    "type" => "Rice [Rawskill]",
+                    "rating" => "30.47",
+                    "length" => "02:05",
+                    "bpm" => "202"
+                ],
+            ]
+        ];
+
+        $pageData['download'] = "#";
+
+        return view('mappool.qualifiers', $pageData);
+    }
+
     public function suggest_map()
     {
         $pageData[] = "";
