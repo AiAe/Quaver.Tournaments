@@ -45,12 +45,12 @@
             </div>
         @endforeach
 
-{{--        <div class="row justify-content-center mt-3">--}}
-{{--            <div class="col-lg-3 text-center">--}}
-{{--                <div class="d-grid gap-1">--}}
-{{--                    <a href="{{ $download }}" class="btn btn-primary">Download all</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-3 text-center">
+                <div class="d-grid gap-1">
+                    <a href="{{ $download }}" class="btn btn-primary">Download all</a>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

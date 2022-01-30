@@ -81,7 +81,7 @@ class MappoolController extends Controller
             ]
         ];
 
-        $pageData['download'] = "#";
+        $pageData['download'] = "https://mega.nz/file/3UpW3ZBb#sjaBJ6HPAUwbPrWU9kz4D7OrkgiFohlusUNE3LQNKL8";
 
         return view('mappool.qualifiers', $pageData);
     }
