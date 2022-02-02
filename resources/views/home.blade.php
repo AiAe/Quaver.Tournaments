@@ -35,39 +35,39 @@
                                 </tr>
                                 <tr>
                                     <td>Qualifiers</td>
-                                    <td>February 4th - February 6th</td>
+                                    <td>February 4th - February 13th</td>
                                 </tr>
                                 <tr>
                                     <td>Round of 128</td>
-                                    <td>February 12th - February 13th</td>
-                                </tr>
-                                <tr>
-                                    <td>Round of 64</td>
                                     <td>February 19th - February 20th</td>
                                 </tr>
                                 <tr>
-                                    <td>Round of 32</td>
+                                    <td>Round of 64</td>
                                     <td>February 26th - February 27th</td>
                                 </tr>
                                 <tr>
-                                    <td>Round of 16</td>
+                                    <td>Round of 32</td>
                                     <td>March 5th - March 6th</td>
                                 </tr>
                                 <tr>
-                                    <td>Quarterfinals</td>
+                                    <td>Round of 16</td>
                                     <td>March 12th - March 13th</td>
                                 </tr>
                                 <tr>
-                                    <td>Semifinals</td>
+                                    <td>Quarterfinals</td>
                                     <td>March 19th - March 20th</td>
                                 </tr>
                                 <tr>
-                                    <td>Finals</td>
+                                    <td>Semifinals</td>
                                     <td>March 26th - March 27th</td>
                                 </tr>
                                 <tr>
-                                    <td>Grand Finals</td>
+                                    <td>Finals</td>
                                     <td>April 2nd - April 3rd</td>
+                                </tr>
+                                <tr>
+                                    <td>Grand Finals</td>
+                                    <td>April 9th - April 10th</td>
                                 </tr>
                                 </tbody>
                             </table>
