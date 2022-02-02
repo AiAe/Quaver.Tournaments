@@ -28,9 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
-                {{--                <li class="nav-item">--}}
-                {{--                    <a class="nav-link" href="#" rel="noreferrer">{{ __('Schedules') }}</a>--}}
-                {{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="https://docs.google.com/spreadsheets/d/1i7rOG6cVp4TOsTOpHGRaWdkCsvScmRm82WeMLF6Mr2I/" rel="noreferrer">{{ __('Schedules') }}</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mapsSuggestion') }}"
                        href="{{ route('mapsSuggestion') }}">{{ __('Suggest maps') }}</a>
