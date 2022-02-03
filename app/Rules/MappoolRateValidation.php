@@ -14,7 +14,7 @@ class MappoolRateValidation implements Rule
         '0.6x',
         '0.65x',
         '0.7x',
-        'o.75x',
+        '0.75x',
         '0.8x',
         '0.85x',
         '0.9x',
