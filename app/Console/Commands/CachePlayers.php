@@ -39,16 +39,19 @@ class CachePlayers extends Command
      */
     public function handle()
     {
-        StaffController::fetchStaff();
+        $this->info('Dispatching fetching staff');
+        dispatch(function () {
+            StaffController::fetchStaff();
+        });
 
         $players = User::query()->has('player')->get();
 
-        $sum_ranks = 0;
-        $temp_players = array();
         foreach ($players as $player) {
-            $this->info('Caching ' . $player['quaver_username']);
-            $temp_players += [$player['quaver_username'] => $player->quaver_player['keys4']['globalRank']];
-            $sum_ranks += $player->quaver_player['keys4']['globalRank'];
+            $this->info('Dispatching ' . $player['quaver_username']);
+            $quaver_user_id = $player->quaver_user_id;
+            dispatch(function () use ($quaver_user_id) {
+                User::CachePlayer($quaver_user_id);
+            });
         }
 
         $this->info('Done');

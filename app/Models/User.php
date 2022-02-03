@@ -103,6 +103,56 @@ class User extends Authenticatable
         });
     }
 
+    public static function CachePlayer($player_id)
+    {
+        return Cache::remember('quaver_user_' . $player_id, 86400, function () use ($player_id) {
+
+            $response = Http::get('https://api.quavergame.com/v1/users/full/' . $player_id);
+            $user = $response->json();
+
+            if(!isset($user['user'])) {
+                Log::error($player_id);
+                return [
+                    "keys4" => [
+                        "globalRank" => -1,
+                        "countryRank" => -1,
+                        "stats" => [
+                            "overall_performance_rating" => 0
+                        ]
+                    ],
+                    "keys7" => [
+                        "globalRank" => -1,
+                        "countryRank" => -1,
+                        "stats" => [
+                            "overall_performance_rating" => 0
+                        ]
+                    ],
+                    "country" => "XX"
+                ];
+            }
+
+            $user = $user['user'];
+
+            return [
+                "keys4" => [
+                    "globalRank" => $user['keys4']['globalRank'],
+                    "countryRank" => $user['keys4']['countryRank'],
+                    "stats" => [
+                        "overall_performance_rating" => $user['keys4']['stats']['overall_performance_rating']
+                    ]
+                ],
+                "keys7" => [
+                    "globalRank" => $user['keys7']['globalRank'],
+                    "countryRank" => $user['keys7']['countryRank'],
+                    "stats" => [
+                        "overall_performance_rating" => $user['keys7']['stats']['overall_performance_rating']
+                    ]
+                ],
+                "country" => $user['info']['country']
+            ];
+        });
+    }
+
     public function updateQuaverUsername()
     {
         $response = Http::get('https://api.quavergame.com/v1/users?id=' . $this->quaver_user_id);
