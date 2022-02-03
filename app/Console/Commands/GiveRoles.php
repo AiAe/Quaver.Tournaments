@@ -39,7 +39,17 @@ class GiveRoles extends Command
      */
     public function handle()
     {
-        foreach (StaffController::$staff as $name => $type) {
+        foreach (array_reverse(StaffController::$staff, true) as $name => $type) {
+            if ($name == 'referees') {
+                foreach ($type as $player) {
+                    $this->info($player);
+                    $user = User::query()->where('quaver_user_id', '=', $player);
+                    $user->update([
+                        'role' => 2
+                    ]);
+                }
+            }
+
             if ($name == 'mappoolers') {
                 foreach ($type as $player) {
                     $user = User::query()->where('quaver_user_id', '=', $player);
@@ -49,11 +59,11 @@ class GiveRoles extends Command
                 }
             }
 
-            if ($name == 'referees') {
+            if ($name == 'organisers') {
                 foreach ($type as $player) {
                     $user = User::query()->where('quaver_user_id', '=', $player);
                     $user->update([
-                        'role' => 2
+                        'role' => 100
                     ]);
                 }
             }
