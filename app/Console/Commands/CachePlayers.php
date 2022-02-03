@@ -39,6 +39,8 @@ class CachePlayers extends Command
      */
     public function handle()
     {
+        StaffController::fetchStaff();
+
         $players = User::query()->has('player')->get();
 
         $sum_ranks = 0;
