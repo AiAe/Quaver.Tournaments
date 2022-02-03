@@ -21,7 +21,7 @@ class PlayersController extends Controller
 
         if (isset($request['search'])) {
             $search = strip_tags($request['search']);
-            $users = User::select(['id'])->where('quaver_username', 'like', '%' . $search . '%')->get();
+            $users = User::select(['id'])->where('quaver_username', 'like', '%'.$search.'%')->get();
 
             if (count($users)) {
                 foreach ($users as $user) {
@@ -39,9 +39,15 @@ class PlayersController extends Controller
 
     public function status(Request $request, $id)
     {
+        $user = Auth::user();
+
+        if ($user->role !== 100) {
+            return back()->with('error', 'You don\'t have access to this action');
+        }
+
         $player = Player::where('user_id', $id)->first();
 
-        $player->status = (int)!$player->status;
+        $player->status = (int) !$player->status;
 
         $player->save();
 

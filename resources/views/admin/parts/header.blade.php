@@ -49,7 +49,7 @@
                             {{ $loggedUser['quaver_username'] }}
                         </a>
                         <div class="dropdown-menu">
-                            @if($loggedUser['role'] === 100)
+                            @if($loggedUser['role'] != 1)
                                 <a class="dropdown-item" href="{{ route('home') }}">{{ __('Back to website') }}</a>
                                 <div class="dropdown-divider"></div>
                             @endif

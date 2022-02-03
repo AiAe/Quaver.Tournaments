@@ -47,7 +47,6 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
     Route::middleware('organizer')->group(function () {
         Route::get('/staff/applications', [App\Http\Controllers\Admin\Staff\StaffController::class, 'applications'])->name('staffApplications');
         Route::get('/users', [UsersController::class, 'page'])->name('users');
-        Route::get('/players', [\App\Http\Controllers\Admin\Players\PlayersController::class, 'page'])->name('players');
         Route::post('/players/status/{id}', [\App\Http\Controllers\Admin\Players\PlayersController::class, 'status'])->name('players.status.update');
 
         Route::prefix('settings')->as('settings.')->group(function () {
@@ -71,6 +70,11 @@ Route::middleware('admin')->prefix('admin')->as('admin.')->group(function () {
         Route::post('round/{round}', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectSave'])->name('roundSelectSave');
         Route::post('round/{round}/positions', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectPositionsSave'])->name('roundSelectPositionsSave');
         Route::post('round/{round}/delete', [\App\Http\Controllers\Admin\Mappool\MappoolController::class, 'selectDelete'])->name('roundSelectDeletePOST');
+    });
+
+    // Referee only
+    Route::middleware('referee')->group(function () {
+        Route::get('/players', [\App\Http\Controllers\Admin\Players\PlayersController::class, 'page'])->name('players');
     });
 });
 

@@ -70,8 +70,8 @@
                             {{ $loggedUser['quaver_username'] }}
                         </a>
                         <div class="dropdown-menu">
-                            @if($loggedUser['role'] === 100)
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Admin') }}</a>
+                            @if($loggedUser['role'] !== 1)
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                 <div class="dropdown-divider"></div>
                             @endif
                             @if(empty($loggedUser['discord_user_id']))

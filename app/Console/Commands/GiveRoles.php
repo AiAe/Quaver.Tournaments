@@ -48,6 +48,15 @@ class GiveRoles extends Command
                     ]);
                 }
             }
+
+            if ($name == 'referees') {
+                foreach ($type as $player) {
+                    $user = User::query()->where('quaver_user_id', '=', $player);
+                    $user->update([
+                        'role' => 2
+                    ]);
+                }
+            }
         }
 
         $this->info('Done');
