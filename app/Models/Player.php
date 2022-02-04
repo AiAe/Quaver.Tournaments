@@ -29,7 +29,6 @@ class Player extends Authenticatable
     protected $hidden = [
         'created_at',
         'updated_at',
-        'status',
         'user_id',
         'id'
     ];
