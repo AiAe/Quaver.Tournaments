@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class PlayersController extends Controller
 {
@@ -45,9 +46,24 @@ class PlayersController extends Controller
             return back()->with('error', 'You don\'t have access to this action');
         }
 
-        $player = Player::where('user_id', $id)->first();
+        $player = Player::where('user_id', $id)->with('user')->first();
 
-        $player->status = (int) !$player->status;
+        $status = (int) !$player->status;
+
+        $player->status = $status;
+
+        $action = "discord";
+
+        if (!$status) {
+            $action = "discord_remove";
+        }
+
+        if (config('app.discord_bot')) {
+            Redis::publish($action, json_encode([
+                "discord_id" => (string) $player->user['discord_user_id'],
+                "discord_nick" => $player->user['quaver_username']
+            ]));
+        }
 
         $player->save();
 
