@@ -48,7 +48,7 @@ class CheckPlayers extends Command
                     "quaver_id" => (string) $player['quaver_user_id'],
                     "quaver_username" => $player['quaver_username'],
                     "discord_id" => (string) $player['discord_user_id'],
-                    "discord_nick" => $player['quaver_username']
+                    "discord_nick" => $player['discord_username']
                 ]));
             }
         }
