@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function player()
     {
-        return $this->belongsTo(Player::class, 'id', 'user_id')->where('status', '=', 1);
+        return $this->belongsTo(Player::class, 'id', 'user_id');
     }
 
     public function getRole()
