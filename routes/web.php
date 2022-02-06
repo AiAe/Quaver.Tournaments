@@ -87,5 +87,9 @@ Route::get('/quaver/map/{id}', function ($id) {
     return redirect('https://quavergame.com/mapset/map/' . $id);
 })->name('quaverMap');
 
+Route::get('/s', function () {
+    return redirect('https://docs.google.com/spreadsheets/d/1i7rOG6cVp4TOsTOpHGRaWdkCsvScmRm82WeMLF6Mr2I/');
+});
+
 // Default
 Route::get('/', [\App\Http\Controllers\Home\HomeController::class, 'page'])->name('home');
