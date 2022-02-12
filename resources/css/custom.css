@@ -173,7 +173,7 @@ select:focus {
 .table-qot-mappool td {
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-right: 20px;
+    /*padding-right: 20px;*/
 }
 
 .table-delete {
