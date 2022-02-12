@@ -25,7 +25,12 @@ class MappoolTypeValidation implements Rule
         'LN Mixed',
         'SV Reading',
         'SV Memo',
-        'Tiebreaker'
+        'Tiebreaker',
+        'Hybrid (LN)',
+        'Hybrid (Rice)',
+        'LN Noodle',
+        'Stamina (Light)',
+        'Stamina (Dense)'
     );
 
     /**
