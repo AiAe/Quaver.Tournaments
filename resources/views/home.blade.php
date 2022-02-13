@@ -8,13 +8,19 @@
                 <div class="p-2">
                     <h1 class="pb-3">Welcome to the website for the Quaver Official Tournament!</h1>
                     <p style="font-size: 18px;">
-                        <h4><a href="{{ route('mappool') }}">Click here</a> to view the RO128 Mappool.</h4>
-                        <br>
-                        For more up-to-date information about the tournament, join our
-                        <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server <br>
-                        and make sure to follow our
-                        <a href="https://www.twitch.tv/quavergame" target="_blank" rel="noreferrer">Twitch</a>
-                        channel for live streams.
+                    <h4><a href="{{ route('mappool') }}">Click here</a> to view the RO128 Mappool.</h4>
+                    <br>
+                    <h5>
+                        <a href="https://docs.google.com/spreadsheets/d/1KC1jVudXxIW7bAzh5nhynqtdcjt1s1RVrziC6l8pV0M#gid=2038944874"
+                        target="_blank" rel="noreferrer">
+                            Qualifiers Evaluation
+                        </a></h5>
+                    <br>
+                    For more up-to-date information about the tournament, join our
+                    <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server <br>
+                    and make sure to follow our
+                    <a href="https://www.twitch.tv/quavergame" target="_blank" rel="noreferrer">Twitch</a>
+                    channel for live streams.
                     </p>
                 </div>
                 <hr>
