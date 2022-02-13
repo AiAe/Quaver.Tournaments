@@ -8,9 +8,8 @@
                 <div class="p-2">
                     <h1 class="pb-3">Welcome to the website for the Quaver Official Tournament!</h1>
                     <p style="font-size: 18px;">
-                        Registrations for this year's Quaver Official 4K Tournament are now closed!<br><br>
-                        Click <a href="{{ route('mappool.qualifiers') }}">here</a> to view the Qualifiers Mappool.
-                        <br><br>
+                        <h4><a href="{{ route('mappool') }}">Click here</a> to view the RO128 Mappool.</h4>
+                        <br>
                         For more up-to-date information about the tournament, join our
                         <a href="https://discord.gg/quaver" target="_blank" rel="noreferrer">Discord</a> server <br>
                         and make sure to follow our

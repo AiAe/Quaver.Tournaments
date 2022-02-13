@@ -20,10 +20,6 @@
                        href="{{ route('signupPlayer') }}">{{ __('Tournament') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('mappool.qualifiers') }}"
-                       href="{{ route('mappool.qualifiers') }}">{{ __('Qualifiers') }}</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
                 <li class="nav-item">
@@ -49,6 +45,8 @@
                         QOT
                     </a>
                     <div class="dropdown-menu" aria-labelledby="qot_dropdown">
+                        <a class="dropdown-item {{ routeIs('staff') }}"
+                           href="{{ route('mappool.qualifiers') }}">{{ __('Qualifiers') }}</a>
                         <a class="dropdown-item {{ routeIs('staff') }}"
                            href="{{ route('staff') }}">{{ __('Staff') }}</a>
                         <a class="dropdown-item {{ routeIs('signupStaff') }}"
