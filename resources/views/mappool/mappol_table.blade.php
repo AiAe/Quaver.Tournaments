@@ -15,15 +15,14 @@
         </thead>
         <tbody>
         @foreach($maps as $map)
-            <tr data-id="{{ $map['id'] }}"
+            <tr data-id="{{ $map['id'] }}" data-download="{{ $map->map['mapset_id'] }}" class="download"
                 style="background-size: cover; background-image:
                     linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)),
                     url('https://cdn.quavergame.com/mapsets/{{ $map->map['mapset_id'] }}.jpg');">
                 <td>{{ $map['category'] }}</td>
                 <td>{{ $map['type'] }}</td>
                 <td>
-                    <a href="{{ route('quaverMap', $map->map['id']) }}" target="_blank"
-                       class="text-white">
+                    <a href="{{ route('quaverMap', $map->map['id']) }}" target="_blank" class="text-white">
                         {{ $map->map['artist'] . ' - ' . $map->map['title'] }}
                         [{{ $map->map['difficulty_name'] }}]
                     </a>
@@ -33,7 +32,9 @@
                 <td>{{ $map->data['offset'] }}</td>
                 <td>{{ number_format($map->map['difficulty_rating'], 2) }}</td>
                 <td>{{ date("i:s", $map->map['length'] / 1000) }}</td>
-                <td>{{ $map->map['bpm'] }}</td>
+                <td>
+                    {{ number_format($map->map['bpm']) }}
+                </td>
             </tr>
         @endforeach
         </tbody>

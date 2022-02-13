@@ -3,14 +3,28 @@
 @section('content')
     <div class="container mt-3">
         @if($round)
+            <div class="alert alert-warning text-center">
+                <p>Make sure you are logged in on the <a href="#">Quaver Website</a> to be able to download the maps.
+                </p>
+                <p>Mirror modifier can be used on any map. Other modifiers and rates listed below are forced.</p>
+                <p>Remember to apply the recommended local offsets to every map.</p>
+            </div>
             <div class="text-white text-center">
                 <h2>Current round</h2>
             </div>
             <div class="card mt-3">
-                <div class="card-header">
-                    {{ $round->name }}
+                <div class="card-header d-flex justify-content-between">
+                    <div>{{ $round->name }}</div>
+                    <div>
+                        <button class="btn btn-secondary btn-sm download-round" data-round="latest-round">
+                            Download All
+                        </button>
+                        <button class="btn btn-secondary btn-sm download-ingame-round" data-round="latest-round">
+                            Download All In-Game
+                        </button>
+                    </div>
                 </div>
-                <div>
+                <div id="latest-round">
                     @include('mappool.mappol_table', ["maps" => $round->maps])
                 </div>
             </div>
@@ -28,8 +42,20 @@
                     <div id="previous_rounds" class="collapse">
                         @foreach($previous_rounds as $round)
                             <div class="card mt-3">
-                                <div class="card-header">{{ $round->name }}</div>
-                                <div>
+                                <div class="card-header d-flex justify-content-between">
+                                    <div>{{ $round->name }}</div>
+                                    <div>
+                                        <button class="btn btn-secondary btn-sm download-round"
+                                                data-round="round-{{ $round['id'] }}">
+                                            Download All
+                                        </button>
+                                        <button class="btn btn-secondary btn-sm download-ingame-round"
+                                                data-round="round-{{ $round['id'] }}">
+                                            Download All In-Game
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="round-{{ $round['id'] }}">
                                     @include('mappool.mappol_table', ["maps" => $round->maps])
                                 </div>
                             </div>

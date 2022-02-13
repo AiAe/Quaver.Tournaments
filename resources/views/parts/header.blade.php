@@ -15,21 +15,19 @@
                         </a>
                     </li>
                 @endguest
-                {{--                @if(config('app.tourney_signups'))--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('signupPlayer') }}"
                        href="{{ route('signupPlayer') }}">{{ __('Tournament') }}</a>
                 </li>
-                {{--                @endif--}}
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool.qualifiers') }}"
-                       href="{{ route('mappool.qualifiers') }}">{{ __('Qualifiers Mappool') }}</a>
+                       href="{{ route('mappool.qualifiers') }}">{{ __('Qualifiers') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mappool') }}" href="{{ route('mappool') }}">{{ __('Mappool') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://docs.google.com/spreadsheets/d/1i7rOG6cVp4TOsTOpHGRaWdkCsvScmRm82WeMLF6Mr2I/" rel="noreferrer">{{ __('Schedules') }}</a>
+                    <a class="nav-link" href="{{ route('spreadsheets.qualifiers') }}" target="_blank">{{ __('Schedules') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('mapsSuggestion') }}"
@@ -39,8 +37,7 @@
                     <a class="nav-link {{ routeIs('players') }}" href="{{ route('players') }}">{{ __('Players') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://challonge.com/QOT2022" target="_blank"
-                       rel="noreferrer">{{ __('Bracket') }}</a>
+                    <a class="nav-link" href="{{ route('challonge') }}" target="_blank">{{ __('Bracket') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('rules') }}" href="{{ route('rules') }}">{{ __('Rules') }}</a>

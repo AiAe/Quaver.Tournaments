@@ -277,3 +277,12 @@ footer {
     color: #ffffff;
     margin-bottom: 20px;
 }
+
+.alert p {
+    margin-bottom: 5px;
+}
+
+.alert-warning a {
+    color: rgb(2, 80, 196);
+    font-weight: 700;
+}
