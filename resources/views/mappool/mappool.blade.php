@@ -4,10 +4,13 @@
     <div class="container mt-3">
         @if($round)
             <div class="alert alert-warning text-center">
-                <p>Make sure you are logged in on the <a href="#">Quaver Website</a> to be able to download the maps.
+                <p>Make sure you are logged in on the
+                    <a href="https://quavergame.com/" target="_blank" rel="noreferrer">Quaver Website</a>
+                    and have <a href="https://i.kys.ovh/0UcAh.png" target="_blank">pop-ups enabled</a> to be able to download the maps!
                 </p>
                 <p>Mirror modifier can be used on any map. Other modifiers and rates listed below are forced.</p>
-                <p>Remember to apply the recommended local offsets to every map.</p>
+                <p>Remember to apply the recommended local offsets to every map
+                    and update online offsets from Quaver options.</p>
             </div>
             <div class="text-white text-center">
                 <h2>Current round</h2>
