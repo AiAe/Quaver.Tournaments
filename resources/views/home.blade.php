@@ -11,7 +11,7 @@
                     <h4><a href="{{ route('mappool') }}">Click here</a> to view the RO128 Mappool.</h4>
                     <br>
                     <h5>
-                        <a href="https://docs.google.com/spreadsheets/d/1KC1jVudXxIW7bAzh5nhynqtdcjt1s1RVrziC6l8pV0M#gid=2038944874"
+                        <a href="https://docs.google.com/spreadsheets/d/1i7rOG6cVp4TOsTOpHGRaWdkCsvScmRm82WeMLF6Mr2I/edit#gid=1115653897"
                         target="_blank" rel="noreferrer">
                             Qualifiers Evaluation
                         </a></h5>
