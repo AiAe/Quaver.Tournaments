@@ -26,7 +26,7 @@ class SignupController extends Controller
         $pageData[] = "";
         $pageData['seo']['title'] = "Join Tournament";
 
-        $pageData['has_registered'] = Player::query()->where('user_id', Auth::user()->id)->first();
+        $pageData['has_registered'] = Player::query()->where('user_id', Auth::user()->id)->where('status', 1)->first();
 
         return view('signup/player', $pageData);
     }
