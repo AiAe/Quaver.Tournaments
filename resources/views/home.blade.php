@@ -123,13 +123,13 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="p-3">
-                    <p style="font-size: 17px;" class="text-warning">
-                        We are looking for more referees, streamers and commentators.
-                        If you are interested in helping, <a href="{{ route('signupStaff') }}">apply here</a>.
-                    </p>
-                </div>
+{{--                <hr>--}}
+{{--                <div class="p-3">--}}
+{{--                    <p style="font-size: 17px;" class="text-warning">--}}
+{{--                        We are looking for more referees, streamers and commentators.--}}
+{{--                        If you are interested in helping, <a href="{{ route('signupStaff') }}">apply here</a>.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

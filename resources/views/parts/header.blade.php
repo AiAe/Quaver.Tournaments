@@ -45,12 +45,12 @@
                         QOT
                     </a>
                     <div class="dropdown-menu" aria-labelledby="qot_dropdown">
-                        <a class="dropdown-item {{ routeIs('staff') }}"
+                        <a class="dropdown-item {{ routeIs('mappool.qualifiers') }}"
                            href="{{ route('mappool.qualifiers') }}">{{ __('Qualifiers') }}</a>
                         <a class="dropdown-item {{ routeIs('staff') }}"
                            href="{{ route('staff') }}">{{ __('Staff') }}</a>
-                        <a class="dropdown-item {{ routeIs('signupStaff') }}"
-                           href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>
+{{--                        <a class="dropdown-item {{ routeIs('signupStaff') }}"--}}
+{{--                           href="{{ route('signupStaff') }}">{{ __('Join Staff') }}</a>--}}
                     </div>
                 </li>
             </ul>

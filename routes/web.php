@@ -24,8 +24,8 @@ Route::middleware('verify.user')->group(function () {
     Route::get('/mappool/suggestion', [MappoolController::class, 'suggest_map'])->name('mapsSuggestion');
     Route::post('/mappool/suggestion', [MappoolController::class, 'save'])->name('mapsSuggestionPOST');
 
-    Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
-    Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
+//    Route::get('/signup/staff', [SignupController::class, 'staff'])->name('signupStaff');
+//    Route::post('/signup/staff', [SignupController::class, 'saveStaff'])->name('signupStaffPost');
 
     // Check if tournament signups are enabled or admin
     Route::middleware('tournament.enabled')->group(function() {
