@@ -7,3 +7,7 @@ Route::middleware('json.response')->prefix('v1')->as('v1.')->group(function() {
     Route::get('mappool', [\App\Http\Controllers\API\v1\Mappool\MappoolController::class, 'mappool']);
     Route::get('staff', [\App\Http\Controllers\API\v1\Staff\StaffController::class, 'staff']);
 });
+
+Route::prefix('v1')->as('v1.')->group(function() {
+    Route::post('schedule', [\App\Http\Controllers\API\v1\Schedules\SchedulesController::class, 'save']);
+});
