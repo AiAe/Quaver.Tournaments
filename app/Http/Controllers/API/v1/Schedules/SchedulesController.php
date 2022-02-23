@@ -12,11 +12,15 @@ class SchedulesController extends Controller
     {
         $headers = $request->header();
 
+        var_dump($headers);
+
         if (isset($headers['secret']) && $headers['secret'] !== config('app.schedule_secret')) {
             return "";
         }
 
         $data = $request->json()->all();
+
+        var_dump($data);
 
         if (is_array($data)) {
             foreach ($data as $match) {
