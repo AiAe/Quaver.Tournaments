@@ -244,6 +244,6 @@ return [
     'game_mode' => env('GAME_MODE', 'keys4'),
     'tourney_signups' => env('TOURNEY_SIGNUPS', false),
 
-    'schedule_secret' => env('SCHEDULE_SECRET', ''),
+    'schedule_exec' => env('SCHEDULE_EXEC', ''),
     'schedule_webhook' => env('SCHEDULE_WEBHOOK', ''),
 ];

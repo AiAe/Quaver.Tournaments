@@ -1,22 +1,50 @@
 <?php
 
-namespace App\Http\Controllers\API\v1\Schedules;
+namespace App\Console\Commands;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Staff\StaffController;
 use App\Models\Schedule;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
-class SchedulesController extends Controller
+class ScheduleFetch extends Command
 {
-    public function save(Request $request)
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'schedule:fetch';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Checks for matches that will start soon and pings staff';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $headers = $request->header();
+        parent::__construct();
+    }
 
-        if (!isset($headers['secret']) || $headers['secret'][0] !== config('app.schedule_secret')) {
-            return "Invalid secret!";
-        }
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $response = Http::get(config('app.schedule_exec'));
 
-        $data = $request->json()->all();
+        $data = $response->json();
 
         if (is_array($data) && count($data)) {
             foreach ($data as $match) {
@@ -35,10 +63,7 @@ class SchedulesController extends Controller
                     'played' => ($match['playerRedScore'] + $match['playerBlueScore'] !== 0)
                 ]);
             }
-
-            return 'Done';
-        } else {
-            return 'Not array or its empty!';
         }
+
     }
 }
