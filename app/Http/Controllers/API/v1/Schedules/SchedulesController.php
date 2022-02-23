@@ -14,7 +14,7 @@ class SchedulesController extends Controller
 
         var_dump($headers);
 
-        if (isset($headers['secret']) && $headers['secret'] !== config('app.schedule_secret')) {
+        if (!isset($headers['secret']) || $headers['secret'] !== config('app.schedule_secret')) {
             return "";
         }
 
