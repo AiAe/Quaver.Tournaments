@@ -245,4 +245,5 @@ return [
     'tourney_signups' => env('TOURNEY_SIGNUPS', false),
 
     'schedule_secret' => env('SCHEDULE_SECRET', ''),
+    'schedule_webhook' => env('SCHEDULE_WEBHOOK', ''),
 ];
