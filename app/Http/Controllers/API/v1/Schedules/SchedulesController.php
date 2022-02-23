@@ -12,17 +12,13 @@ class SchedulesController extends Controller
     {
         $headers = $request->header();
 
-        var_dump($headers);
-
-        if (!isset($headers['secret']) || $headers['secret'] !== config('app.schedule_secret')) {
-            return "";
+        if (!isset($headers['secret']) || $headers['secret'][0] !== config('app.schedule_secret')) {
+            return "Invalid secret!";
         }
 
         $data = $request->json()->all();
 
-        var_dump($data);
-
-        if (is_array($data)) {
+        if (is_array($data) && count($data)) {
             foreach ($data as $match) {
                 Schedule::updateOrCreate([
                     'match_id' => $match['matchId']
@@ -39,6 +35,10 @@ class SchedulesController extends Controller
                     'played' => ($match['playerRedScore'] + $match['playerBlueScore'] !== 0)
                 ]);
             }
+
+            return 'Done';
+        } else {
+            return 'Not array or its empty!';
         }
     }
 }
