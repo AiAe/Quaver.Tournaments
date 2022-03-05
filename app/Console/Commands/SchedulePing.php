@@ -107,6 +107,8 @@ class SchedulePing extends Command
         $msg .= sprintf("**PLEASE REACT TO THIS MESSAGE TO CONFIRM YOU'RE AVAILABLE**\n");
         $msg .= sprintf("**IF NOT PLEASE INFORM AND FIND SOMEONE TO REPLACE YOU**\n");
 
+        $msg .= sprintf("\n\n **GENERATED LOBBY PASSWORD: `%s`**", \Str::random(8));
+
         return Http::post(config('app.schedule_webhook'), [
             'content' => $msg
         ]);
