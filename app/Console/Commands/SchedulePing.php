@@ -58,10 +58,30 @@ class SchedulePing extends Command
                     self::send($match);
                 }
 
+                if (config('app.schedule_players_webhook')) {
+                    self::sendPlayers($match);
+                }
+
                 $match->notified = 1;
 
                 $match->save();
             }
+        }
+    }
+
+    private function sendPlayers($match)
+    {
+        $msg = sprintf("Match ID: %s\nTimestamp: %s\n", $match->match_id, $match->timestamp);
+
+        $playerRed = User::select(['discord_user_id'])->where('quaver_username', $match->playerRed)->first();
+        $playerBlue = User::select(['discord_user_id'])->where('quaver_username', $match->playerBlue)->first();
+
+        if ($playerRed && $playerBlue) {
+            $msg .= sprintf("<@%s> and <@%s> your match starts in under an hour!\nInvites will be sent 5 minutes prior!\nMake sure you are online!", $playerRed['discord_user_id'], $playerBlue['discord_user_id']);
+
+            return Http::post(config('app.schedule_players_webhook'), [
+                'content' => $msg
+            ]);
         }
     }
 
@@ -113,4 +133,6 @@ class SchedulePing extends Command
             'content' => $msg
         ]);
     }
+
+
 }
