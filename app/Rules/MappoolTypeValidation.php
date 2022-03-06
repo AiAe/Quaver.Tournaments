@@ -30,7 +30,8 @@ class MappoolTypeValidation implements Rule
         'Hybrid (Rice)',
         'LN Noodle',
         'Stamina (Light)',
-        'Stamina (Dense)'
+        'Stamina (Dense)',
+        'Speedjack'
     );
 
     /**
