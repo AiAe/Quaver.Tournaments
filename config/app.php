@@ -246,4 +246,5 @@ return [
 
     'schedule_exec' => env('SCHEDULE_EXEC', ''),
     'schedule_webhook' => env('SCHEDULE_WEBHOOK', ''),
+    'schedule_players_webhook' => env('SCHEDULE_PLAYERS_WEBHOOK', ''),
 ];
