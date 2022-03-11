@@ -31,7 +31,8 @@ class MappoolTypeValidation implements Rule
         'LN Noodle',
         'Stamina (Light)',
         'Stamina (Dense)',
-        'Speedjack'
+        'Speedjack',
+        'Dump'
     );
 
     /**

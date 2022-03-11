@@ -11,7 +11,8 @@ class MappoolModsValidation implements Rule
     public static array $mods = array(
         'None',
         'NLN',
-        'NSV'
+        'NSV',
+        'NLN, NSV'
     );
 
     /**
