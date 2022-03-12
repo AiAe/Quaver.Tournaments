@@ -115,6 +115,7 @@ class MappoolController extends Controller
             'rate' => ['required', new MappoolRateValidation()],
             'mods' => ['required', new MappoolModsValidation()],
             'overwrite_difficulty_rating' => ['nullable', 'numeric'],
+            'overwrite_bpm' => ['nullable', 'numeric'],
             'offset' => ['required'],
             'position' => ['required', 'numeric']
         ]);
@@ -127,6 +128,11 @@ class MappoolController extends Controller
         // Replace difficulty rating if one is provided
         if(isset($validated['overwrite_difficulty_rating'])) {
             $map['difficulty_rating'] = (float) $validated['overwrite_difficulty_rating'];
+        }
+
+        // Replace bpm if one is provided
+        if(isset($validated['overwrite_bpm'])) {
+            $map['bpm'] = (float) $validated['overwrite_bpm'];
         }
 
         Mappool::create([

@@ -55,11 +55,20 @@
                             {{ Form::text('overwrite_difficulty_rating', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
-                </div>
 
-                <div class="mt-3">
-                    <label class="form-label">{{ __('Position') }}</label>
-                    {{ Form::text('position', 0, ['class' => 'form-control']) }}
+                    <div class="col-lg-3">
+                        <div class="mt-3">
+                            <label class="form-label">BPM (if rate is not 1x)</label>
+                            {{ Form::text('overwrite_bpm', null, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="mt-3">
+                            <label class="form-label">{{ __('Position') }}</label>
+                            {{ Form::text('position', 0, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-3">
