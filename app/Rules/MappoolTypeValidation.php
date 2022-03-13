@@ -33,7 +33,8 @@ class MappoolTypeValidation implements Rule
         'Stamina (Dense)',
         'Speedjack',
         'Dump',
-        'LN Inverse'
+        'LN Inverse',
+        'LN Chords'
     );
 
     /**
