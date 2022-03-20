@@ -34,7 +34,9 @@ class MappoolTypeValidation implements Rule
         'Speedjack',
         'Dump',
         'LN Inverse',
-        'LN Chords'
+        'LN Chords',
+        'Mixed Rice',
+        'Chordjack (light)'
     );
 
     /**
