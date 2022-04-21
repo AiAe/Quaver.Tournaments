@@ -8,7 +8,7 @@
                 <div class="p-2">
                     <h1 class="pb-3">Welcome to the website for the Quaver Official Tournament!</h1>
                     <p style="font-size: 18px;">
-                    <h4><a href="{{ route('mappool') }}">Click here</a> to view the RO16 Mappool.</h4>
+                    <h3>Tournament ended!</h3>
                     <br>
                     <h5>
                         <a href="https://docs.google.com/spreadsheets/d/1i7rOG6cVp4TOsTOpHGRaWdkCsvScmRm82WeMLF6Mr2I/edit#gid=1115653897"
