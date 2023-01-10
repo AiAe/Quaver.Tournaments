@@ -22,12 +22,14 @@ This project aims to be useful for everyone who is interested in hosting a tourn
 # Setting up project
 
 ## Requirements
+
 1. Nginx (or other web server)
-2. PHP 8.0 (or above)
+2. PHP 8.1 (or above)
 3. Mariadb (or MySQL)
 4. Redis
 
 ## Install
+
 1. Clone the project
 2. Configure the server to use `/public` for root directory. [Settings up with Nginx](#nginx-config)
 3. Copy `.env.example` and rename to `.env` and configure it
@@ -71,9 +73,11 @@ server {
 ```
 
 ### Deploying
+
 `sh deploy.sh`
 
 ### Commands
+
 1. `php artisan user:roles` - Will give each member from Staff their role
 2. `qot:translatable` - Will generate/populate all missing strings for translating
 
@@ -96,10 +100,6 @@ For login with Quaver - https://quavergame.com/developers/applications
 1. `QUAVER_CLIENT_ID=` - Quaver client id
 2. `QUAVER_SECRET=` - Quaver secret
 3. `QUAVER_REDIRECT=` - where to redirect after the user login (default: https://qot.ovh/oauth/quaver/callback)
-
-For Challonge - https://challonge.com/settings/developer
-1. `CHALLONGE_API=` - API Key
-2. `CHALLONGE_SLUG=` - Challonge tournament slug
 
 # License
 This project is licensed under the AGPL-3.0 license.
