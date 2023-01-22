@@ -5,9 +5,10 @@
     "keywords": ["framework", "laravel", "qot", "quaver"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7"
     },
     "require-dev": {

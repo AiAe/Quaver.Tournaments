@@ -5,19 +5,10 @@ Quaver Official Tournament - Website
 This project aims to be useful for everyone who is interested in hosting a tournament.
 
 ## What the project contains
-1. Login with Quaver
-2. Link Discord
-3. Discord bot for roles
-4. Forms: Suggest map and Join staff forms
-5. Player registration
-6. Manual rules and staff pages
-7. Admin panel - Forms data, mappool manager
-8. Supports multiple languages - needs translators
+None
 
 ## API
-1. `/api/v1/players` - returns all registered players for the tourney
-2. `/api/v1/mappool` - returns all enabled rounds with their maps
-3. `/api/v1/staff` - returns all staff members
+None
 
 # Setting up project
 
@@ -78,15 +69,9 @@ server {
 
 ### Commands
 
-1. `php artisan user:roles` - Will give each member from Staff their role
-2. `qot:translatable` - Will generate/populate all missing strings for translating
+None
 
 ## ENV
-1. `GAME_MODE=keys4` - Which mode the tournament is for. Supports **keys4** or **keys7**
-2. `TOURNEY_SIGNUPS=true` - This will enable tournament signups
-3. `FORCE_LOCK=false` - If true it will lock the site with user and password
-4. `AUTH_USER=qot` - Username (used if `FORCE_LOCK` is set to true)
-5. `AUTH_PASSWORD=qot` - Password (used if `FORCE_LOCK` is set to true)
 
 For [QOT.Bot](https://github.com/AiAe/qot.bot)
 1. `DISCORD_BOT=false` - change to `true` if bot is set up
