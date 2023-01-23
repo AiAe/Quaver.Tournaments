@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('quaver_user_id')->unique();
-            $table->string('discord_user_id')->nullable()->index();
+            $table->unsignedBigInteger('quaver_user_id')->unique();
+            $table->unsignedBigInteger('discord_user_id')->nullable()->index();
             $table->string('username');
             $table->string('country');
             $table->rememberToken();
