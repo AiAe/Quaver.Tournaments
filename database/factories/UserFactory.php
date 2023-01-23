@@ -13,8 +13,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'quaver_user_id' => $this->faker->unique()->randomNumber(),
-            'discord_user_id' => $this->faker->optional(0.9)->randomNumber(),
+            'quaver_user_id' => $this->faker->unique()->randomNumber(5),
+            'discord_user_id' => $this->faker->optional(0.9)->randomNumber(9),
             'username' => $this->faker->userName(),
             'country' => $this->faker->countryCode(),
             'created_at' => Carbon::now(),
