@@ -17,7 +17,7 @@ class User extends Authenticatable
         'country'
     ];
 
-    public function user_role(): HasMany
+    public function roles(): HasMany
     {
         return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
