@@ -14,7 +14,7 @@ class UserFactory extends Factory
     {
         return [
             'quaver_user_id' => $this->faker->unique()->randomNumber(),
-            'discord_user_id' => $this->faker->optional(0.9)->unique()->randomNumber(),
+            'discord_user_id' => $this->faker->optional(0.9)->randomNumber(),
             'username' => $this->faker->userName(),
             'country' => $this->faker->countryCode(),
             'created_at' => Carbon::now(),
