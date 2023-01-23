@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum TournamentStatus: string
+enum TournamentStatus: int
 {
-    case Unlisted = 'Unlisted';
-    case Upcoming = 'Upcoming';
-    case RegistrationsOpen = 'RegistrationsOpen';
-    case Ongoing = 'Ongoing';
-    case Concluded = 'Concluded';
+    case Unlisted = -1;
+    case Upcoming = 0;
+    case RegistrationsOpen = 1;
+    case Ongoing = 2;
+    case Concluded = 3;
 }

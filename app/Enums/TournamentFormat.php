@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum TournamentFormat: string
+enum TournamentFormat: int
 {
-    case Solo = 'Solo';
-    case Team = 'Team';
+    case Solo = 0;
+    case Team = 1;
 }
