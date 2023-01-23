@@ -1,1 +1,10 @@
+@import "colors";
+
 @import "~bootstrap/scss/bootstrap";
+
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+@import "theme";
+
+@import "components/match-card";
+@import "components/schedules";

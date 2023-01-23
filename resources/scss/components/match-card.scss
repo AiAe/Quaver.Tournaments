@@ -1,0 +1,142 @@
+.match-card {
+    background-color: $dark;
+    border: 1px solid $primary;
+    border-radius: 6px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(33, 203, 237, 0.35);
+    padding: 16px 12px;
+
+    .match-header {
+        background: linear-gradient(90deg, rgba(33, 203, 237, 0.1) 0%, rgba(33, 203, 237, 0) 100%);
+        border-width: 0 2px;
+        border-style: solid;
+        border-color: $primary;
+        color: $light;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 6px;
+
+        .match-timestamp {
+            text-align: right;
+
+            div:first-child {
+                font-size: 16px;
+            }
+
+            div:last-child {
+                font-size: 14px;
+            }
+
+            @media (max-width: map-get($grid-breakpoints, 'sm')) {
+                div {
+                    display: inline-block;
+                }
+            }
+        }
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            flex-direction: column;
+        }
+    }
+
+    .match-body {
+        padding: 24px 0;
+
+        .match-details {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            @media (max-width: map-get($grid-breakpoints, 'sm')) {
+                flex-direction: column;
+            }
+
+            .match-player {
+                display: flex;
+                align-items: center;
+
+                .match-player-avatar {
+                    width: 60px;
+                    height: 60px;
+                    margin-right: 12px;
+
+                    img {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+
+                .match-player-data {
+
+                    .match-player-name {
+                        font-weight: 700;
+                        font-size: 26px;
+                    }
+
+                    .match-player-stats {
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+
+                        img {
+                            margin-right: 12px;
+                        }
+                    }
+                }
+            }
+
+            .match-vs {
+                font-size: 20px;
+                color: $white;
+
+                @media (max-width: map-get($grid-breakpoints, 'sm')) {
+                    margin: 10px 0;
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+
+    .match-footer {
+        .btn {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            .btn {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.col-lg-4 {
+    .match-card {
+        .match-body {
+            .match-details {
+                .match-player {
+                    .match-player-avatar {
+                        width: 50px;
+                        height: 50px;
+                        margin-right: 12px;
+                    }
+
+                    .match-player-data {
+                        .match-player-name {
+                            font-size: 16px;
+                        }
+
+                        .match-player-stats {
+                            font-size: 12px;
+
+                            img {
+                                margin-right: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

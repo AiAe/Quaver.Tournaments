@@ -1,0 +1,37 @@
+.tournament_schedules {
+    width: 100%;
+
+    tbody {
+        tr {
+            border-width: 0 2px;
+            border-style: solid;
+            border-color: transparent;
+
+            .tournament-schedule-title {
+                text-align: right;
+                font-weight: 700;
+                font-size: 16px;
+                color: $white;
+                padding-right: 10px;
+            }
+
+            .tournament-schedule-date {
+                font-size: 14px;
+                padding-left: 10px;
+            }
+
+            .tournament-schedule-arrow {
+                display: inline-block;
+                padding-left: 10px;
+            }
+        }
+
+        // There is weird bug when its inside the tr on itself
+        tr:hover {
+            background: linear-gradient(90deg, rgba(33, 203, 237, 0.1) 0%, rgba(33, 203, 237, 0) 100%);
+            border-width: 0 2px;
+            border-style: solid;
+            border-color: $primary;
+        }
+    }
+}
