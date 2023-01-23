@@ -10,11 +10,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house"></i> {{ __('Home') }}
+                    <a class="nav-link active" aria-current="page" href="{{ route('web.home') }}"><i class="bi bi-house"></i> {{ __('Home') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-trophy"></i> {{ __('Tournaments') }}</a>
+                    <a class="nav-link" href="{{ route('web.tournaments.list') }}"><i class="bi bi-trophy"></i> {{ __('Tournaments') }}</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-md-auto">

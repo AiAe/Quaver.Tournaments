@@ -14,3 +14,37 @@ body {
 nav {
     border-bottom: 1px solid $primary;
 }
+
+.tournaments {
+
+    .tournament {
+        background-color: $dark;
+        border: 1px solid $primary;
+        border-radius: 6px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(33, 203, 237, 0.35);
+        padding: 16px 12px;
+        margin-bottom: 10px;
+
+        .tournament-details {
+            width: 100%;
+
+            h1 {
+                background: linear-gradient(90deg, rgba(33, 203, 237, 0.1) 0%, rgba(33, 203, 237, 0) 100%);
+                border-width: 0 2px;
+                border-style: solid;
+                border-color: $primary;
+                color: $light;
+                padding: 4px 6px;
+            }
+
+            .tournament-boxes {
+                margin: 10px 0;
+            }
+
+            .tournament-boxes > div {
+                border: 1px solid $primary;
+                padding: 8px;
+            }
+        }
+    }
+}
