@@ -13,4 +13,11 @@ class QuaverApiTest extends TestCase
         $this->assertNotNull($data);
         $this->assertEquals('Swan', $data['info']['username']);
     }
+
+    public function testMapIsOk()
+    {
+        $data = QuaverApi::getMap(2);
+        $this->assertNotNull($data);
+        $this->assertEquals('HyuN', $data['artist']);
+    }
 }

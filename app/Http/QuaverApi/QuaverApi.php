@@ -45,4 +45,8 @@ class QuaverApi
     public static function getUserFull(int $id) {
         return self::request("users/full/$id", [], 'user');
     }
+
+    public static function getMap(int $id) {
+        return self::request("maps/$id", [], 'map');
+    }
 }
