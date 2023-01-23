@@ -21,4 +21,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
+
+    public function tournaments(): HasMany
+    {
+        return $this->hasMany(Tournament::class);
+    }
 }
