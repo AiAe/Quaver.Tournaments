@@ -11,6 +11,15 @@ body {
     font-size: 16px;
 }
 
-nav {
+.navbar {
     border-bottom: 1px solid $primary;
+}
+
+.border-bottom {
+    border-bottom-color: $primary !important;
+}
+
+footer {
+    background-color: $dark;
+    border-top: 1px solid $primary;
 }

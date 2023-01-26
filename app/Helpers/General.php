@@ -4,7 +4,7 @@ if (!function_exists('appVersion')) {
     function appVersion(): string
     {
         if (config('app.env') == "local") {
-            return (string)time();
+            return "dev";
         } else {
             return config('app.app_version');
         }

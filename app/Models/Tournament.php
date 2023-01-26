@@ -18,7 +18,7 @@ class Tournament extends Model
         'status' => TournamentStatus::class
     ];
 
-    public $defaultMetaValues = [];
+    protected $with = ['metas'];
 
     public function user(): BelongsTo
     {
