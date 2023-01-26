@@ -3,31 +3,33 @@
         <h1>{{ $tournament->name }}</h1>
 
         <div class="row">
-            <div class="col-lg-7 col-md-7 d-flex align-items-center">
+            <div class="col-lg-12 col-md-12 d-flex align-items-center">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="https://dummyimage.com/800x200/c1c1c1/ffffff.jpg" class="img-fluid">
+                        <img src="https://dummyimage.com/610x150/c1c1c1/ffffff.jpg" class="img-fluid">
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 col-md-5 d-flex align-items-center text-center">
+            <div class="col-lg-12 col-md-12 d-flex align-items-center text-center">
                 <div class="tournament-details">
                     <div class="row tournament-boxes">
                         <div class="col-lg-6">
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Dates') }}</div>
                                 <div class="tournament-box-content">
-                                    <div class="tournament-box-text">{{ __('Starts in :time', ['time' => \Carbon\Carbon::now()->addDays(50)->diffForHumans(['parts' => 2, 'short' => true])]) }}</div>
-                                    <div>{{ __(':time', ['time' => \Carbon\Carbon::now()->addDays(50)->format('d.m.y, h:m')]) }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tournament-box">
-                                <div class="tournament-box-title">{{ __('Status') }}</div>
-                                <div class="tournament-box-content">
                                     <div class="tournament-box-text">{{ __($tournament->status->name()) }}</div>
-                                    <div>{{ __('Closes :date', ['date' => \Carbon\Carbon::now()->days(77)->diffForHumans(['parts' => 2, 'short' => true])]) }}</div>
+                                    @php($date_1 = \Carbon\Carbon::now()->days(77)->diffForHumans(['parts' => 2, 'short' => true]))
+                                    @php($date_2 = \Carbon\Carbon::now()->days(77)->format('d.m.Y'))
+
+                                    @if($tournament->status == \App\Enums\TournamentStatus::RegistrationsOpen)
+                                        <div>{{ __('Ends in :date', ['date' => $date_1]) }}</div>
+                                    @elseif($tournament->status == \App\Enums\TournamentStatus::Ongoing)
+                                        <div>{{ __('Ends in :date', ['date' => $date_1]) }}</div>
+                                    @elseif($tournament->status == \App\Enums\TournamentStatus::Concluded)
+                                        <div>{{ __('Ended :date', ['date' => $date_1]) }}</div>
+                                    @else
+                                        <div>{{ __('Starts in :date', ['date' => $date_1]) }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -44,22 +46,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col">
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Format') }}</div>
                                 <div class="tournament-box-content">
                                     <div class="tournament-box-text">{{ __($tournament->format->name()) }}</div>
                                     <div>
-                                        2 vs 2
+                                        @if($tournament->format == \App\Enums\TournamentFormat::Solo)
+                                            1 vs 1
+                                        @else
+                                            2 vs 2
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            {{--                                    ToDo remove if no rank restriction--}}
+                            <div class="tournament-box">
+                                <div class="tournament-box-title">{{ __('Rank') }}</div>
+                                <div class="tournament-box-content">
+                                    <div class="tournament-box-text">Rank restricted</div>
+                                    <div>#500 - #10,000</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="tournament-box">
+                                <div class="tournament-box-title">{{ __('Entries') }}</div>
+                                <div class="tournament-box-content">
+                                    <div class="tournament-box-text">55</div>
+                                    <div>{{ __('Players') }}</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-{{--                    <div class="row tournament-boxes">--}}
-{{--                        --}}
-{{--                    </div>--}}
 
                     <div class="row tournament-boxes">
                         <div class="col-lg-12">
