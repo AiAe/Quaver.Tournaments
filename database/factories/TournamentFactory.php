@@ -16,7 +16,7 @@ class TournamentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->company(),
             'format' => TournamentFormat::Solo,
             'status' => TournamentStatus::Unlisted,
             'created_at' => Carbon::now(),
