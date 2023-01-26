@@ -36,9 +36,13 @@
         <span wire:loading.delay wire:target="update">
             {{ __('Loading...') }}
         </span>
-        @foreach($tournaments as $tournament)
-            @include('web.tournaments.components.tournament', ['tournament' => $tournament])
-        @endforeach
+        <div class="row">
+            @foreach($tournaments as $tournament)
+                <div class="col-lg-6">
+                    @include('web.tournaments.components.tournament', ['tournament' => $tournament])
+                </div>
+            @endforeach
+        </div>
     </div>
 
     <div class="d-flex justify-content-center">
