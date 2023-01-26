@@ -82,10 +82,6 @@
                         </div>
                     </div>
 
-                    {{--                    <div class="row tournament-boxes">--}}
-                    {{--                        --}}
-                    {{--                    </div>--}}
-
                     <div class="row tournament-boxes">
                         <div class="col-lg-12">
                             <div class="d-grid gap-2">
