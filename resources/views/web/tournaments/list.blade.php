@@ -11,15 +11,7 @@
         </p>
     </header>
 
-    @include('web.tournaments.blocks.search')
-
     <div class="container">
-        <div class="tournaments">
-            @foreach($tournaments as $tournament)
-                @include('web.tournaments.blocks.tournament')
-            @endforeach
-        </div>
-
-        {{ $tournaments->links() }}
+        <livewire:show-tournaments></livewire:show-tournaments>
     </div>
 @endsection

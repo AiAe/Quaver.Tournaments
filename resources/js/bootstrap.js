@@ -11,3 +11,14 @@ import * as Popper from '@popperjs/core'
 window.Popper = Popper
 
 import 'bootstrap'
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    Livewire.on('gotoTop', () => {
+        console.log('owo');
+        window.scrollTo({
+            top: 15,
+            left: 15,
+            behaviour: 'smooth'
+        })
+    });
+});
