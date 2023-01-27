@@ -14,7 +14,6 @@ class TournamentCreate extends Component
 
     public $name;
     public $format = TournamentFormat::Solo->value;
-    protected $status = TournamentStatus::Unlisted->value;
 
     protected $rules = [
         'name' => ['required', 'min:3', 'max:30'],
@@ -34,7 +33,7 @@ class TournamentCreate extends Component
         $user = auth()->user();
 
         $validated['user_id'] = $user->id;
-        $validated['status'] = $this->status;
+        $validated['status'] = TournamentStatus::Unlisted->value;
 
         $tournament = Tournament::create($validated);
 
