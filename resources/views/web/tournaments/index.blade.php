@@ -12,6 +12,6 @@
     </header>
 
     <div class="container">
-        <livewire:show-tournaments></livewire:show-tournaments>
+        <livewire:tournament-search></livewire:tournament-search>
     </div>
 @endsection
