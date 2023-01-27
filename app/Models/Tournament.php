@@ -31,7 +31,7 @@ class Tournament extends Model
         return $this->hasMany(Team::class);
     }
 
-    public function stage(): HasMany
+    public function stages(): HasMany
     {
         return $this->hasMany(TournamentStage::class);
     }
