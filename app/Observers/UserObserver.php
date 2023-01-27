@@ -18,7 +18,7 @@ class UserObserver
     {
         UserRole::create([
             'user_id' => $user->id,
-            'role' => UserRoles::User
+            'role' => UserRoles::User->value
         ]);
     }
 

@@ -2,10 +2,25 @@
 
 namespace App\Enums;
 
-enum UserRoles : string
+use App\Traits\EnumToArray;
+
+enum UserRoles : int
 {
-    case Blacklisted = 'Blacklisted';
-    case User = 'User';
-    case Admin = 'Admin';
-    case Organizer = 'Organizer';
+    use EnumToArray;
+
+    case Blacklisted = 0;
+    case User = 1;
+    case Admin = 2;
+    case Organizer = 3;
+
+    public function name()
+    {
+        return match ($this)
+        {
+            self::Blacklisted => 'Blacklisted',
+            self::User => 'User',
+            self::Admin => 'Admin',
+            self::Organizer => 'Organizer'
+        };
+    }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('role')->default(\App\Enums\UserRoles::User->value);
+            $table->integer('role')->default(\App\Enums\UserRoles::User->value);
             $table->timestamps();
 
             $table->unique(['user_id', 'role']);
