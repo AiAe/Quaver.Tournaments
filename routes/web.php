@@ -20,5 +20,5 @@ Route::controller(TournamentsController::class)
     ->prefix('tournaments')
     ->as('tournaments.')
     ->group(function () {
-        Route::get('', 'list')->name('list');
+        Route::get('', 'index')->name('index');
     });

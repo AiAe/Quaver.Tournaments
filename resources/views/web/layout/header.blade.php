@@ -17,7 +17,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('web.tournaments.list') }}" href="{{ route('web.tournaments.list') }}"><i class="bi bi-trophy"></i> {{ __('Tournaments') }}</a>
+                    <a class="nav-link {{ routeIs('web.tournaments.index') }}" href="{{ route('web.tournaments.index') }}"><i class="bi bi-trophy"></i> {{ __('Tournaments') }}</a>
                 </li>
             </ul>
 
