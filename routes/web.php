@@ -17,4 +17,4 @@ Route::controller(AuthController::class)
 Route::get('/', [HomeController::class, 'view'])->name('home');
 
 Route::resource('tournaments',TournamentsController::class)
-    ->only(['index']);
+    ->only(['index', 'show']);
