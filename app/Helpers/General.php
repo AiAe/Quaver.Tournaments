@@ -32,9 +32,19 @@ if (!function_exists('routeIsWithin')) {
     }
 }
 
-if(!function_exists('countryFlag')) {
+if (!function_exists('countryFlag')) {
     function countryFlag($flag)
     {
         return asset(sprintf('assets/img/flags/3x2/%s.svg', $flag));
+    }
+}
+
+if (!function_exists('stringHasValue')) {
+    function stringHasValue($string)
+    {
+        if(!is_numeric($string)) return false;
+        if ($string == null) return false;
+        if ($string == "") return false;
+        return true;
     }
 }
