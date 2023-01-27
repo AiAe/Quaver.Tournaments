@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
 
+            $table->unique(['tournament_stage_id', 'index']);
+
             $table->timestamps();
         });
     }

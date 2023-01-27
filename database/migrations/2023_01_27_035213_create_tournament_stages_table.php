@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->unsignedInteger('index');
             $table->unsignedInteger('stage_format');
 
+            $table->unique(['tournament_id', 'index']);
+
             $table->timestamps();
         });
     }
