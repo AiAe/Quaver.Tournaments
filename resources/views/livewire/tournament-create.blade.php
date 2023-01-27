@@ -1,0 +1,34 @@
+<div>
+    <div class="modal fade" id="tournamentCreate" tabindex="-1" aria-labelledby="tournamentCreateLabel" wire:ignore.self
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tournamentCreateLabel">{{ __('Create Tournament') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="create">
+                    <div class="modal-body">
+                        <div>
+                            <label class="form-label">{{ __('Name') }}</label>
+                            <input type="text" wire:model="name" class="form-control">
+                            @error('name') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="form-label">{{ __('Format') }}</label>
+                            <select wire:model="format" class="form-control">
+                                @foreach(\App\Enums\TournamentFormat::cases() as $format)
+                                    <option value="{{ $format->value }}">{{ $format->name() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

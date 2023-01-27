@@ -1,0 +1,39 @@
+$input-group-addon-bg: $dark;
+$input-group-addon-color: $light;
+$input-bg: $background-color;
+$input-color: $light;
+$input-border-color: $primary;
+
+$input-focus-box-shadow: none;
+
+$pagination-bg: $dark;
+$pagination-border-color: $primary;
+$pagination-color: $light;
+
+$pagination-hover-color:            $dark;
+$pagination-hover-bg:               $primary;
+$pagination-hover-border-color:     $primary;
+
+$pagination-active-color:           $dark;
+$pagination-active-bg:              $primary;
+$pagination-active-border-color:    $primary;
+
+$pagination-disabled-color:         $secondary;
+$pagination-disabled-bg:            $dark;
+$pagination-disabled-border-color:  $primary;
+
+$pagination-focus-color:            $dark;
+$pagination-focus-bg:               $primary;
+$pagination-focus-box-shadow:       none;
+$pagination-focus-outline:          0;
+
+$nav-pills-border-radius: 0;
+$nav-link-color: rgba(255, 255, 255, 0.55);
+$nav-link-hover-color: rgba(255, 255, 255, 0.75);
+
+$card-bg: $dark;
+
+$modal-content-color:               $primary;
+$modal-content-bg:                  $dark;
+$modal-header-border-color:         $primary;
+$modal-footer-border-color:         $primary;
