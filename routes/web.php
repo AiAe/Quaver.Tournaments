@@ -16,9 +16,5 @@ Route::controller(AuthController::class)
 
 Route::get('/', [HomeController::class, 'view'])->name('home');
 
-Route::controller(TournamentsController::class)
-    ->prefix('tournaments')
-    ->as('tournaments.')
-    ->group(function () {
-        Route::get('', 'index')->name('index');
-    });
+Route::resource('tournaments',TournamentsController::class)
+    ->only(['index']);
