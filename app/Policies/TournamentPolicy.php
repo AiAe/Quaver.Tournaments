@@ -26,8 +26,7 @@ class TournamentPolicy
 
     public function view(?User $user, Tournament $tournament): bool
     {
-        return $tournament->status != TournamentStatus::Unlisted
-            || $tournament->user_id == $user->id;
+        return $tournament->status != TournamentStatus::Unlisted || $tournament->user->is($user);
     }
 
     public function create(User $user): bool

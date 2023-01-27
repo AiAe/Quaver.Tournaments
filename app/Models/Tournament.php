@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
-use App\Models\Scopes\UnlistedScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,10 +23,5 @@ class Tournament extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    protected static function booted()
-    {
-        static::addGlobalScope(new UnlistedScope);
     }
 }
