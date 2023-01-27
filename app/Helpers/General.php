@@ -3,11 +3,11 @@
 if (!function_exists('appVersion')) {
     function appVersion(): string
     {
-        if (config('app.env') == "local") {
-            return "dev";
-        } else {
-            return config('app.app_version');
-        }
+        return match (config('app.env')) {
+            'local' => 'dev',
+            'testing' => 'test',
+            default => config('app.app_version'),
+        };
     }
 }
 
