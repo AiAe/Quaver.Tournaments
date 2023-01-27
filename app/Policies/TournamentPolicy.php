@@ -54,4 +54,9 @@ class TournamentPolicy
     {
         return false;
     }
+
+    public function viewUnlisted(User $user): bool
+    {
+        return false;
+    }
 }
