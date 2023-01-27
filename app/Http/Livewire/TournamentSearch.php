@@ -13,9 +13,9 @@ class TournamentSearch extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $search;
-    public $format;
-    public $status;
+    public $search = null;
+    public $format = null;
+    public $status = null;
 
     protected $queryString = ['search', 'format', 'status'];
 
@@ -55,15 +55,15 @@ class TournamentSearch extends Component
             $tournaments->whereNot('status', TournamentStatus::Unlisted);
         }
 
-        if ($this->search) {
+        if ($this->search !== null) {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
         }
 
-        if ($this->format) {
+        if ($this->format !== null) {
             $tournaments->where('format', $this->format);
         }
 
-        if ($this->status) {
+        if ($this->status !== null) {
             $tournaments->where('status', $this->status);
         }
 
