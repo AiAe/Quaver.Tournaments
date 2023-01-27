@@ -1,6 +1,11 @@
+html {
+    height: 100vh;
+}
+
 body {
     background-color: $background-color;
     color: $light;
+    min-height: 100vh;
 }
 
 .btn {
@@ -9,6 +14,10 @@ body {
     color: $light;
     text-transform: uppercase;
     font-size: 16px;
+}
+
+.btn-close {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
 }
 
 .navbar {
@@ -22,4 +31,11 @@ body {
 footer {
     background-color: $dark;
     border-top: 1px solid $primary;
+}
+
+.sidebar-menu {
+    width: 260px;
+    height: 100vh;
+    border-right: 1px solid $primary;
+    overflow-y: auto;
 }
