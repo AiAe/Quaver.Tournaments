@@ -55,15 +55,15 @@ class TournamentSearch extends Component
             $tournaments->whereNot('status', TournamentStatus::Unlisted);
         }
 
-        if ($this->search !== null) {
+        if ($this->search && $this->search !== "") {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
         }
 
-        if ($this->format !== null) {
+        if ($this->format && $this->format !== "") {
             $tournaments->where('format', $this->format);
         }
 
-        if ($this->status !== null) {
+        if ($this->status && $this->status !== "") {
             $tournaments->where('status', $this->status);
         }
 
