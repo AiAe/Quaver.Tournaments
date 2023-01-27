@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum UserRoles : string
+enum UserRoles : int
 {
-    case Blacklisted = 'Blacklisted';
-    case User = 'User';
-    case Admin = 'Admin';
-    case Organizer = 'Organizer';
+    case Blacklisted = 0;
+    case User = 1;
+    case Admin = 2;
+    case Organizer = 3;
 }
