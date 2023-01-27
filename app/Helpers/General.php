@@ -42,9 +42,9 @@ if (!function_exists('countryFlag')) {
 if (!function_exists('stringHasValue')) {
     function stringHasValue($string)
     {
-        if(!is_numeric($string)) return false;
         if ($string == null) return false;
         if ($string == "") return false;
+        if(is_numeric($string)) return true;
         return true;
     }
 }
