@@ -85,7 +85,7 @@
                     <div class="row tournament-boxes">
                         <div class="col-lg-12">
                             <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-info btn-sm">{{ __('View Tournament') }}</a>
+                                <a href="{{route('web.tournaments.show', $tournament)}}" class="btn btn-info btn-sm">{{ __('View Tournament') }}</a>
                             </div>
                         </div>
                     </div>

@@ -2,19 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\TournamentStatus;
 use App\Models\Tournament;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ShowTournaments extends Component
+class TournamentSearch extends Component
 {
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 
-    public $search = "";
-    public $format = "";
-    public $status = "";
+    public $search = null;
+    public $format = null;
+    public $status = null;
 
     protected $queryString = ['search', 'format', 'status'];
 
@@ -49,19 +50,24 @@ class ShowTournaments extends Component
     {
         $tournaments = Tournament::query();
 
-        if ($this->search) {
+        $canViewUnlisted = auth()->user()?->can('viewUnlisted', Tournament::class);
+        if (!$canViewUnlisted) {
+            $tournaments->whereNot('status', TournamentStatus::Unlisted);
+        }
+
+        if ($this->search !== null) {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
         }
 
-        if ($this->format !== "") {
-            $tournaments->where('format', '=', $this->format);
+        if ($this->format !== null) {
+            $tournaments->where('format', $this->format);
         }
 
-        if ($this->status !== "") {
-            $tournaments->where('status', '=', $this->status);
+        if ($this->status !== null) {
+            $tournaments->where('status', $this->status);
         }
 
-        return view('livewire.tournaments', [
+        return view('livewire.tournament-search', [
             'tournaments' => $tournaments->orderByDesc('id')->paginate(10)
         ]);
     }
