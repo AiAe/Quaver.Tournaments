@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class TournamentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Tournament::class, 'tournament');
+    }
+
     public function index()
     {
         return view('web.tournaments.index');
