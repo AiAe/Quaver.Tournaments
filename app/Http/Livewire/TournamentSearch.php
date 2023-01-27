@@ -7,7 +7,7 @@ use App\Models\Tournament;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ShowTournaments extends Component
+class TournamentSearch extends Component
 {
     use WithPagination;
 
@@ -67,7 +67,7 @@ class ShowTournaments extends Component
             $tournaments->where('status', $this->status);
         }
 
-        return view('livewire.tournaments', [
+        return view('livewire.tournament-search', [
             'tournaments' => $tournaments->orderByDesc('id')->paginate(10)
         ]);
     }
