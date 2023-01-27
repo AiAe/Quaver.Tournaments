@@ -18,7 +18,10 @@ class Authenticated
      */
     public function handle(Request $request, Closure $next)
     {
-        View::share('loggedUser', Auth::user());
+        $user = Auth::user();
+
+        View::share('loggedUser', $user);
+        $request->attributes->set('loggedUser', $user);
 
         return $next($request);
     }
