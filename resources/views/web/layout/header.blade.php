@@ -23,16 +23,34 @@
 
             <ul class="navbar-nav ms-md-auto">
                 @auth()
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ __('Welcome, :username', ['username' => $loggedUser->username]) }}
                         </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('web.auth.logout') }}">
-                            <i class="bi bi-box-arrow-out-right"></i> {{ __('Logout') }}
-                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    {{ __('Profile') }}
+                                </a>
+                            </li>
+                            @can('create', \App\Models\Tournament::class)
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <a class="dropdown-item" href="#tournamentCreate" data-bs-toggle="modal" data-bs-target="#tournamentCreate">
+                                        {{ __('Create Tournament') }}
+                                    </a>
+                                </li>
+                                @push('modals')
+                                    @livewire('tournament-create', key('tournamentCreate'))
+                                @endpush
+                            @endcan
+                            <div class="dropdown-divider"></div>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('web.auth.logout') }}">
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endauth
                 @guest

@@ -14,6 +14,13 @@ class Tournament extends Model
 {
     use Metable, HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'format',
+        'status'
+    ];
+
     protected $casts = [
         'format' => TournamentFormat::class,
         'status' => TournamentStatus::class
