@@ -12,6 +12,12 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'tournament_id',
+        'user_id'
+    ];
+
     public function tournament(): BelongsTo
     {
         return $this->belongsTo(Tournament::class);
@@ -24,7 +30,6 @@ class Team extends Model
 
     public function members(): BelongsToMany
     {
-        return $this
-            ->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
