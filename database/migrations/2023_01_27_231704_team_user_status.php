@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('team_user', function (Blueprint $table) {
-            $table->integer('status')->default(\App\Enums\TeamUserStatus::Pending->value);
+            $table->integer('status')->default(\App\Enums\TeamUserStatus::Pending->value)->after('user_id');
         });
     }
 
