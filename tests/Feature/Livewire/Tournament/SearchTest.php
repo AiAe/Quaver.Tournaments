@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
-use App\Http\Livewire\TournamentSearch;
+use App\Http\Livewire\Tournament\Search;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -13,7 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire;
 use Tests\TestCase;
 
-class TournamentSearchTest extends TestCase
+class SearchTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -35,19 +35,19 @@ class TournamentSearchTest extends TestCase
 
     public function testCanRender()
     {
-        Livewire::test(TournamentSearch::class)->assertOk();
+        Livewire::test(Search::class)->assertOk();
     }
 
     public function testIndexContainsComponent()
     {
         $this->get(route('web.tournaments.index'))
-            ->assertSeeLivewire(TournamentSearch::class);
+            ->assertSeeLivewire(Search::class);
     }
 
     public function testCanPartiallySearchTitle()
     {
         $tour = Tournament::firstWhere('status', TournamentStatus::RegistrationsOpen);
-        Livewire::test(TournamentSearch::class)
+        Livewire::test(Search::class)
             ->set('search', substr($tour->name, 0, 4))
             ->assertSee($tour->name);
     }
@@ -56,12 +56,12 @@ class TournamentSearchTest extends TestCase
     {
         $tour = Tournament::firstWhere('status', TournamentStatus::Unlisted);
 
-        Livewire::test(TournamentSearch::class)
+        Livewire::test(Search::class)
             ->set('status', TournamentStatus::Unlisted)
             ->assertDontSee($tour->name);
 
         Livewire::actingAs($this->admin)
-            ->test(TournamentSearch::class)
+            ->test(Search::class)
             ->set('status', TournamentStatus::Unlisted)
             ->assertSee($tour->name);
     }
@@ -69,7 +69,7 @@ class TournamentSearchTest extends TestCase
     public function testQueryParams()
     {
         Livewire::withQueryParams(['search' => 'ababa'])
-            ->test(TournamentSearch::class)
+            ->test(Search::class)
             ->assertSet('search', 'ababa');
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class TournamentRegister extends Component
+class Register extends Component
 {
     use AuthorizesRequests;
 
@@ -52,6 +52,6 @@ class TournamentRegister extends Component
 
     public function render()
     {
-        return view('livewire.tournament-register');
+        return view('livewire.tournament.register');
     }
 }

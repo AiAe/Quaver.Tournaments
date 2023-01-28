@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
@@ -8,7 +8,7 @@ use App\Models\Tournament;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class TournamentCreate extends Component
+class Create extends Component
 {
     use AuthorizesRequests;
 
@@ -42,6 +42,6 @@ class TournamentCreate extends Component
 
     public function render()
     {
-        return view('livewire.tournament-create');
+        return view('livewire.tournament.create');
     }
 }

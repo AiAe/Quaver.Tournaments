@@ -21,8 +21,8 @@
             </a>
 
             @push('modals')
-                <livewire:tournament-register wire:key="{{ key('tournamentRegister') }}"
-                                              :tournament="$tournament"></livewire:tournament-register>
+                <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
+                                              :tournament="$tournament"></livewire:tournament.register>
             @endpush
         </li>
         <hr>

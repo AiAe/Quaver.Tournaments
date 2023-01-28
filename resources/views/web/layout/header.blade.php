@@ -41,7 +41,7 @@
                                     </a>
                                 </li>
                                 @push('modals')
-                                    @livewire('tournament-create', key('tournamentCreate'))
+                                    @livewire('tournament.create', key('tournamentCreate'))
                                 @endpush
                             @endcan
                             <div class="dropdown-divider"></div>

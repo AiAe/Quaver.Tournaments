@@ -1,18 +1,17 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
-use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
-use App\Http\Livewire\TournamentCreate;
+use App\Http\Livewire\Tournament\Create;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class TournamentCreateTest extends TestCase
+class CreateTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -28,7 +27,7 @@ class TournamentCreateTest extends TestCase
     /** @test */
     public function the_component_can_render()
     {
-        $component = Livewire::test(TournamentCreate::class);
+        $component = Livewire::test(Create::class);
 
         $component->assertStatus(200);
     }
@@ -38,7 +37,7 @@ class TournamentCreateTest extends TestCase
     {
         $this->actingAs($this->admin);
 
-        Livewire::test(TournamentCreate::class)
+        Livewire::test(Create::class)
             ->set('name', 'qot_factory')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
@@ -50,7 +49,7 @@ class TournamentCreateTest extends TestCase
     public function name_is_required()
     {
         Livewire::actingAs($this->admin)
-            ->test(TournamentCreate::class)
+            ->test(Create::class)
             ->set('name', '')
             ->call('create')
             ->assertHasErrors([
@@ -64,7 +63,7 @@ class TournamentCreateTest extends TestCase
         $this->actingAs($this->admin);
 
         $response = Livewire::actingAs($this->admin)
-            ->test(TournamentCreate::class)
+            ->test(Create::class)
             ->set('name', 'qot_factory')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
