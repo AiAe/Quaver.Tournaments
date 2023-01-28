@@ -3,11 +3,14 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Enums\UserRoles;
 use App\Models\Team;
 use App\Models\Tournament;
+use App\Models\User;
 use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,7 +32,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        
+        Gate::before(function (User $user, string $ability) {
+            if ($user->hasRole(UserRoles::Admin)) {
+                return true;
+            }
 
-        //
+            return null;
+        });
     }
 }
