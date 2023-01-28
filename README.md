@@ -1,13 +1,17 @@
 # QOT
+
 Quaver Official Tournament - Website
 
 ## About this project
+
 This project aims to be useful for everyone who is interested in hosting a tournament.
 
 ## What the project contains
+
 None
 
 ## API
+
 None
 
 # Setting up project
@@ -29,6 +33,7 @@ None
 6. Run `php artisan migrate`
 
 #### Nginx config
+
 ```apacheconf
 server {
     listen 443 ssl http2;
@@ -69,7 +74,7 @@ server {
 
 ### Commands
 
-None
+- `artisan user:role`
 
 ## ENV
 
@@ -87,4 +92,5 @@ For login with Quaver - https://quavergame.com/developers/applications
 3. `QUAVER_REDIRECT=` - where to redirect after the user login (default: https://qot.ovh/oauth/quaver/callback)
 
 # License
+
 This project is licensed under the AGPL-3.0 license.
