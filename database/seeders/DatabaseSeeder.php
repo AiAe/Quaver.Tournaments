@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            TournamentSeeder::class
+            QuaverMapStaticSeeder::class,
+            TournamentSeeder::class,
         ]);
     }
 }
