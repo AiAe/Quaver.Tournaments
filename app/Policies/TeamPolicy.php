@@ -12,13 +12,6 @@ class TeamPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, $ability)
-    {
-        if ($user->hasRole(UserRoles::Admin)) {
-            return true;
-        }
-    }
-
     public function viewAny(?User $user): bool
     {
         return true;
