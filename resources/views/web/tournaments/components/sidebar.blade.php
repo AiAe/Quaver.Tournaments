@@ -13,10 +13,17 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            {{-- ToDo add check if player already joined --}}
+            <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
+               data-bs-target="#tournamentRegister">
                 <i class="bi bi-box-arrow-right"></i>
                 {{ __('Register') }}
             </a>
+
+            @push('modals')
+                <livewire:tournament-register wire:key="{{ key('tournamentRegister') }}"
+                                              :tournament="$tournament"></livewire:tournament-register>
+            @endpush
         </li>
         <hr>
         <li class="nav-item">

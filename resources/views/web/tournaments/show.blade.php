@@ -9,10 +9,6 @@
 
             <main class="col ps-md-2 pt-2">
                 <div class="container">
-{{--                    <div class="page-header pt-3">--}}
-{{--                        --}}
-{{--                    </div>--}}
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
