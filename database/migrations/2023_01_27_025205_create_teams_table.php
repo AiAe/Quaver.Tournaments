@@ -14,8 +14,7 @@ return new class extends Migration {
             $table->id();
 
             $table->string('name');
-            $table->foreignIdFor(Tournament::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Tournament::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -23,8 +22,11 @@ return new class extends Migration {
         Schema::create('team_user', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Team::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Team::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained();
+
+            $table->boolean('is_captain')->default(false);
+            $table->index(['team_id', 'is_captain']);
 
             $table->timestamps();
         });

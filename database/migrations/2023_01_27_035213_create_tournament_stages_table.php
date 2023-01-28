@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
 
             $table->string('name');
-            $table->foreignIdFor(Tournament::class);
+            $table->foreignIdFor(Tournament::class)->constrained()->cascadeOnDelete();
             $table->unsignedInteger('index');
             $table->unsignedInteger('stage_format');
 

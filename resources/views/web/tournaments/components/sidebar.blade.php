@@ -1,3 +1,4 @@
+@php use App\Enums\TournamentFormat; @endphp
 <aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
@@ -13,17 +14,34 @@
             </a>
         </li>
         <li class="nav-item">
-            {{-- ToDo add check if player already joined --}}
-            <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
-               data-bs-target="#tournamentRegister">
-                <i class="bi bi-box-arrow-right"></i>
-                {{ __('Register') }}
-            </a>
-
-            @push('modals')
-                <livewire:tournament-register wire:key="{{ key('tournamentRegister') }}"
-                                              :tournament="$tournament"></livewire:tournament-register>
-            @endpush
+            @auth()
+                @if($loggedUser->teams()->firstWhere('tournament_id', $tournament->id) == null)
+                    <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
+                       data-bs-target="#tournamentRegister">
+                        <i class="bi bi-box-arrow-right"></i>
+                        {{ __('Register') }}
+                    </a>
+                    @push('modals')
+                        <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
+                                                      :tournament="$tournament"></livewire:tournament.register>
+                    @endpush
+                @elseif($tournament->format == TournamentFormat::Team)
+                    <a class="nav-link">
+                        <i class="bi bi-people"></i>
+                        {{ __('Team') }}
+                    </a>
+                    <a class="nav-link">
+                        <i class="bi bi-mailbox"></i>
+                        {{ __('Invites') }}
+                    </a>
+                @endif
+            @endauth
+            @guest()
+                <a class="nav-link" href="{{route('web.auth.oauth', 'quaver')}}">
+                    <i class="bi bi-box-arrow-right"></i>
+                    {{ __('Register') }}
+                </a>
+            @endguest
         </li>
         <hr>
         <li class="nav-item">

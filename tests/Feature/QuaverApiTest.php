@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 namespace Tests\Feature;
 
 use App\Http\QuaverApi\QuaverApi;
@@ -18,6 +20,18 @@ class QuaverApiTest extends TestCase
     {
         $data = QuaverApi::getMap(2);
         $this->assertEquals('HyuN', $data['artist']);
+    }
+
+    public function testMapsetIsOk()
+    {
+        $data = QuaverApi::getMapset(2);
+        $this->assertEquals('HyuN', $data['artist']);
+    }
+
+    public function testRankedMapsetsIsOk()
+    {
+        $data = QuaverApi::getRankedMapsetIds();
+        $this->assertEquals(2, $data[0]);
     }
 
     public function testExceptionThrown()

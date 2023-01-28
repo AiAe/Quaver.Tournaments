@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create('tournament_stage_rounds', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(TournamentStage::class);
+            $table->foreignIdFor(TournamentStage::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->unsignedInteger('index');
             $table->dateTime('starts_at');

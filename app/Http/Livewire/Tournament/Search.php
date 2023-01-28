@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tournament;
 
 use App\Enums\TournamentStatus;
 use App\Models\Tournament;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class TournamentSearch extends Component
+class Search extends Component
 {
     use WithPagination;
 
@@ -68,7 +68,7 @@ class TournamentSearch extends Component
             $tournaments->where('status', $this->status);
         }
 
-        return view('livewire.tournament-search', [
+        return view('livewire.tournament.search', [
             'tournaments' => $tournaments->orderByDesc('id')->paginate(10)
         ]);
     }

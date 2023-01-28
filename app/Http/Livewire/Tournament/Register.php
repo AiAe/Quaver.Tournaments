@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
-class TournamentRegister extends Component
+class Register extends Component
 {
     use AuthorizesRequests;
 
@@ -39,10 +39,10 @@ class TournamentRegister extends Component
             $validated['name'] = $user->username;
         }
 
-        $validated['user_id'] = $user->id;
         $validated['tournament_id'] = $this->tournament->id;
 
         $team = Team::create($validated);
+        $team->members()->attach($user, ['is_captain' => true]);
 
         // ToDo redirect to team page inviting if its team
 
@@ -52,6 +52,6 @@ class TournamentRegister extends Component
 
     public function render()
     {
-        return view('livewire.tournament-register');
+        return view('livewire.tournament.register');
     }
 }
