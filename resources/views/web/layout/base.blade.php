@@ -10,11 +10,15 @@
 </head>
 
 <body>
+
 @include('web.layout.header')
-@yield('content')
+<main>
+    @yield('content')
+</main>
 @include('web.layout.footer')
 
 @stack('scripts')
+@stack('modals')
 @livewireScripts
 </body>
 
