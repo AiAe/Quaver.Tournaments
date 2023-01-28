@@ -61,4 +61,20 @@ class QuaverApi
     {
         return self::request("maps/$id", [], 'map');
     }
+
+    /**
+     * @throws Exception
+     */
+    public static function getMapset(int $id)
+    {
+        return self::request("mapsets/$id", [], 'mapset');
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function getRankedMapsetIds()
+    {
+        return self::request('mapsets/ranked', [], 'mapsets');
+    }
 }
