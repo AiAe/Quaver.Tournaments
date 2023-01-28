@@ -10,6 +10,7 @@
         "kodeine/laravel-meta": "^2.1",
         "laravel/framework": "^9.19",
         "laravel/socialite": "^5.6",
+        "laravel/telescope": "^4.12",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.11"
     },
