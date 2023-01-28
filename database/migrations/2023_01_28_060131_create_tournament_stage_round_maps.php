@@ -12,8 +12,8 @@ return new class extends Migration {
         Schema::create('tournament_stage_round_maps', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(TournamentStageRound::class);
-            $table->foreignIdFor(QuaverMap::class);
+            $table->foreignIdFor(TournamentStageRound::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(QuaverMap::class)->constrained('quaver_maps', 'quaver_map_id');
 
             $table->unsignedInteger('index');
 

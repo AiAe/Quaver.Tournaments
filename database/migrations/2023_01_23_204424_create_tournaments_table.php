@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
 
             $table->string('name')->index();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->index();
             $table->integer('format')->default(TournamentFormat::Solo->value)->index();
             $table->integer('status')->default(TournamentStatus::Unlisted->value)->index();
 

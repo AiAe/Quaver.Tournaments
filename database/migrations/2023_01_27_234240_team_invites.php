@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::create('team_user_invites', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Team::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Team::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
