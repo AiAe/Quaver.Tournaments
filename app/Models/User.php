@@ -34,7 +34,7 @@ class User extends Authenticatable
         return $this->roles()->firstWhere('role', $role) != null;
     }
 
-    public function tournaments(): HasMany
+    public function hostedTournaments(): HasMany
     {
         return $this->hasMany(Tournament::class);
     }
@@ -44,6 +44,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class)
             ->withPivot('is_captain')
             ->withTimestamps();
+    }
+
+    // Counterpart of Tournament->participants()
+    public function participatedTournaments()
+    {
+        return $this->teams->map->tournament;
     }
 
     public function invites()
