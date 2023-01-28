@@ -39,14 +39,11 @@ class User extends Authenticatable
         return $this->hasMany(Tournament::class);
     }
 
-    public function captainTeams(): HasMany
+    public function teams(): BelongsToMany
     {
-        return $this->hasMany(Team::class);
-    }
-
-    public function memberTeams(): BelongsToMany
-    {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)
+            ->withPivot('is_captain')
+            ->withTimestamps();
     }
 
     public function invites()

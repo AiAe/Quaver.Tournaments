@@ -10,6 +10,7 @@ use App\Models\Tournament;
 use App\Models\TournamentStage;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class TournamentSeeder extends Seeder
@@ -32,12 +33,28 @@ class TournamentSeeder extends Seeder
     private function createFullTournament(array $stages)
     {
         $tournament = Tournament::factory()
-            ->has(Team::factory(5)->has(User::factory(4), 'members'))
             ->create([
                 'format' => TournamentFormat::Team,
                 'status' => TournamentStatus::RegistrationsOpen
             ]);
 
+        $this->createTeams($tournament, 5, 4);
+        $this->createStages($tournament, $stages);
+    }
+
+    private function createTeams(Tournament $tournament, int $teamCount, int $memberCountPerTeam): void
+    {
+        Team::factory($teamCount)
+            ->recycle($tournament)
+            ->hasAttached(
+                User::factory($memberCountPerTeam),
+                new Sequence(fn($sequence) => ['is_captain' => $sequence->index % $memberCountPerTeam == 0]),
+                'members'
+            )->create();
+    }
+
+    private function createStages(Tournament $tournament, array $stages): void
+    {
         $i = 0;
         $startsAt = Carbon::now();
         foreach ($stages as [$format, $weeks]) {
