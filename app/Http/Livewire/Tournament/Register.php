@@ -39,10 +39,10 @@ class Register extends Component
             $validated['name'] = $user->username;
         }
 
-        $validated['user_id'] = $user->id;
         $validated['tournament_id'] = $this->tournament->id;
 
         $team = Team::create($validated);
+        $team->members()->attach($user, ['is_captain' => true]);
 
         // ToDo redirect to team page inviting if its team
 
