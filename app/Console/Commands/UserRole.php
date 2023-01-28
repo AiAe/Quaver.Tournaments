@@ -20,12 +20,10 @@ class UserRole extends Command
      *
      * @var string
      */
-    protected $description = 'Give user role';
+    protected $description = 'Give or remove role from user';
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle()
     {
@@ -33,23 +31,37 @@ class UserRole extends Command
 
         $user = User::where('username', $username)->first();
 
-        if($user) {
-            $roles = UserRoles::array();
+        if ($user) {
+            $userRoles = $user->roles->map->role;
+            $roleLabels = [];
 
-            $role = $this->choice('Which role?', $roles);
+            foreach (UserRoles::cases() as $role) {
+                $label = $role->name();
+                if ($userRoles->contains($role)) {
+                    $label .= ' (✓)';
+                }
+                $roleLabels[$role->value] = $label;
+            }
 
-            $role_id = array_search($role, $roles);
+            $roleId = array_search($this->choice('Which role?', $roleLabels), $roleLabels);
+            $role = UserRoles::cases()[$roleId];
 
-            if ($this->confirm(sprintf('Do you wish to give %s role %s', $username, $role), true)) {
-                $user->roles()->create(['role' => $role_id]);
-
-                $user->save();
+            if ($userRoles->contains($role)) {
+                if ($this->confirm(sprintf('Do you wish to remove %s role from %s', $role->name(), $username),
+                    true)) {
+                    $user->roles()->firstWhere('role', $roleId)->delete();
+                    $user->save();
+                }
+            } else {
+                if ($this->confirm(sprintf('Do you wish to give %s role to %s', $role->name(), $username), true)) {
+                    $user->roles()->create(['role' => $role]);
+                    $user->save();
+                }
             }
 
             $this->info('Done!');
         } else {
-            $this->info('User not found!');
+            $this->error('User not found!');
         }
-
     }
 }
