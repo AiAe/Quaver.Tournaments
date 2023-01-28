@@ -2,7 +2,8 @@
 <aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{ route('web.tournaments.show', $tournament->id) }}"
+               class="nav-link {{ routeIs('web.tournaments.show') }}">
                 <i class="bi bi-info-square-fill"></i>
                 {{ __('Information') }}
             </a>
@@ -13,41 +14,51 @@
                 {{ __('Rules') }}
             </a>
         </li>
-        <li class="nav-item">
-            @auth()
-                @if($loggedUser->teams()->firstWhere('tournament_id', $tournament->id) == null)
+        <hr>
+
+        @auth()
+
+            @if($loggedUser->teams()->firstWhere('tournament_id', $tournament->id) == null)
+                <li class="nav-item">
                     <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
                        data-bs-target="#tournamentRegister">
                         <i class="bi bi-box-arrow-right"></i>
                         {{ __('Register') }}
                     </a>
-                    @push('modals')
-                        <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
-                                                      :tournament="$tournament"></livewire:tournament.register>
-                    @endpush
-                @elseif($tournament->format == TournamentFormat::Team)
-                    <a class="nav-link">
+                </li>
+                <hr>
+                @push('modals')
+                    <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
+                                                  :tournament="$tournament"></livewire:tournament.register>
+                @endpush
+            @elseif($tournament->format == TournamentFormat::Team)
+                <li class="nav-item">
+                    <a class="nav-link {{ routeIs('web.tournaments.team') }}"
+                       href="{{ route('web.tournaments.team', $tournament->id) }}">
                         <i class="bi bi-people"></i>
-                        {{ __('Team') }}
+                        {{ __('My Team') }}
                     </a>
-                    <a class="nav-link">
-                        <i class="bi bi-mailbox"></i>
-                        {{ __('Invites') }}
-                    </a>
-                @endif
-            @endauth
-            @guest()
+                </li>
+                <hr>
+            @endif
+        @endauth
+        @guest()
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('web.auth.oauth', 'quaver')}}">
                     <i class="bi bi-box-arrow-right"></i>
                     {{ __('Register') }}
                 </a>
-            @endguest
-        </li>
-        <hr>
+            </li>
+            <hr>
+        @endguest
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="bi bi-controller"></i>
-                {{ __('Players') }}
+                @if($tournament->format == TournamentFormat::Team)
+                    {{ __('Teams') }}
+                @else
+                    {{ __('Players') }}
+                @endif
             </a>
         </li>
         <li class="nav-item">

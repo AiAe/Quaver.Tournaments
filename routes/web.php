@@ -3,6 +3,7 @@
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\TournamentsController;
+use App\Http\Controllers\Web\TournamentTeamController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)
@@ -18,3 +19,10 @@ Route::get('/', [HomeController::class, 'view'])->name('home');
 
 Route::resource('tournaments',TournamentsController::class)
     ->only(['index', 'show']);
+
+Route::controller(TournamentTeamController::class)
+    ->prefix('tournaments/{tournament}/team')
+    ->as('tournaments.team')
+    ->group(function () {
+        Route::get('', 'show');
+    });
