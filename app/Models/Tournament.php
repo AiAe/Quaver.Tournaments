@@ -42,4 +42,9 @@ class Tournament extends Model
     {
         return $this->hasMany(TournamentStage::class);
     }
+
+    public function participants()
+    {
+        return $this->teams->flatMap->members;
+    }
 }
