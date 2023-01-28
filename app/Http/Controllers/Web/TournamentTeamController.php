@@ -19,11 +19,6 @@ class TournamentTeamController extends Controller
 
     public function show(Tournament $tournament)
     {
-
-//        $from_user = Auth::user();
-//
-//        User::where('username', 'AiAe')->first()->notify(new TeamInvite($from_user, $tournament));
-
         return view('web.tournaments.team', compact('tournament'));
     }
 }
