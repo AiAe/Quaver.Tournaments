@@ -52,6 +52,7 @@ class CreateTest extends TestCase
         Livewire::actingAs($this->admin)
             ->test(Create::class)
             ->set('name', '')
+            ->set('slug', 'QOTFactory2023')
             ->call('create')
             ->assertHasErrors([
                 'name' => 'required'
@@ -79,6 +80,7 @@ class CreateTest extends TestCase
         $response = Livewire::actingAs($this->admin)
             ->test(Create::class)
             ->set('name', 'qot_factory')
+            ->set('slug', 'QOTFactory2023')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
 
