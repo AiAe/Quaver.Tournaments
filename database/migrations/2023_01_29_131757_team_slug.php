@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('teams', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
     }
 };
