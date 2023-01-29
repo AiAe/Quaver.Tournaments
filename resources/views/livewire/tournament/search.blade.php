@@ -25,6 +25,7 @@
                 <select wire:model.lazy="status" class="form-control">
                     <option value="" selected>{{ __('All') }}</option>
                     @foreach(\App\Enums\TournamentStatus::cases() as $status)
+                        @continue($status == \App\Enums\TournamentStatus::Unlisted)
                         <option value="{{ $status->value }}">{{ $status->name() }}</option>
                     @endforeach
                 </select>
