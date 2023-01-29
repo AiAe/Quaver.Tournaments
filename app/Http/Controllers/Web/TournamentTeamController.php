@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 use App\Models\Tournament;
-use App\Models\User;
-use App\Notifications\TeamInvite;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TournamentTeamController extends Controller
 {
@@ -17,8 +14,10 @@ class TournamentTeamController extends Controller
         // ToDo restrict the page only if tournament is team based & when player has/in team
     }
 
-    public function show(Tournament $tournament)
+    public function show(Tournament $tournament, Team $team)
     {
-        return view('web.tournaments.team', compact('tournament'));
+        $team->with(['members', 'captain']);
+
+        return view('web.tournaments.team', compact('tournament', 'team'));
     }
 }

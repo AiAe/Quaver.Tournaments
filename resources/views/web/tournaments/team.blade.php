@@ -8,11 +8,14 @@
             </div>
             <div>
                 {{--ToDo if team is full remove button--}}
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
-                @push('modals')
-                    <livewire:tournament.team.invite wire:key="{{ key('tournamentTeamInvite') }}"
-                                                     :tournament_id="$tournament->id"></livewire:tournament.team.invite>
-                @endpush
+                @if($team->captain()->id == $loggedUser->id)
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
+                    @push('modals')
+                        <livewire:tournament.team.invite wire:key="{{ key('tournamentTeamInvite') }}"
+                                                         :tournament_id="$tournament->id"></livewire:tournament.team.invite>
+                    @endpush
+                @endif
             </div>
         </div>
 
@@ -28,18 +31,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>AiAe</td>
-                        <td>Accepted</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>IceDynamix</td>
-                        <td>Pending</td>
-                        <td><i class="bi bi-x"></i></td>
-                    </tr>
+                    @foreach($team->members as $member)
+                        <tr>
+                            <td>1</td>
+                            <td>{{ $member->username }}</td>
+                            <td>
+                                @if($member->pivot->is_captain)
+                                    {{ __('Captain') }}
+                                @else
+                                    {{ __('Player') }}
+                                @endif
+                            </td>
+                            <td>-</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
