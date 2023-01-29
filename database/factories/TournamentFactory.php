@@ -17,6 +17,7 @@ class TournamentFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
+            'slug' => $this->faker->slug(),
             'format' => TournamentFormat::Solo,
             'status' => TournamentStatus::Unlisted,
             'created_at' => Carbon::now(),

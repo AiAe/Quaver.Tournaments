@@ -20,9 +20,5 @@ Route::get('/', [HomeController::class, 'view'])->name('home');
 Route::resource('tournaments',TournamentsController::class)
     ->only(['index', 'show']);
 
-Route::controller(TournamentTeamController::class)
-    ->prefix('tournaments/{tournament}/team')
-    ->as('tournaments.team')
-    ->group(function () {
-        Route::get('', 'show');
-    });
+Route::resource('tournaments.teams', TournamentTeamController::class)
+    ->only(['show']);

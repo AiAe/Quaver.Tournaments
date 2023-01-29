@@ -2,7 +2,7 @@
 <aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a href="{{ route('web.tournaments.show', $tournament->id) }}"
+            <a href="{{ route('web.tournaments.show', $tournament->slug) }}"
                class="nav-link {{ routeIs('web.tournaments.show') }}">
                 <i class="bi bi-info-square-fill"></i>
                 {{ __('Information') }}
@@ -14,11 +14,12 @@
                 {{ __('Rules') }}
             </a>
         </li>
+
         <hr>
 
         @auth()
-
-            @if($loggedUser->teams()->firstWhere('tournament_id', $tournament->id) == null)
+            @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
+            @if($team == null)
                 <li class="nav-item">
                     <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
                        data-bs-target="#tournamentRegister">
@@ -34,7 +35,7 @@
             @elseif($tournament->format == TournamentFormat::Team)
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('web.tournaments.team') }}"
-                       href="{{ route('web.tournaments.team', $tournament->id) }}">
+                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament->slug, 'team' => $team->slug]) }}">
                         <i class="bi bi-people"></i>
                         {{ __('My Team') }}
                     </a>
@@ -107,6 +108,5 @@
                 {{ __('Settings') }}
             </a>
         </li>
-
     </ul>
 </aside>

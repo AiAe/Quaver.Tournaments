@@ -13,9 +13,15 @@ class Team extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'tournament_id',
         'user_id'
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function tournament(): BelongsTo
     {

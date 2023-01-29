@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Tournament;
 use App\Enums\TournamentFormat;
 use App\Models\Team;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Str;
 
 class Register extends Component
 {
@@ -13,30 +15,52 @@ class Register extends Component
 
     public $tournament;
     public $name;
+    public $slug;
+
+    protected function rules()
+    {
+        $slug_rule = Rule::unique('teams')->where('tournament_id', $this->tournament->id);
+
+        if ($this->tournament->format == TournamentFormat::Team) {
+            return [
+                'name' => ['required', 'min:3', 'max:60'],
+                'slug' => ['required', $slug_rule, 'min:3', 'max:60']
+            ];
+        }
+
+        return [
+            'name' => ['nullable'],
+            'slug' => ['nullable', $slug_rule]
+        ];
+    }
 
     public function mount($tournament)
     {
         $this->tournament = $tournament;
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function generate_slug()
+    {
+        $this->slug = Str::slug($this->name);
+        $this->validate();
+    }
+
     public function create()
     {
         $this->authorize('create', Team::class);
 
-        $rules = [
-            'name' => ['nullable']
-        ];
-
-        if($this->tournament->format == TournamentFormat::Team) {
-            $rules['name'] = ['required', 'min:3', 'max:30'];
-        }
-
-        $validated = $this->validate($rules);
+        $validated = $this->validate();
 
         $user = auth()->user();
 
-        if(!isset($validated['name']) || $validated['name'] == "") {
+        if (!isset($validated['name']) || $validated['name'] == "") {
             $validated['name'] = $user->username;
+            $validated['slug'] = Str::slug($user->username);
         }
 
         $validated['tournament_id'] = $this->tournament->id;
@@ -44,9 +68,7 @@ class Register extends Component
         $team = Team::create($validated);
         $team->members()->attach($user, ['is_captain' => true]);
 
-        // ToDo redirect to team page inviting if its team
-
-        return redirect()->to(route('web.tournaments.show', $this->tournament->id))
+        return redirect()->to(route('web.tournaments.teams.show', ['tournament' => $this->tournament->slug, 'team' => $this->slug]))
             ->with('success', __('Successfully registered!'));
     }
 
