@@ -8,7 +8,7 @@
             </div>
             <div>
                 {{--ToDo if team is full remove button--}}
-                @if($team->captain()->id == $loggedUser->id)
+                @if($team->captain()->is($loggedUser))
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
                     @push('modals')
@@ -42,7 +42,27 @@
                                     {{ __('Player') }}
                                 @endif
                             </td>
+                            <td>
+                                @if(!$member->pivot->is_captain && $team->captain()->is($loggedUser))
+                                    <button class="btn btn-danger btn-sm">{{ __('Remove') }}</button>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    @foreach($team->invites as $invite)
+                        <tr>
                             <td>-</td>
+                            <td>{{ $invite->username }}</td>
+                            <td>{{ __('Pending Invite') }}</td>
+                            <td>
+                                @if($team->captain()->is($loggedUser))
+                                    <button class="btn btn-danger btn-sm">{{ __('Remove') }}</button>
+                                @else
+                                    -
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

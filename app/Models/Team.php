@@ -40,7 +40,7 @@ class Team extends Model
             ->withTimestamps();
     }
 
-    public function invites()
+    public function invites(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'team_user_invites')->withTimestamps();
     }
