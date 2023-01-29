@@ -41,7 +41,7 @@
                             @if(count($loggedUser->unreadNotifications))
                                 <ul class="list-group">
                                     @foreach($loggedUser->unreadNotifications as $notification)
-                                        @livewire('notification', ['notification' => $notification], key($notification->id))
+                                        @livewire('user.notification', ['notification' => $notification], key($notification->id))
                                     @endforeach
                                 </ul>
                             @else

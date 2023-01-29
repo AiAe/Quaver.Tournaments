@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Tournament\Team;
 
 use App\Models\Tournament;
 use App\Models\User;
+use App\Notifications\TeamInvite;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
@@ -41,19 +42,16 @@ class Invite extends Component
         // Check if user exists
         $player = User::where('username', $validated['username'])->first();
 
-        if($player) {
+        if ($player) {
             $user = auth()->user();
-
             $tournament = Tournament::where('id', $this->tournament_id)->first();
             $team = $user->teams()->firstWhere('tournament_id', $this->tournament_id);
 
-            if($tournament && $team) {
-                dd($team);
-                // Invite player here...
-                // Send notification for their invite
-                // $player->notify(new TeamInvite($user, $tournament));
+            if ($tournament && $team) {
+                $team->invites()->attach($player);
+                $player->notify(new TeamInvite($user, $tournament));
 
-                // session()->flash('invite-success', __('Successfully invited player!'));
+                session()->flash('invite-success', __('Successfully invited player!'));
             } else {
                 session()->flash('invite-team-not-found', __('Team not found!'));
             }
