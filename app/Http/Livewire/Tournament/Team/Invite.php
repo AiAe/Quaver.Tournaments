@@ -6,6 +6,7 @@ use App\Models\Tournament;
 use App\Models\User;
 use App\Notifications\TeamInvite;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Invite extends Component
@@ -13,15 +14,35 @@ class Invite extends Component
     use AuthorizesRequests;
 
     public $tournament_id;
+    public $team_id;
     public $username;
 
-    protected $rules = [
-        // Maybe create custom rule to verify Player exists?
-        // Also we probably should update player's username constantly to not have duplicates
-        // Since we search for player by username and take first result?
-        // Alternatively we add select2 with api search for players
-        'username' => ['required', 'min:3', 'max:15']
-    ];
+    protected function rules()
+    {
+        if ($player = User::select(['id'])->where('username', $this->username)->first()) {
+            return [
+                'username' => [
+                    'required',
+                    'min:3',
+                    'max:15',
+                    function ($attributes, $value, $fail) use ($player) {
+                        if ($player->teams()->where('team_id', $this->team_id)->exists()) {
+                            $fail(__('Player is already in the team!'));
+                        }
+                    },
+                    function ($attributes, $value, $fail) use ($player) {
+                        if ($player->invites()->where('team_id', $this->team_id)->exists()) {
+                            $fail(__('Player has been invited already!'));
+                        }
+                    },
+                ]
+            ];
+        }
+
+        return [
+            'username' => ['required', Rule::exists('users', 'username'), 'min:3', 'max:15']
+        ];
+    }
 
     public function mount($tournament_id)
     {
