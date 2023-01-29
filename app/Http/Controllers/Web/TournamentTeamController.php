@@ -10,7 +10,7 @@ class TournamentTeamController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Tournament::class, 'tournament');
+//        $this->authorizeResource(Tournament::class, 'tournament');
         // ToDo restrict the page only if tournament is team based & when player has/in team
     }
 
