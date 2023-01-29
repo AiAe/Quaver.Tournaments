@@ -1,5 +1,5 @@
 <div>
-    <div class="tournament">
+    <div class="tournament position-relative">
         <h1>{{ $tournament->name }}</h1>
 
         <div class="row">
@@ -85,7 +85,7 @@
                     <div class="row tournament-boxes">
                         <div class="col-lg-12">
                             <div class="d-grid gap-2">
-                                <a href="{{route('web.tournaments.show', $tournament)}}" class="btn btn-info btn-sm">{{ __('View Tournament') }}</a>
+                                <a href="{{route('web.tournaments.show', $tournament)}}" class="btn btn-info btn-sm stretched-link">{{ __('View Tournament') }}</a>
                             </div>
                         </div>
                     </div>
