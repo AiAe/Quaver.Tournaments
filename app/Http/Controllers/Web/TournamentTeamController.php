@@ -16,7 +16,7 @@ class TournamentTeamController extends Controller
 
     public function show(Tournament $tournament, Team $team)
     {
-        $team->with(['members', 'captain']);
+        $team->with(['members']);
 
         return view('web.tournaments.team', compact('tournament', 'team'));
     }
