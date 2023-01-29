@@ -16,6 +16,7 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
+            'slug' => $this->faker->slug(),
             'tournament_id' => Tournament::factory(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

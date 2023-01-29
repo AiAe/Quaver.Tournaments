@@ -7,22 +7,31 @@ use App\Enums\TournamentStatus;
 use App\Models\Tournament;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Str;
 
 class Create extends Component
 {
     use AuthorizesRequests;
 
     public $name;
+    public $slug;
     public $format = TournamentFormat::Solo->value;
 
     protected $rules = [
-        'name' => ['required', 'min:3', 'max:30'],
+        'name' => ['required', 'min:3', 'max:60'],
+        'slug' => ['required', 'unique:App\Models\Tournament,slug', 'min:3', 'max:60'],
         'format' => ['required']
     ];
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+
+    public function generate_slug()
+    {
+        $this->slug = Str::slug($this->name);
+        $this->validate();
     }
 
     public function create()
@@ -37,7 +46,7 @@ class Create extends Component
 
         $tournament = Tournament::create($validated);
 
-        return redirect()->to(route('web.tournaments.show', $tournament->id))->with('success', __('Tournament created!'));
+        return redirect()->to(route('web.tournaments.show', $tournament->slug))->with('success', __('Tournament created!'));
     }
 
     public function render()

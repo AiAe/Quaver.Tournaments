@@ -17,6 +17,7 @@ class Tournament extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'slug',
         'format',
         'status'
     ];
@@ -27,6 +28,11 @@ class Tournament extends Model
     ];
 
     protected $with = ['metas'];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function user(): BelongsTo
     {

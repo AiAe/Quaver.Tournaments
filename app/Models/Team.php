@@ -13,9 +13,15 @@ class Team extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'tournament_id',
         'user_id'
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function tournament(): BelongsTo
     {
@@ -34,7 +40,7 @@ class Team extends Model
             ->withTimestamps();
     }
 
-    public function invites()
+    public function invites(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'team_user_invites')->withTimestamps();
     }

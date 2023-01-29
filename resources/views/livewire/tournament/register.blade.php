@@ -1,5 +1,5 @@
 <div>
-    <div class="modal fade" id="tournamentRegister" tabindex="-1" aria-labelledby="tournamentRegisterLabel"
+    <div class="modal modal-lg fade" id="tournamentRegister" tabindex="-1" aria-labelledby="tournamentRegisterLabel"
          wire:ignore.self
          aria-hidden="true">
         <div class="modal-dialog">
@@ -15,6 +15,16 @@
                                 <label class="form-label">{{ __('Team Name') }}</label>
                                 <input type="text" wire:model="name" class="form-control">
                                 @error('name') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <label class="form-label">{{ __('Url') }}</label>
+                                <div class="input-group">
+                                    <label class="input-group-text">{{ __('/tournaments/:slug/team/', ['slug' => $tournament->slug]) }}</label>
+                                    <input type="text" wire:model="slug" class="form-control">
+                                    <button wire:click="generate_slug" class="btn btn-primary btn-sm" type="button">{{ __('Generate url') }}</button>
+                                </div>
+                                @error('slug') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="modal-footer">

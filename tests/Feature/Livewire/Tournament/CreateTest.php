@@ -39,10 +39,11 @@ class CreateTest extends TestCase
 
         Livewire::test(Create::class)
             ->set('name', 'qot_factory')
+            ->set('slug', 'QOTFactory2023')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
 
-        $this->assertTrue(Tournament::whereName('qot_factory')->exists());
+        $this->assertTrue(Tournament::whereSlug('QOTFactory2023')->exists());
     }
 
     /** @test */
@@ -51,9 +52,23 @@ class CreateTest extends TestCase
         Livewire::actingAs($this->admin)
             ->test(Create::class)
             ->set('name', '')
+            ->set('slug', 'QOTFactory2023')
             ->call('create')
             ->assertHasErrors([
                 'name' => 'required'
+            ]);
+    }
+
+    /** @test */
+    public function slug_is_required()
+    {
+        Livewire::actingAs($this->admin)
+            ->test(Create::class)
+            ->set('name', 'qot_factory')
+            ->set('slug', '')
+            ->call('create')
+            ->assertHasErrors([
+                'slug' => 'required'
             ]);
     }
 
@@ -65,6 +80,7 @@ class CreateTest extends TestCase
         $response = Livewire::actingAs($this->admin)
             ->test(Create::class)
             ->set('name', 'qot_factory')
+            ->set('slug', 'QOTFactory2023')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
 

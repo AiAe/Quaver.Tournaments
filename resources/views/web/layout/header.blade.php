@@ -27,6 +27,31 @@
             <ul class="navbar-nav ms-md-auto">
                 @auth()
                     <li class="nav-item dropdown">
+                        <a class="nav-link position-relative" href="#" role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            @if(count($loggedUser->unreadNotifications))
+                                <img src="{{ asset('assets/img/icons/app-indicator-red.svg') }}">
+                            @else
+                                <img src="{{ asset('assets/img/icons/app-indicator.svg') }}">
+                            @endif
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="min-width: 300px;">
+                            @if(count($loggedUser->unreadNotifications))
+                                <ul class="list-group">
+                                    @foreach($loggedUser->unreadNotifications as $notification)
+                                        @livewire('user.notification', ['notification' => $notification], key($notification->id))
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="pt-2 pb-2 text-center">
+                                    {{ __('There is no new notifications') }}
+                                </div>
+                            @endif
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             {{ __('Welcome, :username', ['username' => $loggedUser->username]) }}
