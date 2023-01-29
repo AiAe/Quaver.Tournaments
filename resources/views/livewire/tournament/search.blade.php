@@ -37,20 +37,17 @@
             {{ __('Loading...') }}
         </span>
         <div class="row">
-            @if(count($tournaments))
-                @foreach($tournaments as $tournament)
-                    <div class="col-lg-6">
-                        @include('web.tournaments.components.tournament', ['tournament' => $tournament])
-                    </div>
-                @endforeach
-
-            @else
+            @forelse($tournaments as $tournament)
+                <div class="col-lg-6">
+                    @include('web.tournaments.components.tournament', ['tournament' => $tournament])
+                </div>
+            @empty
                 <div class="col-lg-12">
                     <div class="text-center py-4">
                         <h4>{{ __('There are no tournaments currently!') }}</h4>
                     </div>
                 </div>
-            @endif
+            @endforelse
         </div>
     </div>
 
