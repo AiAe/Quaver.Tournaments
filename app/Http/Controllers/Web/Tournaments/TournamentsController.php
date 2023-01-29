@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Tournaments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;

@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
-use App\Http\Controllers\Web\TournamentsController;
-use App\Http\Controllers\Web\TournamentTeamController;
+use App\Http\Controllers\Web\Tournaments\TournamentsController;
+use App\Http\Controllers\Web\Tournaments\TournamentTeamController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)
