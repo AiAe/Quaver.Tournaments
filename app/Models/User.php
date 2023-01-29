@@ -20,6 +20,10 @@ class User extends Authenticatable
         'country'
     ];
 
+    protected $hidden = [
+        'remember_token'
+    ];
+
     public function roles(): HasMany
     {
         return $this->hasMany(UserRole::class, 'user_id', 'id');
