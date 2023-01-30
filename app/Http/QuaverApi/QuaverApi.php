@@ -61,7 +61,7 @@ class QuaverApi
      */
     public static function getUserFull(int $id)
     {
-        return self::request("users/full/$id", [], 'users');
+        return self::request("users/full/$id", [], 'user');
     }
 
     /**
