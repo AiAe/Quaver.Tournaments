@@ -21,4 +21,6 @@ Route::resource('tournaments',TournamentsController::class)
     ->only(['index', 'show']);
 
 Route::resource('tournaments.teams', TournamentTeamController::class)
-    ->only(['show']);
+    ->only(['show'])->scoped([
+        'team' => 'slug'
+    ]);
