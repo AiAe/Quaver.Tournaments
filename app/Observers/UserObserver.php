@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Enums\UserRoles;
+use App\Http\QuaverApi\QuaverApi;
 use App\Models\User;
 use App\Models\UserRole;
 
@@ -20,6 +21,8 @@ class UserObserver
             'user_id' => $user->id,
             'role' => UserRoles::User->value
         ]);
+
+        $this->updateUser($user);
     }
 
     /**
@@ -30,7 +33,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        //
+        $this->updateUser($user);
     }
 
     /**
@@ -52,7 +55,7 @@ class UserObserver
      */
     public function restored(User $user)
     {
-        //
+        $this->updateUser($user);
     }
 
     /**
@@ -64,5 +67,18 @@ class UserObserver
     public function forceDeleted(User $user)
     {
         //
+    }
+
+    private function updateUser(User $user)
+    {
+        dispatch(function () use ($user) {
+            $user_api = QuaverApi::getUser($user->quaver_user_id);
+
+            if($user_api && isset($user_api[0])) {
+                $user->username = $user_api[0]['username'];
+                $user->country = $user_api[0]['country']??"X";
+                $user->save();
+            }
+        });
     }
 }
