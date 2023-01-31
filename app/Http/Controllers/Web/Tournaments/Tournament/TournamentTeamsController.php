@@ -4,25 +4,19 @@ namespace App\Http\Controllers\Web\Tournaments\Tournament;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 
-class TeamsController extends Controller
+class TournamentTeamsController extends Controller
 {
-    public function index()
+    public function index(Tournament $tournament)
     {
-
+        return view('web.tournaments.teams.index', compact('tournament'));
     }
 
-    public function create()
+    public function show(Tournament $tournament, Team $team)
     {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
-    public function show(Team $team)
-    {
+        return view('web.tournaments.teams.show', compact('tournament', 'team'));
     }
 
     public function edit(Team $team)

@@ -1,28 +1,30 @@
 @extends('web.tournaments.parts.base')
 
 @section('section')
+    <header class="py-5">
+        <h1>{{ $team->name }}</h1>
+    </header>
+
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <h1 class="mb-0">{{ __('My Team') }}</h1>
-            </div>
-            <div>
-                {{--ToDo if team is full remove button--}}
-                @if($team->captain()->is($loggedUser))
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
-                    @push('modals')
-                        <livewire:tournament.team.invite wire:key="{{ key('tournamentTeamInvite') }}"
-                                                         :tournament_id="$tournament->id" :team_id="$team->id">
-
-                        </livewire:tournament.team.invite>
-                    @endpush
-                @endif
-            </div>
-        </div>
-
         <div class="mt-3">
             <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        {{ __('Players') }}
+                    </div>
+                    {{--ToDo if team is full remove button--}}
+                    @if($team->captain()->is($loggedUser))
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
+                        @push('modals')
+                            <livewire:tournament.team.invite
+                                wire:key="{{ key('tournamentTeamInvite') }}"
+                                :tournament_id="$tournament->id" :team_id="$team->id">
+                            </livewire:tournament.team.invite>
+                        @endpush
+                    @endif
+                </div>
+
                 <table class="table table-hover table-dark mb-0">
                     <thead>
                     <tr>
@@ -53,6 +55,7 @@
                             </td>
                         </tr>
                     @endforeach
+
                     @foreach($team->invites as $invite)
                         <tr>
                             <td>-</td>

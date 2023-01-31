@@ -6,7 +6,8 @@
             <div class="col-lg-12 col-md-12 d-flex align-items-center">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="https://dummyimage.com/610x150/c1c1c1/ffffff.jpg" class="img-fluid">
+                        <img src="https://dummyimage.com/610x150/c1c1c1/ffffff.jpg" class="img-fluid"
+                             width="610" height="150" loading="lazy">
                     </div>
                 </div>
             </div>

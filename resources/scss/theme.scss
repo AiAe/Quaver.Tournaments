@@ -40,3 +40,12 @@ footer {
     overflow-y: auto;
     padding-top: 1rem;
 }
+
+header {
+    border-bottom: 1px solid $primary;
+    text-align: center;
+}
+
+.table-link tbody tr:hover {
+    cursor: pointer;
+}

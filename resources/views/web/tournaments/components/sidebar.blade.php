@@ -53,14 +53,17 @@
             <hr>
         @endguest
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-controller"></i>
-                @if($tournament->format == TournamentFormat::Team)
+            @if($tournament->format == TournamentFormat::Team)
+                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament->slug]) }}" class="nav-link">
+                    <i class="bi bi-controller"></i>
                     {{ __('Teams') }}
-                @else
+                </a>
+            @else
+                <a href="#" class="nav-link">
+                    <i class="bi bi-controller"></i>
                     {{ __('Players') }}
-                @endif
-            </a>
+                </a>
+            @endif
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link">
