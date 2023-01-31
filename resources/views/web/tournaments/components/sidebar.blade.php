@@ -2,7 +2,7 @@
 <aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a href="{{ route('web.tournaments.show', $tournament->slug) }}"
+            <a href="{{ route('web.tournaments.show', $tournament) }}"
                class="nav-link {{ routeIs('web.tournaments.show') }}">
                 <i class="bi bi-info-square-fill"></i>
                 {{ __('Information') }}
@@ -35,7 +35,7 @@
             @elseif($tournament->format == TournamentFormat::Team)
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('web.tournaments.team') }}"
-                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament->slug, 'team' => $team->slug]) }}">
+                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
                         <i class="bi bi-people"></i>
                         {{ __('My Team') }}
                     </a>
@@ -54,7 +54,7 @@
         @endguest
         <li class="nav-item">
             @if($tournament->format == TournamentFormat::Team)
-                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament->slug]) }}" class="nav-link">
+                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}" class="nav-link">
                     <i class="bi bi-controller"></i>
                     {{ __('Teams') }}
                 </a>
