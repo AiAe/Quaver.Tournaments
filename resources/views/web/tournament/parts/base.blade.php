@@ -4,7 +4,7 @@
     <div class="container-fluid px-0">
         <div class="row flex-nowrap gx-0">
             <div class="col-auto px-0">
-                @include('web.tournaments.components.sidebar')
+                @include('web.tournament.components.sidebar')
             </div>
 
             <main class="col ps-0 pt-2">

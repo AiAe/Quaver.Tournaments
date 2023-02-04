@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
-use App\Http\Controllers\Web\Tournaments\Tournament\TournamentTeamsController;
+use App\Http\Controllers\Web\Tournament\TournamentTeamsController;
 use App\Http\Controllers\Web\Tournaments\TournamentsController;
 use Illuminate\Support\Facades\Route;
 
