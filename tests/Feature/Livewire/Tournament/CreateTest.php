@@ -4,7 +4,7 @@ namespace Livewire\Tournament;
 
 use App\Enums\TournamentFormat;
 use App\Enums\UserRoles;
-use App\Http\Livewire\Tournament\Create;
+use App\Http\Livewire\Tournaments\Create;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

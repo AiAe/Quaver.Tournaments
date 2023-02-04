@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament;
+namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentStatus;
 use App\Models\Tournament;
@@ -68,7 +68,7 @@ class Search extends Component
             $tournaments->where('status', $this->status);
         }
 
-        return view('livewire.tournament.search', [
+        return view('livewire.tournaments.search', [
             'tournaments' => $tournaments->orderByDesc('id')->paginate(10)
         ]);
     }

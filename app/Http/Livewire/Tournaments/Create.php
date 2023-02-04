@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament;
+namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
@@ -51,6 +51,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.tournament.create');
+        return view('livewire.tournaments.create');
     }
 }
