@@ -41,7 +41,7 @@ class SearchTest extends TestCase
     public function testIndexContainsComponent()
     {
         $this->get(route('web.tournaments.index'))
-            ->assertSeeLivewire(Search::class);
+            ->assertSeeLivewire('tournaments.search');
     }
 
     public function testCanPartiallySearchTitle()

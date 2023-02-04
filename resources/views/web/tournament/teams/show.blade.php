@@ -17,10 +17,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
                         @push('modals')
-                            <livewire:tournament.team.invite
-                                wire:key="{{ key('tournamentTeamInvite') }}"
-                                :tournament_id="$tournament->id" :team_id="$team->id">
-                            </livewire:tournament.team.invite>
+                            @livewire('tournament.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))
                         @endpush
                     @endif
                 </div>

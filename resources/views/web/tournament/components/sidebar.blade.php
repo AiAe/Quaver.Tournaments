@@ -29,8 +29,7 @@
                 </li>
                 <hr>
                 @push('modals')
-                    <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
-                                                  :tournament="$tournament"></livewire:tournament.register>
+                    @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
                 @endpush
             @elseif($tournament->format == TournamentFormat::Team)
                 <li class="nav-item">
