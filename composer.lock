@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ea561899b7869eda68e289b09f5e53c",
+    "content-hash": "25a48d1a0a68f6457fe70db59e95d3d2",
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +60,75 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "cesargb/laravel-magiclink",
+            "version": "v2.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cesargb/laravel-magiclink.git",
+                "reference": "97f42b4a4f3f6ed3bf29d6717b6d8bd9ea07ff0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cesargb/laravel-magiclink/zipball/97f42b4a4f3f6ed3bf29d6717b6d8bd9ea07ff0e",
+                "reference": "97f42b4a4f3f6ed3bf29d6717b6d8bd9ea07ff0e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^9.0|^10.0",
+                "illuminate/container": "^9.0|^10.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "illuminate/database": "^9.0|^10.0",
+                "laravel/serializable-closure": "^1.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.9",
+                "nunomaduro/larastan": "^2.1",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MagicLink\\MagicLinkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MagicLink\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cesar Garcia",
+                    "email": "cesargb@gmail.com",
+                    "homepage": "https://github.com/cesargb",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create secure link for access to private data or login in Laravel without password",
+            "homepage": "https://github.com/cesargb/laravel-magiclink",
+            "keywords": [
+                "auth",
+                "download",
+                "file",
+                "laravel",
+                "link",
+                "login"
+            ],
+            "support": {
+                "issues": "https://github.com/cesargb/laravel-magiclink/issues",
+                "source": "https://github.com/cesargb/laravel-magiclink/tree/v2.15.0"
+            },
+            "time": "2023-01-25T16:37:11+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

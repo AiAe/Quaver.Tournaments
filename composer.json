@@ -6,6 +6,7 @@
     "license": "LGPL-3.0-or-later",
     "require": {
         "php": "^8.2",
+        "cesargb/laravel-magiclink": "^2.15",
         "guzzlehttp/guzzle": "^7.5.0",
         "kodeine/laravel-meta": "^2.1.1",
         "laravel/framework": "^v9.50.2",
