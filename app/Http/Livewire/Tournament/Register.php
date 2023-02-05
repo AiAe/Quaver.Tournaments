@@ -23,8 +23,8 @@ class Register extends Component
 
         if ($this->tournament->format == TournamentFormat::Team) {
             return [
-                'name' => ['required', 'min:3', 'max:60'],
-                'slug' => ['required', $slug_rule, 'min:3', 'max:60']
+                'name' => ['required', 'min:3', 'max:30'],
+                'slug' => ['required', $slug_rule, 'min:3', 'max:30']
             ];
         }
 
@@ -68,8 +68,10 @@ class Register extends Component
         $team = Team::create($validated);
         $team->members()->attach($user, ['is_captain' => true]);
 
-        return redirect()->to(route('web.tournaments.teams.show', ['tournament' => $this->tournament->slug, 'team' => $this->slug]))
-            ->with('success', __('Successfully registered!'));
+        createToast('success', '', __('You signed up successfully!'));
+
+        return redirect()->to(route('web.tournaments.teams.show',
+            ['tournament' => $this->tournament->slug, 'team' => $this->slug]));
     }
 
     public function render()

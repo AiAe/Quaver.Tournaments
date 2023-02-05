@@ -70,15 +70,17 @@ class Invite extends Component
 
             if ($tournament && $team) {
                 $team->invites()->attach($player);
-                $player->notify(new TeamInvite($user, $tournament));
+                $player->notify(new TeamInvite($user, $tournament, $team));
 
-                session()->flash('invite-success', __('Successfully invited player!'));
+                createToast('success', '', __('Invitation was sent!'));
             } else {
-                session()->flash('invite-team-not-found', __('Team not found!'));
+                createToast('error', '', __('Team not found!'), false);
             }
         } else {
-            session()->flash('invite-player-not-found', __('Player not found!'));
+            createToast('error', '', __('Player not found!'), false);
         }
+
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

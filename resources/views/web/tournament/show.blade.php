@@ -1,4 +1,4 @@
-@extends('web.tournaments.parts.base')
+@extends('web.tournament.parts.base')
 
 @section('section')
     <div class="container">

@@ -2,7 +2,7 @@
 <aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a href="{{ route('web.tournaments.show', $tournament->slug) }}"
+            <a href="{{ route('web.tournaments.show', $tournament) }}"
                class="nav-link {{ routeIs('web.tournaments.show') }}">
                 <i class="bi bi-info-square-fill"></i>
                 {{ __('Information') }}
@@ -29,13 +29,12 @@
                 </li>
                 <hr>
                 @push('modals')
-                    <livewire:tournament.register wire:key="{{ key('tournamentRegister') }}"
-                                                  :tournament="$tournament"></livewire:tournament.register>
+                    @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
                 @endpush
             @elseif($tournament->format == TournamentFormat::Team)
                 <li class="nav-item">
                     <a class="nav-link {{ routeIs('web.tournaments.team') }}"
-                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament->slug, 'team' => $team->slug]) }}">
+                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
                         <i class="bi bi-people"></i>
                         {{ __('My Team') }}
                     </a>
@@ -53,14 +52,17 @@
             <hr>
         @endguest
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-controller"></i>
-                @if($tournament->format == TournamentFormat::Team)
+            @if($tournament->format == TournamentFormat::Team)
+                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}" class="nav-link">
+                    <i class="bi bi-controller"></i>
                     {{ __('Teams') }}
-                @else
+                </a>
+            @else
+                <a href="#" class="nav-link">
+                    <i class="bi bi-controller"></i>
                     {{ __('Players') }}
-                @endif
-            </a>
+                </a>
+            @endif
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link">

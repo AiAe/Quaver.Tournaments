@@ -48,3 +48,13 @@ if (!function_exists('stringHasValue')) {
         return true;
     }
 }
+
+function createToast($type, $title, $message, $hide = true)
+{
+    session()->flash('toast', [
+        'type' => $type,
+        'title' => $title,
+        'message' => $message,
+        'hide' => $hide
+    ]);
+}

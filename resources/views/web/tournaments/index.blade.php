@@ -12,6 +12,6 @@
     </header>
 
     <div class="container">
-        <livewire:tournament.search></livewire:tournament.search>
+        @livewire('tournaments.search', key('search'))
     </div>
 @endsection

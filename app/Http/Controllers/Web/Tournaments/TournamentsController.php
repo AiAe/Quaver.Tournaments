@@ -18,17 +18,9 @@ class TournamentsController extends Controller
         return view('web.tournaments.index');
     }
 
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
     public function show(Tournament $tournament)
     {
-        return view('web.tournaments.show', compact('tournament'));
+        return view('web.tournament.show', compact('tournament'));
     }
 
     public function edit(Tournament $tournament)

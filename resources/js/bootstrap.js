@@ -8,13 +8,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 import * as Popper from '@popperjs/core'
-window.Popper = Popper
+window.Popper = Popper;
 
-import 'bootstrap'
+import * as Bootstrap from 'bootstrap'
+window.Bootstrap = Bootstrap;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     Livewire.on('gotoTop', () => {
-        console.log('owo');
         window.scrollTo({
             top: 15,
             left: 15,
@@ -22,3 +22,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
         })
     });
 });
+
+
+const tableLinks = document.querySelectorAll('.table-link tbody tr');
+
+if(tableLinks) {
+    for (const tr of tableLinks) {
+        const route = tr.dataset.route;
+        if(route) {
+            tr.addEventListener('click', function () {
+                window.location = route;
+            }.bind(route));
+        }
+    }
+}

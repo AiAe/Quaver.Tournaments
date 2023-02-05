@@ -10,22 +10,22 @@ $pagination-bg: $dark;
 $pagination-border-color: $primary;
 $pagination-color: $light;
 
-$pagination-hover-color:            $dark;
-$pagination-hover-bg:               $primary;
-$pagination-hover-border-color:     $primary;
+$pagination-hover-color: $dark;
+$pagination-hover-bg: $primary;
+$pagination-hover-border-color: $primary;
 
-$pagination-active-color:           $dark;
-$pagination-active-bg:              $primary;
-$pagination-active-border-color:    $primary;
+$pagination-active-color: $dark;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
 
-$pagination-disabled-color:         $secondary;
-$pagination-disabled-bg:            $dark;
-$pagination-disabled-border-color:  $primary;
+$pagination-disabled-color: $secondary;
+$pagination-disabled-bg: $dark;
+$pagination-disabled-border-color: $primary;
 
-$pagination-focus-color:            $dark;
-$pagination-focus-bg:               $primary;
-$pagination-focus-box-shadow:       none;
-$pagination-focus-outline:          0;
+$pagination-focus-color: $dark;
+$pagination-focus-bg: $primary;
+$pagination-focus-box-shadow: none;
+$pagination-focus-outline: 0;
 
 $nav-pills-border-radius: 0;
 $nav-link-color: rgba(255, 255, 255, 0.55);
@@ -33,7 +33,20 @@ $nav-link-hover-color: rgba(255, 255, 255, 0.75);
 
 $card-bg: $dark;
 
-$modal-content-color:               $primary;
-$modal-content-bg:                  $dark;
-$modal-header-border-color:         $primary;
-$modal-footer-border-color:         $primary;
+$modal-content-color: $primary;
+$modal-content-bg: $dark;
+$modal-header-border-color: $primary;
+$modal-footer-border-color: $primary;
+
+$dropdown-bg: $dark;
+$dropdown-color: $light;
+$dropdown-link-color: $light;
+$dropdown-link-hover-color: shade-color($light, 10%);
+$dropdown-link-hover-bg: $secondary;
+$dropdown-link-active-bg: $secondary;
+
+$toast-header-color: $light;
+$toast-header-background-color: $dark;
+$toast-header-border-color: $primary;
+$toast-background-color: $background-color;
+$toast-border-color: $primary;

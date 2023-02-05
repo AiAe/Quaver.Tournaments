@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament;
+namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
@@ -18,8 +18,8 @@ class Create extends Component
     public $format = TournamentFormat::Solo->value;
 
     protected $rules = [
-        'name' => ['required', 'min:3', 'max:60'],
-        'slug' => ['required', 'unique:App\Models\Tournament,slug', 'min:3', 'max:60'],
+        'name' => ['required', 'min:3', 'max:30'],
+        'slug' => ['required', 'unique:App\Models\Tournament,slug', 'min:3', 'max:30'],
         'format' => ['required']
     ];
 
@@ -46,11 +46,13 @@ class Create extends Component
 
         $tournament = Tournament::create($validated);
 
-        return redirect()->to(route('web.tournaments.show', $tournament->slug))->with('success', __('Tournament created!'));
+        createToast('success', '', __('Tournament was created!'));
+
+        return redirect()->to(route('web.tournaments.show', $tournament->slug));
     }
 
     public function render()
     {
-        return view('livewire.tournament.create');
+        return view('livewire.tournaments.create');
     }
 }

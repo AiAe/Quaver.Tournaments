@@ -5,7 +5,7 @@ namespace Livewire\Tournament;
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
-use App\Http\Livewire\Tournament\Search;
+use App\Http\Livewire\Tournaments\Search;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -41,7 +41,7 @@ class SearchTest extends TestCase
     public function testIndexContainsComponent()
     {
         $this->get(route('web.tournaments.index'))
-            ->assertSeeLivewire(Search::class);
+            ->assertSeeLivewire('tournaments.search');
     }
 
     public function testCanPartiallySearchTitle()

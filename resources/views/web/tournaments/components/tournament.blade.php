@@ -1,12 +1,13 @@
 <div>
-    <div class="tournament">
+    <div class="tournament position-relative">
         <h1>{{ $tournament->name }}</h1>
 
         <div class="row">
             <div class="col-lg-12 col-md-12 d-flex align-items-center">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="https://dummyimage.com/610x150/c1c1c1/ffffff.jpg" class="img-fluid">
+                        <img src="https://dummyimage.com/610x150/c1c1c1/ffffff.jpg" class="img-fluid"
+                             width="610" height="150" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -75,8 +76,17 @@
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Entries') }}</div>
                                 <div class="tournament-box-content">
-                                    <div class="tournament-box-text">55</div>
-                                    <div>{{ __('Players') }}</div>
+                                    @if($tournament->format == \App\Enums\TournamentFormat::Solo)
+                                        <div class="tournament-box-text">
+                                            {{ $tournament->participants()->count() }}
+                                        </div>
+                                        <div>{{ __('Players') }}</div>
+                                    @else
+                                        <div class="tournament-box-text">
+                                            {{ $tournament->teams()->count() }}
+                                        </div>
+                                        <div>{{ __('Teams') }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -85,7 +95,8 @@
                     <div class="row tournament-boxes">
                         <div class="col-lg-12">
                             <div class="d-grid gap-2">
-                                <a href="{{route('web.tournaments.show', $tournament)}}" class="btn btn-info btn-sm">{{ __('View Tournament') }}</a>
+                                <a href="{{route('web.tournaments.show', $tournament)}}"
+                                   class="btn btn-info btn-sm stretched-link">{{ __('View Tournament') }}</a>
                             </div>
                         </div>
                     </div>

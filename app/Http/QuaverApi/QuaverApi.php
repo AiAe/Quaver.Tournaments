@@ -49,6 +49,16 @@ class QuaverApi
     /**
      * @throws Exception
      */
+    public static function getUser(int $id)
+    {
+        return self::request("users", [
+            'id' => $id
+        ], 'users');
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function getUserFull(int $id)
     {
         return self::request("users/full/$id", [], 'user');
