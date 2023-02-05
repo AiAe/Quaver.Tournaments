@@ -50,6 +50,15 @@ header {
     cursor: pointer;
 }
 
+.editor-toolbar a {
+    color: $white !important;
+}
+
+.editor-toolbar a.active, .editor-toolbar a:hover {
+    background: $primary;
+    border-color: $dark;
+}
+
 .notifications {
     min-width: 400px;
 

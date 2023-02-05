@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\Tournament\TournamentRulesController;
 use App\Http\Controllers\Web\Tournament\TournamentTeamsController;
 use App\Http\Controllers\Web\Tournaments\TournamentsController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,11 @@ Route::controller(AuthController::class)
 
 Route::get('/', [HomeController::class, 'view'])->name('home');
 
-Route::resource('tournaments',TournamentsController::class)
+Route::resource('tournaments', TournamentsController::class)
     ->only(['index', 'show']);
+
+Route::singleton('tournaments.rules', TournamentRulesController::class)
+    ->only(['show', 'update']);
 
 Route::resource('tournaments.teams', TournamentTeamsController::class)
     ->only(['index', 'show'])->scoped([
