@@ -9,7 +9,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('web.tournaments.rules.show', $tournament) }}"
+               class="nav-link {{ routeIs('web.tournaments.rules.show') }}">
                 <i class="bi bi-hammer"></i>
                 {{ __('Rules') }}
             </a>
@@ -33,7 +34,7 @@
                 @endpush
             @elseif($tournament->format == TournamentFormat::Team)
                 <li class="nav-item">
-                    <a class="nav-link {{ routeIs('web.tournaments.team') }}"
+                    <a class="nav-link {{ routeIs('web.tournaments.teams.show') }}"
                        href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
                         <i class="bi bi-people"></i>
                         {{ __('My Team') }}
@@ -53,7 +54,8 @@
         @endguest
         <li class="nav-item">
             @if($tournament->format == TournamentFormat::Team)
-                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}" class="nav-link">
+                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
+                   class="nav-link {{ routeIs('web.tournaments.teams.index') }}">
                     <i class="bi bi-controller"></i>
                     {{ __('Teams') }}
                 </a>

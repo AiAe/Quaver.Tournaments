@@ -11,7 +11,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class TournamentPolicy
 {
     use HandlesAuthorization;
-    
+
     public function viewAny(?User $user): bool
     {
         return true;

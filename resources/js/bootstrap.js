@@ -13,6 +13,9 @@ window.Popper = Popper;
 import * as Bootstrap from 'bootstrap'
 window.Bootstrap = Bootstrap;
 
+import * as MDEditor from 'simplemde/dist/simplemde.min';
+window.SimpleMDE = MDEditor;
+
 document.addEventListener("DOMContentLoaded", function (event) {
     Livewire.on('gotoTop', () => {
         window.scrollTo({
