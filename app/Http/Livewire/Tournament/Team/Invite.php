@@ -70,7 +70,7 @@ class Invite extends Component
 
             if ($tournament && $team) {
                 $team->invites()->attach($player);
-                $player->notify(new TeamInvite($user, $tournament));
+                $player->notify(new TeamInvite($user, $tournament, $team));
 
                 session()->flash('invite-success', __('Successfully invited player!'));
             } else {
@@ -79,6 +79,8 @@ class Invite extends Component
         } else {
             session()->flash('invite-player-not-found', __('Player not found!'));
         }
+
+        return redirect(request()->header('Referer'));
     }
 
     public function render()

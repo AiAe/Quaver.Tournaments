@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Team;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -13,16 +14,18 @@ class TeamInvite extends Notification
 
     private User $user;
     private Tournament $tournament;
+    private Team $team;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user, $tournament)
+    public function __construct($user, $tournament, $team)
     {
         $this->user = $user;
         $this->tournament = $tournament;
+        $this->team = $team;
     }
 
     /**
@@ -46,10 +49,19 @@ class TeamInvite extends Notification
     {
         return [
             'sender' => [
-                'id' => $notifiable->id,
-                'username' => $notifiable->username
+                'id' => $this->user->id,
+                'username' => $this->user->username
             ],
-            'tournament_id' => $this->tournament->id,
+            'tournament' => [
+                'id' => $this->tournament->id,
+                'slug' => $this->tournament->slug,
+                'name' => $this->tournament->name
+            ],
+            'team' => [
+                'id' => $this->team->id,
+                'slug' => $this->team->slug,
+                'name' => $this->team->name,
+            ]
         ];
     }
 }
