@@ -8,9 +8,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 import * as Popper from '@popperjs/core'
-window.Popper = Popper
+window.Popper = Popper;
 
-import 'bootstrap'
+import * as Bootstrap from 'bootstrap'
+window.Bootstrap = Bootstrap;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     Livewire.on('gotoTop', () => {

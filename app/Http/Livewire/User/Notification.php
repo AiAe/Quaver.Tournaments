@@ -31,10 +31,12 @@ class Notification extends Component
             $team->invites()->detach($player);
             $this->notification->markAsRead();
 
+            createToast('success', '', __('You joined the team!'));
+
             return redirect(route('web.tournaments.teams.show', [
                 'tournament' => $this->notification['data']['tournament']['slug'],
                 'team' => $this->notification['data']['team']['slug']
-            ]))->with('success', __('You joined the team!'));
+            ]));
         }
     }
 
@@ -46,6 +48,8 @@ class Notification extends Component
 
             $team->invites()->detach($player);
             $this->notification->markAsRead();
+
+            createToast('success', '', __('You declined joining the team!'));
 
             return redirect(request()->header('Referer'));
         }

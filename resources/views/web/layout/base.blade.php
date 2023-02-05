@@ -19,6 +19,7 @@
 
 @stack('scripts')
 @stack('modals')
+@include('web.layout.toast')
 @livewireScripts
 </body>
 

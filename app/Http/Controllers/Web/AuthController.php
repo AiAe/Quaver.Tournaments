@@ -56,14 +56,18 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect(route('web.home'))->with(['success' => __('Logged out successfully!')]);
+
+        createToast('success', '', __('Logged out successfully!'));
+
+        return redirect(route('web.home'));
     }
 
     // Protected
 
     protected function sendFailedResponse($msg = null)
     {
-        return redirect(route('web.home'))->with('error', $msg);
+        createToast('error', '', $msg);
+        return redirect(route('web.home'));
     }
 
     protected function loginOrCreateQuaverAccount($providerUser)

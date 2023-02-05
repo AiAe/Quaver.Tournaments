@@ -46,7 +46,9 @@ class Create extends Component
 
         $tournament = Tournament::create($validated);
 
-        return redirect()->to(route('web.tournaments.show', $tournament->slug))->with('success', __('Tournament created!'));
+        createToast('success', '', __('Tournament was created!'));
+
+        return redirect()->to(route('web.tournaments.show', $tournament->slug));
     }
 
     public function render()
