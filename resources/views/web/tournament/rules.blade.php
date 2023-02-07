@@ -5,9 +5,9 @@
         <h1>{{ $title }}</h1>
     </header>
 
-    <div class=" mt-3">
+    <div class="mt-3">
         <div class="card">
-            <div class="card-body position-relative">
+            <div class="card-body position-relative rules-field">
                 @can('update', $tournament)
                     <div class="position-absolute" style="top: 10px; right: 10px;">
                         <button class="btn btn-primary btn-sm" type="button" data-bs-target="#tournamentRulesEdit"
