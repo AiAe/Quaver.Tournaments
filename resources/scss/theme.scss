@@ -90,6 +90,11 @@ footer a {
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
     }
+
+    .navbar.navbar-dark {
+        border: 1px solid $secondary;
+        border-left: none;
+    }
 }
 
 .page-cover {
