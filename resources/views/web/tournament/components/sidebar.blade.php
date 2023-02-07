@@ -1,116 +1,98 @@
-@php use App\Enums\TournamentFormat; @endphp
-<aside class="sidebar-menu text-white">
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a href="{{ route('web.tournaments.show', $tournament) }}"
-               class="nav-link {{ routeIs('web.tournaments.show') }}">
-                <i class="bi bi-info-square-fill"></i>
-                {{ __('Information') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('web.tournaments.rules.show', $tournament) }}"
-               class="nav-link {{ routeIs('web.tournaments.rules.show') }}">
-                <i class="bi bi-hammer"></i>
-                {{ __('Rules') }}
-            </a>
-        </li>
+<div class="list-group mb-2">
+    <a href="{{ route('web.tournaments.show', $tournament) }}"
+       class="list-group-item {{ routeIs('web.tournaments.show') }}">
+        <i class="bi bi-info-square-fill"></i>
+        {{ __('Information') }}
+    </a>
+    <a href="{{ route('web.tournaments.rules.show', $tournament) }}"
+       class="list-group-item {{ routeIs('web.tournaments.rules.show') }}">
+        <i class="bi bi-hammer"></i>
+        {{ __('Rules') }}
+    </a>
+</div>
 
-        <hr>
+<div class="list-group mb-2">
+    @auth()
+        @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
+        @if($team == null)
+            <a class="list-group-item" href="#tournamentRegister" data-bs-toggle="modal"
+               data-bs-target="#tournamentRegister">
+                <i class="bi bi-box-arrow-right"></i>
+                {{ __('Register') }}
+            </a>
+            @push('modals')
+                @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
+            @endpush
+        @elseif($tournament->format == TournamentFormat::Team)
+            <a class="list-group-item {{ routeIs('web.tournaments.teams.show') }}"
+               href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
+                <i class="bi bi-people"></i>
+                {{ __('My Team') }}
+            </a>
+        @endif
+    @endauth
+    @guest()
+        <a class="list-group-item" href="{{route('web.auth.oauth', 'quaver')}}">
+            <i class="bi bi-box-arrow-right"></i>
+            {{ __('Register') }}
+        </a>
+    @endguest
+</div>
 
-        @auth()
-            @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
-            @if($team == null)
-                <li class="nav-item">
-                    <a class="nav-link" href="#tournamentRegister" data-bs-toggle="modal"
-                       data-bs-target="#tournamentRegister">
-                        <i class="bi bi-box-arrow-right"></i>
-                        {{ __('Register') }}
-                    </a>
-                </li>
-                <hr>
-                @push('modals')
-                    @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
-                @endpush
-            @elseif($tournament->format == TournamentFormat::Team)
-                <li class="nav-item">
-                    <a class="nav-link {{ routeIs('web.tournaments.teams.show') }}"
-                       href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
-                        <i class="bi bi-people"></i>
-                        {{ __('My Team') }}
-                    </a>
-                </li>
-                <hr>
-            @endif
-        @endauth
-        @guest()
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('web.auth.oauth', 'quaver')}}">
-                    <i class="bi bi-box-arrow-right"></i>
-                    {{ __('Register') }}
-                </a>
-            </li>
-            <hr>
-        @endguest
-        <li class="nav-item">
-            @if($tournament->format == TournamentFormat::Team)
-                <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
-                   class="nav-link {{ routeIs('web.tournaments.teams.index') }}">
-                    <i class="bi bi-controller"></i>
-                    {{ __('Teams') }}
-                </a>
-            @else
-                <a href="#" class="nav-link">
-                    <i class="bi bi-controller"></i>
-                    {{ __('Players') }}
-                </a>
-            @endif
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-music-note-beamed"></i>
-                {{ __('Mappool') }}
-            </a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-journal"></i>
-                {{ __('Bracket') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-calendar"></i>
-                {{ __('Schedules') }}
-            </a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-globe"></i>
-                {{ __('Suggest Maps') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-shield-fill"></i>
-                {{ __('Apply for Staff') }}
-            </a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-people-fill"></i>
-                {{ __('Staff') }}
-            </a>
-        </li>
-        <hr>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="bi bi-wrench"></i>
-                {{ __('Settings') }}
-            </a>
-        </li>
-    </ul>
-</aside>
+<div class="list-group mb-2">
+    @if($tournament->format == TournamentFormat::Team)
+        <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
+           class="list-group-item {{ routeIs('web.tournaments.teams.index') }}">
+            <i class="bi bi-controller"></i>
+            {{ __('Teams') }}
+        </a>
+    @else
+        <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
+           class="list-group-item {{ routeIs('web.tournaments.teams.index') }}">
+            <i class="bi bi-controller"></i>
+            {{ __('Players') }}
+        </a>
+    @endif
+</div>
+
+<div class="list-group mb-2">
+    <a href="#" class="list-group-item">
+        <i class="bi bi-music-note-beamed"></i>
+        {{ __('Mappool') }}
+    </a>
+    <a href="#" class="list-group-item">
+        <i class="bi bi-journal"></i>
+        {{ __('Bracket') }}
+    </a>
+    <a href="#" class="list-group-item">
+        <i class="bi bi-calendar"></i>
+        {{ __('Schedules') }}
+    </a>
+</div>
+
+<div class="list-group mb-2">
+    <a href="#" class="list-group-item">
+        <i class="bi bi-globe"></i>
+        {{ __('Suggest Maps') }}
+    </a>
+    <a href="#" class="list-group-item">
+        <i class="bi bi-shield-fill"></i>
+        {{ __('Apply for Staff') }}
+    </a>
+</div>
+
+<div class="list-group mb-2">
+    <a href="#" class="list-group-item">
+        <i class="bi bi-people-fill"></i>
+        {{ __('Staff') }}
+    </a>
+</div>
+
+@can('update', $tournament)
+    <div class="list-group">
+        <a href="#" class="list-group-item">
+            <i class="bi bi-wrench"></i>
+            {{ __('Settings') }}
+        </a>
+    </div>
+@endcan

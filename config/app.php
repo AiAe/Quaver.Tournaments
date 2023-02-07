@@ -210,7 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'TournamentFormat' => \App\Enums\TournamentFormat::class,
     ])->toArray(),
 
     'app_version' => env('APP_VERSION', 'production')
