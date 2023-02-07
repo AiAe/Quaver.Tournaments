@@ -1,13 +1,12 @@
 @extends('web.tournament.parts.base')
 
 @section('section')
-    <header class="py-5">
+    <header class="page-cover smaller">
         <h1>{{ $title }}</h1>
     </header>
 
-    <div class="container mt-3">
+    <div class=" mt-3">
         <div class="card">
-
             <div class="card-body position-relative">
                 @can('update', $tournament)
                     <div class="position-absolute" style="top: 10px; right: 10px;">

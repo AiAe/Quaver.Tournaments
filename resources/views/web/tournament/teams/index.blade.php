@@ -1,11 +1,11 @@
 @extends('web.tournament.parts.base')
 
 @section('section')
-    <header class="py-5">
+    <header class="page-cover smaller">
         <h1>{{ $title }}</h1>
     </header>
 
-    <div class="container mt-3">
+    <div class="mt-3">
         <div class="card">
             <div class="card-header">
                 {{ $title }}

@@ -1,5 +1,5 @@
 @php use App\Enums\TournamentFormat; @endphp
-<aside class="sidebar-menu d-flex flex-column flex-shrink-0 text-white bg-dark">
+<aside class="sidebar-menu text-white">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
             <a href="{{ route('web.tournaments.show', $tournament) }}"
