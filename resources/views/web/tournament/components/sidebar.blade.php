@@ -11,33 +11,39 @@
     </a>
 </div>
 
-<div class="list-group mb-2">
-    @auth()
-        @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
-        @if($team == null)
-            <a class="list-group-item" href="#tournamentRegister" data-bs-toggle="modal"
-               data-bs-target="#tournamentRegister">
-                <i class="bi bi-box-arrow-right"></i>
-                {{ __('Register') }}
-            </a>
-            @push('modals')
-                @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
-            @endpush
-        @elseif($tournament->format == TournamentFormat::Team)
+
+@can('create', [\App\Models\Team::class, $tournament])
+    <div class="list-group mb-2">
+        <a class="list-group-item" href="#tournamentRegister" data-bs-toggle="modal"
+           data-bs-target="#tournamentRegister">
+            <i class="bi bi-box-arrow-right"></i>
+            {{ __('Register') }}
+        </a>
+    </div>
+    @push('modals')
+        @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
+    @endpush
+@endcan
+@auth()
+    @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
+    @if($team && $tournament->format == TournamentFormat::Team)
+        <div class="list-group mb-2">
             <a class="list-group-item {{ routeIs('web.tournaments.teams.show') }}"
                href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
                 <i class="bi bi-people"></i>
                 {{ __('My Team') }}
             </a>
-        @endif
-    @endauth
-    @guest()
+        </div>
+    @endif
+@endauth
+@guest()
+    <div class="list-group mb-2">
         <a class="list-group-item" href="{{route('web.auth.oauth', 'quaver')}}">
             <i class="bi bi-box-arrow-right"></i>
             {{ __('Register') }}
         </a>
-    @endguest
-</div>
+    </div>
+@endguest
 
 <div class="list-group mb-2">
     @if($tournament->format == TournamentFormat::Team)

@@ -15,13 +15,13 @@
                 {{ __('Players') }}
             </div>
             {{--ToDo if team is full remove button--}}
-            @if($team->captain()->is($loggedUser))
+            @can('update', $team)
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
                 @push('modals')
                     @livewire('tournament.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))
                 @endpush
-            @endif
+            @endcan
         </div>
 
         <table class="table table-hover table-dark mb-0">
