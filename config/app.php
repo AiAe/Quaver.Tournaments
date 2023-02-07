@@ -211,6 +211,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'TournamentFormat' => \App\Enums\TournamentFormat::class,
+        'TournamentStatus' => \App\Enums\TournamentStatus::class,
     ])->toArray(),
 
     'app_version' => env('APP_VERSION', 'production')

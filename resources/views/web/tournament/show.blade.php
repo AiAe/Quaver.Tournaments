@@ -2,7 +2,7 @@
 
 @push('cover')
     <div class="col-lg-12">
-        <header class="page-cover" style="background: url('{{ asset('assets/img/cover_l_q.png') }}')"></header>
+        <header class="page-cover" style="background: url('{{ asset('assets/img/cover_l_q.png') }}') center;"></header>
     </div>
 @endpush
 

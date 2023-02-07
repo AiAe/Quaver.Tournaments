@@ -2,7 +2,7 @@ html {
 }
 
 body {
-    background-color: $background-color;
+    background: url("../../public/assets/img/pattern_cell.jpg"), $background-color;
     color: $light;
 }
 
@@ -118,7 +118,7 @@ footer a {
     user-select: none;
 
     &.smaller {
-        height: 180px;
+        //height: 190px;
     }
 }
 
