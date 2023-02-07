@@ -36,7 +36,5 @@ class TournamentTeamsController extends Controller
 
     public function destroy(Team $team)
     {
-//        $this->authorize('')
-        dd(\Gate::forUser(\Auth::user())->allows('delete', $team));
     }
 }
