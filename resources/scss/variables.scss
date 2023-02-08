@@ -2,7 +2,7 @@ $input-group-addon-bg: $dark;
 $input-group-addon-color: $light;
 $input-bg: $background-color;
 $input-color: $light;
-$input-border-color: $primary;
+$input-border-color: $secondary;
 
 $input-focus-box-shadow: none;
 
@@ -30,8 +30,10 @@ $pagination-focus-outline: 0;
 $nav-pills-border-radius: 0;
 $nav-link-color: rgba(255, 255, 255, 0.55);
 $nav-link-hover-color: rgba(255, 255, 255, 0.75);
+$nav-pills-link-active-bg: $dark;
 
 $card-bg: $dark;
+$card-border-color: $secondary;
 
 $modal-content-color: $primary;
 $modal-content-bg: $dark;
@@ -50,3 +52,9 @@ $toast-header-background-color: $dark;
 $toast-header-border-color: $primary;
 $toast-background-color: $background-color;
 $toast-border-color: $primary;
+
+$list-group-bg: $dark;
+$list-group-color: $light;
+$list-group-active-bg: $dark;
+$list-group-active-border-color: $primary;
+$list-group-border-color: $secondary;

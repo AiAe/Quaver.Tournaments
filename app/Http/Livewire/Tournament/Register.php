@@ -52,7 +52,7 @@ class Register extends Component
 
     public function create()
     {
-        $this->authorize('create', Team::class);
+        $this->authorize('create', [Team::class, $this->tournament]);
 
         $validated = $this->validate();
 
@@ -61,6 +61,10 @@ class Register extends Component
         if (!isset($validated['name']) || $validated['name'] == "") {
             $validated['name'] = $user->username;
             $validated['slug'] = Str::slug($user->username);
+        }
+
+        if (!$this->slug) {
+            $this->slug = $validated['slug'];
         }
 
         $validated['tournament_id'] = $this->tournament->id;

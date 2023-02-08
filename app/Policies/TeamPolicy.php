@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
 use App\Models\Team;
+use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -22,14 +23,17 @@ class TeamPolicy
         return $user->can('view', $team->tournament);
     }
 
-    public function create(User $user): bool
+    public function create(User $user, Tournament $tournament): bool
     {
-        return !$user->hasRole(UserRoles::Blacklisted);
+        return ($tournament->status == TournamentStatus::RegistrationsOpen)
+            && !$user->teams()->firstWhere('tournament_id', $tournament->id)
+            && !$user->hasRole(UserRoles::Blacklisted);
     }
 
     public function update(User $user, Team $team): bool
     {
-        return $user->is($team->user) && $team->tournament->status == TournamentStatus::RegistrationsOpen;
+        return ($team->tournament->status == TournamentStatus::RegistrationsOpen
+            && $team->captain()->is($user));
     }
 
     public function delete(User $user, Team $team): bool
