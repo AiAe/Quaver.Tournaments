@@ -61,4 +61,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Team::class, 'team_user_invites')->withTimestamps();
     }
+
+    public function staffedTournaments(): BelongsToMany
+    {
+        return $this->belongsToMany(Tournament::class, 'tournament_staff')
+            ->using(TournamentStaff::class)
+            ->orderByPivot('staff_role');
+    }
 }

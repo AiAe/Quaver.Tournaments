@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\StaffRole;
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStageFormat;
 use App\Enums\TournamentStatus;
@@ -41,6 +42,7 @@ class TournamentSeeder extends Seeder
 
         $this->createTeams($tournament, 5, 4);
         $this->createStages($tournament, $stages);
+        $this->createStaff($tournament);
     }
 
     private function createTeams(Tournament $tournament, int $teamCount, int $memberCountPerTeam): void
@@ -107,4 +109,20 @@ class TournamentSeeder extends Seeder
         }
     }
 
+    private function createStaff(Tournament $tournament)
+    {
+        $tournament->staff()->attach($tournament->user, ['staff_role' => StaffRole::Organizer]);
+
+        $roles = [
+            [StaffRole::Mappooler, 2],
+            [StaffRole::Referee, 5],
+            [StaffRole::Streamer, 3],
+            [StaffRole::Commentator, 3],
+        ];
+
+        foreach ($roles as [$role, $n]) {
+            $staffUsers = User::factory($n)->create();
+            $tournament->staff()->attach($staffUsers->map->id, ['staff_role' => $role]);
+        }
+    }
 }
