@@ -21,7 +21,7 @@ class CreateTest extends TestCase
     {
         parent::setUp();
         $this->admin = User::factory()->create();
-        $this->admin->addRole(UserRoles::Admin);
+        $this->admin->addRole(UserRoles::Organizer);
     }
 
     /** @test */

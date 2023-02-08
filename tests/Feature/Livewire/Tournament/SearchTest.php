@@ -59,11 +59,6 @@ class SearchTest extends TestCase
         Livewire::test(Search::class)
             ->set('status', TournamentStatus::Unlisted)
             ->assertDontSee($tour->name);
-
-        Livewire::actingAs($this->admin)
-            ->test(Search::class)
-            ->set('status', TournamentStatus::Unlisted)
-            ->assertSee($tour->name);
     }
 
     public function testQueryParams()

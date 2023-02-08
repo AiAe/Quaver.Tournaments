@@ -50,11 +50,7 @@ class Search extends Component
     {
         $tournaments = Tournament::query();
 
-        $canViewUnlisted = auth()->user()?->can('viewUnlisted', Tournament::class);
-
-        if (!$canViewUnlisted) {
-            $tournaments->whereNot('status', TournamentStatus::Unlisted);
-        }
+        $tournaments->whereNot('status', TournamentStatus::Unlisted);
 
         if (stringHasValue($this->search)) {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
