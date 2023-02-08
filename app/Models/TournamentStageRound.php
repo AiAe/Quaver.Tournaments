@@ -22,4 +22,9 @@ class TournamentStageRound extends Model
     {
         return $this->hasMany(TournamentStageRoundMap::class);
     }
+
+    public function matches(): HasMany
+    {
+        return $this->hasMany(TournamentMatch::class);
+    }
 }
