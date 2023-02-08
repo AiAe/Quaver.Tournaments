@@ -7,6 +7,7 @@ use App\Enums\TournamentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kodeine\Metable\Metable;
 
@@ -52,5 +53,12 @@ class Tournament extends Model
     public function participants()
     {
         return $this->teams->flatMap->members;
+    }
+
+    public function staff(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'tournament_staff')
+            ->using(TournamentStaff::class)
+            ->orderByPivot('staff_role');
     }
 }

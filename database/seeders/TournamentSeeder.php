@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Enums\StaffRole;
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStageFormat;
 use App\Enums\TournamentStatus;
 use App\Models\Team;
 use App\Models\Tournament;
+use App\Models\TournamentMatch;
 use App\Models\TournamentStage;
 use App\Models\TournamentStageRoundMap;
 use App\Models\User;
@@ -41,6 +43,7 @@ class TournamentSeeder extends Seeder
 
         $this->createTeams($tournament, 5, 4);
         $this->createStages($tournament, $stages);
+        $this->createStaff($tournament);
     }
 
     private function createTeams(Tournament $tournament, int $teamCount, int $memberCountPerTeam): void
@@ -82,16 +85,23 @@ class TournamentSeeder extends Seeder
             case TournamentStageFormat::DoubleElimination:
             case TournamentStageFormat::Swiss:
                 for ($i = 0; $i < $weeks; $i++) {
-                    $round = $stage->rounds()->create([
-                        'name' => sprintf('%s Round %s', $format->name(), $i + 1),
-                        'starts_at' => $startsAt->copy()->addWeeks($i),
-                        'ends_at' => $startsAt->copy()->addWeeks($i + 1),
-                        'index' => $i
-                    ]);
+                    $round = $stage->rounds()
+                        ->create([
+                            'name' => sprintf('%s Round %s', $format->name(), $i + 1),
+                            'starts_at' => $startsAt->copy()->addWeeks($i),
+                            'ends_at' => $startsAt->copy()->addWeeks($i + 1),
+                            'index' => $i
+                        ]);
 
                     TournamentStageRoundMap::factory(10)
                         ->create(new Sequence(fn($seq) => [
                             'index' => $seq->index,
+                            'tournament_stage_round_id' => $round->id
+                        ]));
+
+                    TournamentMatch::factory(10)
+                        ->create(new Sequence(fn($seq) => [
+                            'label' => $seq->index,
                             'tournament_stage_round_id' => $round->id
                         ]));
                 }
@@ -107,4 +117,20 @@ class TournamentSeeder extends Seeder
         }
     }
 
+    private function createStaff(Tournament $tournament)
+    {
+        $tournament->staff()->attach($tournament->user, ['staff_role' => StaffRole::Organizer]);
+
+        $roles = [
+            [StaffRole::Mappooler, 2],
+            [StaffRole::Referee, 5],
+            [StaffRole::Streamer, 3],
+            [StaffRole::Commentator, 3],
+        ];
+
+        foreach ($roles as [$role, $n]) {
+            $staffUsers = User::factory($n)->create();
+            $tournament->staff()->attach($staffUsers->map->id, ['staff_role' => $role]);
+        }
+    }
 }
