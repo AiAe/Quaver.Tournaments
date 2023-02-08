@@ -19,7 +19,7 @@ jobs:
         node-version: '17.x'
     - uses: actions/checkout@v3
     - name: install
-      run: npm ci
+      run: npm install
     - name: Vite build
       run: npm build
     - name: Copy .env
