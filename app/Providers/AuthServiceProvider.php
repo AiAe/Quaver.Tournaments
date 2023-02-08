@@ -33,12 +33,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function (User $user, string $ability) {
-            if ($user->hasRole(UserRoles::Admin)) {
-                return true;
-            }
-
-            return null;
-        });
+//        Gate::before(function (User $user, string $ability) {
+//            if ($user->hasRole(UserRoles::Admin)) {
+//                return true;
+//            }
+//
+//            return null;
+//        });
     }
 }
