@@ -56,8 +56,6 @@ class Invite extends Component
 
     public function create()
     {
-        // ToDo probably another ability?
-        $this->authorize('invite', Tournament::class);
         $validated = $this->validate();
 
         // Check if user exists
@@ -67,6 +65,8 @@ class Invite extends Component
             $user = auth()->user();
             $tournament = Tournament::where('id', $this->tournament_id)->first();
             $team = $user->teams()->firstWhere('tournament_id', $this->tournament_id);
+
+            $this->authorize('update', $team);
 
             if ($tournament && $team) {
                 $team->invites()->attach($player);
