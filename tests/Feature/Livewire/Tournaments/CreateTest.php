@@ -1,6 +1,6 @@
 <?php
 
-namespace Livewire\Tournament;
+namespace Tests\Feature\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Enums\UserRoles;
@@ -15,13 +15,13 @@ class CreateTest extends TestCase
 {
     use RefreshDatabase;
 
-    private User $admin;
+    private User $organiser;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->admin = User::factory()->create();
-        $this->admin->addRole(UserRoles::Organizer);
+        $this->organiser = User::factory()->create();
+        $this->organiser->addRole(UserRoles::Organizer);
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class CreateTest extends TestCase
     /** @test */
     public function can_create_post()
     {
-        $this->actingAs($this->admin);
+        $this->actingAs($this->organiser);
 
         Livewire::test(Create::class)
             ->set('name', 'qot_factory')
@@ -49,7 +49,7 @@ class CreateTest extends TestCase
     /** @test */
     public function name_is_required()
     {
-        Livewire::actingAs($this->admin)
+        Livewire::actingAs($this->organiser)
             ->test(Create::class)
             ->set('name', '')
             ->set('slug', 'QOTFactory2023')
@@ -62,7 +62,7 @@ class CreateTest extends TestCase
     /** @test */
     public function slug_is_required()
     {
-        Livewire::actingAs($this->admin)
+        Livewire::actingAs($this->organiser)
             ->test(Create::class)
             ->set('name', 'qot_factory')
             ->set('slug', '')
@@ -75,9 +75,9 @@ class CreateTest extends TestCase
     /** @test */
     public function is_redirected_to_tournament_page_after_creation()
     {
-        $this->actingAs($this->admin);
+        $this->actingAs($this->organiser);
 
-        $response = Livewire::actingAs($this->admin)
+        $response = Livewire::actingAs($this->organiser)
             ->test(Create::class)
             ->set('name', 'qot_factory')
             ->set('slug', 'QOTFactory2023')
