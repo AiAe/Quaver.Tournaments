@@ -7,6 +7,11 @@
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255,255,255, 0.10);
         padding: 16px 12px;
         margin-bottom: 1rem;
+        transition: 0.2s;
+
+        &:hover {
+            border-color: $primary;
+        }
 
         h1 {
             background: rgba(33, 203, 237, 0.05);
