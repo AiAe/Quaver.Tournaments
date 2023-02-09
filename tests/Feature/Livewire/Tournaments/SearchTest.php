@@ -1,6 +1,6 @@
 <?php
 
-namespace Livewire\Tournament;
+namespace Tests\Feature\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
@@ -17,13 +17,11 @@ class SearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    private User $admin;
-
     protected function setUp(): void
     {
         parent::setUp();
-        $this->admin = User::factory()->create();
-        $this->admin->addRole(UserRoles::Admin);
+        $admin = User::factory()->create();
+        $admin->addRole(UserRoles::Admin);
 
         $count = sizeof(TournamentStatus::cases());
         Tournament::factory($count)
