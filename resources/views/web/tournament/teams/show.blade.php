@@ -36,7 +36,7 @@
             <tbody>
             @foreach($team->members as $member)
                 <tr>
-                    <td>1</td>
+                    <td>-</td>
                     <td>{{ $member->username }}</td>
                     <td>
                         @if($member->pivot->is_captain)
@@ -46,11 +46,9 @@
                         @endif
                     </td>
                     <td>
-                        @if(!$member->pivot->is_captain && $team->captain()->is($loggedUser))
-                            <button class="btn btn-danger btn-sm">{{ __('Remove') }}</button>
-                        @else
-                            -
-                        @endif
+                        @can('update', $team)
+                            @livewire('tournament.team.player-actions', ['team' => $team, 'user' => $member], key($member))
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -61,11 +59,9 @@
                     <td>{{ $invite->username }}</td>
                     <td>{{ __('Pending Invite') }}</td>
                     <td>
-                        @if($team->captain()->is($loggedUser))
-                            <button class="btn btn-danger btn-sm">{{ __('Remove') }}</button>
-                        @else
-                            -
-                        @endif
+                        @can('update', $team)
+                            @livewire('tournament.team.player-actions', ['team' => $team, 'user' => $invite], key($member))
+                        @endcan
                     </td>
                 </tr>
             @endforeach
