@@ -27,16 +27,25 @@ class Notification extends Component
             $player = User::where('id', $this->notification['notifiable_id'])->firstOrFail();
             $team = Team::where('id', $this->notification['data']['team']['id'])->firstOrFail();
 
-            $team->members()->attach($player);
-            $team->invites()->detach($player);
-            $this->notification->markAsRead();
+            if (!$team->members()->where('user_id', $player->id)->exists()) {
+                $team->members()->attach($player);
+                $team->invites()->detach($player);
+                $this->notification->markAsRead();
 
-            createToast('success', '', __('You joined the team!'));
+                createToast('success', '', __('You joined the team!'));
 
-            return redirect(route('web.tournaments.teams.show', [
-                'tournament' => $this->notification['data']['tournament']['slug'],
-                'team' => $this->notification['data']['team']['slug']
-            ]));
+                return redirect(route('web.tournaments.teams.show', [
+                    'tournament' => $this->notification['data']['tournament']['slug'],
+                    'team' => $this->notification['data']['team']['slug']
+                ]));
+            } else {
+                $team->invites()->detach($player);
+                $this->notification->markAsRead();
+
+                createToast('success', '', __('You are already in this team!'));
+
+                return redirect(request()->header('Referer'));
+            }
         }
     }
 
