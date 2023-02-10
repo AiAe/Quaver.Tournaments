@@ -13,8 +13,10 @@
                 </nav>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100 navbar-radius-right">
                     <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                                aria-controls="navbarNav" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="{{ __('Toggle navigation') }}">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
@@ -63,7 +65,8 @@
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                           data-bs-toggle="dropdown"
                                            aria-expanded="false">
                                             {{ __('Welcome, :username', ['username' => $loggedUser->username]) }}
                                         </a>
@@ -73,10 +76,19 @@
                                                     {{ __('Profile') }}
                                                 </a>
                                             </li>
+
+                                            <li>
+                                                <a class="dropdown-item"
+                                                   href="{{ route('web.users.tournaments.show', $loggedUser) }}">
+                                                    {{ __('My Tournaments') }}
+                                                </a>
+                                            </li>
+
                                             @can('create', \App\Models\Tournament::class)
                                                 <div class="dropdown-divider"></div>
                                                 <li>
-                                                    <a class="dropdown-item" href="#tournamentCreate" data-bs-toggle="modal"
+                                                    <a class="dropdown-item" href="#tournamentCreate"
+                                                       data-bs-toggle="modal"
                                                        data-bs-target="#tournamentCreate">
                                                         {{ __('Create Tournament') }}
                                                     </a>
