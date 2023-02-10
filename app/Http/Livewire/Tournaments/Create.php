@@ -18,8 +18,8 @@ class Create extends Component
     public $format = TournamentFormat::Solo->value;
 
     protected $rules = [
-        'name' => ['required', 'min:3', 'max:30'],
-        'slug' => ['required', 'unique:App\Models\Tournament,slug', 'min:3', 'max:30'],
+        'name' => ['required', 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\s\_\-]+$/'],
+        'slug' => ['required', 'unique:App\Models\Tournament,slug', 'regex:/^[A-Za-z0-9\-\_]+$/', 'min:3', 'max:30'],
         'format' => ['required']
     ];
 

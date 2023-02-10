@@ -23,8 +23,8 @@ class Register extends Component
 
         if ($this->tournament->format == TournamentFormat::Team) {
             return [
-                'name' => ['required', 'min:3', 'max:30'],
-                'slug' => ['required', $slug_rule, 'min:3', 'max:30']
+                'name' => ['required', 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\s\_\-]+$/'],
+                'slug' => ['required', $slug_rule, 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\-\_]+$/']
             ];
         }
 

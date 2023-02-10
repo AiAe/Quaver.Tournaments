@@ -39,11 +39,11 @@ class CreateTest extends TestCase
 
         Livewire::test(Create::class)
             ->set('name', 'qot_factory')
-            ->set('slug', 'QOTFactory2023')
+            ->set('slug', 'QOT7KFactory2023')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
 
-        $this->assertTrue(Tournament::whereSlug('QOTFactory2023')->exists());
+        $this->assertTrue(Tournament::whereSlug('QOT7KFactory2023')->exists());
     }
 
     /** @test */
@@ -60,11 +60,33 @@ class CreateTest extends TestCase
     }
 
     /** @test */
+    public function special_characters_not_allowed()
+    {
+        Livewire::actingAs($this->organiser)
+            ->test(Create::class)
+            ->set('name', 'QOT!2023')
+            ->set('slug', 'QOTFactory_2023')
+            ->call('create')
+            ->assertHasErrors([
+                'name' => 'regex'
+            ]);
+
+        Livewire::actingAs($this->organiser)
+            ->test(Create::class)
+            ->set('name', 'QOT 2023')
+            ->set('slug', 'QOTFactory2023!')
+            ->call('create')
+            ->assertHasErrors([
+                'slug' => 'regex'
+            ]);
+    }
+
+    /** @test */
     public function slug_is_required()
     {
         Livewire::actingAs($this->organiser)
             ->test(Create::class)
-            ->set('name', 'qot_factory')
+            ->set('name', 'qotfactory')
             ->set('slug', '')
             ->call('create')
             ->assertHasErrors([
@@ -79,7 +101,7 @@ class CreateTest extends TestCase
 
         $response = Livewire::actingAs($this->organiser)
             ->test(Create::class)
-            ->set('name', 'qot_factory')
+            ->set('name', 'qotfactory')
             ->set('slug', 'QOTFactory2023')
             ->set('format', TournamentFormat::Solo->value)
             ->call('create');
@@ -89,4 +111,28 @@ class CreateTest extends TestCase
 
         $this->assertEquals(route('web.tournaments.show', $id), $redirect);
     }
+
+    /** @test */
+    public function unique_tournament_slug()
+    {
+        $this->actingAs($this->organiser);
+
+        Livewire::actingAs($this->organiser)
+            ->test(Create::class)
+            ->set('name', 'qotfactory2')
+            ->set('slug', 'QOTFactory2023')
+            ->set('format', TournamentFormat::Solo->value)
+            ->call('create');
+
+        Livewire::actingAs($this->organiser)
+            ->test(Create::class)
+            ->set('name', 'qotfactory2')
+            ->set('slug', 'QOTFactory2023')
+            ->set('format', TournamentFormat::Team->value)
+            ->call('create')
+            ->assertHasErrors([
+                'slug' => 'unique'
+            ]);
+    }
+
 }
