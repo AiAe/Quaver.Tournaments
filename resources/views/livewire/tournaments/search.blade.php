@@ -25,7 +25,9 @@
                 <select wire:model.lazy="status" class="form-control">
                     <option value="" selected>{{ __('All') }}</option>
                     @foreach(\App\Enums\TournamentStatus::cases() as $status)
-                        @continue($status == \App\Enums\TournamentStatus::Unlisted)
+                        @if(!$show_unlisted)
+                            @continue($status == \App\Enums\TournamentStatus::Unlisted)
+                        @endif
                         <option value="{{ $status->value }}">{{ $status->name() }}</option>
                     @endforeach
                 </select>
@@ -45,7 +47,7 @@
             @empty
                 <div class="col-lg-12">
                     <div class="text-center py-4">
-                        <h4>{{ __('There are no tournaments currently!') }}</h4>
+                        <h4>{{ __('No Tournaments found!') }}</h4>
                     </div>
                 </div>
             @endforelse

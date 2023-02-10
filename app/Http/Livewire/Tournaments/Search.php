@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentStatus;
+use App\Enums\UserRoles;
 use App\Models\Tournament;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +17,8 @@ class Search extends Component
     public $search = null;
     public $format = null;
     public $status = null;
+    public $user = null;
+    public $show_unlisted = false;
 
     protected $queryString = ['search', 'format', 'status'];
 
@@ -50,7 +53,13 @@ class Search extends Component
     {
         $tournaments = Tournament::query();
 
-        $tournaments->whereNot('status', TournamentStatus::Unlisted);
+        if($this->user) {
+            $tournaments->where('user_id', $this->user->id);
+        }
+
+        if(!$this->show_unlisted) {
+            $tournaments->whereNot('status', TournamentStatus::Unlisted);
+        }
 
         if (stringHasValue($this->search)) {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
