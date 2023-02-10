@@ -1,9 +1,21 @@
 <div>
     <div class="row g-3 justify-content-evenly align-items-center py-3">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="input-group">
-                <label class="input-group-text">{{ __('Tournament Search') }}</label>
+                <label class="input-group-text">{{ __('Name') }}</label>
                 <input type="text" wire:model.lazy="search" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="input-group">
+                <label class="input-group-text">{{ __('Mode') }}</label>
+                <select wire:model.lazy="mode" class="form-control">
+                    <option value="" selected>{{ __('All') }}</option>
+                    @foreach(\App\Enums\TournamentGameMode::cases() as $mode)
+                        <option value="{{ $mode->value }}">{{ $mode->name() }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 

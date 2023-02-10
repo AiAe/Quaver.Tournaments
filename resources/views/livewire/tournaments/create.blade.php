@@ -26,6 +26,15 @@
                         </div>
 
                         <div class="mt-2">
+                            <label class="form-label">{{ __('Mode') }}</label>
+                            <select wire:model="mode" class="form-control">
+                                @foreach(\App\Enums\TournamentGameMode::cases() as $mode)
+                                    <option value="{{ $mode->value }}">{{ $mode->name() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mt-2">
                             <label class="form-label">{{ __('Format') }}</label>
                             <select wire:model="format" class="form-control">
                                 @foreach(\App\Enums\TournamentFormat::cases() as $format)
