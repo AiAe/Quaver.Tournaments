@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\TournamentFormat;
+use App\Enums\TournamentGameMode;
 use App\Enums\TournamentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,11 +21,13 @@ class Tournament extends Model
         'name',
         'slug',
         'format',
+        'mode',
         'status'
     ];
 
     protected $casts = [
         'format' => TournamentFormat::class,
+        'mode' => TournamentGameMode::class,
         'status' => TournamentStatus::class
     ];
 

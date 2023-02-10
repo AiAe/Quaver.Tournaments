@@ -15,12 +15,13 @@ class Search extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = null;
+    public $mode = null;
     public $format = null;
     public $status = null;
     public $user = null;
     public $show_unlisted = false;
 
-    protected $queryString = ['search', 'format', 'status'];
+    protected $queryString = ['search', 'mode', 'format', 'status'];
 
     public function mount()
     {
@@ -63,6 +64,10 @@ class Search extends Component
 
         if (stringHasValue($this->search)) {
             $tournaments->where('name', 'like', sprintf('%%%s%%', $this->search));
+        }
+
+        if (stringHasValue($this->mode)) {
+            $tournaments->where('mode', $this->mode);
         }
 
         if (stringHasValue($this->format)) {

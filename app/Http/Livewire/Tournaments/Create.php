@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
+use App\Enums\TournamentGameMode;
 use App\Enums\TournamentStatus;
 use App\Models\Tournament;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -15,11 +16,13 @@ class Create extends Component
 
     public $name;
     public $slug;
+    public $mode = TournamentGameMode::Keys4->value;
     public $format = TournamentFormat::Solo->value;
 
     protected $rules = [
         'name' => ['required', 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\s\_\-]+$/'],
         'slug' => ['required', 'unique:App\Models\Tournament,slug', 'regex:/^[A-Za-z0-9\-\_]+$/', 'min:3', 'max:30'],
+        'mode' => ['required'],
         'format' => ['required']
     ];
 
