@@ -212,7 +212,11 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'TournamentFormat' => \App\Enums\TournamentFormat::class,
         'TournamentStatus' => \App\Enums\TournamentStatus::class,
+        'TournamentGameMode' => \App\Enums\TournamentGameMode::class,
     ])->toArray(),
 
-    'app_version' => env('APP_VERSION', 'production')
+    'app_version' => env('APP_VERSION', 'production'),
+    'app_lock' => env('APP_LOCK', false),
+    'auth_user' => env('AUTH_USER', ''),
+    'auth_password' => env('AUTH_PASSWORD', ''),
 ];
