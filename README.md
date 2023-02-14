@@ -1,25 +1,17 @@
-# QOT
+# Quaver.Tournaments
 
-Quaver Official Tournament - Website
-
-## About this project
-
-This project aims to be useful for everyone who is interested in hosting a tournament.
+Platform that helps organisers host their own tournaments.
 
 ## What the project contains
 
-None
-
-## API
-
-None
+TBA
 
 # Setting up project
 
 ## Requirements
 
 1. Nginx (or other web server)
-2. PHP 8.1 (or above)
+2. PHP 8.2 (or above)
 3. Mariadb (or MySQL)
 4. Redis
 
@@ -30,14 +22,14 @@ None
 3. Copy `.env.example` and rename to `.env` and configure it
 4. Run `composer install`
 5. Run `php artisan key:generate`
-6. Run `php artisan migrate`
+6. Run `sh deploy.sh`
 
 #### Nginx config
 
-```apacheconf
+```nginx
 server {
     listen 443 ssl http2;
-    server_name qot.ovh;
+    server_name tournaments.quavergame.com;
     root /qot/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
@@ -57,7 +49,7 @@ server {
     error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
@@ -68,29 +60,32 @@ server {
 }
 ```
 
-### Deploying
-
-`sh deploy.sh`
-
 ### Commands
 
 - `artisan user:role`
+- `artisan user:ghost`
 
-## ENV
-
-For [QOT.Bot](https://github.com/AiAe/qot.bot)
-1. `DISCORD_BOT=false` - change to `true` if bot is set up
-
+### ENV
 For linking Discord - https://discord.com/developers/applications
-1. `DISCORD_REDIRECT=` - where to redirect the user after login (default: https://qot.ovh/oauth/discord/callback)
-2. `DISCORD_CLIENT_ID=` - Discord bot client id
-3. `DISCORD_SECRET=` - Discord bot secret
-
 For login with Quaver - https://quavergame.com/developers/applications
-1. `QUAVER_CLIENT_ID=` - Quaver client id
-2. `QUAVER_SECRET=` - Quaver secret
-3. `QUAVER_REDIRECT=` - where to redirect after the user login (default: https://qot.ovh/oauth/quaver/callback)
 
-# License
+- `APP_LOCK` - `true` or `false`
+- `AUTH_USER` - user
+- `AUTH_PASSWORD` - password
+
+
+- `DISCORD_BOT=false` - TBA
+
+
+- `DISCORD_CLIENT_ID=` - Discord bot client id
+- `DISCORD_SECRET=` - Discord bot secret
+- `DISCORD_REDIRECT=` - Redirect after login
+
+
+- `QUAVER_CLIENT_ID=` - Quaver client id
+- `QUAVER_SECRET=` - Quaver secret
+- `QUAVER_REDIRECT=` - Redirect after login
+
+## License
 
 This project is licensed under the AGPL-3.0 license.

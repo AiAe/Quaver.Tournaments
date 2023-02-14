@@ -28,6 +28,15 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        if (config('app.app_lock') === true && !app()->runningInConsole()) {
+            if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != config('app.auth_user')
+                || $_SERVER['PHP_AUTH_PW'] != config('app.auth_password')) {
+                header('WWW-Authenticate: Basic realm="tournaments.quavergame.com"');
+                header('HTTP/1.0 401 Unauthorized');
+                die('Access Denied');
+            }
+        }
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
