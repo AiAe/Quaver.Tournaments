@@ -62,6 +62,7 @@ class Tournament extends Model
     {
         return $this->belongsToMany(User::class, 'tournament_staff')
             ->using(TournamentStaff::class)
+            ->withPivot('staff_role')
             ->orderByPivot('staff_role');
     }
 }

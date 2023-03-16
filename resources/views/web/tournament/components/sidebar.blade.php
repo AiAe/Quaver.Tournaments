@@ -88,7 +88,7 @@
 </div>
 
 <div class="list-group mb-2">
-    <a href="#" class="list-group-item">
+    <a href="{{route('web.tournaments.staff.index', $tournament)}}" class="list-group-item">
         <i class="bi bi-people-fill"></i>
         {{ __('Staff') }}
     </a>
