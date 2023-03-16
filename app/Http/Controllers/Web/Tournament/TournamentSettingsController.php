@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class TournamentSettingsController extends Controller
 {
-
     public function show(Tournament $tournament)
     {
+        $this->authorize('update', $tournament);
+
         $title = __('Tournament Settings');
 
         return view('web.tournament.settings', compact('tournament', 'title'));
