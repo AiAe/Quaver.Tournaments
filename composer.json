@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "cesargb/laravel-magiclink": "^2.15",
+        "dyanakiev/html": "^6.2",
         "guzzlehttp/guzzle": "^7.5.0",
         "kodeine/laravel-meta": "^2.1.1",
         "laravel/framework": "^v10.0.0",

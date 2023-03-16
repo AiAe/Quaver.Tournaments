@@ -84,7 +84,7 @@
 
 @can('update', $tournament)
     <div class="list-group">
-        <a href="#" class="list-group-item">
+        <a href="{{ route('web.tournaments.settings.show', $tournament) }}" class="list-group-item">
             {{ __('Settings') }}
         </a>
     </div>
