@@ -65,4 +65,9 @@ class Tournament extends Model
             ->withPivot('staff_role')
             ->orderByPivot('staff_role');
     }
+
+    public function staffApplications(): HasMany
+    {
+        return $this->hasMany(TournamentStaffApplication::class);
+    }
 }
