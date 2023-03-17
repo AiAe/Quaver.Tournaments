@@ -17,4 +17,11 @@
         {{-- TODO: Description with best of, number of bans, etc --}}
         <p>Best of 7, 2 bans per player/team</p>
     </div>
+
+    <div class="card">
+        <div class="card-header">
+            Matches
+        </div>
+        <x-matches.list :matches="$round->matches"/>
+    </div>
 @endsection
