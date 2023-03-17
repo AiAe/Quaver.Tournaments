@@ -24,4 +24,11 @@
         </div>
         <x-matches.list :matches="$round->matches"/>
     </div>
+
+    <div class="card">
+        <div class="card-header">
+            Maps
+        </div>
+        <x-mappool.map-list :maps="$round->maps"/>
+    </div>
 @endsection
