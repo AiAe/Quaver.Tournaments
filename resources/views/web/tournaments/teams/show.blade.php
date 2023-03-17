@@ -1,4 +1,4 @@
-@extends('web.tournament.parts.base')
+@extends('web.tournaments.parts.base')
 
 @push('cover')
     <div class="col-lg-12">
@@ -19,7 +19,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
                 @push('modals')
-                    @livewire('tournament.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))
+                    @livewire('tournaments.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))
                 @endpush
             @endcan
         </div>
@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         @can('update', $team)
-                            @livewire('tournament.team.player-actions', ['team' => $team, 'user' => $member], key($member))
+                            @livewire('tournaments.team.player-actions', ['team' => $team, 'user' => $member], key($member))
                         @endcan
                     </td>
                 </tr>
@@ -60,7 +60,7 @@
                     <td>{{ __('Pending Invite') }}</td>
                     <td>
                         @can('update', $team)
-                            @livewire('tournament.team.player-actions', ['team' => $team, 'user' => $invite], key($member))
+                            @livewire('tournaments.team.player-actions', ['team' => $team, 'user' => $invite], key($member))
                         @endcan
                     </td>
                 </tr>

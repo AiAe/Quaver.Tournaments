@@ -16,7 +16,7 @@
 
         <div class="row mt-3">
             <div class="col-lg-3">
-                @include('web.tournament.components.sidebar')
+                <x-sidebar :tournament="$tournament"/>
             </div>
 
             <div class="col-lg-9">

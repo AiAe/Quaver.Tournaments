@@ -20,7 +20,7 @@ class TournamentsController extends Controller
 
     public function show(Tournament $tournament)
     {
-        return view('web.tournament.show', compact('tournament'));
+        return view('web.tournaments.show', compact('tournament'));
     }
 
     public function edit(Tournament $tournament)

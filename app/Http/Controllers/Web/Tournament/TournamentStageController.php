@@ -12,7 +12,7 @@ class TournamentStageController extends Controller
     public function index(Tournament $tournament)
     {
         $tournament->load(['stages', 'stages.rounds']);
-        return view('web.tournament.stages.index', ['title' => 'Stages', 'tournament' => $tournament]);
+        return view('web.tournaments.stages.index', ['title' => 'Stages', 'tournaments' => $tournament]);
     }
 
     public function create()

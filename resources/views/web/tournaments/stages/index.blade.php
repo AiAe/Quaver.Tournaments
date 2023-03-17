@@ -1,4 +1,4 @@
-@extends('web.tournament.parts.base')
+@extends('web.tournaments.parts.base')
 
 @push('cover')
     <div class="col-lg-12">
