@@ -14,7 +14,7 @@ enum StaffRole: int
     case Streamer = 3;
     case Commentator = 4;
 
-    public function name()
+    public function name(): string
     {
         return match ($this) {
             self::Organizer => 'Organizer',
