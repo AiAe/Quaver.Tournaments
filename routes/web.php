@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\Tournament\TournamentRulesController;
 use App\Http\Controllers\Web\Tournament\TournamentStaffController;
+use App\Http\Controllers\Web\Tournament\TournamentStageController;
 use App\Http\Controllers\Web\Tournament\TournamentTeamsController;
 use App\Http\Controllers\Web\Tournaments\TournamentsController;
 use App\Http\Controllers\Web\User\UserTournamentsController;
@@ -32,8 +33,10 @@ Route::resource('tournaments.teams', TournamentTeamsController::class)
     ]);
 
 Route::resource('tournaments.staff', TournamentStaffController::class)
-    ->only(['index'])
-    ->scoped(['team' => 'slug']);
+    ->only(['index']);
+
+Route::resource('tournaments.stages', TournamentStageController::class)
+    ->only(['index']);
 
 Route::singleton('users.tournaments', UserTournamentsController::class)
     ->only(['show']);

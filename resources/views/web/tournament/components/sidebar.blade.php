@@ -74,6 +74,11 @@
         <i class="bi bi-calendar"></i>
         {{ __('Schedules') }}
     </a>
+    <a href="{{route('web.tournaments.stages.index', $tournament)}}" class="list-group-item">
+        {{-- TODO: Pick icon--}}
+        <i class="bi bi-calendar"></i>
+        {{ __('Stages') }}
+    </a>
 </div>
 
 <div class="list-group mb-2">
