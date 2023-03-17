@@ -5,7 +5,11 @@
     </div>
     <ul>
         @forelse($stage->rounds as $round)
-            <li>{{$round->name}}</li>
+            <li>
+                <a href="{{route('web.tournaments.rounds.show', ['tournament' => $stage->tournament, 'round' => $round])}}">
+                    {{$round->name}}
+                </a>
+            </li>
         @empty
             <li>No rounds...</li>
         @endforelse

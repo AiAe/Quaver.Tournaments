@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\Tournament\TournamentRoundController;
 use App\Http\Controllers\Web\Tournament\TournamentRulesController;
 use App\Http\Controllers\Web\Tournament\TournamentsController;
 use App\Http\Controllers\Web\Tournament\TournamentStaffController;
@@ -28,15 +29,18 @@ Route::singleton('tournaments.rules', TournamentRulesController::class)
     ->only(['show', 'update']);
 
 Route::resource('tournaments.teams', TournamentTeamsController::class)
-    ->only(['index', 'show'])->scoped([
-        'team' => 'slug'
-    ]);
+    ->only(['index', 'show'])
+    ->scoped(['team' => 'slug']);
 
 Route::resource('tournaments.staff', TournamentStaffController::class)
     ->only(['index']);
 
 Route::resource('tournaments.stages', TournamentStageController::class)
     ->only(['index']);
+
+// TODO: Use slug instead of ID
+Route::resource('tournaments.rounds', TournamentRoundController::class)
+    ->only(['show']);
 
 Route::singleton('users.tournaments', UserTournamentsController::class)
     ->only(['show']);
