@@ -21,7 +21,7 @@
         </a>
     </div>
     @push('modals')
-        @livewire('tournament.register', ['tournament' => $tournament], key($tournament))
+        @livewire('tournaments.register', ['tournament' => $tournament], key($tournament))
     @endpush
 @endcan
 @auth()
