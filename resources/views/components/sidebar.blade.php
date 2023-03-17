@@ -1,3 +1,5 @@
+@php use App\Enums\TournamentFormat; @endphp
+
 <div class="list-group mb-2">
     <a href="{{ route('web.tournaments.show', $tournament) }}"
        class="list-group-item {{ routeIs('web.tournaments.show') }}">
@@ -62,7 +64,7 @@
 </div>
 
 <div class="list-group mb-2">
-    <a href="#" class="list-group-item">
+    <a href="{{route('web.tournaments.mappools', $tournament)}}" class="list-group-item">
         <i class="bi bi-music-note-beamed"></i>
         {{ __('Mappool') }}
     </a>

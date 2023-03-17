@@ -22,25 +22,16 @@ Route::controller(AuthController::class)
 
 Route::get('/', [HomeController::class, 'view'])->name('home');
 
-Route::resource('tournaments', TournamentsController::class)
-    ->only(['index', 'show']);
+// Tournament extensions
+Route::prefix('tournaments')->as('tournaments.')->group(function () {
+    Route::get('/{tournament}/mappools', [TournamentsController::class, 'mappools'])->name('mappools');
+});
 
-Route::singleton('tournaments.rules', TournamentRulesController::class)
-    ->only(['show', 'update']);
-
+Route::resource('tournaments', TournamentsController::class)->only(['index', 'show']);
+Route::singleton('tournaments.rules', TournamentRulesController::class)->only(['show', 'update']);
 Route::resource('tournaments.teams', TournamentTeamsController::class)
-    ->only(['index', 'show'])
-    ->scoped(['team' => 'slug']);
-
-Route::resource('tournaments.staff', TournamentStaffController::class)
-    ->only(['index']);
-
-Route::resource('tournaments.stages', TournamentStageController::class)
-    ->only(['index']);
-
-// TODO: Use slug instead of ID
-Route::resource('tournaments.rounds', TournamentRoundController::class)
-    ->only(['show']);
-
-Route::singleton('users.tournaments', UserTournamentsController::class)
-    ->only(['show']);
+    ->only(['index', 'show'])->scoped(['team' => 'slug']);
+Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index']);
+Route::resource('tournaments.stages', TournamentStageController::class)->only(['index']);
+Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show']); // TODO: Use slug instead of ID
+Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show']);
