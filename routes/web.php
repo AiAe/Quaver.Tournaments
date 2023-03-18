@@ -25,6 +25,7 @@ Route::get('/', [HomeController::class, 'view'])->name('home');
 // Tournament extensions
 Route::prefix('tournaments')->as('tournaments.')->group(function () {
     Route::get('/{tournament}/mappools', [TournamentsController::class, 'mappools'])->name('mappools');
+    Route::get('/{tournament}/schedules', [TournamentsController::class, 'schedules'])->name('schedules');
 });
 
 Route::resource('tournaments', TournamentsController::class)->only(['index', 'show']);
