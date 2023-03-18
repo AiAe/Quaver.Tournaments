@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament\Team;
+namespace App\Http\Livewire\Tournaments\Team;
 
 use App\Models\Team;
 use App\Models\User;
@@ -56,6 +56,6 @@ class PlayerActions extends Component
 
     public function render()
     {
-        return view('livewire.tournament.team.player-actions');
+        return view('livewire.tournaments.team.player-actions');
     }
 }

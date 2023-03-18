@@ -12,7 +12,7 @@ class TournamentStaffController extends Controller
     {
         $title = __('Staff');
 
-        return view('web.tournament.staff.index', ['title' => $title, 'tournament' => $tournament]);
+        return view('web.tournaments.staff.index', ['title' => $title, 'tournaments' => $tournament]);
     }
 
     public function create(Tournament $tournament)

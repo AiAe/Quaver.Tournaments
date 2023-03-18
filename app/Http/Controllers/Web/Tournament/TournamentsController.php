@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Tournaments;
+namespace App\Http\Controllers\Web\Tournament;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;
@@ -20,7 +20,7 @@ class TournamentsController extends Controller
 
     public function show(Tournament $tournament)
     {
-        return view('web.tournament.show', compact('tournament'));
+        return view('web.tournaments.show', compact('tournament'));
     }
 
     public function edit(Tournament $tournament)
@@ -33,5 +33,18 @@ class TournamentsController extends Controller
 
     public function destroy(Tournament $tournament)
     {
+    }
+
+    public function mappools(Tournament $tournament)
+    {
+        $tournament->load('stages.rounds.maps.map');
+        return view('web.tournaments.mappools', ['tournament' => $tournament]);
+    }
+
+    public function schedules(Tournament $tournament)
+    {
+        // TODO: eager load staff once implemented
+        $tournament->load(['stages.rounds.matches.team1', 'stages.rounds.matches.team2']);
+        return view('web.tournaments.schedules', ['tournament' => $tournament]);
     }
 }

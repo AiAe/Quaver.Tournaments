@@ -1,4 +1,4 @@
-@extends('web.tournament.parts.base')
+@extends('web.tournaments.parts.base')
 
 @push('cover')
     <div class="col-lg-12">
@@ -28,11 +28,11 @@
             </div>
         </div>
 
-{{--        <div class="col-lg-6">--}}
-{{--            <h3>Schedule</h3>--}}
-{{--        </div>--}}
-{{--        <div class="col-lg-6">--}}
-{{--            <h3>Prizes</h3>--}}
-{{--        </div>--}}
+        {{--        <div class="col-lg-6">--}}
+        {{--            <h3>Schedule</h3>--}}
+        {{--        </div>--}}
+        {{--        <div class="col-lg-6">--}}
+        {{--            <h3>Prizes</h3>--}}
+        {{--        </div>--}}
     </div>
 @endsection

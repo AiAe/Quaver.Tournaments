@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Http\QuaverApi\QuaverApi;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class QuaverMap extends Model
 {
@@ -43,5 +42,15 @@ class QuaverMap extends Model
             'count_hitobject_normal' => $data['count_hitobject_normal'],
             'count_hitobject_long' => $data['count_hitobject_long'],
         ];
+    }
+
+    public function tournamentUses(): HasMany
+    {
+        return $this->hasMany(TournamentStageRoundMap::class);
+    }
+
+    public function __toString(): string
+    {
+        return "{$this->artist} - {$this->title} [{$this->difficulty_name}] ({$this->creator_username})";
     }
 }

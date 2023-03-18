@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament\Team;
+namespace App\Http\Livewire\Tournaments\Team;
 
 use App\Models\Tournament;
 use App\Models\User;
@@ -85,6 +85,6 @@ class Invite extends Component
 
     public function render()
     {
-        return view('livewire.tournament.team.invite');
+        return view('livewire.tournaments.team.invite');
     }
 }

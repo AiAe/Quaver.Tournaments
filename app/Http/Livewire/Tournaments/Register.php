@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tournament;
+namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Models\Team;
@@ -80,6 +80,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.tournament.register');
+        return view('livewire.tournaments.register');
     }
 }

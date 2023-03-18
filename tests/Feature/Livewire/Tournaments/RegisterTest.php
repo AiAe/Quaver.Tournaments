@@ -4,8 +4,8 @@ namespace Tests\Feature\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
-use App\Http\Livewire\Tournament\Register;
-use App\Http\Livewire\Tournament\Team\Invite;
+use App\Http\Livewire\Tournaments\Register;
+use App\Http\Livewire\Tournaments\Team\Invite;
 use App\Models\Team;
 use App\Models\Tournament;
 use App\Models\User;
@@ -46,14 +46,14 @@ class RegisterTest extends TestCase
 
         $this->actingAs($this->player)
             ->get(route('web.tournaments.show', $this->tournament))
-            ->assertSeeLivewire('tournament.register');
+            ->assertSeeLivewire('tournaments.register');
     }
 
     /** @test */
     public function player_needs_to_login_to_register()
     {
         $this->get(route('web.tournaments.show', $this->tournament))
-            ->assertDontSeeLivewire('tournament.register');
+            ->assertDontSeeLivewire('tournaments.register');
     }
 
     /** @test */
