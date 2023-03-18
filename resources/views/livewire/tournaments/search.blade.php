@@ -54,7 +54,7 @@
         <div class="row">
             @forelse($tournaments as $tournament)
                 <div class="col-lg-6">
-                    @include('web.tournaments.components.tournament', ['tournament' => $tournament])
+                    <x-tournament :tournament="$tournament"/>
                 </div>
             @empty
                 <div class="col-lg-12">

@@ -18,12 +18,12 @@ class TournamentTeamsController extends Controller
             $title = __('Teams');
         }
 
-        return view('web.tournament.teams.index', compact('tournament', 'title'));
+        return view('web.tournaments.teams.index', compact('tournament', 'title'));
     }
 
     public function show(Tournament $tournament, Team $team)
     {
-        return view('web.tournament.teams.show', compact('tournament', 'team'));
+        return view('web.tournaments.teams.show', compact('tournament', 'team'));
     }
 
     public function edit(Team $team)

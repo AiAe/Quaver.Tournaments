@@ -68,4 +68,15 @@ class User extends Authenticatable
             ->using(TournamentStaff::class)
             ->orderByPivot('staff_role');
     }
+
+    public function staffApplications(): HasMany
+    {
+        return $this->hasMany(TournamentStaffApplication::class);
+    }
+
+    public function quaverUrl(): string
+    {
+        $id = $this->quaver_user_id;
+        return "https://quavergame.com/user/{$id}";
+    }
 }

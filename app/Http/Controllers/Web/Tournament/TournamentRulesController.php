@@ -13,7 +13,7 @@ class TournamentRulesController extends Controller
     {
         $title = __('Rules');
 
-        return view('web.tournament.rules', compact('tournament', 'title'));
+        return view('web.tournaments.rules', compact('tournament', 'title'));
     }
 
     public function update(Request $request, Tournament $tournament)

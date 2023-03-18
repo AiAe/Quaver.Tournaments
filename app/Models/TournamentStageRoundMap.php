@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class TournamentStageRoundMap extends Model
 {
@@ -16,8 +15,8 @@ class TournamentStageRoundMap extends Model
         return $this->belongsTo(TournamentStageRound::class);
     }
 
-    public function map(): HasOne
+    public function map(): BelongsTo
     {
-        return $this->hasOne(QuaverMap::class);
+        return $this->belongsTo(QuaverMap::class, 'quaver_map_id', 'quaver_map_id');
     }
 }

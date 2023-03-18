@@ -9,6 +9,7 @@ use App\Enums\TournamentStatus;
 use App\Models\Team;
 use App\Models\Tournament;
 use App\Models\TournamentMatch;
+use App\Models\TournamentStaffApplication;
 use App\Models\TournamentStage;
 use App\Models\TournamentStageRoundMap;
 use App\Models\User;
@@ -128,9 +129,15 @@ class TournamentSeeder extends Seeder
             [StaffRole::Commentator, 3],
         ];
 
+
         foreach ($roles as [$role, $n]) {
             $staffUsers = User::factory($n)->create();
             $tournament->staff()->attach($staffUsers->map->id, ['staff_role' => $role]);
+
         }
+
+        TournamentStaffApplication::factory(5)
+            ->recycle($tournament)
+            ->create();
     }
 }
