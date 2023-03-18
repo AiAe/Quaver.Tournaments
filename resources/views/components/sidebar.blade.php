@@ -1,113 +1,91 @@
-@php use App\Enums\TournamentFormat; @endphp
+@php use App\Enums\TournamentFormat;use App\Models\Team; @endphp
 
-{{-- TODO: please for gods sake make components out of those --}}
-
-<div class="list-group mb-2">
-    <a href="{{ route('web.tournaments.show', $tournament) }}"
-       class="list-group-item {{ routeIs('web.tournaments.show') }}">
-        <i class="bi bi-info-square-fill"></i>
+<x-sidebar.group>
+    <x-sidebar.item route="web.tournaments.show" :routeParams="$tournament" icon="bi-info-square-fill">
         {{ __('Information') }}
-    </a>
-    <a href="{{ route('web.tournaments.rules.show', $tournament) }}"
-       class="list-group-item {{ routeIs('web.tournaments.rules.show') }}">
-        <i class="bi bi-hammer"></i>
+    </x-sidebar.item>
+    <x-sidebar.item route="web.tournaments.rules.show" :routeParams="$tournament" icon="bi-hammer">
         {{ __('Rules') }}
-    </a>
-</div>
+    </x-sidebar.item>
+</x-sidebar.group>
 
-
-@can('create', [\App\Models\Team::class, $tournament])
-    <div class="list-group mb-2">
-        <a class="list-group-item" href="#tournamentRegister" data-bs-toggle="modal"
-           data-bs-target="#tournamentRegister">
-            <i class="bi bi-box-arrow-right"></i>
+@can('create', [Team::class, $tournament])
+    <x-sidebar.group>
+        <x-sidebar.item icon="bi-box-arrow-right" data-bs-toggle="modal" data-bs-target="#tournamentRegister">
             {{ __('Register') }}
-        </a>
-    </div>
+        </x-sidebar.item>
+    </x-sidebar.group>
     @push('modals')
         @livewire('tournaments.register', ['tournament' => $tournament], key($tournament))
     @endpush
 @endcan
+
 @auth()
     @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
     @if($team && $tournament->format == TournamentFormat::Team)
-        <div class="list-group mb-2">
-            <a class="list-group-item {{ routeIs('web.tournaments.teams.show') }}"
-               href="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
-                <i class="bi bi-people"></i>
+        <x-sidebar.group>
+            <x-sidebar.item route="web.tournaments.teams.show" :routeParams="compact('tournament','team')"
+                            icon="bi-people">
                 {{ __('My Team') }}
-            </a>
-        </div>
+            </x-sidebar.item>
+        </x-sidebar.group>
     @endif
 @endauth
+
 @guest()
-    <div class="list-group mb-2">
-        <a class="list-group-item" href="{{route('web.auth.oauth', 'quaver')}}">
-            <i class="bi bi-box-arrow-right"></i>
+    <x-sidebar.group>
+        <x-sidebar.item route="web.auth.oauth" routeParams="quaver" icon="bi-box-arrow-right">
             {{ __('Register') }}
-        </a>
-    </div>
+        </x-sidebar.item>
+    </x-sidebar.group>
 @endguest
 
-<div class="list-group mb-2">
-    @if($tournament->format == TournamentFormat::Team)
-        <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
-           class="list-group-item {{ routeIs('web.tournaments.teams.index') }}">
-            <i class="bi bi-controller"></i>
+<x-sidebar.group>
+    <x-sidebar.item route="web.tournaments.teams.index" :routeParams="$tournament" icon="bi-controller">
+        @if($tournament->format == TournamentFormat::Team)
             {{ __('Teams') }}
-        </a>
-    @else
-        <a href="{{ route('web.tournaments.teams.index', ['tournament' => $tournament]) }}"
-           class="list-group-item {{ routeIs('web.tournaments.teams.index') }}">
-            <i class="bi bi-controller"></i>
+        @else
             {{ __('Players') }}
-        </a>
-    @endif
-</div>
+        @endif
+    </x-sidebar.item>
+</x-sidebar.group>
 
-<div class="list-group mb-2">
-    <a href="{{route('web.tournaments.mappools', $tournament)}}" class="list-group-item">
-        <i class="bi bi-music-note-beamed"></i>
+<x-sidebar.group>
+    <x-sidebar.item route="web.tournaments.mappools" :route-params="$tournament" icon="bi-music-note-beamed">
         {{ __('Mappool') }}
-    </a>
+    </x-sidebar.item>
+
     {{--    <a href="#" class="list-group-item">--}}
     {{--        <i class="bi bi-journal"></i>--}}
     {{--        {{ __('Bracket') }}--}}
     {{--    </a>--}}
-    <a href="{{route('web.tournaments.schedules', $tournament)}}" class="list-group-item">
-        <i class="bi bi-calendar"></i>
+
+    <x-sidebar.item route="web.tournaments.schedules" :route-params="$tournament" icon="bi-journal">
         {{ __('Schedules') }}
-    </a>
-    <a href="{{route('web.tournaments.stages.index', $tournament)}}" class="list-group-item">
-        {{-- TODO: Pick icon--}}
-        <i class="bi bi-calendar"></i>
+    </x-sidebar.item>
+
+    {{-- TODO: Pick icon--}}
+    <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament" icon="bi-calendar">
         {{ __('Stages') }}
-    </a>
-</div>
+    </x-sidebar.item>
+</x-sidebar.group>
 
-<div class="list-group mb-2">
-    <a href="#" class="list-group-item">
-        <i class="bi bi-globe"></i>
-        {{ __('Suggest Maps') }}
-    </a>
-    <a href="#" class="list-group-item">
-        <i class="bi bi-shield-fill"></i>
+<x-sidebar.group>
+    <x-sidebar.item icon="bi-shield-fill">
         {{ __('Apply for Staff') }}
-    </a>
-</div>
+    </x-sidebar.item>
+</x-sidebar.group>
 
-<div class="list-group mb-2">
-    <a href="{{route('web.tournaments.staff.index', $tournament)}}" class="list-group-item">
-        <i class="bi bi-people-fill"></i>
+<x-sidebar.group>
+    <x-sidebar.item route="web.tournaments.staff.index" :route-params="$tournament" icon="bi-people-fill">
         {{ __('Staff') }}
-    </a>
-</div>
+    </x-sidebar.item>
+</x-sidebar.group>
 
 @can('update', $tournament)
-    <div class="list-group">
-        <a href="#" class="list-group-item">
-            <i class="bi bi-wrench"></i>
+    <x-sidebar.group>
+        <x-sidebar.item icon="bi-wrench">
             {{ __('Settings') }}
-        </a>
-    </div>
+        </x-sidebar.item>
+    </x-sidebar.group>
 @endcan
