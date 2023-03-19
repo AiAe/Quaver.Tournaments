@@ -1,4 +1,4 @@
-<div class="collapse" id="mapsCollapse{{ $loop->index }}">
+<div>
     <div class="row mt-2">
         @forelse($maps as $map)
             @php($m = $map->map)

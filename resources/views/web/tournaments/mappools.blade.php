@@ -27,13 +27,16 @@
                         <a href="#" class="btn btn-primary btn-sm">{{ __('Download In-Game') }}</a>
                     </div>
                     <div>
-                        <a data-bs-toggle="collapse" href="#mapsCollapse{{ $loop->index }}" role="button" aria-expanded="false" aria-controls="mapsCollapse{{ $loop->index }}">
+                        <a data-bs-toggle="collapse" href="#mapsCollapse{{ $loop->index }}" role="button"
+                           aria-expanded="false" aria-controls="mapsCollapse{{ $loop->index }}">
                             <i class="bi bi-chevron-down"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <x-mappool.map-list :maps="$round->maps" :loop="$loop"/>
+            <div class="collapse" id="mapsCollapse{{ $loop->index }}">
+                <x-mappool.map-list :maps="$round->maps"/>
+            </div>
         </div>
     @empty
         <div class="card">
