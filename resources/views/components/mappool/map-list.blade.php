@@ -6,7 +6,7 @@
                 <div class="map position-relative">
                     <div class="mapset-cover d-flex justify-content-between align-items-center"
                          style="background: linear-gradient(90deg, rgba(23, 23, 23, 0.93) 52.58%, rgba(36, 36, 36, 0.4) 100%),
-                         url('https://cdn.quavergame.com/mapsets/{{ $m->quaver_mapset_id }}.jpg');">
+                         url('https://cdn.quavergame.com/mapsets/{{ $m->quaver_mapset_id }}.jpg'); background-size: cover;">
                         <div>
                             <div>{{ $m->artist }} - {{ $m->title }}</div>
                             <div>{{ $m->difficulty_name }} - {{ $m->difficulty_rating }}</div>
