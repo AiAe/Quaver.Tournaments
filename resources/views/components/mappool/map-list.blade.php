@@ -12,7 +12,9 @@
                             <div>{{ $m->difficulty_name }} - {{ $m->difficulty_rating }}</div>
                         </div>
                         <div>
-                            {{ $map->mods }}
+                            @if($map->mods)
+                                <img src="{{ asset('assets/img/mods/'.$map->mods.'.svg') }}">
+                            @endif
                         </div>
                     </div>
                     <div class="row map-info-2">
