@@ -10,7 +10,7 @@
 
 @section('section')
     @forelse($tournament->stages as $stage)
-        <x-stages.card :stage="$stage"/>
+        <x-stages.card :stage="$stage" :tournament="$tournament"/>
     @empty
         <div class="card">
             <p>No stages...</p>

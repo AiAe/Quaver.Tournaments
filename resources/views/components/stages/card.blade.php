@@ -6,7 +6,7 @@
     <ul>
         @forelse($stage->rounds as $round)
             <li>
-                <a href="{{route('web.tournaments.rounds.show', ['tournament' => $stage->tournament, 'round' => $round])}}">
+                <a href="{{route('web.tournaments.rounds.show', ['tournament' => $tournament, 'round' => $round])}}">
                     {{$round->name}}
                 </a>
             </li>
