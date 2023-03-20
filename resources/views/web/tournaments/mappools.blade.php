@@ -13,12 +13,12 @@
     @forelse(
         $tournament->stages()
             ->whereNot('stage_format', TournamentStageFormat::Registration)
+            ->with(['rounds.maps.map'])
             ->get()
             ->flatMap
             ->rounds
         as $round
     )
-        @php($round->load('maps.map'))
         <div class="mappools">
             <div class="d-flex justify-content-between align-items-center round-name">
                 <div class="d-flex align-items-center"><span></span>{{ $round->name }}</div>
