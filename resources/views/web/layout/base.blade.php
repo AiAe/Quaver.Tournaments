@@ -21,6 +21,10 @@
 @stack('modals')
 @include('web.layout.toast')
 @livewireScripts
+
+@if(config('clockwork.enable') === true)
+    <script src="https://cdn.jsdelivr.net/gh/underground-works/clockwork-browser@1/dist/toolbar.js"></script>
+@endif
 </body>
 
 </html>
