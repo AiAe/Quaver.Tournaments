@@ -32,9 +32,14 @@ const tableLinks = document.querySelectorAll('.table-link tbody tr');
 if(tableLinks) {
     for (const tr of tableLinks) {
         const route = tr.dataset.route;
+        const blank = tr.dataset.blank??"";
         if(route) {
             tr.addEventListener('click', function () {
-                window.location = route;
+                if(blank) {
+                    window.open(route, "_blank");
+                } else {
+                    window.location = route;
+                }
             }.bind(route));
         }
     }
