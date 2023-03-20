@@ -1,6 +1,7 @@
 <div>
     <div class="row mt-2">
         @forelse($maps as $map)
+            @dump($map->toArray())
             @php($m = $map->map)
             <div class="col-lg-12 mb-2">
                 <div class="map position-relative">

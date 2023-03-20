@@ -37,7 +37,6 @@ class TournamentsController extends Controller
 
     public function mappools(Tournament $tournament)
     {
-        $tournament->load('stages.rounds.maps.map');
         return view('web.tournaments.mappools', ['tournament' => $tournament]);
     }
 
