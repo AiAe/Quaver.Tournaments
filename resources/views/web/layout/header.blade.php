@@ -109,7 +109,7 @@
 
                                             <div class="dropdown-divider"></div>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('web.auth.logout') }}">
+                                                <a class="dropdown-item" href="{{ route('web.auth.logout', ['redirect' => current_route()]) }}">
                                                     {{ __('Logout') }}
                                                 </a>
                                             </li>
@@ -118,7 +118,7 @@
                                 @endauth
                                 @guest
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('web.auth.oauth', 'quaver') }}">
+                                        <a class="nav-link" href="{{ route('web.auth.oauth', ['driver' => 'quaver', 'redirect' => current_route()]) }}">
                                             <i class="bi bi-box-arrow-in-right"></i> {{ __('Login') }}
                                         </a>
                                     </li>
