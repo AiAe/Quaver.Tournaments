@@ -8,7 +8,7 @@
                     <h5 class="modal-title" id="tournamentRegisterLabel">{{ __('Register') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                @if($loggedUser->has_discord())
+                @if(Auth::user()->has_discord())
                     <form wire:submit.prevent="create">
                         @if($tournament->format == \App\Enums\TournamentFormat::Team)
                             <div class="modal-body">
