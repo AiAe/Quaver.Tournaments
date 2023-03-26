@@ -25,10 +25,17 @@
         <x-matches.list :matches="$round->matches"/>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            Maps
+    <div class="mappools mt-2">
+        <div class="d-flex justify-content-between align-items-center round-name">
+            <div class="d-flex align-items-center"><span></span>{{ __('Maps') }}</div>
+            <div class="d-flex" style="gap: 10px;">
+                <div class="d-flex" style="gap: 10px;">
+                    <a href="#" class="btn btn-primary btn-sm">{{ __('Download') }}</a>
+                    <a href="#" class="btn btn-primary btn-sm">{{ __('Download In-Game') }}</a>
+                </div>
+            </div>
         </div>
+
         <x-mappool.map-list :maps="$round->maps"/>
     </div>
 @endsection

@@ -53,4 +53,10 @@ class QuaverMap extends Model
     {
         return "{$this->artist} - {$this->title} [{$this->difficulty_name}] ({$this->creator_username})";
     }
+
+    public function quaverUrl(): string
+    {
+        $id = $this->quaver_map_id;
+        return "https://quavergame.com/mapsets/map/{$id}";
+    }
 }

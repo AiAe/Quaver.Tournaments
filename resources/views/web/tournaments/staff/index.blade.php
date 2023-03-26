@@ -14,26 +14,23 @@
             {{ $title }}
         </div>
 
-        {{-- TODO: insert design here, sort/group by staff role? --}}
         <div class="table-responsive">
             <table class="table table-hover table-dark table-link">
                 <thead>
                 <tr>
-                    <th style="width: 10%;">{{ __('#') }}</th>
-                    <th>{{ __('Role') }}</th>
+                    <th style="width: 25%;">{{ __('Role') }}</th>
                     <th>{{ __('User') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($tournament->staff as $user)
-                    <tr data-route="{{$user->quaverUrl()}}">
-                        <td>{{ $loop->index + 1 }}</td>
+                    <tr data-route="{{ $user->quaverUrl() }}" data-blank="yes">
                         <td>{{ $user->pivot->staff_role->name() }}</td>
-                        <td>{{$user->username}}</td>
+                        <td>{{ $user->username }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td>No staff...?</td>
+                        <td colspan="4">{{ __('There is currently no Staff') }}</td>
                     </tr>
                 @endforelse
                 </tbody>

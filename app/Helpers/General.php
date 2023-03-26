@@ -49,6 +49,19 @@ if (!function_exists('stringHasValue')) {
     }
 }
 
+if(!function_exists('current_route')) {
+    function current_route($open_modal_id = null)
+    {
+        $current = \Illuminate\Support\Facades\URL::current();
+
+        if($open_modal_id) {
+            $current .= $open_modal_id;
+        }
+
+        return $current;
+    }
+}
+
 function createToast($type, $title, $message, $hide = true)
 {
     session()->flash('toast', [

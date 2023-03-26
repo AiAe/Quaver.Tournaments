@@ -79,4 +79,9 @@ class User extends Authenticatable
         $id = $this->quaver_user_id;
         return "https://quavergame.com/user/{$id}";
     }
+
+    public function has_discord(): bool
+    {
+        return (bool)$this->discord_user_id;
+    }
 }

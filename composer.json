@@ -7,13 +7,14 @@
     "require": {
         "php": "^8.2",
         "cesargb/laravel-magiclink": "^2.15",
-        "guzzlehttp/guzzle": "^7.5.0",
-        "kodeine/laravel-meta": "^2.1.1",
-        "laravel/framework": "^v10.0.0",
-        "laravel/socialite": "^v5.6.1",
-        "laravel/telescope": "^v4.12.0",
-        "laravel/tinker": "^v2.8.0",
-        "livewire/livewire": "^v2.11.2",
+        "dyanakiev/html": "^6.2",
+        "guzzlehttp/guzzle": "^7.5",
+        "kodeine/laravel-meta": "^2.1",
+        "laravel/framework": "^v10.0",
+        "laravel/socialite": "^v5.6",
+        "laravel/telescope": "^v4.14",
+        "laravel/tinker": "^v2.8",
+        "livewire/livewire": "^v2.12",
         "spatie/laravel-markdown": "^2.2"
     },
     "require-dev": {

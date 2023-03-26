@@ -1,0 +1,45 @@
+.mappools {
+    margin-bottom: 10px;
+
+    .round-name {
+        background: $dark;
+        border: 1px solid #5A5A5A;
+        border-radius: 6px;
+        position: relative;
+        padding: 8px 12px;
+        font-size: 24px;
+        text-transform: uppercase;
+
+        span {
+            display: inline-block;
+            background: #21CBED;
+            border-radius: 3px;
+            width: 4px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    }
+
+    .map {
+        background: $dark;
+        border-radius: 10px;
+
+        .mapset-cover {
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .map-info-2 {
+            padding: 8px 12px;
+
+            span {
+                color: #FFE76B;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+

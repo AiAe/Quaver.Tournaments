@@ -4,7 +4,7 @@
 @push('cover')
     <div class="col-lg-12">
         <header class="page-cover smaller">
-            <h1>Mappools</h1>
+            <h1>{{ __('Mappools') }}</h1>
         </header>
     </div>
 @endpush
@@ -13,21 +13,35 @@
     @forelse(
         $tournament->stages()
             ->whereNot('stage_format', TournamentStageFormat::Registration)
+            ->with(['rounds.maps.map'])
             ->get()
             ->flatMap
             ->rounds
         as $round
     )
-        {{-- TODO: Implement mappools list design? probably not needed as long as the component works properly --}}
-        <div class="card">
-            <div class="card-header">
-                {{$round->name}}
+        <div class="mappools">
+            <div class="d-flex justify-content-between align-items-center round-name">
+                <div class="d-flex align-items-center"><span></span>{{ $round->name }}</div>
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="d-flex" style="gap: 10px;">
+                        <a href="#" class="btn btn-primary btn-sm">{{ __('Download') }}</a>
+                        <a href="#" class="btn btn-primary btn-sm">{{ __('Download In-Game') }}</a>
+                    </div>
+                    <div>
+                        <a data-bs-toggle="collapse" href="#mapsCollapse{{ $loop->index }}" role="button"
+                           aria-expanded="false" aria-controls="mapsCollapse{{ $loop->index }}">
+                            <i class="bi bi-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <x-mappool.map-list :maps="$round->maps"/>
+            <div class="collapse" id="mapsCollapse{{ $loop->index }}">
+                <x-mappool.map-list :maps="$round->maps"/>
+            </div>
         </div>
     @empty
         <div class="card">
-            No mappools...
+            {{ __('No mappools...') }}
         </div>
     @endforelse
 @endsection

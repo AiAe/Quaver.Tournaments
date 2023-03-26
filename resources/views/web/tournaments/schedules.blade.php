@@ -18,6 +18,7 @@
             ->rounds
         as $round
     )
+{{--        @php($round->load('teams'))--}}
         {{-- TODO: Implement matches list design? probably not needed as long as the component works properly --}}
         <div class="card">
             <div class="card-header">

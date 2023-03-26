@@ -13,7 +13,9 @@
                 <div class="card-body">
                     <h1>{{ $tournament->name }}</h1>
                 </div>
-                <div class="card-footer d-flex justify-content-end">
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                    </div>
                     <div>
                         <a href="#" class="btn btn-secondary btn-sm">
                             <i class="bi bi-discord"></i>

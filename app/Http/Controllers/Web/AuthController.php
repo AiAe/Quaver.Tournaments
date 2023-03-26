@@ -15,8 +15,13 @@ class AuthController extends Controller
         'discord', 'quaver'
     ];
 
-    public function redirectToProvider($driver)
+    public function redirectToProvider(Request $request, $driver)
     {
+        // If `redirect` is provided in route it will save and will redirect back to it
+        if($request->has('redirect')) {
+            session()->put('auth_redirect', $request->get('redirect'));
+        }
+
         if (!$this->isProviderAllowed($driver)) {
             return $this->sendFailedResponse("{$driver} is not currently supported");
         }
@@ -54,10 +59,16 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         createToast('success', '', __('Logged out successfully!'));
+
+        // Redirect back to specific route if provided
+        if($request->has('redirect')) {
+            return redirect($request->get('redirect'));
+        }
 
         return redirect(route('web.home'));
     }
@@ -84,9 +95,10 @@ class AuthController extends Controller
 
         Auth::login($user, true);
 
-//        if (empty($user->discord_user_id)) {
-//            return redirect(route('oauth', 'discord'));
-//        }
+        // Redirect back to auth route if it's provided in session
+        if($auth_redirect = session('auth_redirect')) {
+            return redirect($auth_redirect);
+        }
 
         return redirect(route('web.home'));
     }
@@ -103,6 +115,13 @@ class AuthController extends Controller
             $user->update([
                 'discord_user_id' => $providerUser->discord_user_id
             ]);
+        }
+
+        createToast('success', '', __('Successfully connected your Discord!'));
+
+        // Redirect back to auth route if it's provided in session
+        if($auth_redirect = session('auth_redirect')) {
+            return redirect($auth_redirect);
         }
 
         return redirect(route('web.home'));
