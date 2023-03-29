@@ -70,11 +70,11 @@
     </x-sidebar.item>
 </x-sidebar.group>
 
-<x-sidebar.group>
-    <x-sidebar.item icon="bi-shield-fill">
-        {{ __('Apply for Staff') }}
-    </x-sidebar.item>
-</x-sidebar.group>
+{{--<x-sidebar.group>--}}
+{{--    <x-sidebar.item icon="bi-shield-fill">--}}
+{{--        {{ __('Apply for Staff') }}--}}
+{{--    </x-sidebar.item>--}}
+{{--</x-sidebar.group>--}}
 
 <x-sidebar.group>
     <x-sidebar.item route="web.tournaments.staff.index" :route-params="$tournament" icon="bi-people-fill">

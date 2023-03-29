@@ -4,7 +4,7 @@
 @push('cover')
     <div class="col-lg-12">
         <header class="page-cover smaller">
-            <h1>Schedules</h1>
+            <h1>{{ __('Schedules') }}</h1>
         </header>
     </div>
 @endpush
@@ -18,13 +18,16 @@
             ->rounds
         as $round
     )
-{{--        @php($round->load('teams'))--}}
-        {{-- TODO: Implement matches list design? probably not needed as long as the component works properly --}}
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header">
                 {{$round->name}}
             </div>
-            <x-matches.list :matches="$round->matches"/>
+
+            <div class="card-body">
+                @php($matches = collect($round->matches()->with(['team1', 'team2'])->orderBy('timestamp')->get())->groupBy('timestamp'))
+
+                <x-matches.list :matches="$matches" :class="'alt'"/>
+            </div>
         </div>
     @empty
         <div class="card">

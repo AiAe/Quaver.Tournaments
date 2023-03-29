@@ -1,0 +1,39 @@
+.rounds {
+
+    .round {
+        background: $dark;
+        border: 1px solid #5A5A5A;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+        }
+
+        &.alt {
+            background: #363636;
+        }
+    }
+
+    .round-name {
+        position: relative;
+        padding: 8px 0;
+        font-size: 24px;
+        text-transform: uppercase;
+
+        span {
+            display: inline-block;
+            background: #21CBED;
+            border-radius: 3px;
+            width: 4px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    }
+}
