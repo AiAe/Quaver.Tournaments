@@ -12,20 +12,19 @@
 
     <div class="card">
         <div class="card-header">
-            Info
+            {{ __('Info') }}
         </div>
         {{-- TODO: Description with best of, number of bans, etc --}}
-        <p>Best of 7, 2 bans per player/team</p>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Matches
+        <div class="card-body">
+            Best of 7, 2 bans per player/team
         </div>
-        <x-matches.list :matches="$round->matches"/>
     </div>
 
-    <div class="mappools mt-2">
+    @php($matches = collect($round->matches()->with(['team1', 'team2'])->orderBy('timestamp')->get())->groupBy('timestamp'))
+
+    <x-matches.list :matches="$matches"/>
+
+    <div class="mappools mt-3">
         <div class="d-flex justify-content-between align-items-center round-name">
             <div class="d-flex align-items-center"><span></span>{{ __('Maps') }}</div>
             <div class="d-flex" style="gap: 10px;">
