@@ -15,7 +15,7 @@
 
 # UPDATE ASSETS (it takes some time)
 npm i &>/dev/null
-npm run prod &>/dev/null
+npm run build &>/dev/null
 
 APP_VERSION=`git rev-parse --short HEAD`
 sed -i 's/^\APP_VERSION=.*/\APP_VERSION='"$APP_VERSION"'/' .env

@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TournamentStage extends Model
 {
+    protected $fillable = [
+        'name',
+        'index',
+        'tournament_id',
+        'stage_format',
+        'stage_text'
+    ];
+
     protected $casts = [
         'stage_format' => TournamentStageFormat::class
     ];

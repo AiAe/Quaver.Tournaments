@@ -33,6 +33,6 @@ Route::singleton('tournaments.rules', TournamentRulesController::class)->only(['
 Route::resource('tournaments.teams', TournamentTeamsController::class)
     ->only(['index', 'show'])->scoped(['team' => 'slug']);
 Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index']);
-Route::resource('tournaments.stages', TournamentStageController::class)->only(['index']);
-Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show']); // TODO: Use slug instead of ID
+Route::resource('tournaments.stages', TournamentStageController::class)->only(['index', 'store']);
+Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show', 'store']); // TODO: Use slug instead of ID
 Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show']);

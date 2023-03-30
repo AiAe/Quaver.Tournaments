@@ -16,6 +16,9 @@ window.Bootstrap = Bootstrap;
 import * as MDEditor from 'simplemde/dist/simplemde.min';
 window.SimpleMDE = MDEditor;
 
+import * as flatpickr from 'flatpickr/dist/flatpickr';
+window.flatpickr = flatpickr;
+
 document.addEventListener("DOMContentLoaded", function (event) {
     Livewire.on('gotoTop', () => {
         window.scrollTo({

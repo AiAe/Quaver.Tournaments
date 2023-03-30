@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use App\Models\TournamentStage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TournamentStageController extends Controller
 {
@@ -14,12 +15,37 @@ class TournamentStageController extends Controller
         return view('web.tournaments.stages.index', ['title' => 'Stages', 'tournament' => $tournament]);
     }
 
-    public function create()
+    public function store(Request $request, Tournament $tournament)
     {
-    }
+        $this->authorize('update', $tournament);
 
-    public function store(Request $request)
-    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'stage_format' => ['required', 'numeric'],
+            'stage_text' => ['nullable']
+        ]);
+
+        $validator->validate();
+        $validated = $validator->validated();
+
+        $validated['tournament_id'] = $tournament->id;
+
+        // Get last stage index
+        $last_stage = TournamentStage::where('tournament_id', $tournament->id)->orderByDesc('id')->first();
+
+        if($last_stage) {
+            $validated['index'] = $last_stage->index + 1;
+        } else {
+            $validated['index'] = 0;
+        }
+
+        $stage = new TournamentStage();
+        $stage->fill($validated);
+        $stage->save();
+
+        createToast('success', __('Stage was created successfully!'), null);
+
+        return back();
     }
 
 //    public function show(TournamentStage $tournamentStage)
