@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tournament_stages', function (Blueprint $table) {
-            $table->text('stage_text')->nullable();
+        Schema::table('tournament_stage_rounds', function (Blueprint $table) {
+            $table->text('round_text')->nullable()->after('index');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tournament_stages', function (Blueprint $table) {
-            $table->dropColumn('stage_text');
+        Schema::table('tournament_stage_rounds', function (Blueprint $table) {
+           $table->dropColumn('round_text');
         });
     }
 };

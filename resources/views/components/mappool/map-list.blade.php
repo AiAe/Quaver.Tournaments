@@ -40,7 +40,7 @@
             </div>
         @empty
             <div class="col-lg-12">
-                {{ __('No maps...') }}
+                {{ __('There are currently no maps') }}
             </div>
         @endforelse
     </div>

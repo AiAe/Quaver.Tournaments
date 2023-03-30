@@ -13,7 +13,8 @@ class TournamentStageRound extends Model
         'name',
         'index',
         'starts_at',
-        'ends_at'
+        'ends_at',
+        'round_text'
     ];
 
     protected $casts = [

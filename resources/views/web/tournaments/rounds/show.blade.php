@@ -10,15 +10,16 @@
 
 @section('section')
 
-    <div class="card">
-        <div class="card-header">
-            {{ __('Info') }}
+    @if($round->round_text)
+        <div class="card mb-3">
+            <div class="card-header">
+                {{ __('Round information') }}
+            </div>
+            <div class="card-body">
+                {{ $round->round_text??"" }}
+            </div>
         </div>
-        {{-- TODO: Description with best of, number of bans, etc --}}
-        <div class="card-body">
-            Best of 7, 2 bans per player/team
-        </div>
-    </div>
+    @endif
 
     @php($matches = collect($round->matches()->with(['team1', 'team2'])->orderBy('timestamp')->get())->groupBy('timestamp'))
 

@@ -62,6 +62,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="form-label">{{ __('Round information') }}</label>
+                            {{ Form::textarea('round_text', '', ['class' => 'form-control']) }}
+                        </div>
+
+                        <div class="form-group">
                             <label class="form-label">{{ __('Starts at') }}</label>
                             {{ Form::text('starts_at', '', ['class' => 'form-control datetimepicker']) }}
                         </div>

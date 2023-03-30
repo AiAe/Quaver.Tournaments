@@ -21,6 +21,7 @@ class TournamentRoundController extends Controller
             'name' => ['required'],
             'starts_at' => ['required'],
             'ends_at' => ['required'],
+            'round_text' => ['nullable'],
         ]);
 
         $validator->validate();

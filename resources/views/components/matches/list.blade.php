@@ -53,7 +53,7 @@
                 </div>
             @endforeach
         @empty
-            {{ __('No matches') }}
+            {{ __('There are currently no matches') }}
         @endforelse
     </div>
 </div>
