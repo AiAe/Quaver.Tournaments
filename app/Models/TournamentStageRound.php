@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TournamentStageRound extends Model
 {
+    protected $fillable = [
+        'tournament_stage_id',
+        'name',
+        'index',
+        'starts_at',
+        'ends_at'
+    ];
+
     protected $casts = [
         'starts_at' => 'datetime',
         'ends_at' => 'datetime',
