@@ -7,7 +7,7 @@
     <div class="stage-body">
         <div class="row">
             <div class="col-lg-6">
-                Text goes here...
+                {{ $stage->stage_text??"" }}
             </div>
             <div class="col-lg-6">
                 @forelse($stage->rounds as $round)
