@@ -42,7 +42,7 @@ class TournamentRoundController extends Controller
         $stage->fill($validated);
         $stage->save();
 
-        createToast('success', __('Round was created successfully!'), null);
+        createToast('success', null, __('Round was created successfully!'));
 
         return back();
     }
