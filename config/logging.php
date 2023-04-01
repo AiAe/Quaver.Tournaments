@@ -80,11 +80,13 @@ return [
 
         'discord' => [
             'driver' => 'custom',
-            'via'    => \KABBOUCHI\LoggerDiscordChannel\DiscordLogger::class,
-            'level'  => 'debug',
-            'role_id' => env('DISCORD_LOGS_ROLE_ID'),
-            'webhook'    => env('DISCORD_LOGS_WEBHOOK'),
-            'environment' => 'production'
+            'via' => dyanakiev\LoggerDiscordChannel\DiscordLogger::class,
+            'suffix' => env('DISCORD_LOG_SUFFIX', 'QT Log'),
+            'webhook' => env('DISCORD_LOGS_WEBHOOK'),
+            'level' => env('DISCORD_LOG_LEVEL', 'debug'),
+            'context' => env('DISCORD_LOG_CONTEXT', false),
+            'environment' => env('DISCORD_LOG_ENVIRONMENT', 'production'), // production, staging, local
+            'message' => env('DISCORD_LOG_MESSAGE', false)
         ],
 
         'papertrail' => [
@@ -94,7 +96,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
         ],
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecb4aadf364a3437a5408eaaa81e2d9a",
+    "content-hash": "8c4717b434e50142811e980ab05069ea",
     "packages": [
         {
             "name": "brick/math",
@@ -504,16 +504,16 @@
         },
         {
             "name": "dyanakiev/laravel-logger-discord-channel",
-            "version": "5.1.2",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dyanakiev/laravel-logger-discord-channel.git",
-                "reference": "3af8d12d64a173afc2b460ec5de6d6f85dfcdb2f"
+                "reference": "13dd516bac60e86f7ced3a298675e27ad0c0cb4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dyanakiev/laravel-logger-discord-channel/zipball/3af8d12d64a173afc2b460ec5de6d6f85dfcdb2f",
-                "reference": "3af8d12d64a173afc2b460ec5de6d6f85dfcdb2f",
+                "url": "https://api.github.com/repos/dyanakiev/laravel-logger-discord-channel/zipball/13dd516bac60e86f7ced3a298675e27ad0c0cb4c",
+                "reference": "13dd516bac60e86f7ced3a298675e27ad0c0cb4c",
                 "shasum": ""
             },
             "require": {
@@ -527,7 +527,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "KABBOUCHI\\LoggerDiscordChannel\\": "src/"
+                    "dyanakiev\\LoggerDiscordChannel\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -536,7 +536,11 @@
             ],
             "authors": [
                 {
-                    "name": "Georges KABBOUCHI",
+                    "name": "Dimitar Yanakiev",
+                    "email": "dimitar.d.yanakiev@gmail.com"
+                },
+                {
+                    "name": "Georges KABBOUCHI (original)",
                     "email": "georges.kabbouchi@gmail.com"
                 }
             ],
@@ -547,9 +551,10 @@
                 "logger"
             ],
             "support": {
-                "source": "https://github.com/dyanakiev/laravel-logger-discord-channel/tree/5.1.2"
+                "issues": "https://github.com/dyanakiev/laravel-logger-discord-channel/issues",
+                "source": "https://github.com/dyanakiev/laravel-logger-discord-channel/tree/6.0.0"
             },
-            "time": "2023-04-01T17:51:30+00:00"
+            "time": "2023-04-01T20:08:59+00:00"
         },
         {
             "name": "egulias/email-validator",
