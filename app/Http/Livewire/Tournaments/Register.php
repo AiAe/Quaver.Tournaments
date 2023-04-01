@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Models\Team;
+use App\Models\Tournament;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -16,22 +17,35 @@ class Register extends Component
     public $tournament;
     public $name;
     public $slug;
+    public $captcha;
 
     protected function rules()
     {
         $slug_rule = Rule::unique('teams')->where('tournament_id', $this->tournament->id);
 
-        if ($this->tournament->format == TournamentFormat::Team) {
-            return [
-                'name' => ['required', 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\s\_\-]+$/'],
-                'slug' => ['required', $slug_rule, 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\-\_]+$/']
-            ];
+        $captcha = $this->tournament->getMeta('register');
+        $captcha_question = $captcha['question'] ?? null;
+        $captcha_answer = $captcha['answer'] ?? null;
+
+        $rules = [];
+
+        if ($captcha_question && $captcha_answer) {
+            $rules['captcha'] = ['required', function ($attributes, $value, $fail) use ($captcha_answer) {
+                if (strtolower($value) !== strtolower($captcha_answer)) {
+                    $fail(__('Answer is wrong!'));
+                }
+            },];
         }
 
-        return [
-            'name' => ['nullable'],
-            'slug' => ['nullable', $slug_rule]
-        ];
+        if ($this->tournament->format == TournamentFormat::Team) {
+            $rules['name'] = ['required', 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\s\_\-]+$/'];
+            $rules['slug'] = ['required', $slug_rule, 'min:3', 'max:30', 'regex:/^[A-Za-z0-9\-\_]+$/'];
+        } else {
+            $rules['name'] = ['nullable'];
+            $rules['slug'] = ['nullable', $slug_rule];
+        }
+
+        return $rules;
     }
 
     public function mount($tournament)

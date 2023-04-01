@@ -14,7 +14,7 @@
             <div class="col-lg-12 col-md-12 d-flex align-items-center text-center">
                 <div class="tournament-details">
                     <div class="row tournament-boxes">
-                        <div class="col-lg-6">
+                        <div class="col">
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Dates') }}</div>
                                 <div class="tournament-box-content">
@@ -34,19 +34,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="tournament-box">
-                                <div class="tournament-box-title">{{ __('Prize') }}</div>
-                                <div class="tournament-box-content">
-                                    <div class="tournament-box-text">
-                                        {{ __('Total Prize Pool :total', ['total' => '600$']) }}
-                                    </div>
-                                    <div>
-                                        {{ __('Top 3 Players Win a Cash Prize') }}
+                        @php($tournament_prize = $tournament->getMeta('prize'))
+                        @php($prize_header = $tournament_prize['header']??null)
+                        @php($prize_body = $tournament_prize['body']??null)
+                        @if($prize_header || $prize_body)
+                            <div class="col">
+                                <div class="tournament-box">
+                                    <div class="tournament-box-title">{{ __('Prize') }}</div>
+                                    <div class="tournament-box-content">
+                                        @if($prize_header)
+                                            <div class="tournament-box-text">
+                                                {{ $prize_header }}
+                                            </div>
+                                        @endif
+                                        @if($prize_body)
+                                            <div>
+                                                {{ $prize_body }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                    </div>
+
+                    <div class="row tournament-boxes">
                         <div class="col">
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Format') }}</div>
@@ -62,16 +74,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            {{--                                    ToDo remove if no rank restriction--}}
-                            <div class="tournament-box">
-                                <div class="tournament-box-title">{{ __('Rank') }}</div>
-                                <div class="tournament-box-content">
-                                    <div class="tournament-box-text">Rank restricted</div>
-                                    <div>#500 - #10,000</div>
+                        @php($tournament_rank = $tournament->getMeta('rank'))
+                        @php($rank_header = $tournament_rank['header']??null)
+                        @php($rank_body = $tournament_rank['body']??null)
+                        @if($rank_header || $rank_body)
+                            <div class="col">
+                                <div class="tournament-box">
+                                    <div class="tournament-box-title">{{ __('Rank') }}</div>
+                                    <div class="tournament-box-content">
+                                        @if($rank_header)
+                                            <div class="tournament-box-text">{{ $rank_header }}</div>
+                                        @endif
+                                        @if($rank_body)
+                                            <div>{{ $rank_body }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="col">
                             <div class="tournament-box">
                                 <div class="tournament-box-title">{{ __('Entries') }}</div>

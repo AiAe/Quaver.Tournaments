@@ -78,6 +78,8 @@ class Search extends Component
             $tournaments->where('status', $this->status);
         }
 
+        $tournaments->with('metas');
+
         return view('livewire.tournaments.search', [
             'tournaments' => $tournaments->orderByDesc('id')->paginate(10)
         ]);

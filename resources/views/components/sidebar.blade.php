@@ -84,7 +84,7 @@
 
 @can('update', $tournament)
     <x-sidebar.group>
-        <x-sidebar.item icon="bi-wrench">
+        <x-sidebar.item route="web.tournaments.edit" :route-params="$tournament" icon="bi-wrench">
             {{ __('Settings') }}
         </x-sidebar.item>
     </x-sidebar.group>
