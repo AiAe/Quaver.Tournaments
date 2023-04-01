@@ -8,7 +8,6 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-
 import * as Popper from '@popperjs/core'
 
 window.Popper = Popper;
@@ -17,7 +16,9 @@ import * as Bootstrap from 'bootstrap'
 
 window.Bootstrap = Bootstrap;
 
-import 'simplemde/dist/simplemde.min';
+import SimpleMDE from 'simplemde/dist/simplemde.min';
+
+window.SimpleMDE = SimpleMDE;
 
 import 'flatpickr/dist/flatpickr';
 
