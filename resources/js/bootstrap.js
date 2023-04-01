@@ -17,9 +17,7 @@ import * as Bootstrap from 'bootstrap'
 
 window.Bootstrap = Bootstrap;
 
-import * as MDEditor from 'simplemde/dist/simplemde.min';
-
-window.SimpleMDE = MDEditor;
+import 'simplemde/dist/simplemde.min';
 
 import 'flatpickr/dist/flatpickr';
 
