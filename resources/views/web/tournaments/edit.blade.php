@@ -112,8 +112,9 @@
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">{{ __('Register answer') }} <small>{{ __('(will be converted to lower case!)') }}</small></label>
-                                {{ Form::text('register[answer]', $tournament->getMeta('register')['answer']??"", ['class' => 'form-control']) }}
+                                <label class="form-label">{{ __('Register answer') }}
+                                    <small>{{ __('(will be converted to lower case!)') }}</small></label>
+                                {{ Form::input('password', 'register[answer]', $tournament->getMeta('register')['answer']??"", ['class' => 'form-control hidden-field']) }}
                             </div>
                         </div>
                     </div>
@@ -145,6 +146,33 @@
                         </div>
                     </div>
 
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Discord Webhook - Registrations') }}</label>
+                                {{ Form::input('password', 'discord_webhook_registrations', $tournament->getMeta('discord_webhook_registrations')??"", ['class' => 'form-control hidden-field']) }}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Discord Webhook - Matches') }}</label>
+                                {{ Form::input('password', 'discord_webhook_matches', $tournament->getMeta('discord_webhook_matches')??"", ['class' => 'form-control hidden-field']) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Discord Webhook - Reminders') }}</label>
+                                {{ Form::input('password', 'discord_webhook_reminders', $tournament->getMeta('discord_webhook_reminders')??"", ['class' => 'form-control hidden-field']) }}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-end mt-2">
                         {{ Form::submit(__('Save'), ['class' => 'btn btn-primary btn-sm']) }}
                     </div>
@@ -155,3 +183,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        const hiddenFields = document.getElementsByClassName('hidden-field');
+
+        for (const field of hiddenFields) {
+            field.addEventListener('focusin', (event) => {
+                event.target.type = "text";
+            });
+
+            field.addEventListener('focusout', (event) => {
+                event.target.type = "password";
+            });
+        }
+    </script>
+@endpush
