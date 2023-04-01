@@ -219,4 +219,5 @@ return [
     'app_lock' => env('APP_LOCK', false),
     'auth_user' => env('AUTH_USER', ''),
     'auth_password' => env('AUTH_PASSWORD', ''),
+    'discord_logs_webhook' => env('DISCORD_LOGS_WEBHOOK', ''),
 ];

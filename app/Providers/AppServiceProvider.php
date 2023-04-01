@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Observers\UserObserver;
 use App\Providers\Socialite\DiscordSocialiteProvider;
 use App\Providers\Socialite\QuaverSocialiteProvider;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('app.env') == "local") {
+            Model::preventLazyLoading();
+        }
+
         // Change paginator style to Bootstrap 5
         Paginator::useBootstrapFive();
 

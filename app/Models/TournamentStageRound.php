@@ -37,6 +37,6 @@ class TournamentStageRound extends Model
 
     public function matches(): HasMany
     {
-        return $this->hasMany(TournamentMatch::class);
+        return $this->hasMany(TournamentMatch::class)->orderBy('timestamp');
     }
 }

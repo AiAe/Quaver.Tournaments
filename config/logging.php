@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'discord'],
             'ignore_exceptions' => false,
         ],
 
@@ -76,6 +76,15 @@ return [
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
             'level' => env('LOG_LEVEL', 'critical'),
+        ],
+
+        'discord' => [
+            'driver' => 'custom',
+            'via'    => \KABBOUCHI\LoggerDiscordChannel\DiscordLogger::class,
+            'level'  => 'debug',
+            'role_id' => 108616029294301184,
+            'webhook'    => env('DISCORD_LOGS_WEBHOOK'),
+            'environment' => 'production'
         ],
 
         'papertrail' => [
