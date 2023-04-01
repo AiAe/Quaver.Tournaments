@@ -8,7 +8,7 @@
         "php": "^8.2",
         "cesargb/laravel-magiclink": "^2.15",
         "dyanakiev/html": "^6.2",
-        "dyanakiev/laravel-logger-discord-channel": "^5.1.2",
+        "dyanakiev/laravel-logger-discord-channel": "^6.0.0",
         "guzzlehttp/guzzle": "^7.5",
         "kodeine/laravel-meta": "^2.1",
         "laravel/framework": "^v10.0",
