@@ -2,7 +2,7 @@
 
 /usr/bin/git pull
 
-/usr/local/bin/composer install --no-dev --no-interaction
+/usr/local/bin/composer install --no-dev --no-interaction --no-progress
 
 /usr/bin/php artisan migrate --force
 
