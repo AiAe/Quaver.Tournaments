@@ -102,14 +102,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Register question') }}</label>
-                                {{ Form::text('register["question"]', $tournament->getMeta('register')['question']??"", ['class' => 'form-control']) }}
+                                {{ Form::text('register[question]', $tournament->getMeta('register')['question']??"", ['class' => 'form-control']) }}
                             </div>
                         </div>
 
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Register answer') }} <small>{{ __('(will be converted to lower case!)') }}</small></label>
-                                {{ Form::text('register["answer"]', $tournament->getMeta('register')['answer']??"", ['class' => 'form-control']) }}
+                                {{ Form::text('register[answer]', $tournament->getMeta('register')['answer']??"", ['class' => 'form-control']) }}
                             </div>
                         </div>
                     </div>
