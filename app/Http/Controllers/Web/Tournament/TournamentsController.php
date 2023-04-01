@@ -57,6 +57,9 @@ class TournamentsController extends Controller
                 'twitch' => ['nullable'],
                 'spreadsheet' => ['nullable'],
                 'information' => ['nullable'],
+                'discord_webhook_registrations' => ['nullable'],
+                'discord_webhook_matches' => ['nullable'],
+                'discord_webhook_reminders' => ['nullable'],
             ]);
         }
 
