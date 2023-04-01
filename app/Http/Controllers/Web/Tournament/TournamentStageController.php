@@ -43,7 +43,7 @@ class TournamentStageController extends Controller
         $stage->fill($validated);
         $stage->save();
 
-        createToast('success', __('Stage was created successfully!'), null);
+        createToast('success', null, __('Stage was created successfully!'));
 
         return back();
     }
