@@ -33,6 +33,20 @@
                                 <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
                             </div>
                         @else
+                            @php($register_captcha = $tournament->getMeta('register'))
+                            @php($captcha_question = $register_captcha['question'])
+
+                            @if($captcha_question)
+                                <div class="modal-body">
+                                    <div>
+                                        <label class="form-label d-block">{{ __('To verify your not a bot, answer this question:') }}</label>
+                                        <label class="form-label text-warning">{{ $captcha_question }}</label>
+                                        <input type="text" wire:model="captcha" class="form-control">
+                                        @error('captcha') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">{{ __('Decline') }}</button>

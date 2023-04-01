@@ -1,5 +1,5 @@
 <div>
-    <div class="dropdown">
+    <div class="dropdown d-none">
         <a class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-gear-wide"></i>
         </a>
@@ -16,4 +16,5 @@
             @endif
         </ul>
     </div>
+    -
 </div>
