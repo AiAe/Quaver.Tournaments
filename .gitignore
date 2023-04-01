@@ -277,3 +277,5 @@ $RECYCLE.BIN/
 .idea
 package-lock.json
 public/build/*
+public/sitemaps/*.xml
+public/sitemap.xml

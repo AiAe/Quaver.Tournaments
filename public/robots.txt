@@ -1,2 +1,5 @@
+Sitemap: https://tournaments.quavergame.com/sitemap.xml
+
+
 User-agent: *
 Disallow:
