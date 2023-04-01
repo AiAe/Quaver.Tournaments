@@ -35,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
             Model::preventLazyLoading();
         }
 
+        if (config('app.env') == 'production') {
+            \URL::forceScheme('https');
+        }
+
         // Change paginator style to Bootstrap 5
         Paginator::useBootstrapFive();
 

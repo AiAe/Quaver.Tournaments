@@ -11,13 +11,16 @@ use Spatie\GitHubWebhooks\Models\GitHubWebhookCall;
 
 class Deploy implements ShouldQueue
 {
-    use InteractsWithQueue;use Queueable;use SerializesModels;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public GitHubWebhookCall $gitHubWebhookCall;
 
     public function __construct(
         public GitHubWebhookCall $webhookCall
-    ) {
+    )
+    {
     }
 
     public function handle()
