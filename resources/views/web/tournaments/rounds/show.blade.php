@@ -10,6 +10,15 @@
 
 @section('section')
 
+    @can('delete', $tournament)
+        <div class="d-flex justify-content-end mb-3">
+            {{ Form::open(['url' => route('web.tournaments.rounds.destroy', [$tournament, $round]), 'class' => 'd-flex']) }}
+            @method('DELETE')
+            {{ Form::submit(__('Delete Round'), ['class' => 'btn btn-danger btn-sm']) }}
+            {{ Form::close() }}
+        </div>
+    @endcan
+
     @if($round->round_text)
         <div class="card mb-3">
             <div class="card-header">

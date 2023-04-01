@@ -21,7 +21,7 @@ class TournamentRulesController extends Controller
         $this->authorize('update', $tournament);
 
         $validator = Validator::make($request->all(), [
-            'rules' => ['nullable', 'string', 'max:8000']
+            'rules' => ['nullable', 'string', 'max:20000']
         ]);
 
         $validator->validate();
