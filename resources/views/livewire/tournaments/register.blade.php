@@ -34,7 +34,7 @@
                             </div>
                         @else
                             @php($register_captcha = $tournament->getMeta('register'))
-                            @php($captcha_question = $register_captcha['question'])
+                            @php($captcha_question = $register_captcha['question']??null)
 
                             @if($captcha_question)
                                 <div class="modal-body">

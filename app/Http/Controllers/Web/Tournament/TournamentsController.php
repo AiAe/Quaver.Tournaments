@@ -28,6 +28,7 @@ class TournamentsController extends Controller
 
     public function edit(Tournament $tournament)
     {
+        $this->authorize('update', $tournament);
         $tournament->load('metas');
 
         return view('web.tournaments.edit', compact('tournament'));
