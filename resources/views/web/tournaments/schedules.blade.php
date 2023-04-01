@@ -13,6 +13,7 @@
     @forelse(
         $tournament->stages()
             ->whereNot('stage_format', TournamentStageFormat::Registration)
+            ->with('rounds', 'rounds.matches', 'rounds.matches.team1', 'rounds.matches.team2')
             ->get()
             ->flatMap
             ->rounds
@@ -24,7 +25,7 @@
             </div>
 
             <div class="card-body">
-                @php($matches = collect($round->matches()->with(['team1', 'team2'])->orderBy('timestamp')->get())->groupBy('timestamp'))
+                @php($matches = collect($round->matches)->groupBy('timestamp'))
 
                 <x-matches.list :matches="$matches" :class="'alt'"/>
             </div>
