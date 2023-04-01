@@ -27,10 +27,16 @@ class TournamentRoundController extends Controller
         $validator->validate();
         $validated = $validator->validated();
 
-        $tournament_stage = TournamentStage::where('tournament_id', $tournament->id)->where('id', $validated['tournament_stage_id'])->firstOrFail();
+        $tournament_stage = TournamentStage::where('tournament_id', $tournament->id)
+            ->where('id', $validated['tournament_stage_id'])
+            ->withTrashed()
+            ->firstOrFail();
 
         // Get last round index
-        $last_round = TournamentStageRound::where('tournament_stage_id', $tournament_stage->id)->orderByDesc('id')->first();
+        $last_round = TournamentStageRound::where('tournament_stage_id', $tournament_stage->id)
+            ->withTrashed()
+            ->orderByDesc('id')
+            ->first();
 
         if($last_round) {
             $validated['index'] = $last_round->index + 1;
@@ -65,7 +71,16 @@ class TournamentRoundController extends Controller
     {
     }
 
-    public function destroy(TournamentStageRound $round)
+    public function destroy(Tournament $tournament, TournamentStageRound $round)
     {
+        $this->authorize('delete', $tournament);
+
+        $tournament_stage = TournamentStage::where('id', $round->tournament_stage_id)->firstOrFail();
+
+        $round->delete();
+
+        createToast('success', '', __('Round is deleted!'));
+
+        return redirect(route('web.tournaments.stages.index', [$tournament, $tournament_stage]));
     }
 }

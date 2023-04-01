@@ -3,13 +3,19 @@
         <div class="d-flex align-items-center">
             <span></span> {{$stage->name}}
         </div>
-        @can('update', $tournament)
-            <div>
+        <div class="d-flex align-items-center align-items-center gap-2">
+            @can('update', $tournament)
                 <a class="btn btn-primary btn-sm" href="#tournamentStageRoundCreate-{{ $stage->id }}"
                    data-bs-toggle="modal"
                    data-bs-target="#tournamentStageRoundCreate-{{ $stage->id }}">{{ __('Create round') }}</a>
-            </div>
-        @endcan
+            @endcan
+            @can('delete', $tournament)
+                {{ Form::open(['url' => route('web.tournaments.stages.destroy', [$tournament, $stage]), 'class' => 'd-flex']) }}
+                @method('DELETE')
+                {{ Form::submit(__('Delete Stage'), ['class' => 'btn btn-danger btn-sm']) }}
+                {{ Form::close() }}
+            @endcan
+        </div>
     </div>
     <div class="stage-body">
         <div class="row">
@@ -50,7 +56,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tournamentStageRoundCreateLabel-{{ $stage->id }}">{{ __('Create Round') }}</h5>
+                        <h5 class="modal-title"
+                            id="tournamentStageRoundCreateLabel-{{ $stage->id }}">{{ __('Create Round') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {{ Form::open(['url' => route('web.tournaments.rounds.store', $tournament)]) }}

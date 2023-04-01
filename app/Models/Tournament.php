@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Kodeine\Metable\Metable;
 
 class Tournament extends Model
 {
-    use Metable, HasFactory;
+    use Metable, HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',

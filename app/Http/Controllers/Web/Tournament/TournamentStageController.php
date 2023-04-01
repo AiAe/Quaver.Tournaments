@@ -31,7 +31,9 @@ class TournamentStageController extends Controller
         $validated['tournament_id'] = $tournament->id;
 
         // Get last stage index
-        $last_stage = TournamentStage::where('tournament_id', $tournament->id)->orderByDesc('id')->first();
+        $last_stage = TournamentStage::where('tournament_id', $tournament->id)
+            ->withTrashed()
+            ->orderByDesc('id')->first();
 
         if($last_stage) {
             $validated['index'] = $last_stage->index + 1;
@@ -52,15 +54,22 @@ class TournamentStageController extends Controller
 //    {
 //    }
 
-    public function edit(TournamentStage $tournamentStage)
+    public function edit(TournamentStage $stage)
     {
     }
 
-    public function update(Request $request, TournamentStage $tournamentStage)
+    public function update(Request $request, TournamentStage $stage)
     {
     }
 
-    public function destroy(TournamentStage $tournamentStage)
+    public function destroy(Tournament $tournament, TournamentStage $stage)
     {
+        $this->authorize('delete', $tournament);
+
+        $stage->delete();
+
+        createToast('success', '', __('Stage is deleted!'));
+
+        return back();
     }
 }
