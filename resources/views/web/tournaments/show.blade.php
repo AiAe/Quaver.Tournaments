@@ -12,19 +12,40 @@
             <div class="card">
                 <div class="card-body">
                     <h1>{{ $tournament->name }}</h1>
+
+                    @if($tournament->getMeta('information'))
+                        <p>
+                            {{ $tournament->getMeta('information') }}
+                        </p>
+                    @endif
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <div>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-secondary btn-sm">
-                            <i class="bi bi-discord"></i>
-                            {{ __('Discord') }}
-                        </a>
-                        <a href="#" class="btn btn-secondary btn-sm">
-                            <i class="bi bi-twitch"></i>
-                            {{ __('Twitch') }}
-                        </a>
+                        @if($tournament->getMeta('spreadsheet'))
+                            <a href="{{ $tournament->getMeta('spreadsheet') }}" class="btn btn-secondary btn-sm"
+                               target="_blank"
+                               rel="noreferrer">
+                                <i class="bi bi-list"></i>
+                                {{ __('Spreadsheet') }}
+                            </a>
+                        @endif
+                        @if($tournament->getMeta('discord'))
+                            <a href="$tournament->getMeta('discord')" class="btn btn-secondary btn-sm" target="_blank"
+                               rel="noreferrer">
+                                <i class="bi bi-discord"></i>
+                                {{ __('Discord') }}
+                            </a>
+                        @endif
+                        @if($tournament->getMeta('twitch'))
+                            <a href="{{ $tournament->getMeta('twitch') }}" class="btn btn-secondary btn-sm"
+                               target="_blank"
+                               rel="noreferrer">
+                                <i class="bi bi-twitch"></i>
+                                {{ __('Twitch') }}
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

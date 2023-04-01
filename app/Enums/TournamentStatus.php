@@ -14,10 +14,9 @@ enum TournamentStatus: int
     case Ongoing = 3;
     case Concluded = 4;
 
-    public function name()
+    public function name() : string
     {
-        return match ($this)
-        {
+        return match ($this) {
             self::Unlisted => 'Unlisted',
             self::Upcoming => 'Upcoming',
             self::RegistrationsOpen => 'Registrations Open',
