@@ -3,7 +3,7 @@
 @else
     <title>{{ config('app.name') }}</title>
 @endif
-{{--<link href="{{ asset('/img/icon.png') }}" rel="shortcut icon">--}}
+<link href="{{ asset('assets/img/QT-Favicon-192x192.png') }}" rel="shortcut icon">
 @if (isset($seo['title']) && $seo['title'])
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta name="twitter:title" content="{{ $seo['title'] }}" />
@@ -30,7 +30,6 @@
 {{--<meta name="theme-color" content="">--}}
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta name="keywords" content="">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 {{--<meta name="author" content="">--}}

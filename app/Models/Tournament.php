@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kodeine\Metable\Metable;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class Tournament extends Model
 {
-    use Metable, HasFactory, SoftDeletes;
+    use Metable, HasFactory, SoftDeletes, HasSEO;
 
     protected $fillable = [
         'user_id',
@@ -70,5 +72,16 @@ class Tournament extends Model
     public function staffApplications(): HasMany
     {
         return $this->hasMany(TournamentStaffApplication::class);
+    }
+
+    public function getDynamicSEOData(): SEOData
+    {
+        $description = $this->getMeta('information')??null;
+
+        return new SEOData(
+            title: e($this->name),
+            description: e($description),
+            author: e($this->user->username)
+        );
     }
 }

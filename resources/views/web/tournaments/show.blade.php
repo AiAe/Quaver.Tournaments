@@ -1,5 +1,9 @@
 @extends('web.tournaments.parts.base')
 
+@push('seo')
+    {!! seo()->for($tournament) !!}
+@endpush
+
 @push('cover')
     <div class="col-lg-12">
         <header class="page-cover" style="background: url('{{ asset('assets/img/cover_l_q.png') }}') center;"></header>
@@ -32,7 +36,7 @@
                             </a>
                         @endif
                         @if($tournament->getMeta('discord'))
-                            <a href="$tournament->getMeta('discord')" class="btn btn-secondary btn-sm" target="_blank"
+                            <a href="{{ $tournament->getMeta('discord') }}" class="btn btn-secondary btn-sm" target="_blank"
                                rel="noreferrer">
                                 <i class="bi bi-discord"></i>
                                 {{ __('Discord') }}

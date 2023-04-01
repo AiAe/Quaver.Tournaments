@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class UserTournamentsController extends Controller
 {
@@ -16,15 +17,19 @@ class UserTournamentsController extends Controller
         $show_unlisted = false;
 
         if ($user->id === $loggedUser->id) {
-            $seo['title'] = __('My Tournaments');
+            $title = __('My Tournaments');
             $show_unlisted = true;
         } else {
-            $seo['title'] = __(':user\'s Tournaments', ['user' => $user->username]);
+            $title = __(':user\'s Tournaments', ['user' => $user->username]);
         }
 
         $tournaments = Tournament::where('user_id', $user->id)->paginate(50);
 
-        return view('web.user.tournaments', compact('tournaments', 'seo', 'user', 'show_unlisted'));
+        $SEOData = new SEOData(
+            title: e($title)
+        );
+
+        return view('web.user.tournaments', compact('tournaments', 'user', 'show_unlisted', 'SEOData', 'title'));
     }
 
 }

@@ -1,10 +1,14 @@
 @extends('web.layout.base')
 
+@push('seo')
+    {!! seo()->for($SEOData) !!}
+@endpush
+
 @section('content')
     <div class="container">
         <header class="page-cover">
             <div>
-                <h1>{{ $seo['title'] }}</h1>
+                <h1>{{ $title }}</h1>
             </div>
         </header>
     </div>

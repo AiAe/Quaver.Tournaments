@@ -1,5 +1,9 @@
 @extends('web.layout.base')
 
+@push('seo')
+    {!! seo()->for($SEOData) !!}
+@endpush
+
 @section('content')
     <div class="container">
         <header class="page-cover">

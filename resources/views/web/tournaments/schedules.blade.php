@@ -1,6 +1,10 @@
 @php use App\Enums\TournamentStageFormat; @endphp
 @extends('web.tournaments.parts.base')
 
+@push('seo')
+    {!! seo()->for($tournament) !!}
+@endpush
+
 @push('cover')
     <div class="col-lg-12">
         <header class="page-cover smaller">
