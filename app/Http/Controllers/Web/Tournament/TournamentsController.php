@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 
 class TournamentsController extends Controller
 {
@@ -16,7 +17,12 @@ class TournamentsController extends Controller
 
     public function index()
     {
-        return view('web.tournaments.index');
+        return view('web.tournaments.index', [
+            'SEOData' => new SEOData(
+                title: 'Tournaments',
+                description: 'Find the perfect tournaments for you.',
+            ),
+        ]);
     }
 
     public function show(Tournament $tournament)
