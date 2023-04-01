@@ -276,3 +276,4 @@ $RECYCLE.BIN/
 
 .idea
 package-lock.json
+public/build/*
