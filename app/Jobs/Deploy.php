@@ -32,7 +32,10 @@ class Deploy implements ShouldQueue
                 && $this->webhookCall->payload()['pull_request']['base']['label'] === "AiAe:main"
                 && $this->webhookCall->payload()['pull_request']['merged'] === true) {
                 Log::info('Deploying!');
-                exec(config('app.jobs_deploy_path'));
+                exec(config('app.jobs_deploy_path'), $output);
+
+                Log::info(implode(PHP_EOL, $output));
+                Log::info('Deploy finished');
             }
         } catch (\Exception $exception) {
             Log::error("Failed to deploy");
