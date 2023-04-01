@@ -220,4 +220,5 @@ return [
     'auth_user' => env('AUTH_USER', ''),
     'auth_password' => env('AUTH_PASSWORD', ''),
     'discord_logs_webhook' => env('DISCORD_LOGS_WEBHOOK', ''),
+    'jobs_deploy_path' => env('JOBS_DEPLOY_PATH', ''),
 ];

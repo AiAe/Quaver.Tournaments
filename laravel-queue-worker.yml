@@ -3,7 +3,7 @@ apps:
     script: artisan
     exec_mode: fork
     interpreter: php
-    instances: 6
+    instances: 2
     args:
       - queue:work
       - --tries=5
