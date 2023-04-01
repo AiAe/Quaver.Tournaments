@@ -6,7 +6,7 @@
 
 /usr/bin/php artisan migrate --force
 
-/usr/bin/php artisan package:discover
+/usr/bin/php artisan package:discover --quiet
 /usr/bin/php artisan view:cache
 /usr/bin/php artisan route:cache
 /usr/bin/php artisan config:cache
@@ -14,8 +14,8 @@
 /usr/bin/php artisan queue:restart
 
 # UPDATE ASSETS (it takes some time)
-npm i &>/dev/null
-npm run build &>/dev/null
+npm i > '/dev/null' 2>&1
+npm run build > '/dev/null' 2>&1
 
 APP_VERSION=`git rev-parse --short HEAD`
 sed -i 's/^\APP_VERSION=.*/\APP_VERSION='"$APP_VERSION"'/' .env
