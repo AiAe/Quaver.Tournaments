@@ -22,13 +22,18 @@ class Deploy implements ShouldQueue
 
     public function handle()
     {
-        if ($this->webhookCall->payload()['action'] === "closed"
-            && !empty($this->webhookCall->payload()['pull_request']['base']['label'])
-            // ToDo probably remove/change label to be in env
-            && $this->webhookCall->payload()['pull_request']['base']['label'] === "AiAe:main"
-            && $this->webhookCall->payload()['pull_request']['merged'] === true) {
-            Log::info('Deploying!');
-            exec(config('app.jobs_deploy_path'));
+        try {
+            if ($this->webhookCall->payload()['action'] === "closed"
+                && !empty($this->webhookCall->payload()['pull_request']['base']['label'])
+                // ToDo probably remove/change label to be in env
+                && $this->webhookCall->payload()['pull_request']['base']['label'] === "AiAe:main"
+                && $this->webhookCall->payload()['pull_request']['merged'] === true) {
+                Log::info('Deploying!');
+                exec(config('app.jobs_deploy_path'));
+            }
+        } catch (\Exception $exception) {
+            Log::error("Failed to deploy");
+            Log::error($exception->getMessage());
         }
     }
 }
