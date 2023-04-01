@@ -82,7 +82,7 @@ return [
             'driver' => 'custom',
             'via'    => \KABBOUCHI\LoggerDiscordChannel\DiscordLogger::class,
             'level'  => 'debug',
-            'role_id' => 108616029294301184,
+            'role_id' => env('DISCORD_LOGS_ROLE_ID'),
             'webhook'    => env('DISCORD_LOGS_WEBHOOK'),
             'environment' => 'production'
         ],
