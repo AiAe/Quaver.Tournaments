@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\MatchFormat;
 use App\Models\Team;
 use App\Models\TournamentMatch;
 use App\Models\TournamentStageRound;
@@ -17,6 +18,7 @@ class TournamentMatchFactory extends Factory
         return [
             'tournament_stage_round_id' => TournamentStageRound::inRandomOrder()->first()->id,
             'label' => $this->faker->word(),
+            'match_format' => MatchFormat::OneVsOne,
             'quaver_mp_id' => $this->faker->optional()->randomNumber(4),
             'score1' => $this->faker->optional()->randomNumber(1),
             'score2' => $this->faker->optional()->randomNumber(1),

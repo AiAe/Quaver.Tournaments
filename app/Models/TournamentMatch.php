@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\MatchFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,8 @@ class TournamentMatch extends Model
     use HasFactory, SoftDeletes;
 
     protected $casts = [
-        'timestamp' => 'datetime'
+        'timestamp' => 'datetime',
+        'match_format' => MatchFormat::class
     ];
 
     public function round(): BelongsTo
