@@ -82,6 +82,8 @@ class TournamentsController extends Controller
 
         $tournament->saveMeta();
 
+        $tournament->clearDates();
+
         return back();
     }
 

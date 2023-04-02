@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentGameMode;
+use App\Enums\TournamentStageFormat;
 use App\Enums\TournamentStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -74,9 +76,45 @@ class Tournament extends Model
         return $this->hasMany(TournamentStaffApplication::class);
     }
 
+    public function dates()
+    {
+        $key_name = sprintf("tournament_%s_dates", $this->id);
+
+        return \Cache::remember($key_name, 60, function () {
+            if($this->status !== TournamentStatus::Concluded) {
+                $stage = $this->stages()->select(['id'])->where('stage_format', TournamentStageFormat::Registration)->first();
+            } else {
+                // Take last stage if tournament is concluded
+                $stage = $this->stages()->select(['id'])->orderBy('index')->first();
+            }
+
+            if ($stage) {
+                $round = TournamentStageRound::select(['starts_at', 'ends_at'])->where('tournament_stage_id', $stage->id)->first();
+
+                if ($round) {
+                    return $round;
+                }
+            }
+
+            // Return something default if stage & round does not exist
+            $round = new TournamentStageRound();
+            $round->starts_at = Carbon::now();
+            $round->ends_at = Carbon::now();
+
+            return $round;
+        });
+    }
+
+    public function clearDates()
+    {
+        $key_name = sprintf("tournament_%s_dates", $this->id);
+        \Cache::forget($key_name);
+        $this->dates();
+    }
+
     public function getDynamicSEOData(): SEOData
     {
-        $description = $this->getMeta('information')??null;
+        $description = $this->getMeta('information') ?? null;
 
         return new SEOData(
             title: e($this->name),

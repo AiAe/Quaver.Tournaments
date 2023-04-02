@@ -14,27 +14,46 @@
 
 @section('section')
     <div class="card">
-        <div class="card-header">
-            {{ $title }}
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>{{ $title }}</div>
+            <div>
+                <a href="{{ route('web.tournaments.staff.create', $tournament->slug) }}"
+                   class="btn btn-primary btn-sm">{{ __('Create/Update') }}</a>
+            </div>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover table-dark table-link">
+            <table class="table table-hover table-dark">
                 <thead>
                 <tr>
                     <th style="width: 25%;">{{ __('Role') }}</th>
                     <th>{{ __('User') }}</th>
+                    @can('update', $tournament)
+                        <th style="width: 20%;">{{ __('Actions') }}</th>
+                    @endcan
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($tournament->staff as $user)
-                    <tr data-route="{{ $user->quaverUrl() }}" data-blank="yes">
+                    <tr>
                         <td>{{ $user->pivot->staff_role->name() }}</td>
-                        <td>{{ $user->username }}</td>
+                        <td>
+                            <a href="{{ $user->quaverUrl() }}" target="_blank" rel="noreferrer">
+                                {{ $user->username }}
+                            </a>
+                        </td>
+                        @can('update', $tournament)
+                            <td>
+                                {{ Form::open(['url' => route('web.tournaments.staff.destroy', ['tournament' => $tournament, 'staff' => $user->id]), 'class' => 'd-flex']) }}
+                                @method('DELETE')
+                                {{ Form::submit(__('Kick'), ['class' => 'btn btn-danger btn-sm']) }}
+                                {{ Form::close() }}
+                            </td>
+                        @endcan
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4">{{ __('There is currently no Staff') }}</td>
+                        <td colspan="2">{{ __('There is currently no Staff') }}</td>
                     </tr>
                 @endforelse
                 </tbody>
