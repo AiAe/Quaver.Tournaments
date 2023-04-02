@@ -45,7 +45,9 @@
         </div>
     @empty
         <div class="card">
-            {{ __('No mappools...') }}
+            <div class="card-body text-center">
+                {{ __('No mappools...') }}
+            </div>
         </div>
     @endforelse
 @endsection
