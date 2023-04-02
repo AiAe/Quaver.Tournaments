@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Tournaments;
 use App\Enums\TournamentFormat;
 use App\Models\Team;
 use App\Models\Tournament;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Str;
+use Woeler\DiscordPhp\Message\DiscordEmbedMessage;
+use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 
 class Register extends Component
 {
@@ -87,6 +90,23 @@ class Register extends Component
         $team->members()->attach($user, ['is_captain' => true]);
 
         createToast('success', '', __('You signed up successfully!'));
+
+        if ($wh = $this->tournament->getMeta('discord_webhook_registrations')) {
+            if ($wh !== "") {
+                dispatch(function () use ($user, $wh) {
+                    $discord_embed_message = new DiscordEmbedMessage();
+
+                    $discord_embed_message->setTitle('New player registered!');
+                    $discord_embed_message->setAuthorName($user->username);
+                    $discord_embed_message->setAuthorUrl($user->quaverUrl());
+                    $discord_embed_message->setColor(2214893);
+                    $discord_embed_message->setTimestamp(Carbon::now());
+
+                    $discord_webhook = new DiscordWebhook($wh);
+                    $discord_webhook->send($discord_embed_message);
+                });
+            }
+        }
 
         return redirect()->to(route('web.tournaments.teams.show',
             ['tournament' => $this->tournament->slug, 'team' => $this->slug]));
