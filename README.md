@@ -20,9 +20,14 @@ TBA
 1. Clone the project
 2. Configure the server to use `/public` for root directory. [Settings up with Nginx](#nginx-config)
 3. Copy `.env.example` and rename to `.env` and configure it
-4. Run `composer install`
-5. Run `php artisan key:generate`
-6. Run `sh deploy.sh`
+4. `composer install`
+5. `php artisan key:generate`
+6. `php artisan migrate`
+7. `sh deploy.sh`
+
+## Development Environment using Laravel Sail
+
+[Development Environment using Laravel Sail](./DevEnvironment.md)
 
 #### Nginx config
 
