@@ -35,7 +35,9 @@ class TournamentStaffTest extends TestCase
         ]);
 
         $this->staff = User::factory()->create();
-        $this->tournament->staff()->attach($this->staff, ['staff_role' => StaffRole::Referee]);
+        $this->tournament
+            ->staff()
+            ->create(['user_id' => $this->staff->id, 'staff_role' => StaffRole::Referee]);
     }
 
     public function testIndex()
@@ -65,29 +67,14 @@ class TournamentStaffTest extends TestCase
             ->first();
 
         $this->assertEquals(StaffRole::Referee, $staff->staff_role);
-    }
 
-    public function testUpdate()
-    {
-        $user = User::factory()->create();
-        $this->tournament->staff()->attach($user, ['staff_role' => StaffRole::Referee]);
-
-        $data = ['username' => $user->username, 'role' => StaffRole::Streamer->value];
-
-        $route = route('web.tournaments.staff.store', $this->tournament);
-        $this->post($route, $data)->assertForbidden();
-        $this->actingAs($this->organizer)->post($route, $data)->assertRedirect();
-
-        $staff = TournamentStaff::where('tournament_id', $this->tournament->id)
-            ->where('user_id', $user->id)
-            ->first();
-
-        $this->assertEquals(StaffRole::Streamer, $staff->staff_role);
+        // duplicate
+        $this->actingAs($this->organizer)->post($route, $data)->assertSessionHasErrorsIn('role');
     }
 
     public function testDestroy()
     {
-        $route = route('web.tournaments.staff.destroy', ['tournament' => $this->tournament, 'staff' => $this->staff]);
+        $route = route('web.tournaments.staff.destroy', ['tournament' => $this->tournament, 'staff' => $this->tournament->staff->first()]);
         $this->delete($route)->assertForbidden();
         $this->actingAs($this->organizer)->delete($route)->assertRedirect();
 

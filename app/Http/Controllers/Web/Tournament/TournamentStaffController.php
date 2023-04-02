@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Web\Tournament;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;
+use App\Models\TournamentStaff;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades;
+use Illuminate\Validation\Validator;
 
 class TournamentStaffController extends Controller
 {
@@ -30,37 +32,39 @@ class TournamentStaffController extends Controller
     {
         $this->authorize('update', $tournament);
 
-        $validator = Validator::make($request->all(), [
+        $validator = Facades\Validator::make($request->all(), [
             'username' => ['required', 'exists:App\Models\User,username'],
             'role' => ['required'],
         ]);
+
+        $validator->after(function (Validator $validator) use ($tournament, $request) {
+            $user = User::select(['id'])->where('username', $request['username'])->first();
+
+            if ($tournament->staff()
+                ->where('user_id', $user->id)
+                ->where('staff_role', $request['role'])
+                ->exists()
+            ) {
+                $validator->errors()->add('role', 'User with that role already added!');
+            }
+        });
 
         $validator->validate();
         $validated = $validator->validated();
 
         $user = User::select(['id'])->where('username', $validated['username'])->first();
-        $staff = $tournament->staff()->wherePivot('user_id', $user->id)->first();
+        $tournament->staff()->create(['user_id' => $user->id, 'staff_role' => $validated['role']]);
+        createToast('success', '', __('Staff has been added!'));
 
-        if ($staff) {
-            // Update
-            createToast('success', '', __('Player has been updated!'));
-
-            $staff->pivot->staff_role = $validated['role'];
-            $staff->pivot->save();
-        } else {
-            // Create
-            $tournament->staff()->attach($user, ['staff_role' => $validated['role']]);
-            createToast('success', '', __('Player has been added!'));
-        }
         return back();
     }
 
-    public function destroy(Tournament $tournament, User $staff)
+    public function destroy(Tournament $tournament, TournamentStaff $staff)
     {
         // Probably change to current user policy?
         $this->authorize('delete', $tournament);
 
-        $tournament->staff()->detach($staff);
+        $staff->delete();
 
         createToast('success', '', __('Staff member was removed!'));
         return back();
