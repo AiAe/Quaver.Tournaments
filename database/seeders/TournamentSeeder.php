@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\MatchFormat;
 use App\Enums\StaffRole;
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentStageFormat;
@@ -42,7 +43,7 @@ class TournamentSeeder extends Seeder
                 'status' => TournamentStatus::RegistrationsOpen
             ]);
 
-        $this->createTeams($tournament, 5, 4);
+        $this->createTeams($tournament, 16, 4);
         $this->createStages($tournament, $stages);
         $this->createStaff($tournament);
     }
@@ -100,11 +101,23 @@ class TournamentSeeder extends Seeder
                             'tournament_stage_round_id' => $round->id
                         ]));
 
-                    TournamentMatch::factory(10)
-                        ->create(new Sequence(fn($seq) => [
-                            'label' => $seq->index,
-                            'tournament_stage_round_id' => $round->id
-                        ]));
+                    if ($format == TournamentStageFormat::Qualifier) {
+                        TournamentMatch::factory(10)
+                            ->hasFfaParticipants($stage->tournament->teams->pluck('id')->random(3))
+                            ->create(new Sequence(fn($seq) => [
+                                'label' => $seq->index,
+                                'match_format' => MatchFormat::FreeForAll,
+                                'tournament_stage_round_id' => $round->id,
+                                'team1_id' => null,
+                                'team2_id' => null
+                            ]));
+                    } else {
+                        TournamentMatch::factory(10)
+                            ->create(new Sequence(fn($seq) => [
+                                'label' => $seq->index,
+                                'tournament_stage_round_id' => $round->id
+                            ]));
+                    }
                 }
                 return;
             case TournamentStageFormat::Registration:
