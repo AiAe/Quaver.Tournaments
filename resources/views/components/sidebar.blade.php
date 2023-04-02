@@ -89,19 +89,3 @@
         </x-sidebar.item>
     </x-sidebar.group>
 @endcan
-
-@auth()
-    @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
-    @can('delete', $team)
-        <div class="mb-2">
-            {{ Form::open(['url' => route('web.tournaments.teams.destroy', [$tournament, $team]), 'onsubmit' => "return confirm('Do you really want to withdraw from the tournament?');"]) }}
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger w-100 text-left">
-                <i class="bi bi-trash"></i>
-
-                {{ __('Withdraw') }}
-            </button>
-            {{ Form::close() }}
-        </div>
-    @endcan
-@endauth
