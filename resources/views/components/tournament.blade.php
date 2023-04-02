@@ -19,17 +19,17 @@
                                 <div class="tournament-box-title">{{ __('Dates') }}</div>
                                 <div class="tournament-box-content">
                                     <div class="tournament-box-text">{{ __($tournament->status->name()) }}</div>
-                                    @php($date_1 = \Carbon\Carbon::now()->days(77)->diffForHumans(['parts' => 2, 'short' => true]))
-                                    @php($date_2 = \Carbon\Carbon::now()->days(77)->format('d.m.Y'))
+                                    @php($dates = $tournament->dates())
+                                    @php($date = $dates->ends_at->diffForHumans(['parts' => 2]))
 
                                     @if($tournament->status == TournamentStatus::RegistrationsOpen)
-                                        <div>{{ __('Ends in :date', ['date' => $date_1]) }}</div>
+                                        <div>{{ __('Ends in :date', ['date' => $date]) }}</div>
                                     @elseif($tournament->status == TournamentStatus::Ongoing)
-                                        <div>{{ __('Ends in :date', ['date' => $date_1]) }}</div>
+                                        <div>{{ __('Ends in :date', ['date' => $date]) }}</div>
                                     @elseif($tournament->status == TournamentStatus::Concluded)
-                                        <div>{{ __('Ended :date', ['date' => $date_1]) }}</div>
+                                        <div>{{ __('Ended :date', ['date' => $date]) }}</div>
                                     @else
-                                        <div>{{ __('Starts in :date', ['date' => $date_1]) }}</div>
+                                        <div>{{ __('Starts in :date', ['date' => $dates->starts_at->diffForHumans(['parts' => 2])]) }}</div>
                                     @endif
                                 </div>
                             </div>
