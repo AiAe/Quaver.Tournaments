@@ -64,8 +64,7 @@
         {{ __('Schedules') }}
     </x-sidebar.item>
 
-    {{-- TODO: Pick icon--}}
-    <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament->slug" icon="bi-calendar">
+    <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament->slug" icon="bi-view-list">
         {{ __('Stages') }}
     </x-sidebar.item>
 </x-sidebar.group>
