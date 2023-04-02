@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class TournamentTeamsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('throttle:day')->only('destroy');
+    }
+
     public function index(Tournament $tournament)
     {
         $title = __('Players');
@@ -34,7 +39,14 @@ class TournamentTeamsController extends Controller
     {
     }
 
-    public function destroy(Team $team)
+    public function destroy(Tournament $tournament, Team $team)
     {
+        $this->authorize('delete', $team);
+
+        $team->delete();
+
+        createToast('success', '', __('Successfully withdrawn from the tournament!'));
+
+        return redirect(route('web.tournaments.show', $tournament));
     }
 }

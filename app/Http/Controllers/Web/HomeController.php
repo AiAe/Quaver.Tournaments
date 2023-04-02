@@ -13,7 +13,7 @@ class HomeController extends Controller
         return view('web.home.home', [
             'SEOData' => new SEOData(
                 title: 'Home',
-                description: '',
+                description: 'Our site is dedicated to hosting exciting tournaments for all skill levels, from beginners to seasoned pros.',
             ),
         ]);
     }

@@ -18,14 +18,21 @@
             <div>
                 {{ __('Players') }}
             </div>
-            {{--ToDo if team is full remove button--}}
-            @can('update', $team)
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>
-                @push('modals')
-                    @livewire('tournaments.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))
-                @endpush
+
+            @can('delete', $team)
+                {{ Form::open(['url' => route('web.tournaments.teams.destroy', [$tournament, $team]), 'onsubmit' => "return confirm('Do you really want to withdraw from the tournament?');"]) }}
+                @method('DELETE')
+                {{ Form::submit(__('Withdraw'), ['class' => 'btn btn-danger btn-sm']) }}
+                {{ Form::close() }}
             @endcan
+            {{--ToDo if team is full remove button--}}
+            {{--            @can('update', $team)--}}
+            {{--                <button type="button" class="btn btn-primary" data-bs-toggle="modal"--}}
+            {{--                        data-bs-target="#tournamentTeamInvite">{{ __('Invite Player') }}</button>--}}
+            {{--                @push('modals')--}}
+            {{--                    @livewire('tournaments.team.invite', ['tournament_id' => $tournament->id, 'team_id' => $team->id], key($tournament))--}}
+            {{--                @endpush--}}
+            {{--            @endcan--}}
         </div>
 
         <table class="table table-hover table-dark mb-0">

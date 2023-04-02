@@ -23,7 +23,11 @@
                 <tr>
                     <th style="width: 10%;">{{ __('#') }}</th>
                     <th>
-                        {{ __('Team name') }}
+                        @if($tournament->format == \App\Enums\TournamentFormat::Team)
+                            {{ __('Team name') }}
+                        @else
+                            {{ __('Player name') }}
+                        @endif
                     </th>
                 </tr>
                 </thead>
