@@ -9,6 +9,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @if(Auth::user()->has_discord())
+                    @php($discord_url = $tournament->getMeta('discord')??null)
+                    @if($discord_url)
+                        <div class="modal-body">
+                            <div class="alert alert-danger mt-2 d-flex justify-content-between align-items-center">
+                                <div>
+                                    {{ __("Make sure to join the tournament's Discord server to get real time updates/reminders!") }}
+                                </div>
+                                <a href="{{ $discord_url }}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">{{ __('Join') }}</a>
+                            </div>
+                        </div>
+                    @endif
                     <form wire:submit.prevent="create">
                         @if($tournament->format == \App\Enums\TournamentFormat::Team)
                             <div class="modal-body">
@@ -39,7 +50,8 @@
                             @if($captcha_question)
                                 <div class="modal-body">
                                     <div>
-                                        <label class="form-label d-block">{{ __('To verify your not a bot, answer this question:') }}</label>
+                                        <label
+                                            class="form-label d-block">{{ __('To verify your not a bot, answer this question:') }}</label>
                                         <label class="form-label text-warning">{{ $captcha_question }}</label>
                                         <input type="text" wire:model="captcha" class="form-control">
                                         @error('captcha') <span class="error">{{ $message }}</span> @enderror
