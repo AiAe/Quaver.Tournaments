@@ -17,19 +17,16 @@
                 </h1>
 
                 <p>
-                    Our site is dedicated to
-                    hosting exciting tournaments for all skill levels, from beginners to seasoned pros.
+                    Quaver Tournaments is dedicated to hosting exciting tournaments for people who love the thrill of
+                    competition, for all skill levels from beginners to seasoned pros.
                     <br>
-                    Whether you're a fan
-                    of rhythm games or simply love the thrill of competition, you're sure to find something to love
-                    here.
+                    No matter whether you're looking to play, spectate or maybe even help out as staff, this is the
+                    right place to go.
                 </p>
 
                 <p>
                     So what are you waiting for? Join the Quaver community today and start competing in some of the most
-                    thrilling and engaging tournaments around. <br>
-                    Whether you're looking to showcase your skills, make new
-                    friends, or simply have fun, Quaver has something for everyone.
+                    thrilling and engaging tournaments around.
                 </p>
 
                 <div class="d-flex justify-content-center">
@@ -69,11 +66,9 @@
                         <h5>Are you interested in hosting a Quaver Tournament?</h5>
 
                         <p class="mt-3">
-                            We offer a lot of options to help you plan and execute your
-                            tournament with ease. <br>
-                            Whether you're looking to host a small tournament or a large-scale
-                            competition, we have everything to make it a success. <br>
-                            We are dedicated to provide you with the best possible experience. <br>
+                            We offer a lot of features to help plan and execute tournaments with ease. <br>
+                            Whether you're looking to host a small tournament or a large-scale competition, we have
+                            everything to make it a success.<br>
                         </p>
 
                         <p>
