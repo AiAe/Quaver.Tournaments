@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentGameMode;
-use App\Enums\TournamentStageFormat;
 use App\Enums\TournamentStatus;
+use Cache;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -76,40 +76,41 @@ class Tournament extends Model
         return $this->hasMany(TournamentStaffApplication::class);
     }
 
-    public function dates()
+    public function startsAt(): ?Carbon
     {
-        $key_name = sprintf("tournament_%s_dates", $this->id);
+        return $this->getDate('starts_at');
+    }
 
-        return \Cache::remember($key_name, 60, function () {
-            if($this->status !== TournamentStatus::Concluded) {
-                $stage = $this->stages()->select(['id'])->where('stage_format', TournamentStageFormat::Registration)->first();
-            } else {
-                // Take last stage if tournament is concluded
-                $stage = $this->stages()->select(['id'])->orderBy('index')->first();
-            }
+    public function registrationEndsAt(): ?Carbon
+    {
+        return $this->getDate('reg_ends_at');
+    }
 
-            if ($stage) {
-                $round = TournamentStageRound::select(['starts_at', 'ends_at'])->where('tournament_stage_id', $stage->id)->first();
+    public function endsAt(): ?Carbon
+    {
+        return $this->getDate('ends_at');
+    }
 
-                if ($round) {
-                    return $round;
-                }
-            }
+    private function getDateCacheKey(): string
+    {
+        return sprintf("tournament_%s_dates", $this->id);
+    }
 
-            // Return something default if stage & round does not exist
-            $round = new TournamentStageRound();
-            $round->starts_at = Carbon::now();
-            $round->ends_at = Carbon::now();
+    private function getDate(string $attr): ?Carbon
+    {
+        $this->load('stages.rounds');
+        $dates = Cache::remember($this->getDateCacheKey(), 60, fn() => [
+            'starts_at' => $this->stages->first()?->rounds->first()?->starts_at,
+            'reg_ends_at' => $this->stages->first()?->rounds->first()?->ends_at,
+            'ends_at' => $this->stages->last()?->rounds->last()?->ends_at,
+        ]);
 
-            return $round;
-        });
+        return $dates[$attr];
     }
 
     public function clearDates()
     {
-        $key_name = sprintf("tournament_%s_dates", $this->id);
-        \Cache::forget($key_name);
-        $this->dates();
+        Cache::forget($this->getDateCacheKey());
     }
 
     public function getDynamicSEOData(): SEOData

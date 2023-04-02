@@ -19,17 +19,28 @@
                                 <div class="tournament-box-title">{{ __('Dates') }}</div>
                                 <div class="tournament-box-content">
                                     <div class="tournament-box-text">{{ __($tournament->status->name()) }}</div>
-                                    @php($dates = $tournament->dates())
-                                    @php($date = $dates->ends_at->diffForHumans(['parts' => 2]))
+                                    @php
+                                        use App\Enums\TournamentStatus;
+                                        $tournament->clearDates();
+                                        $displayDate = match ($tournament->status) {
+                                            TournamentStatus::Unlisted => $tournament->startsAt(),
+                                            TournamentStatus::RegistrationsOpen =>  $tournament->registrationEndsAt(),
+                                            default => $tournament->endsAt(),
+                                        };
+                                    @endphp
 
-                                    @if($tournament->status == TournamentStatus::RegistrationsOpen)
-                                        <div>{{ __('Ends in :date', ['date' => $date]) }}</div>
-                                    @elseif($tournament->status == TournamentStatus::Ongoing)
-                                        <div>{{ __('Ends in :date', ['date' => $date]) }}</div>
-                                    @elseif($tournament->status == TournamentStatus::Concluded)
-                                        <div>{{ __('Ended :date', ['date' => $date]) }}</div>
-                                    @else
-                                        <div>{{ __('Starts in :date', ['date' => $dates->starts_at->diffForHumans(['parts' => 2])]) }}</div>
+                                    @if ($displayDate)
+                                        @php($data = ['date' => $displayDate->diffForHumans(['parts' => 2])])
+
+                                        @if($tournament->status == TournamentStatus::Unlisted)
+                                            <div>{{ __('Starts in :date', $data) }}</div>
+                                        @elseif($tournament->status == TournamentStatus::RegistrationsOpen)
+                                            <div>{{ __('Ends in :date', $data) }}</div>
+                                        @elseif($tournament->status == TournamentStatus::Ongoing)
+                                            <div>{{ __('Ends in :date', $data) }}</div>
+                                        @elseif($tournament->status == TournamentStatus::Concluded)
+                                            <div>{{ __('Ended :date', $data) }}</div>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
