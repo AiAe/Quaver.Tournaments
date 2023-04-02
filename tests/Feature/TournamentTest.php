@@ -62,14 +62,24 @@ class TournamentTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUpdate()
+    public function testEditAndUpdate()
     {
         $this->assertTrue($this->organizer->can('update', $this->tournament));
         $this->assertFalse(User::factory()->create()->can('update', $this->tournament));
 
+        $this->get(route('web.tournaments.edit', $this->tournament))
+            ->assertForbidden();
+
         $data = ['status' => TournamentStatus::RegistrationsOpen->value];
         $this->put(route('web.tournaments.update', $this->tournament), $data)
             ->assertForbidden();
+
+        $this->actingAs($this->organizer)
+            ->get(route('web.tournaments.edit', $this->tournament))
+            ->assertOk()
+            ->assertSee('Status')
+            ->assertSee('Rank')
+            ->assertSee('Prize');
 
         $this->actingAs($this->organizer)
             ->put(route('web.tournaments.update', $this->tournament), $data)
@@ -77,6 +87,12 @@ class TournamentTest extends TestCase
 
         $this->tournament->refresh();
         $this->assertEquals(TournamentStatus::RegistrationsOpen, $this->tournament->status);
+
+        $data = ['discord' => 'ababa'];
+        $this->actingAs($this->organizer)
+            ->put(route('web.tournaments.update', $this->tournament), $data)->assertRedirect();
+        $this->tournament->refresh();
+        $this->assertEquals('ababa', $this->tournament->discord);
     }
 
     public function testDelete()
