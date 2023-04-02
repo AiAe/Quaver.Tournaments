@@ -1,10 +1,10 @@
 @php use App\Enums\TournamentFormat;use App\Models\Team; @endphp
 
 <x-sidebar.group>
-    <x-sidebar.item route="web.tournaments.show" :routeParams="$tournament" icon="bi-info-square-fill">
+    <x-sidebar.item route="web.tournaments.show" :routeParams="$tournament->slug" icon="bi-info-square-fill">
         {{ __('Information') }}
     </x-sidebar.item>
-    <x-sidebar.item route="web.tournaments.rules.show" :routeParams="$tournament" icon="bi-hammer">
+    <x-sidebar.item route="web.tournaments.rules.show" :routeParams="$tournament->slug" icon="bi-hammer">
         {{ __('Rules') }}
     </x-sidebar.item>
 </x-sidebar.group>
@@ -24,7 +24,7 @@
     @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
     @if($team && $tournament->format == TournamentFormat::Team)
         <x-sidebar.group>
-            <x-sidebar.item route="web.tournaments.teams.show" :routeParams="compact('tournament','team')"
+            <x-sidebar.item route="web.tournaments.teams.show" :routeParams="[$tournament->slug, $team->id]"
                             icon="bi-people">
                 {{ __('My Team') }}
             </x-sidebar.item>
@@ -41,7 +41,7 @@
 @endguest
 
 <x-sidebar.group>
-    <x-sidebar.item route="web.tournaments.teams.index" :routeParams="$tournament" icon="bi-controller">
+    <x-sidebar.item route="web.tournaments.teams.index" :routeParams="$tournament->slug" icon="bi-controller">
         @if($tournament->format == TournamentFormat::Team)
             {{ __('Teams') }}
         @else
@@ -51,7 +51,7 @@
 </x-sidebar.group>
 
 <x-sidebar.group>
-    <x-sidebar.item route="web.tournaments.mappools" :route-params="$tournament" icon="bi-music-note-beamed">
+    <x-sidebar.item route="web.tournaments.mappools" :route-params="$tournament->slug" icon="bi-music-note-beamed">
         {{ __('Mappool') }}
     </x-sidebar.item>
 
@@ -60,12 +60,12 @@
     {{--        {{ __('Bracket') }}--}}
     {{--    </a>--}}
 
-    <x-sidebar.item route="web.tournaments.schedules" :route-params="$tournament" icon="bi-journal">
+    <x-sidebar.item route="web.tournaments.schedules" :route-params="$tournament->slug" icon="bi-journal">
         {{ __('Schedules') }}
     </x-sidebar.item>
 
     {{-- TODO: Pick icon--}}
-    <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament" icon="bi-calendar">
+    <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament->slug" icon="bi-calendar">
         {{ __('Stages') }}
     </x-sidebar.item>
 </x-sidebar.group>
@@ -77,15 +77,31 @@
 {{--</x-sidebar.group>--}}
 
 <x-sidebar.group>
-    <x-sidebar.item route="web.tournaments.staff.index" :route-params="$tournament" icon="bi-people-fill">
+    <x-sidebar.item route="web.tournaments.staff.index" :route-params="$tournament->slug" icon="bi-people-fill">
         {{ __('Staff') }}
     </x-sidebar.item>
 </x-sidebar.group>
 
 @can('update', $tournament)
     <x-sidebar.group>
-        <x-sidebar.item route="web.tournaments.edit" :route-params="$tournament" icon="bi-wrench">
+        <x-sidebar.item route="web.tournaments.edit" :route-params="$tournament->slug" icon="bi-wrench">
             {{ __('Settings') }}
         </x-sidebar.item>
     </x-sidebar.group>
 @endcan
+
+@auth()
+    @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
+    @can('delete', $team)
+        <div class="mb-2">
+            {{ Form::open(['url' => route('web.tournaments.teams.destroy', [$tournament, $team]), 'onsubmit' => "return confirm('Do you really want to withdraw from the tournament?');"]) }}
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger w-100 text-left">
+                <i class="bi bi-trash"></i>
+
+                {{ __('Withdraw') }}
+            </button>
+            {{ Form::close() }}
+        </div>
+    @endcan
+@endauth
