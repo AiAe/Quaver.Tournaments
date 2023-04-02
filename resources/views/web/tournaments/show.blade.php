@@ -18,9 +18,7 @@
                     <h1>{{ $tournament->name }}</h1>
 
                     @if($tournament->getMeta('information'))
-                        <p>
-                            {{ $tournament->getMeta('information') }}
-                        </p>
+                        <x-markdown>{{ $tournament->getMeta('information') }}</x-markdown>
                     @endif
                 </div>
                 <div class="card-footer d-flex justify-content-between">
