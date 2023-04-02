@@ -6,6 +6,7 @@ use App\Enums\MatchFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TournamentMatch extends Model
@@ -40,5 +41,10 @@ class TournamentMatch extends Model
     public function precedingMatch2(): BelongsTo
     {
         return $this->belongsTo(TournamentMatch::class);
+    }
+
+    public function ffaParticipants(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, 'tournament_match_ffa_participants');
     }
 }
