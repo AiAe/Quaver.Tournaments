@@ -17,8 +17,10 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <div>{{ $title }}</div>
             <div>
-                <a href="{{ route('web.tournaments.staff.create', $tournament->slug) }}"
-                   class="btn btn-primary btn-sm">{{ __('Create/Update') }}</a>
+                @can('update', $tournament)
+                    <a href="{{ route('web.tournaments.staff.create', $tournament->slug) }}"
+                       class="btn btn-primary btn-sm">{{ __('Create/Update') }}</a>
+                @endcan
             </div>
         </div>
 

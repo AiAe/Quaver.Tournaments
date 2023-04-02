@@ -34,7 +34,7 @@
                             </table>
                         </div>
                         <div class="col-lg-3">
-                            <table>
+                            <table class="d-none">
                                 <tr>
                                     <th style="width: 25%"></th>
                                     <th style="width: 25%"></th>
