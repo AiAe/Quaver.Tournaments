@@ -41,7 +41,7 @@
     <div class="mappools mt-3">
         <div class="d-flex justify-content-between align-items-center round-name">
             <div class="d-flex align-items-center"><span></span>{{ __('Maps') }}</div>
-            <div class="d-flex" style="gap: 10px;">
+            <div class="d-lg-flex d-md-flex d-sm-none d-none" style="gap: 10px;">
                 <div class="d-flex" style="gap: 10px;">
                     <a href="#" class="btn btn-primary btn-sm">{{ __('Download') }}</a>
                     <a href="#" class="btn btn-primary btn-sm">{{ __('Download In-Game') }}</a>
