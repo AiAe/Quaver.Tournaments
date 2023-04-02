@@ -31,7 +31,7 @@
                     <th style="width: 25%;">{{ __('Role') }}</th>
                     <th>{{ __('User') }}</th>
                     @can('update', $tournament)
-                        <th style="width: 20%;">{{ __('Actions') }}</th>user
+                        <th style="width: 20%;">{{ __('Actions') }}</th>
                     @endcan
                 </tr>
                 </thead>
