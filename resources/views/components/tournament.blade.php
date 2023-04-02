@@ -21,7 +21,6 @@
                                     <div class="tournament-box-text">{{ __($tournament->status->name()) }}</div>
                                     @php
                                         use App\Enums\TournamentStatus;
-                                        $tournament->clearDates();
                                         $displayDate = match ($tournament->status) {
                                             TournamentStatus::Unlisted => $tournament->startsAt(),
                                             TournamentStatus::RegistrationsOpen =>  $tournament->registrationEndsAt(),
