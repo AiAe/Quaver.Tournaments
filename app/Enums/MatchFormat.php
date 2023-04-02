@@ -14,8 +14,8 @@ enum MatchFormat: int
     public function name(): string
     {
         return match ($this) {
-            MatchFormat::OneVsOne => 'OneVsOne ',
-            MatchFormat::FreeForAll => 'FreeForAll ',
+            MatchFormat::OneVsOne => 'OneVsOne',
+            MatchFormat::FreeForAll => 'FreeForAll',
         };
     }
 }
