@@ -62,11 +62,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'team_user_invites')->withTimestamps();
     }
 
-    public function staffedTournaments(): BelongsToMany
+    public function staffedTournaments(): HasMany
     {
-        return $this->belongsToMany(Tournament::class, 'tournament_staff')
-            ->using(TournamentStaff::class)
-            ->orderByPivot('staff_role');
+        return $this->hasMany(TournamentStaff::class)->orderBy('staff_role');
     }
 
     public function staffApplications(): HasMany
