@@ -6,7 +6,10 @@ use App\Enums\TournamentFormat;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Models\Tournament;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Woeler\DiscordPhp\Message\DiscordEmbedMessage;
+use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 
 class TournamentTeamsController extends Controller
 {
@@ -43,9 +46,25 @@ class TournamentTeamsController extends Controller
     {
         $this->authorize('delete', $team);
 
-        $team->delete();
-
         createToast('success', '', __('Successfully withdrawn from the tournament!'));
+
+        if ($wh = $tournament->getMeta('discord_webhook_registrations')) {
+            if ($wh !== "") {
+                dispatch(function () use ($team, $wh) {
+                    $discord_embed_message = new DiscordEmbedMessage();
+
+                    $discord_embed_message->setTitle('Withdraw from the tournament');
+                    $discord_embed_message->setAuthorName($team->name);
+                    $discord_embed_message->setColor(16711680);
+                    $discord_embed_message->setTimestamp(Carbon::now());
+
+                    $discord_webhook = new DiscordWebhook($wh);
+                    $discord_webhook->send($discord_embed_message);
+                });
+            }
+        }
+
+        $team->delete();
 
         return redirect(route('web.tournaments.show', $tournament));
     }

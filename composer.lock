@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1627b0a0827833283ea046a7dd165157",
+    "content-hash": "b80f01e76a79fc20f7868fbb36090383",
     "packages": [
         {
             "name": "brick/math",
@@ -7716,6 +7716,61 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "woeler/phpdiscord",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Woeler/discord-php.git",
+                "reference": "075abb9a376da98fbec0f135dbecc385222a6b97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Woeler/discord-php/zipball/075abb9a376da98fbec0f135dbecc385222a6b97",
+                "reference": "075abb9a376da98fbec0f135dbecc385222a6b97",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Woeler\\DiscordPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Woeler",
+                    "email": "woeler@woeler.eu"
+                }
+            ],
+            "description": "A php library to use Discord webhooks and embeds.",
+            "support": {
+                "issues": "https://github.com/Woeler/discord-php/issues",
+                "source": "https://github.com/Woeler/discord-php/tree/4.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://woeler.dev",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Woeler",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-01-27T15:07:31+00:00"
         }
     ],
     "packages-dev": [
