@@ -26,6 +26,7 @@
         <include>
             <directory suffix=".php">app</directory>
             <directory suffix=".php">resources/views</directory>
+            <directory suffix=".php">database/seeders</directory>
         </include>
     </coverage>
 </phpunit>
