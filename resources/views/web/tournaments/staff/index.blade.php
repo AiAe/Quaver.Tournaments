@@ -19,7 +19,7 @@
             <div>
                 @can('update', $tournament)
                     <a href="{{ route('web.tournaments.staff.create', $tournament->slug) }}"
-                       class="btn btn-primary btn-sm">{{ __('Create/Update') }}</a>
+                       class="btn btn-primary btn-sm">{{ __('Create') }}</a>
                 @endcan
             </div>
         </div>
@@ -41,7 +41,7 @@
                         <td>{{ $staff->staff_role->name() }}</td>
                         <td>
                             <a href="{{ $staff->user->quaverUrl() }}" target="_blank" rel="noreferrer">
-                                {{ $staff->username }}
+                                {{ $staff->user->username }}
                             </a>
                         </td>
                         @can('update', $tournament)
