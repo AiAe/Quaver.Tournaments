@@ -30,6 +30,11 @@ class TournamentRulesController extends Controller
         $tournament->setMeta('rules', $validated['rules'] ?? "");
         $tournament->saveMeta();
 
-        return redirect(request()->header('Referer'));
+        $redirect = request()->header('Referer');
+        if ($redirect) {
+            return redirect($redirect);
+        } else {
+            return back();
+        }
     }
 }
