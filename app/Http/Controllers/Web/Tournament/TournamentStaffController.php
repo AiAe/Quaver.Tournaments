@@ -21,6 +21,8 @@ class TournamentStaffController extends Controller
 
     public function create(Tournament $tournament)
     {
+        $this->authorize('update', $tournament);
+
         $title = __('Invite Staff');
 
         return view('web.tournaments.staff.create', compact('title', 'tournament'));
@@ -28,6 +30,8 @@ class TournamentStaffController extends Controller
 
     public function store(Request $request, Tournament $tournament)
     {
+        $this->authorize('update', $tournament);
+
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'exists:App\Models\User,username'],
             'role' => ['required'],
