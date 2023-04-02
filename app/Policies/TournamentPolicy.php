@@ -29,6 +29,7 @@ class TournamentPolicy
 
     public function update(User $user, Tournament $tournament): bool
     {
+        // Check if auth user has organiser role
         return $tournament->user_id == $user->id;
     }
 
