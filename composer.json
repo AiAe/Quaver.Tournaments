@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "cesargb/laravel-magiclink": "^2.15",
+        "doctrine/dbal": "^3.6",
         "dyanakiev/html": "^6.2",
         "dyanakiev/laravel-logger-discord-channel": "^6.0.0",
         "guzzlehttp/guzzle": "^7.5",
