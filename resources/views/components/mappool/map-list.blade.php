@@ -27,7 +27,7 @@
                                     <i class="bi bi-plus-slash-minus"></i> <span>{{ $map->offset }}</span>
                                 </div>
                                 <div>
-                                    <i class="bi bi-clock-fill"></i> <span>{{ $m->length }}</span>
+                                    <i class="bi bi-clock-fill"></i> <span>{{ \Carbon\CarbonInterval::milliseconds($m->length)->cascade()->forHumans(null, true, 2) }}</span>
                                 </div>
                                 <div>
                                     <i class="bi bi-speedometer2"></i> <span>{{ $m->bpm }} BPM</span>
