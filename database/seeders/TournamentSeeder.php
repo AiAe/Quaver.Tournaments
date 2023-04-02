@@ -133,7 +133,7 @@ class TournamentSeeder extends Seeder
 
     private function createStaff(Tournament $tournament)
     {
-        $tournament->staff()->attach($tournament->user, ['staff_role' => StaffRole::Organizer]);
+        $tournament->staff()->create(['user_id' => $tournament->user->id, 'staff_role' => StaffRole::Organizer]);
 
         $roles = [
             [StaffRole::Mappooler, 2],
@@ -145,8 +145,9 @@ class TournamentSeeder extends Seeder
 
         foreach ($roles as [$role, $n]) {
             $staffUsers = User::factory($n)->create();
-            $tournament->staff()->attach($staffUsers->map->id, ['staff_role' => $role]);
-
+            for ($i = 0; $i < $n; $i++) {
+                $tournament->staff()->create(['user_id' => $staffUsers[$i]->id, 'staff_role' => $role]);
+            }
         }
 
         TournamentStaffApplication::factory(5)
