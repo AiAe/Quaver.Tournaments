@@ -4,8 +4,8 @@ namespace App\Policies;
 
 use App\Enums\MatchFormat;
 use App\Enums\TournamentStageFormat;
-use App\Models\Tournament;
 use App\Models\TournamentMatch;
+use App\Models\TournamentStageRound;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -23,25 +23,21 @@ class MatchPolicy
         return $user->can('view', $tournamentMatch->tournament());
     }
 
-    // Pass in extra tournament argument
-    public function create(User $user, Tournament $tournament): bool
+    // Pass in extra tournament round argument
+    public function create(User $user, TournamentStageRound $round): bool
     {
-        return $user->is($tournament->user);
+        return $round->stage->tournament->userIsOrganizer($user);
     }
 
     public function update(User $user, TournamentMatch $tournamentMatch): bool
     {
-        return self::isOrganizer($user, $tournamentMatch);
-    }
-
-    private static function isOrganizer(User $user, TournamentMatch $tournamentMatch): bool
-    {
-        return $user->is($tournamentMatch->tournament()->user);
+        return $tournamentMatch->tournament()->userIsOrganizer($user);
     }
 
     public function delete(User $user, TournamentMatch $tournamentMatch): bool
     {
-        return $tournamentMatch->timestamp->isFuture() && self::isOrganizer($user, $tournamentMatch);
+        return $tournamentMatch->timestamp->isFuture()
+            && $tournamentMatch->tournament()->userIsOrganizer($user);
     }
 
     public function restore(User $user, TournamentMatch $tournamentMatch): bool
@@ -60,7 +56,7 @@ class MatchPolicy
         $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
         $isFuture = $tournamentMatch->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $isFuture && self::isOrganizer($user, $tournamentMatch)) return true;
+        if ($isQualifier && $isFfa && $isFuture && $tournamentMatch->tournament()->userIsOrganizer($user)) return true;
 
         $team = $user->teams()
             ->where('tournament_id', $tournamentMatch->tournament()->id)
@@ -82,7 +78,7 @@ class MatchPolicy
         $isQualifier = $tournamentMatch->round->stage->stage_format == TournamentStageFormat::Qualifier;
         $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
 
-        if ($isQualifier && $isFfa && self::isOrganizer($user, $tournamentMatch)) return true;
+        if ($isQualifier && $isFfa && $tournamentMatch->tournament()->userIsOrganizer($user)) return true;
 
         $isMoreThan1HourAhead = $tournamentMatch->timestamp->copy()->addHours(-1)->isFuture();
 

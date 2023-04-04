@@ -19,7 +19,8 @@ class TournamentPolicy
 
     public function view(?User $user, Tournament $tournament): bool
     {
-        return $tournament->status != TournamentStatus::Unlisted || $tournament->user->is($user);
+        return $tournament->status != TournamentStatus::Unlisted
+            || $user && $tournament->userIsOrganizer($user);
     }
 
     public function create(User $user): bool
@@ -29,13 +30,12 @@ class TournamentPolicy
 
     public function update(User $user, Tournament $tournament): bool
     {
-        // Check if auth user has organiser role
-        return $tournament->user_id == $user->id;
+        return $tournament->userIsOrganizer($user);
     }
 
     public function delete(User $user, Tournament $tournament): bool
     {
-        return $tournament->user_id == $user->id;
+        return $tournament->userIsOrganizer($user);
     }
 
     public function restore(User $user, Tournament $tournament): bool

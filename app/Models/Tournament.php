@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StaffRole;
 use App\Enums\TournamentFormat;
 use App\Enums\TournamentGameMode;
 use App\Enums\TournamentStatus;
@@ -70,6 +71,19 @@ class Tournament extends Model
     public function staffApplications(): HasMany
     {
         return $this->hasMany(TournamentStaffApplication::class);
+    }
+
+    public function userHasStaffRole(User $user, StaffRole $role): bool
+    {
+        return $this->staff()
+            ->where('user_id', $user->id)
+            ->where('staff_role', $role->value)
+            ->exists();
+    }
+
+    public function userIsOrganizer(User $user): bool
+    {
+        return $user->is($this->user) || $this->userHasStaffRole($user, StaffRole::Organizer);
     }
 
     public function startsAt(): ?Carbon
