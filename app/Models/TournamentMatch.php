@@ -47,4 +47,9 @@ class TournamentMatch extends Model
     {
         return $this->belongsToMany(Team::class, 'tournament_match_ffa_participants');
     }
+
+    public function tournament(): Tournament
+    {
+        return $this->round->stage->tournament;
+    }
 }
