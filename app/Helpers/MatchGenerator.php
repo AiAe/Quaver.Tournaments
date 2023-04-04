@@ -5,7 +5,6 @@ namespace App\Helpers;
 use App\Enums\MatchFormat;
 use App\Models\Team;
 use App\Models\TournamentStageRound;
-use Carbon\Carbon;
 
 class MatchGenerator
 {
@@ -17,22 +16,18 @@ class MatchGenerator
      */
     public static function generateQualifierLobbies(TournamentStageRound $round, array $timestamps)
     {
-        $timestamps = collect($timestamps);
+        $timestamps = collect($timestamps)->sort();
+        $first = $timestamps->first();
+        $last = $timestamps->last();
 
-        $first = $timestamps->min();
-        $last = $timestamps->max();
-        $multiWeek = $first->addDays(7) > $last;
+        $isMultiWeek = $last->startOfWeek()->diff($first->startOfWeek())->d / 7 > 0;
 
         foreach ($timestamps as $timestamp) {
-            $timestamp = Carbon::now();
-            $week = $timestamp->week - $first->week + 1;
-            $weekday = $timestamp->englishDayOfWeek;
-            $time = $timestamp->format('H:i');
+            $week = ($timestamp->copy()->startOfWeek()->diff($first->startOfWeek())->d) / 7 + 1;
+            $label = strtoupper($timestamp->isoFormat('ddd-HH:mm'));
 
-            if ($multiWeek) {
-                $label = "$week-$weekday-$time";
-            } else {
-                $label = "$weekday-$time";
+            if ($isMultiWeek) {
+                $label = "$week-$label";
             }
 
             $round->matches()->create([
@@ -80,15 +75,21 @@ class MatchGenerator
         }
     }
 
-    private static int $optimalHour = 19;
+    public static int $optimalHour = 19;
 
-    private static function findOptimalHourFromMatchUp(Team $team1, Team $team2): int
+    public static function findOptimalHourFromMatchUp(Team $team1, Team $team2): int
     {
-        $time1 = $team1->timezone_offset;
-        $time2 = $team2->timezone_offset;
-
-        $difference = (($time1 - $time2 + 12) % 24) - 12;
-        $middleTimezone = (($time1 - $difference / 2 + 12) % 24) - 12;
+        $middleTimezone = self::getMiddleTimezone($team1->timezone_offset, $team2->timezone_offset);
         return ((MatchGenerator::$optimalHour - $middleTimezone) % 24) / 24;
+    }
+
+    public static function getMiddleTimezone(int $timezone1, int $timezone2): int
+    {
+        $difference = (($timezone1 - $timezone2 + 12) % 24) - 12;
+        if ($difference > 12 || $difference < -12) {
+            $difference = (24 - abs($difference)) % 24;
+        }
+
+        return (($timezone1 - $difference / 2 + 12) % 24) - 12;
     }
 }
