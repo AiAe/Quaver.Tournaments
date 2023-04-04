@@ -18,6 +18,13 @@ class TournamentMatch extends Model
         'match_format' => MatchFormat::class
     ];
 
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     public function round(): BelongsTo
     {
         return $this->belongsTo(TournamentStageRound::class, 'tournament_stage_round_id');
