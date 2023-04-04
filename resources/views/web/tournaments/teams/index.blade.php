@@ -22,21 +22,27 @@
                 <thead>
                 <tr>
                     <th style="width: 10%;">{{ __('#') }}</th>
-                    <th>
-                        @if($tournament->format == \App\Enums\TournamentFormat::Team)
-                            {{ __('Team name') }}
-                        @else
-                            {{ __('Player name') }}
-                        @endif
-                    </th>
+                    @if($tournament->format == \App\Enums\TournamentFormat::Team)
+                        <th>{{ __('Team name') }}</th>
+                    @else
+                        <th>{{ __('Player name') }}</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($tournament->teams as $team)
-                    <tr data-route="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
-                        <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $team->name }}</td>
-                    </tr>
+                    @if($tournament->format == \App\Enums\TournamentFormat::Team)
+                        <tr data-route="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $team->name }}</td>
+                        </tr>
+                    @else
+                        @php($captain = $team->captain)
+                        <tr data-route="{{ $captain->quaverUrl() }}">
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $captain->username }}</td>
+                        </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
