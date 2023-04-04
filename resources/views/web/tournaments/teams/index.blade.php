@@ -25,6 +25,8 @@
                     @if($tournament->format == \App\Enums\TournamentFormat::Team)
                         <th>{{ __('Team name') }}</th>
                     @else
+                        {{-- TODO: Add country flag --}}
+                        {{-- <th>{{ __('Country') }}</th> --}}
                         <th>{{ __('Player name') }}</th>
                     @endif
                 </tr>
@@ -40,6 +42,8 @@
                         @php($captain = $team->captain)
                         <tr data-route="{{ $captain->quaverUrl() }}">
                             <td>{{ $loop->index + 1 }}</td>
+                            {{-- TODO: Add country flag --}}
+                            {{-- <td>{{ $captain->country }}</td> --}}
                             <td>{{ $captain->username }}</td>
                         </tr>
                     @endif
