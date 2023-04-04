@@ -7,20 +7,22 @@ use App\Enums\TournamentStageFormat;
 use App\Models\TournamentMatch;
 use App\Models\TournamentStageRound;
 use App\Models\User;
+use Gate;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MatchPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, TournamentMatch $match): bool
+    public function view(?User $user, TournamentMatch $match): bool
     {
-        return $user->can('view', $match->tournament());
+        // $user->can doesn't work when $user is null
+        return Gate::forUser($user)->allows('view', $match->tournament());
     }
 
     // Pass in extra tournament round argument
