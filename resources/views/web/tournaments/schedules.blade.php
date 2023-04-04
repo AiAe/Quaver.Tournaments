@@ -21,6 +21,7 @@
             ->get()
             ->flatMap
             ->rounds
+            ->filter(fn ($round) => $round)
         as $round
     )
         <div class="card mb-3">
