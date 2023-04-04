@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Enums\MatchFormat;
+use App\Enums\TournamentStageFormat;
 use App\Models\Tournament;
 use App\Models\TournamentMatch;
 use App\Models\User;
@@ -50,5 +52,28 @@ class MatchPolicy
     public function forceDelete(User $user, TournamentMatch $tournamentMatch): bool
     {
         return false;
+    }
+
+    public function assignTeamToQualifierLobby(User $user, TournamentMatch $tournamentMatch): bool
+    {
+        $isQualifier = $tournamentMatch->round->stage->stage_format == TournamentStageFormat::Qualifier;
+        $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
+        $isFuture = $tournamentMatch->timestamp->isFuture();
+
+        if ($isQualifier && $isFfa && $isFuture && self::isOrganizer($user, $tournamentMatch)) return true;
+
+        $team = $user->teams()
+            ->where('tournament_id', $tournamentMatch->tournament()->id)
+            ->first();
+
+        if (!$team) return false;
+
+        $isCaptain = $team->captain()->is($user);
+
+        $noOtherMatches = !$team->ffaMatches()
+            ->where('tournament_stage_round_id', $tournamentMatch->round->id)
+            ->exists();
+
+        return $isQualifier && $isFfa && $isFuture && $isCaptain && $noOtherMatches;
     }
 }
