@@ -18,9 +18,9 @@ class MatchPolicy
         return true;
     }
 
-    public function view(User $user, TournamentMatch $tournamentMatch): bool
+    public function view(User $user, TournamentMatch $match): bool
     {
-        return $user->can('view', $tournamentMatch->tournament());
+        return $user->can('view', $match->tournament());
     }
 
     // Pass in extra tournament round argument
@@ -29,37 +29,37 @@ class MatchPolicy
         return $round->stage->tournament->userIsOrganizer($user);
     }
 
-    public function update(User $user, TournamentMatch $tournamentMatch): bool
+    public function update(User $user, TournamentMatch $match): bool
     {
-        return $tournamentMatch->tournament()->userIsOrganizer($user);
+        return $match->tournament()->userIsOrganizer($user);
     }
 
-    public function delete(User $user, TournamentMatch $tournamentMatch): bool
+    public function delete(User $user, TournamentMatch $match): bool
     {
-        return $tournamentMatch->timestamp->isFuture()
-            && $tournamentMatch->tournament()->userIsOrganizer($user);
+        return $match->timestamp->isFuture()
+            && $match->tournament()->userIsOrganizer($user);
     }
 
-    public function restore(User $user, TournamentMatch $tournamentMatch): bool
+    public function restore(User $user, TournamentMatch $match): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, TournamentMatch $tournamentMatch): bool
+    public function forceDelete(User $user, TournamentMatch $match): bool
     {
         return false;
     }
 
-    public function assignTeamToQualifierLobby(User $user, TournamentMatch $tournamentMatch): bool
+    public function assignTeamToQualifierLobby(User $user, TournamentMatch $match): bool
     {
-        $isQualifier = $tournamentMatch->round->stage->stage_format == TournamentStageFormat::Qualifier;
-        $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
-        $isFuture = $tournamentMatch->timestamp->isFuture();
+        $isQualifier = $match->round->stage->stage_format == TournamentStageFormat::Qualifier;
+        $isFfa = $match->match_format == MatchFormat::FreeForAll;
+        $isFuture = $match->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $isFuture && $tournamentMatch->tournament()->userIsOrganizer($user)) return true;
+        if ($isQualifier && $isFfa && $isFuture && $match->tournament()->userIsOrganizer($user)) return true;
 
         $team = $user->teams()
-            ->where('tournament_id', $tournamentMatch->tournament()->id)
+            ->where('tournament_id', $match->tournament()->id)
             ->first();
 
         if (!$team) return false;
@@ -67,29 +67,29 @@ class MatchPolicy
         $isCaptain = $team->captain()->is($user);
 
         $noOtherMatches = !$team->ffaMatches()
-            ->where('tournament_stage_round_id', $tournamentMatch->round->id)
+            ->where('tournament_stage_round_id', $match->round->id)
             ->exists();
 
         return $isQualifier && $isFfa && $isFuture && $isCaptain && $noOtherMatches;
     }
 
-    public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $tournamentMatch): bool
+    public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool
     {
-        $isQualifier = $tournamentMatch->round->stage->stage_format == TournamentStageFormat::Qualifier;
-        $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
+        $isQualifier = $match->round->stage->stage_format == TournamentStageFormat::Qualifier;
+        $isFfa = $match->match_format == MatchFormat::FreeForAll;
 
-        if ($isQualifier && $isFfa && $tournamentMatch->tournament()->userIsOrganizer($user)) return true;
+        if ($isQualifier && $isFfa && $match->tournament()->userIsOrganizer($user)) return true;
 
-        $isMoreThan1HourAhead = $tournamentMatch->timestamp->copy()->addHours(-1)->isFuture();
+        $isMoreThan1HourAhead = $match->timestamp->copy()->addHours(-1)->isFuture();
 
         $team = $user->teams()
-            ->where('tournament_id', $tournamentMatch->tournament()->id)
+            ->where('tournament_id', $match->tournament()->id)
             ->first();
 
         if (!$team) return false;
 
         $isCaptain = $team->captain()->is($user);
-        $isParticipant = $team->ffaMatches->contains($tournamentMatch);
+        $isParticipant = $team->ffaMatches->contains($match);
 
         return $isQualifier && $isFfa && $isMoreThan1HourAhead && $isCaptain && $isParticipant;
     }
