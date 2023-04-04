@@ -27,7 +27,7 @@ class TournamentStageRound extends Model
 
     public function stage(): BelongsTo
     {
-        return $this->belongsTo(TournamentStage::class);
+        return $this->belongsTo(TournamentStage::class, 'tournament_stage_id');
     }
 
     public function maps(): HasMany
@@ -37,6 +37,6 @@ class TournamentStageRound extends Model
 
     public function matches(): HasMany
     {
-        return $this->hasMany(TournamentMatch::class)->orderBy('timestamp');
+        return $this->hasMany(TournamentMatch::class, 'tournament_stage_round_id')->orderBy('timestamp');
     }
 }

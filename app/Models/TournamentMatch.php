@@ -18,9 +18,16 @@ class TournamentMatch extends Model
         'match_format' => MatchFormat::class
     ];
 
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     public function round(): BelongsTo
     {
-        return $this->belongsTo(TournamentStageRound::class);
+        return $this->belongsTo(TournamentStageRound::class, 'tournament_stage_round_id');
     }
 
     public function team1(): BelongsTo
@@ -46,5 +53,10 @@ class TournamentMatch extends Model
     public function ffaParticipants(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'tournament_match_ffa_participants');
+    }
+
+    public function tournament(): Tournament
+    {
+        return $this->round->stage->tournament;
     }
 }

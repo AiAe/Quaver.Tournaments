@@ -32,7 +32,7 @@ class TournamentStage extends Model
 
     public function rounds(): HasMany
     {
-        return $this->hasMany(TournamentStageRound::class);
+        return $this->hasMany(TournamentStageRound::class, 'tournament_stage_id');
     }
 
     protected function startsAt(): ?Carbon
