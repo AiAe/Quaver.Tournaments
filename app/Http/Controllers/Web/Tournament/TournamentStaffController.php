@@ -38,8 +38,8 @@ class TournamentStaffController extends Controller
         $validator->validate();
         $validated = $validator->validated();
 
-        $user = User::select(['id'])->where('username', $validated['username'])->first();
-        $staff = $tournament->staff()->wherePivot('user_id', $user->id)->first();
+        $user = User::select(['id'])->where('username', $validated['username'])->firstOrFail();
+        $staff = $tournament->staff()->wherePivot('user_id', $user->id)->firstOrFail();
 
         if ($staff) {
             // Update
