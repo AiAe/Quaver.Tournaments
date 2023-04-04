@@ -57,6 +57,54 @@ class MatchPolicyTest extends TestCase
         $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));
     }
 
+    public function testWithdrawTeamFromQualifier()
+    {
+        $this->match->ffaParticipants()->attach($this->team);
+
+        $this->assertTrue($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
+    }
+
+    public function testWithdrawTeamFromQualifierOrganizer()
+    {
+        $this->match->ffaParticipants()->attach($this->team);
+
+        $this->assertTrue($this->tournament->user->can('withdrawTeamFromQualifierLobby', $this->match));
+    }
+
+    public function testWithdrawTeamFromQualifierNotQualifier()
+    {
+        $this->match->ffaParticipants()->attach($this->team);
+
+        $stage = $this->match->round->stage;
+        $stage->stage_format = TournamentStageFormat::Swiss;
+        $stage->save();
+
+        $this->assertFalse($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
+    }
+
+    public function testWithdrawTeamFromQualifierTooLate()
+    {
+        $this->match->ffaParticipants()->attach($this->team);
+
+        $this->match->timestamp = Carbon::now()->addDays(-1);
+        $this->match->save();
+
+        $this->assertFalse($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
+
+        $this->match->timestamp = Carbon::now()->addMinutes(30);
+        $this->match->save();
+
+        $this->assertFalse($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
+    }
+
+    public function testWithdrawTeamFromQualifierNotCaptain()
+    {
+        $this->match->ffaParticipants()->attach($this->team);
+
+        $notCaptain = $this->team->members()->wherePivot('is_captain', false)->first();
+        $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

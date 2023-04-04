@@ -76,4 +76,25 @@ class MatchPolicy
 
         return $isQualifier && $isFfa && $isFuture && $isCaptain && $noOtherMatches;
     }
+
+    public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $tournamentMatch): bool
+    {
+        $isQualifier = $tournamentMatch->round->stage->stage_format == TournamentStageFormat::Qualifier;
+        $isFfa = $tournamentMatch->match_format == MatchFormat::FreeForAll;
+
+        if ($isQualifier && $isFfa && self::isOrganizer($user, $tournamentMatch)) return true;
+
+        $isMoreThan1HourAhead = $tournamentMatch->timestamp->copy()->addHours(-1)->isFuture();
+
+        $team = $user->teams()
+            ->where('tournament_id', $tournamentMatch->tournament()->id)
+            ->first();
+
+        if (!$team) return false;
+
+        $isCaptain = $team->captain()->is($user);
+        $isParticipant = $team->ffaMatches->contains($tournamentMatch);
+
+        return $isQualifier && $isFfa && $isMoreThan1HourAhead && $isCaptain && $isParticipant;
+    }
 }
