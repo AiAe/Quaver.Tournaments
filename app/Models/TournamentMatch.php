@@ -20,7 +20,7 @@ class TournamentMatch extends Model
 
     public function round(): BelongsTo
     {
-        return $this->belongsTo(TournamentStageRound::class);
+        return $this->belongsTo(TournamentStageRound::class, 'tournament_stage_round_id');
     }
 
     public function team1(): BelongsTo
