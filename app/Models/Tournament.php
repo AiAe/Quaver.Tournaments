@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kodeine\Metable\Metable;
@@ -63,12 +62,9 @@ class Tournament extends Model
         return $this->teams->flatMap->members;
     }
 
-    public function staff(): BelongsToMany
+    public function staff(): HasMany
     {
-        return $this->belongsToMany(User::class, 'tournament_staff')
-            ->using(TournamentStaff::class)
-            ->withPivot('staff_role')
-            ->orderByPivot('staff_role');
+        return $this->hasMany(TournamentStaff::class)->orderBy('staff_role');
     }
 
     public function staffApplications(): HasMany

@@ -19,7 +19,7 @@
             <div>
                 @can('update', $tournament)
                     <a href="{{ route('web.tournaments.staff.create', $tournament->slug) }}"
-                       class="btn btn-primary btn-sm">{{ __('Create/Update') }}</a>
+                       class="btn btn-primary btn-sm">{{ __('Create') }}</a>
                 @endcan
             </div>
         </div>
@@ -36,17 +36,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($tournament->staff as $user)
+                @forelse($tournament->staff as $staff)
                     <tr>
-                        <td>{{ $user->pivot->staff_role->name() }}</td>
+                        <td>{{ $staff->staff_role->name() }}</td>
                         <td>
-                            <a href="{{ $user->quaverUrl() }}" target="_blank" rel="noreferrer">
-                                {{ $user->username }}
+                            <a href="{{ $staff->user->quaverUrl() }}" target="_blank" rel="noreferrer">
+                                {{ $staff->user->username }}
                             </a>
                         </td>
                         @can('update', $tournament)
                             <td>
-                                {{ Form::open(['url' => route('web.tournaments.staff.destroy', ['tournament' => $tournament, 'staff' => $user->id]), 'class' => 'd-flex']) }}
+                                {{ Form::open(['url' => route('web.tournaments.staff.destroy', ['tournament' => $tournament, 'staff' => $staff->id]), 'class' => 'd-flex']) }}
                                 @method('DELETE')
                                 {{ Form::submit(__('Kick'), ['class' => 'btn btn-danger btn-sm']) }}
                                 {{ Form::close() }}

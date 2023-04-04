@@ -1,3 +1,4 @@
+@php use App\Enums\StaffRole; @endphp
 @extends('web.tournaments.parts.base')
 
 @push('seo')
@@ -19,9 +20,6 @@
         </div>
 
         <div class="card-body">
-            <div class="alert alert-info">
-                {{ __('Entering the username of someone who is already in Staff, will update their role!') }}
-            </div>
             {{ Form::open(['url' => route('web.tournaments.staff.store', $tournament->slug)]) }}
             <div class="form-group">
                 <label class="form-label">{{ __('Username') }}</label>
@@ -30,7 +28,7 @@
 
             <div class="form-group mt-2">
                 <label class="form-label">{{ __('Role') }}</label>
-                {{ Form::select('role', \App\Enums\StaffRole::array(), null, ['class' => 'form-control']) }}
+                {{ Form::select('role', StaffRole::array(), null, ['class' => 'form-control']) }}
             </div>
 
             <div class="d-flex justify-content-end mt-2">

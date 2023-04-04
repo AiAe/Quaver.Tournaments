@@ -44,4 +44,9 @@ class Team extends Model
     {
         return $this->belongsToMany(User::class, 'team_user_invites')->withTimestamps();
     }
+
+    public function ffaMatches(): BelongsToMany
+    {
+        return $this->belongsToMany(TournamentMatch::class, 'tournament_match_ffa_participants');
+    }
 }
