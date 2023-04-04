@@ -40,7 +40,7 @@ class TournamentStaffController extends Controller
         $validator->after(function (Validator $validator) use ($tournament, $request) {
             $user = User::select(['id'])->where('username', $request['username'])->first();
 
-            if ($tournament->staff()
+            if ($user && $tournament->staff()
                 ->where('user_id', $user->id)
                 ->where('staff_role', $request['role'])
                 ->exists()
