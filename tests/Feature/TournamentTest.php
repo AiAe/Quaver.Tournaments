@@ -16,10 +16,17 @@ class TournamentTest extends TestCase
 
     private User $organizer;
     private Tournament $tournament;
+    private Tournament $fullTournament;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->seed();
+
+        $this->fullTournament = Tournament::where('format', TournamentFormat::Team)
+            ->where('status', TournamentStatus::RegistrationsOpen)
+            ->first();
+
         $this->organizer = User::factory()->create();
         $this->organizer->addRole(UserRoles::Organizer);
 
@@ -107,19 +114,24 @@ class TournamentTest extends TestCase
             ->delete(route('web.tournaments.destroy', $this->tournament))
             ->assertRedirect();
 
-        $this->assertEquals(0, Tournament::all()->count());
         $this->assertSoftDeleted($this->tournament);
     }
 
     public function testMappoolIndex()
     {
-        $this->get(route('web.tournaments.mappools', $this->tournament))
+        $this->get(route('web.tournaments.mappools', $this->fullTournament))
             ->assertOk();
     }
 
     public function testSchedulesIndex()
     {
-        $this->get(route('web.tournaments.schedules', $this->tournament))
+        $this->get(route('web.tournaments.schedules', $this->fullTournament))
+            ->assertOk();
+    }
+
+    public function testTeamsIndex()
+    {
+        $this->get(route('web.tournaments.teams.index', $this->fullTournament))
             ->assertOk();
     }
 }

@@ -39,7 +39,7 @@
                             <td>{{ $team->name }}</td>
                         </tr>
                     @else
-                        @php($captain = $team->captain)
+                        @php($captain = $team->captain())
                         <tr data-route="{{ $captain->quaverUrl() }}">
                             <td>{{ $loop->index + 1 }}</td>
                             {{-- TODO: Add country flag --}}
