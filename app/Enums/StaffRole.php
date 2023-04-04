@@ -11,11 +11,12 @@ enum StaffRole: int
     case Organizer = 0;
     case HeadMappooler = 1;
     case Mappooler = 2;
-    case HeadReferee = 3;
-    case Referee = 4;
-    case HeadStreamer = 5;
-    case Streamer = 6;
-    case Commentator = 7;
+    case Mapper = 3;
+    case HeadReferee = 4;
+    case Referee = 5;
+    case HeadStreamer = 6;
+    case Streamer = 7;
+    case Commentator = 8;
 
     public function name(): string
     {
@@ -23,6 +24,7 @@ enum StaffRole: int
             self::Organizer => 'Organizer',
             self::HeadMappooler => 'Head Mappooler',
             self::Mappooler => 'Mappooler',
+            self::Mapper => 'Mapper',
             self::HeadReferee => 'Head Referee',
             self::Referee => 'Referee',
             self::HeadStreamer => 'Head Streamer',
