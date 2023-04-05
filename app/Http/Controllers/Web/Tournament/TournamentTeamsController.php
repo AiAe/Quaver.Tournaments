@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Tournament;
 use App\Enums\TournamentFormat;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\TeamRank;
 use App\Models\Tournament;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,18 +23,22 @@ class TournamentTeamsController extends Controller
     {
         $title = __('Players');
 
-        if($tournament->format == TournamentFormat::Team) {
+        if ($tournament->format == TournamentFormat::Team) {
             $title = __('Teams');
         }
 
-        $teams = $tournament->teams()->paginate(50);
+        $teamRanks = TeamRank::where('tournament_id', $tournament->id)
+            ->with('team')
+            ->orderBy($tournament->mode->rankColumnName())
+            ->paginate(50);
 
-        return view('web.tournaments.teams.index', compact('tournament', 'title', 'teams'));
+        return view('web.tournaments.teams.index', compact('tournament', 'title', 'teamRanks'));
     }
 
     public function show(Tournament $tournament, Team $team)
     {
-        return view('web.tournaments.teams.show', compact('tournament', 'team'));
+        $members = $team->members()->orderBy($tournament->mode->rankColumnName())->get();
+        return view('web.tournaments.teams.show', compact('tournament', 'team', 'members'));
     }
 
     public function edit(Team $team)

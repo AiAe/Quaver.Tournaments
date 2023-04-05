@@ -19,12 +19,7 @@
                 {{ __('Players') }}
             </div>
 
-            @can('delete', $team)
-                {{ Form::open(['url' => route('web.tournaments.teams.destroy', [$tournament, $team]), 'onsubmit' => "return confirm('Do you really want to withdraw from the tournament?');"]) }}
-                @method('DELETE')
-                {{ Form::submit(__('Withdraw'), ['class' => 'btn btn-danger btn-sm']) }}
-                {{ Form::close() }}
-            @endcan
+            <x-withdraw-button :team="$team" :tournament="$tournament"/>
             {{--ToDo if team is full remove button--}}
             {{--            @can('update', $team)--}}
             {{--                <button type="button" class="btn btn-primary" data-bs-toggle="modal"--}}
@@ -45,9 +40,9 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($team->members as $member)
+            @foreach($members as $member)
                 <tr>
-                    <td>-</td>
+                    <td>#{{ $member->quaverRank($tournament->mode) }}</td>
                     <td>{{ $member->username }}</td>
                     <td>
                         @if($member->pivot->is_captain)

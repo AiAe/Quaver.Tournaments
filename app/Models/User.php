@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TournamentGameMode;
 use App\Enums\UserRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -81,6 +82,11 @@ class User extends Authenticatable
 
     public function has_discord(): bool
     {
-        return (bool)$this->discord_user_id;
+        return (bool) $this->discord_user_id;
+    }
+
+    public function quaverRank(TournamentGameMode $mode)
+    {
+        return $this->{$mode->rankColumnName()};
     }
 }

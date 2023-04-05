@@ -27,6 +27,7 @@ class PlayerActions extends Component
         if (!$this->team->captain()->is($this->user)) {
             $this->team->invites()->detach($this->user);
             $this->team->members()->detach($this->user);
+            $this->team->updateTeamRank();
 
             createToast('success', '', __('Player was removed!'));
         } else {
