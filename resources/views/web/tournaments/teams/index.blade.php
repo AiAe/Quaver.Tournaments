@@ -14,8 +14,17 @@
 
 @section('section')
     <div class="card">
-        <div class="card-header">
-            {{ $title }}
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                {{ $title }}
+            </div>
+            @if(
+                $tournament->format == \App\Enums\TournamentFormat::Solo
+                && $loggedUser->teams()->firstWhere('tournament_id', $tournament->id)
+            )
+                <x-withdraw-button :team="$loggedUser->teams()->firstWhere('tournament_id', $tournament->id)"
+                                   :tournament="$tournament"/>
+            @endif
         </div>
         <div class="table-responsive">
             <table class="table table-hover table-dark table-link">
