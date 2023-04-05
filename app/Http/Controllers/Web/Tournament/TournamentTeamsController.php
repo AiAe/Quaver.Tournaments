@@ -26,7 +26,9 @@ class TournamentTeamsController extends Controller
             $title = __('Teams');
         }
 
-        return view('web.tournaments.teams.index', compact('tournament', 'title'));
+        $teams = $tournament->teams()->paginate(50);
+
+        return view('web.tournaments.teams.index', compact('tournament', 'title', 'teams'));
     }
 
     public function show(Tournament $tournament, Team $team)
