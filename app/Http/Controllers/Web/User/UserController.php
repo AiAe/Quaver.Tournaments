@@ -28,7 +28,7 @@ class UserController extends Controller
         $this->authorize('update', $loggedUser);
 
         $validator = Validator::make($request->all(), [
-            'timezone_offset' => ['required', 'min:-12', 'max:14']
+            'timezone_offset' => ['required', 'numeric', 'between:-12,14']
         ]);
 
         $validator->validate();
