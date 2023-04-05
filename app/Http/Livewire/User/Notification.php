@@ -32,6 +32,8 @@ class Notification extends Component
                 $team->invites()->detach($player);
                 $this->notification->markAsRead();
 
+                $team->updateTeamRank();
+
                 createToast('success', '', __('You joined the team!'));
 
                 return redirect(route('web.tournaments.teams.show', [
