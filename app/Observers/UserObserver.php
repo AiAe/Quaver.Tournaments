@@ -72,11 +72,13 @@ class UserObserver
     private function updateUser(User $user)
     {
         dispatch(function () use ($user) {
-            $user_api = QuaverApi::getUser($user->quaver_user_id);
+            $user_api = QuaverApi::getUserFull($user->quaver_user_id);
 
-            if($user_api && isset($user_api[0])) {
-                $user->username = $user_api[0]['username'];
-                $user->country = $user_api[0]['country']??"X";
+            if ($user_api) {
+                $user->username = $user_api['info']['username'];
+                $user->country = $user_api['info']['country'] ?? 'XX';
+                $user->quaver_4k_rank = $user_api['keys4']['globalRank'];
+                $user->quaver_7k_rank = $user_api['keys7']['globalRank'];
                 $user->save();
             }
         });

@@ -17,6 +17,8 @@ class UserFactory extends Factory
             'discord_user_id' => $this->faker->optional(0.9)->randomNumber(9),
             'username' => substr($this->faker->userName(), 0, 14),
             'country' => $this->faker->countryCode(),
+            'quaver_4k_rank' => $this->faker->optional(0.9)->randomNumber(6),
+            'quaver_7k_rank' => $this->faker->optional(0.9)->randomNumber(6),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
