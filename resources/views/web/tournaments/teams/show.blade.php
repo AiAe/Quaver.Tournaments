@@ -45,9 +45,9 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($team->members as $member)
+            @foreach($members as $member)
                 <tr>
-                    <td>-</td>
+                    <td>#{{ $member->quaverRank($tournament->mode) }}</td>
                     <td>{{ $member->username }}</td>
                     <td>
                         @if($member->pivot->is_captain)

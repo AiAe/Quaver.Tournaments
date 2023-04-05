@@ -33,7 +33,8 @@ class TournamentTeamsController extends Controller
 
     public function show(Tournament $tournament, Team $team)
     {
-        return view('web.tournaments.teams.show', compact('tournament', 'team'));
+        $members = $team->members->sortBy(fn($user) => $user->quaverRank($tournament->mode));
+        return view('web.tournaments.teams.show', compact('tournament', 'team', 'members'));
     }
 
     public function edit(Team $team)
