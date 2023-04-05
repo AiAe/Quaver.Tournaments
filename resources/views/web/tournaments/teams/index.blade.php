@@ -20,7 +20,7 @@
             </div>
             @if(
                 $tournament->format == \App\Enums\TournamentFormat::Solo
-                && $loggedUser->teams()->firstWhere('tournament_id', $tournament->id)
+                && $loggedUser?->teams()->firstWhere('tournament_id', $tournament->id)
             )
                 <x-withdraw-button :team="$loggedUser->teams()->firstWhere('tournament_id', $tournament->id)"
                                    :tournament="$tournament"/>
