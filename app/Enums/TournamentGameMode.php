@@ -18,4 +18,12 @@ enum TournamentGameMode: int
             self::Keys7 => '7 Keys'
         };
     }
+
+    public function rankColumnName(): string
+    {
+        return match ($this) {
+            self::Keys4 => 'quaver_4k_rank',
+            self::Keys7 => 'quaver_7k_rank'
+        };
+    }
 }
