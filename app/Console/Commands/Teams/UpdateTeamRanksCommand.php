@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands\Teams;
 
-use App\Enums\TournamentFormat;
 use App\Enums\TournamentStatus;
 use App\Models\Tournament;
 use Illuminate\Console\Command;
@@ -16,7 +15,6 @@ class UpdateTeamRanksCommand extends Command
     public function handle(): void
     {
         $tournaments = Tournament::whereNot('status', TournamentStatus::Concluded)
-            ->where('format', TournamentFormat::Team)
             ->with(['teams', 'teams.teamRank'])
             ->get();
 

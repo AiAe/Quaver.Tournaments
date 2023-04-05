@@ -68,7 +68,7 @@ class Team extends Model
 
         foreach (TournamentGameMode::cases() as $mode) {
             $column = $mode->rankColumnName();
-            $teamRank->{$column} = $this->members()->pluck($column)->average();
+            $teamRank->{$column} = $this->members()->pluck($column)->average() ?? 9999999;
         }
 
         $teamRank->save();
