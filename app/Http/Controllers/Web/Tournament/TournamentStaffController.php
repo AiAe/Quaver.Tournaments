@@ -16,6 +16,8 @@ class TournamentStaffController extends Controller
     {
         $title = __('Staff');
 
+        $tournament->load(['staff.user']);
+
         return view('web.tournaments.staff.index', ['title' => $title, 'tournament' => $tournament]);
     }
 
@@ -41,9 +43,9 @@ class TournamentStaffController extends Controller
             $user = User::select(['id'])->where('username', $request['username'])->first();
 
             if ($user && $tournament->staff()
-                ->where('user_id', $user->id)
-                ->where('staff_role', $request['role'])
-                ->exists()
+                    ->where('user_id', $user->id)
+                    ->where('staff_role', $request['role'])
+                    ->exists()
             ) {
                 $validator->errors()->add('role', 'User with that role already added!');
             }
@@ -61,7 +63,6 @@ class TournamentStaffController extends Controller
 
     public function destroy(Tournament $tournament, TournamentStaff $staff)
     {
-        // Probably change to current user policy?
         $this->authorize('delete', $tournament);
 
         $staff->delete();
