@@ -34,17 +34,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($teams as $team)
+                @foreach($teamRanks as $teamRank)
+                    @php($team = $teamRank->team)
                     @if($tournament->format == \App\Enums\TournamentFormat::Team)
                         <tr data-route="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
-                            <td>{{ $loop->iteration + $teams->firstItem() - 1 }}</td>
+                            <td>{{ $loop->iteration + $teamRanks->firstItem() - 1 }}</td>
                             <td>{{ $team->name }}</td>
-                            <td>#{{ $team->teamRank?->{$tournament->mode->rankColumnName()} }}</td>
+                            <td>#{{ $teamRank->{$tournament->mode->rankColumnName()} }}</td>
                         </tr>
                     @else
                         @php($captain = $team->captain())
                         <tr data-route="{{ $captain->quaverUrl() }}">
-                            <td>{{ $loop->iteration + $teams->firstItem() - 1 }}</td>
+                            <td>{{ $loop->iteration + $teamRanks->firstItem() - 1 }}</td>
                             {{-- TODO: Add country flag --}}
                             {{-- <td>{{ $captain->country }}</td> --}}
                             <td>{{ $captain->username }}</td>
@@ -57,9 +58,9 @@
         </div>
     </div>
 
-    @if($teams->hasPages())
+    @if($teamRanks->hasPages())
         <div class="card mt-3 p-2">
-            {{ $teams->links() }}
+            {{ $teamRanks->links() }}
         </div>
     @endif
 @endsection
