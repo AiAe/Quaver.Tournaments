@@ -80,6 +80,10 @@ class UserObserver
                 $user->quaver_4k_rank = $user_api['keys4']['globalRank'];
                 $user->quaver_7k_rank = $user_api['keys7']['globalRank'];
                 $user->save();
+
+                foreach ($user->teams as $team) {
+                    $team->updateTeamRank();
+                }
             }
         });
     }
