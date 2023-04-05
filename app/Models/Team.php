@@ -66,11 +66,11 @@ class Team extends Model
             $teamRank->tournament_id = $this->tournament_id;
         }
 
-        foreach (TournamentGameMode::array() as $mode) {
-            $column = $mode->columnName();
+        foreach (TournamentGameMode::cases() as $mode) {
+            $column = $mode->rankColumnName();
             $teamRank->{$column} = $this->members()->pluck($column)->average();
         }
-        
+
         $teamRank->save();
     }
 }

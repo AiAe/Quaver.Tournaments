@@ -23,11 +23,13 @@
                 <tr>
                     <th style="width: 10%;">{{ __('#') }}</th>
                     @if($tournament->format == \App\Enums\TournamentFormat::Team)
-                        <th>{{ __('Team name') }}</th>
+                        <th>{{ __('Team Name') }}</th>
+                        <th>{{ __('Team Rank (avg.)') }}</th>
                     @else
                         {{-- TODO: Add country flag --}}
                         {{-- <th>{{ __('Country') }}</th> --}}
-                        <th>{{ __('Player name') }}</th>
+                        <th>{{ __('Player') }}</th>
+                        <th>{{ __('Player Rank') }}</th>
                     @endif
                 </tr>
                 </thead>
@@ -37,6 +39,7 @@
                         <tr data-route="{{ route('web.tournaments.teams.show', ['tournament' => $tournament, 'team' => $team]) }}">
                             <td>{{ $loop->iteration + $teams->firstItem() - 1 }}</td>
                             <td>{{ $team->name }}</td>
+                            <td>#{{ $team->teamRank?->{$tournament->mode->rankColumnName()} }}</td>
                         </tr>
                     @else
                         @php($captain = $team->captain())
@@ -45,6 +48,7 @@
                             {{-- TODO: Add country flag --}}
                             {{-- <td>{{ $captain->country }}</td> --}}
                             <td>{{ $captain->username }}</td>
+                            <td>#{{ $captain->{$tournament->mode->rankColumnName()} }}</td>
                         </tr>
                     @endif
                 @endforeach

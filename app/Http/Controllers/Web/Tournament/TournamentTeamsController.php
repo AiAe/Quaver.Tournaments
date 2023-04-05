@@ -22,11 +22,15 @@ class TournamentTeamsController extends Controller
     {
         $title = __('Players');
 
-        if($tournament->format == TournamentFormat::Team) {
+        if ($tournament->format == TournamentFormat::Team) {
             $title = __('Teams');
         }
 
-        $teams = $tournament->teams()->paginate(50);
+        $teams = $tournament->teams()
+            ->with(['members', 'teamRank'])
+            ->leftJoin('team_ranks', 'team_ranks.team_id', '=', 'teams.id')
+            ->orderBy('team_ranks.'.$tournament->mode->rankColumnName())
+            ->paginate(50);
 
         return view('web.tournaments.teams.index', compact('tournament', 'title', 'teams'));
     }
