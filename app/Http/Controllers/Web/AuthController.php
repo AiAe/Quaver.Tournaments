@@ -106,7 +106,7 @@ class AuthController extends Controller
     protected function loginOrCreateDiscordAccount($providerUser)
     {
         if (!Auth::user()) {
-            return redirect(route('home'));
+            return redirect(route('web.home'));
         }
 
         $user = User::where('quaver_user_id', Auth::user()->quaver_user_id)->first();
