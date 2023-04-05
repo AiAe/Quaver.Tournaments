@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Enums\UserRoles;
-use App\Http\QuaverApi\QuaverApi;
+use App\Jobs\UserUpdateJob;
 use App\Models\User;
 use App\Models\UserRole;
 
@@ -71,20 +71,6 @@ class UserObserver
 
     private function updateUser(User $user)
     {
-        dispatch(function () use ($user) {
-            $user_api = QuaverApi::getUserFull($user->quaver_user_id);
-
-            if ($user_api) {
-                $user->username = $user_api['info']['username'];
-                $user->country = $user_api['info']['country'] ?? 'XX';
-                $user->quaver_4k_rank = $user_api['keys4']['globalRank'];
-                $user->quaver_7k_rank = $user_api['keys7']['globalRank'];
-                $user->save();
-
-                foreach ($user->teams as $team) {
-                    $team->updateTeamRank();
-                }
-            }
-        });
+        UserUpdateJob::dispatch($user);
     }
 }
