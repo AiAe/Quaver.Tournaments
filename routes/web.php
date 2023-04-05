@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Tournament\TournamentsController;
 use App\Http\Controllers\Web\Tournament\TournamentStaffController;
 use App\Http\Controllers\Web\Tournament\TournamentStageController;
 use App\Http\Controllers\Web\Tournament\TournamentTeamsController;
+use App\Http\Controllers\Web\User\UserController;
 use App\Http\Controllers\Web\User\UserTournamentsController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,6 @@ Route::resource('tournaments.teams', TournamentTeamsController::class)
 Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index', 'create', 'store', 'destroy']);
 Route::resource('tournaments.stages', TournamentStageController::class)->only(['index', 'store', 'destroy']);
 Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show', 'store', 'destroy']); // TODO: Use slug instead of ID
+
+Route::singleton('users', UserController::class)->only(['edit', 'update']);
 Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show'])->middleware('auth');

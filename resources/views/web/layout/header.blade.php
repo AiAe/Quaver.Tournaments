@@ -71,11 +71,11 @@
                                             {{ __('Welcome, :username', ['username' => $loggedUser->username]) }}
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item" href="#">
-                                                    {{ __('Profile') }}
-                                                </a>
-                                            </li>
+{{--                                            <li>--}}
+{{--                                                <a class="dropdown-item" href="#">--}}
+{{--                                                    {{ __('Profile') }}--}}
+{{--                                                </a>--}}
+{{--                                            </li>--}}
 
                                             <li>
                                                 <a class="dropdown-item"
@@ -103,6 +103,14 @@
                                                 <li>
                                                     <a class="dropdown-item" href="/telescope">
                                                         {{ __('Telescope Dashboard') }}
+                                                    </a>
+                                                </li>
+                                            @endcan
+
+                                            @can('update', $loggedUser)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('web.users.edit') }}">
+                                                        {{ __('Settings') }}
                                                     </a>
                                                 </li>
                                             @endcan

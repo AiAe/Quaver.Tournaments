@@ -17,7 +17,8 @@ class User extends Authenticatable
         'quaver_user_id',
         'discord_user_id',
         'username',
-        'country'
+        'country',
+        'timezone_offset'
     ];
 
     protected $hidden = [

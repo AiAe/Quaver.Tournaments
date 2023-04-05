@@ -24,6 +24,13 @@
 
 @stack('scripts')
 @stack('modals')
+
+@auth()
+    @if($loggedUser->timezone_offset == null)
+        @include('web.modals.timezone')
+    @endif
+@endauth
+
 @include('web.layout.toast')
 @livewireScripts
 
