@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web\User;
 
+use App\Enums\TournamentFormat;
+use App\Enums\TournamentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +16,8 @@ class UserController extends Controller
         // User profile
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         $loggedUser = $request->attributes->get('loggedUser');
         $this->authorize('update', $loggedUser);
 
@@ -36,6 +39,19 @@ class UserController extends Controller
 
         $loggedUser->fill($validated);
         $loggedUser->save();
+
+        // Update all solo tournaments
+        $this->dispatch(function () use ($loggedUser) {
+            $tournaments = $loggedUser->participatedTournaments()
+                ->where('status', '!=', TournamentStatus::Concluded)
+                ->where('format', TournamentFormat::Solo);
+
+            foreach ($tournaments as $tournament) {
+                $team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id);
+                $team->timezone_offset = $loggedUser->timezone_offset;
+                $team->save();
+            }
+        });
 
         createToast('success', '', __('Settings are saved successfully!'));
 
