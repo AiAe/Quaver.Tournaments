@@ -15,7 +15,7 @@ class Team extends Model
         'name',
         'slug',
         'tournament_id',
-        'user_id'
+        'timezone_offset'
     ];
 
     public function getRouteKeyName(): string

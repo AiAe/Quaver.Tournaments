@@ -6,9 +6,11 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Models\Tournament;
 use App\Models\TournamentMatch;
+use App\Models\User;
 use App\Policies\MatchPolicy;
 use App\Policies\TeamPolicy;
 use App\Policies\TournamentPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,7 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Tournament::class => TournamentPolicy::class,
         Team::class => TeamPolicy::class,
-        TournamentMatch::class => MatchPolicy::class
+        TournamentMatch::class => MatchPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**
