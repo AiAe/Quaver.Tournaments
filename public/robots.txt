@@ -1,5 +1,7 @@
 Sitemap: https://tournaments.quavergame.com/sitemap.xml
 
+User-agent: *
+Disallow: /auth/*
 
 User-agent: *
-Disallow:
+Disallow: /api/*
