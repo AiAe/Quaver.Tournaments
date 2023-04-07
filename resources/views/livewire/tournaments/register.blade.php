@@ -51,7 +51,7 @@
                                 <div class="modal-body">
                                     <div>
                                         <label
-                                            class="form-label d-block">{{ __('To verify your not a bot, answer this question:') }}</label>
+                                            class="form-label d-block">{{ __('Qaptcha:') }}</label>
                                         <label class="form-label text-warning">{{ $captcha_question }}</label>
                                         <input type="text" wire:model="captcha" class="form-control">
                                         @error('captcha') <span class="error">{{ $message }}</span> @enderror
