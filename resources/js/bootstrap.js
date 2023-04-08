@@ -22,6 +22,8 @@ window.SimpleMDE = SimpleMDE;
 
 import 'flatpickr/dist/flatpickr';
 
+import './plugins/livewire-sortable';
+
 document.addEventListener("DOMContentLoaded", function (event) {
     Livewire.on('gotoTop', () => {
         window.scrollTo({

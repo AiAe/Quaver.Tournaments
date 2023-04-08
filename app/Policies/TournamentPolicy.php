@@ -2,9 +2,11 @@
 
 namespace App\Policies;
 
+use App\Enums\StaffRole;
 use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
 use App\Models\Tournament;
+use App\Models\TournamentStageRound;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -51,5 +53,15 @@ class TournamentPolicy
     public function viewUnlisted(User $user): bool
     {
         return false;
+    }
+
+    public function updateMappool(User $user, Tournament $tournament, TournamentStageRound $round): bool
+    {
+        $roundHasNotEndedYet = $round->ends_at->isFuture();
+
+        $userCanUpdate = $this->update($user, $tournament)
+            || $tournament->userHasStaffRole($user, StaffRole::HeadMappooler);
+
+        return $roundHasNotEndedYet && $userCanUpdate;
     }
 }
