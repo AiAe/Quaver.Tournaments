@@ -24,8 +24,8 @@
     @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
     @if($team && $tournament->format == TournamentFormat::Team)
         <x-sidebar.group>
-            <x-sidebar.item route="web.tournaments.teams.show" :routeParams="[$tournament->slug, $team->id]"
-                            icon="bi-people">
+            <x-sidebar.item icon="bi-people"
+                            href="{{route('web.tournaments.teams.show',[$tournament, $team])}}">
                 {{ __('My Team') }}
             </x-sidebar.item>
         </x-sidebar.group>
@@ -34,7 +34,8 @@
 
 @guest()
     <x-sidebar.group>
-        <x-sidebar.item route="web.auth.oauth" routeParams="quaver" icon="bi-box-arrow-right">
+        <x-sidebar.item route=" web.auth.oauth
+            " routeParams="quaver" icon="bi-box-arrow-right">
             {{ __('Register') }}
         </x-sidebar.item>
     </x-sidebar.group>
