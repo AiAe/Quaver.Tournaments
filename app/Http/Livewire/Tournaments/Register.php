@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentFormat;
 use App\Models\Team;
-use App\Models\Tournament;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Validation\Rule;
@@ -88,6 +87,7 @@ class Register extends Component
 
         $team = Team::create($validated);
         $team->members()->attach($user, ['is_captain' => true]);
+        $team->updateTeamRank();
 
         createToast('success', '', __('You signed up successfully!'));
 
