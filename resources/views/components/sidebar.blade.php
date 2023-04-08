@@ -34,8 +34,7 @@
 
 @guest()
     <x-sidebar.group>
-        <x-sidebar.item route=" web.auth.oauth
-            " routeParams="quaver" icon="bi-box-arrow-right">
+        <x-sidebar.item route="web.auth.oauth" routeParams="quaver" icon="bi-box-arrow-right">
             {{ __('Register') }}
         </x-sidebar.item>
     </x-sidebar.group>
