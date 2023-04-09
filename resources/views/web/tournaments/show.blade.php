@@ -26,7 +26,7 @@
                     </div>
                     <div>
                         @if($tournament->getMeta('spreadsheet'))
-                            <a href="{{ $tournament->getMeta('spreadsheet') }}" class="btn btn-secondary btn-sm"
+                            <a href="{{ $tournament->getMeta('spreadsheet') }}" class="btn btn-spreadsheet btn-sm"
                                target="_blank"
                                rel="noreferrer">
                                 <i class="bi bi-list"></i>
@@ -34,14 +34,23 @@
                             </a>
                         @endif
                         @if($tournament->getMeta('discord'))
-                            <a href="{{ $tournament->getMeta('discord') }}" class="btn btn-secondary btn-sm" target="_blank"
+                            <a href="{{ $tournament->getMeta('discord') }}" class="btn btn-discord btn-sm"
+                               target="_blank"
                                rel="noreferrer">
                                 <i class="bi bi-discord"></i>
                                 {{ __('Discord') }}
                             </a>
                         @endif
+                        @if($tournament->getMeta('twitter'))
+                            <a href="{{ $tournament->getMeta('twitter') }}" class="btn btn-twitter btn-sm"
+                               target="_blank"
+                               rel="noreferrer">
+                                <i class="bi bi-twitter"></i>
+                                {{ __('Twitter') }}
+                            </a>
+                        @endif
                         @if($tournament->getMeta('twitch'))
-                            <a href="{{ $tournament->getMeta('twitch') }}" class="btn btn-secondary btn-sm"
+                            <a href="{{ $tournament->getMeta('twitch') }}" class="btn btn-twitch btn-sm"
                                target="_blank"
                                rel="noreferrer">
                                 <i class="bi bi-twitch"></i>

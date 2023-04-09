@@ -16,7 +16,7 @@
 
         <div class="row mt-3">
             <div class="col-lg-3">
-                <div class="sticky-top" style="top: 80px;">
+                <div class="sticky-top mb-3" style="top: 80px; z-index: 200;">
                     <x-sidebar :tournament="$tournament"/>
                 </div>
             </div>

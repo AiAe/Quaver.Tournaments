@@ -144,6 +144,13 @@
                                 {{ Form::text('spreadsheet', $tournament->getMeta('spreadsheet')??"", ['class' => 'form-control']) }}
                             </div>
                         </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Twitter URL') }}</label>
+                                {{ Form::text('twitter', $tournament->getMeta('twitter')??"", ['class' => 'form-control']) }}
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
