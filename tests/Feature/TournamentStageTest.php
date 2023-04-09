@@ -35,6 +35,9 @@ class TournamentStageTest extends TestCase
     public function testBasic()
     {
         $this->get(route('web.tournaments.stages.index', $this->tournament))
+            ->assertForbidden();
+
+        $this->actingAs($this->organizer)->get(route('web.tournaments.stages.index', $this->tournament))
             ->assertOk();
     }
 }

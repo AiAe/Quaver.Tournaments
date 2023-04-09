@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class TournamentStageController extends Controller
 {
+
     public function index(Tournament $tournament)
     {
+        $this->authorize('view', $tournament);
+
         $tournament->load('stages.rounds');
+
         return view('web.tournaments.stages.index', ['title' => 'Stages', 'tournament' => $tournament]);
     }
 

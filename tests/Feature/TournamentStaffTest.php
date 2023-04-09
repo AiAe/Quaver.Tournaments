@@ -43,6 +43,10 @@ class TournamentStaffTest extends TestCase
     public function testIndex()
     {
         $this->get(route('web.tournaments.staff.index', $this->tournament))
+            ->assertForbidden();
+
+        $this->actingAs($this->organizer)
+            ->get(route('web.tournaments.staff.index', $this->tournament))
             ->assertOk();
     }
 

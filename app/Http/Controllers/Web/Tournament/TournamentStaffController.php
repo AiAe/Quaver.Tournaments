@@ -12,8 +12,11 @@ use Illuminate\Validation\Validator;
 
 class TournamentStaffController extends Controller
 {
+
     public function index(Tournament $tournament)
     {
+        $this->authorize('view', $tournament);
+
         $title = __('Staff');
 
         $tournament->load(['staff.user']);

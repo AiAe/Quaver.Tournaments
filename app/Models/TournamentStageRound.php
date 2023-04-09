@@ -17,7 +17,8 @@ class TournamentStageRound extends Model
         'index',
         'starts_at',
         'ends_at',
-        'round_text'
+        'round_text',
+        'mappool_visible'
     ];
 
     protected $casts = [

@@ -56,6 +56,7 @@ class TournamentsController extends Controller
                 'discord' => ['nullable'],
                 'twitch' => ['nullable'],
                 'spreadsheet' => ['nullable'],
+                'twitter' => ['nullable'],
                 'information' => ['nullable'],
                 'discord_webhook_registrations' => ['nullable'],
                 'discord_webhook_matches' => ['nullable'],
@@ -98,11 +99,15 @@ class TournamentsController extends Controller
 
     public function mappools(Tournament $tournament)
     {
+        $this->authorize('view', $tournament);
+
         return view('web.tournaments.mappools', ['tournament' => $tournament]);
     }
 
     public function schedules(Tournament $tournament)
     {
+        $this->authorize('view', $tournament);
+
         // TODO: eager load staff once implemented
         $tournament->load(['stages.rounds.matches.team1', 'stages.rounds.matches.team2']);
         return view('web.tournaments.schedules', ['tournament' => $tournament]);

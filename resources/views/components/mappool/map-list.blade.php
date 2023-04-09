@@ -9,11 +9,14 @@
                          url('https://cdn.quavergame.com/mapsets/{{ $m->quaver_mapset_id }}.jpg'); background-size: cover;">
                         <div>
                             <div>{{ $m->artist }} - {{ $m->title }}</div>
-                            <div>{{ $m->difficulty_name }} - {{ $m->difficulty_rating }}</div>
+                            <div>{{ $m->difficulty_name }} - {{ ($map->modded_difficulty) ?: $m->difficulty_rating }}</div>
                         </div>
                         <div>
                             @if($map->mods)
-                                <img src="{{ asset('assets/img/mods/'.$map->mods.'.svg') }}">
+                                @php($mods = explode(",", $map->mods))
+                                @foreach($mods as $mod)
+                                    <img src="{{ asset('assets/img/mods/'.$mod.'.svg') }}">
+                                @endforeach
                             @endif
                         </div>
                     </div>
@@ -24,7 +27,7 @@
                         <div class="col-lg-4">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <i class="bi bi-plus-slash-minus"></i> <span>{{ $map->offset }}</span>
+                                    <i class="bi bi-plus-slash-minus"></i> <span>{{ $map->offset??0 }}</span>
                                 </div>
                                 <div>
                                     <i class="bi bi-clock-fill"></i>
