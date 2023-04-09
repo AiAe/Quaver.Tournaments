@@ -18,6 +18,9 @@
                             <button wire:click="fetch_map" class="btn btn-primary btn-sm"
                                     type="button">{{ __('Fetch Map') }}</button>
                         </div>
+                        @error('map_not_found')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="form-group mt-2">
@@ -47,14 +50,21 @@
                     </div>
 
                     <div class="row mt-2">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Modded difficulty') }}</label>
                                 {{ Form::text('modded_difficulty', '', ['class' => 'form-control', 'wire:model' => 'modded_difficulty']) }}
                                 <small>{{ __('If rates are used write the correct difficulty rate') }}</small>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Modded BPM') }}</label>
+                                {{ Form::text('modded_bpm', '', ['class' => 'form-control', 'wire:model' => 'modded_bpm']) }}
+                                <small>{{ __('If rates are used write the correct BPM') }}</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Offset') }}</label>
                                 {{ Form::text('offset', '', ['class' => 'form-control', 'wire:model' => 'offset']) }}

@@ -9,7 +9,7 @@
                          url('https://cdn.quavergame.com/mapsets/{{ $m->quaver_mapset_id }}.jpg'); background-size: cover;">
                         <div>
                             <div>{{ $m->artist }} - {{ $m->title }}</div>
-                            <div>{{ $m->difficulty_name }} - {{ ($map->modded_difficulty) ?: $m->difficulty_rating }}</div>
+                            <div>{{ $m->difficulty_name }} - {{ number_format(($map->modded_difficulty) ?: $m->difficulty_rating, 2) }}</div>
                         </div>
                         <div>
                             @if($map->mods)
@@ -21,10 +21,10 @@
                         </div>
                     </div>
                     <div class="row map-info-2">
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             {{ __('Category') }}: <span>{{ $map->category }} - {{ $map->sub_category }}</span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <i class="bi bi-plus-slash-minus"></i> <span>{{ $map->offset??0 }}</span>
@@ -34,7 +34,7 @@
                                     <span>{{ \Carbon\CarbonInterval::milliseconds($m->length)->cascade()->forHumans(null, true, 2) }}</span>
                                 </div>
                                 <div>
-                                    <i class="bi bi-speedometer2"></i> <span>{{ $m->bpm }} BPM</span>
+                                    <i class="bi bi-speedometer2"></i> <span>{{ ($map->modded_bpm) ?: $m->bpm }} BPM</span>
                                 </div>
                             </div>
                         </div>
