@@ -21,6 +21,7 @@ class UpdateMappool extends Component
     public $mods = null;
     public $offset = 0;
     public $modded_difficulty = null;
+    public $modded_bpm = null;
 
     protected function rules()
     {
@@ -31,7 +32,8 @@ class UpdateMappool extends Component
             'sub_category' => ['required', 'string', 'max:255'],
             'mods' => ['nullable', 'string', 'max:255'],
             'offset' => ['required', 'numeric'],
-            'modded_difficulty' => ['nullable']
+            'modded_difficulty' => ['nullable'],
+            'modded_bpm' => ['nullable']
         ];
     }
 
@@ -43,19 +45,31 @@ class UpdateMappool extends Component
 
     public function fetch_map()
     {
-        $id = basename($this->quaver_map_url);
+        $id = (int)basename($this->quaver_map_url);
 
-        if (!$id) return;
-
-        $api_map = QuaverApi::getMap($id);
-
-        $map = QuaverMap::where('quaver_map_id', $id)->first();
-
-        if (!$map) {
-            $map = QuaverMap::create(QuaverMap::quaverDataToAttributes($api_map));
+        if (!$id) {
+            $this->addError('map_not_found', __('Invalid map url!'));
+            return;
         }
 
-        $this->quaver_map_id = $map->quaver_map_id;
+        try {
+            $api_map = QuaverApi::getMap($id);
+
+            if (!$api_map) {
+                $this->addError('map_not_found', __('Map is not found!'));
+                return;
+            }
+
+            $map = QuaverMap::where('quaver_map_id', $id)->first();
+
+            if (!$map) {
+                $map = QuaverMap::create(QuaverMap::quaverDataToAttributes($api_map));
+            }
+
+            $this->quaver_map_id = $map->quaver_map_id;
+        } catch (\Exception $e) {
+            $this->addError('map_not_found', __('Failed to fetch map!'));
+        }
     }
 
     public function create()

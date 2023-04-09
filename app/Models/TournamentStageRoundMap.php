@@ -20,6 +20,7 @@ class TournamentStageRoundMap extends Model
         'mods',
         'offset',
         'modded_difficulty',
+        'modded_bpm',
         'index'
     ];
 
