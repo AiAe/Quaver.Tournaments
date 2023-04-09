@@ -17,9 +17,29 @@ class TournamentRulesTest extends TestCase
     private Tournament $tournament;
     private User $organizer;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->organizer = User::factory()->create();
+        $this->organizer->addRole(UserRoles::Organizer);
+
+        $this->tournament = Tournament::create([
+            'user_id' => $this->organizer->id,
+            'name' => 'qot_factory',
+            'slug' => 'qot_factory',
+            'format' => TournamentFormat::Solo,
+            'status' => TournamentStatus::Unlisted
+        ]);
+    }
+
     public function testIndex()
     {
         $this->get(route('web.tournaments.rules.show', $this->tournament))
+            ->assertForbidden();
+
+        $this->actingAs($this->organizer)
+            ->get(route('web.tournaments.rules.show', $this->tournament))
             ->assertOk();
     }
 
@@ -37,21 +57,5 @@ class TournamentRulesTest extends TestCase
         $rules = str_repeat('too long', 10_000);
 
         $this->actingAs($this->organizer)->put($route, ['rules' => $rules])->assertSessionHasErrors(['rules']);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->organizer = User::factory()->create();
-        $this->organizer->addRole(UserRoles::Organizer);
-
-        $this->tournament = Tournament::create([
-            'user_id' => $this->organizer->id,
-            'name' => 'qot_factory',
-            'slug' => 'qot_factory',
-            'format' => TournamentFormat::Solo,
-            'status' => TournamentStatus::Unlisted
-        ]);
     }
 }

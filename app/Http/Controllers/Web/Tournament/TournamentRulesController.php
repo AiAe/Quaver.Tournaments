@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class TournamentRulesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Tournament::class, 'tournament');
+    }
+
     public function show(Tournament $tournament)
     {
         $title = __('Rules');

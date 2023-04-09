@@ -55,6 +55,8 @@ class TournamentRoundController extends Controller
 
     public function show(Tournament $tournament, TournamentStageRound $round)
     {
+        $this->authorize('view', $tournament);
+
         // TODO: eager load staff for schedule once implemented
         $round->load('matches', 'maps.map');
         return view('web.tournaments.rounds.show', [

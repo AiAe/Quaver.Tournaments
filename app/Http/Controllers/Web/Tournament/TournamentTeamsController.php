@@ -21,6 +21,8 @@ class TournamentTeamsController extends Controller
 
     public function index(Tournament $tournament)
     {
+        $this->authorize('view', $tournament);
+
         $title = __('Players');
 
         if ($tournament->format == TournamentFormat::Team) {
@@ -37,6 +39,8 @@ class TournamentTeamsController extends Controller
 
     public function show(Tournament $tournament, Team $team)
     {
+        $this->authorize('view', $tournament);
+
         $members = $team->members()->orderBy($tournament->mode->rankColumnName())->get();
         return view('web.tournaments.teams.show', compact('tournament', 'team', 'members'));
     }
