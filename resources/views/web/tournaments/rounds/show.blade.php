@@ -15,12 +15,14 @@
 @section('section')
 
     <div class="d-flex justify-content-between mb-3">
-        @can('update', $tournament)
-            <div>
-                <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                   data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
-            </div>
-        @endcan
+{{--        @can('update', $tournament)--}}
+{{--            <div>--}}
+{{--                <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"--}}
+{{--                   data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>--}}
+{{--            </div>--}}
+{{--        @endcan--}}
+
+        <div></div>
 
         @can('delete', $tournament)
             <div>
