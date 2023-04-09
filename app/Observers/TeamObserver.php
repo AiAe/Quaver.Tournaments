@@ -8,7 +8,6 @@ class TeamObserver
 {
     public function created(Team $team): void
     {
-        $team->updateTeamRank();
     }
 
     public function updated(Team $team): void
