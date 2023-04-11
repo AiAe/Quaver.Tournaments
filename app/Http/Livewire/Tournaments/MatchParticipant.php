@@ -15,17 +15,19 @@ class MatchParticipant extends Component
     use AuthorizesRequests;
     use WithRateLimiting;
 
+    public $player_in_stage_round;
     public $match;
     public $tournament;
     public $loggedUser;
 
-    public function mount(TournamentMatch $match)
+    public function mount(TournamentMatch $match, $player_in_stage_round)
     {
-        $match->load(['round', 'round.stage', 'round.stage.tournament']);
+        $match->load(['round']);
         $this->match = $match;
+        $this->player_in_stage_round = $player_in_stage_round;
 
-        $this->tournament = $match->round->stage->tournament;
-        $this->loggedUser = Auth::user();
+        $this->tournament = request()->attributes->get('tournament');
+        $this->loggedUser = request()->attributes->get('loggedUser');
     }
 
     public function join()

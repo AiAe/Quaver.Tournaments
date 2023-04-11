@@ -21,11 +21,10 @@
 @endcan
 
 @auth()
-    @php($team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id))
-    @if($team && $tournament->format == TournamentFormat::Team)
+    @if($loggedUserTeam && $tournament->format == TournamentFormat::Team)
         <x-sidebar.group>
             <x-sidebar.item icon="bi-people"
-                            href="{{route('web.tournaments.teams.show',[$tournament, $team])}}">
+                            href="{{route('web.tournaments.teams.show',[$tournament, $loggedUserTeam])}}">
                 {{ __('My Team') }}
             </x-sidebar.item>
         </x-sidebar.group>

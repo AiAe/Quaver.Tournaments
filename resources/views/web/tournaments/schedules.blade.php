@@ -17,7 +17,8 @@
     @forelse(
         $tournament->stages()
             ->whereNot('stage_format', TournamentStageFormat::Registration)
-            ->with('rounds', 'rounds.matches', 'rounds.matches.team1', 'rounds.matches.team2', 'rounds.stage')
+            ->with('rounds', 'rounds.matches', 'rounds.matches.team1', 'rounds.matches.team2', 'rounds.stage',
+            'rounds.matches.ffaParticipants', 'rounds.matches.round')
             ->get()
             ->flatMap
             ->rounds

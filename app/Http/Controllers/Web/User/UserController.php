@@ -26,7 +26,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $loggedUser = \Auth::user();
+        $loggedUser = $request->attributes->get('loggedUser');
 
         $this->authorize('update', $loggedUser);
 

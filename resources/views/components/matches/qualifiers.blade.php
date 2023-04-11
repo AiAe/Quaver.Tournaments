@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-10">
-                        @php($participants = $match->ffaParticipants()->get())
+                        @php($participants = $match->ffaParticipants)
                         <div class="table-responsive">
                             <table class="table table-bordered table-dark mb-0">
                                 <tr>
@@ -30,9 +30,18 @@
                                 class="font-weight-bold text-primary">
                                 {{ $match->timestamp->format('H:i \U\T\C') }}
                             </div>
-                            <livewire:tournaments.match-participant
-                                :match="$match"
-                                wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
+
+                            @if($loggedUserTeamCaptain)
+                                @php($player_in_stage_round = \App\Models\TournamentMatchFfaParticipants::query()
+                                    ->where('tournament_stage_round_id', $match->round->id)
+                                    ->where('team_id', $loggedUserTeam->id)
+                                    ->first())
+
+                                <livewire:tournaments.match-participant
+                                    :match="$match" :player_in_stage_round="$player_in_stage_round"
+                                    wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
+
+                            @endif
                         </div>
                     </div>
                 </div>
