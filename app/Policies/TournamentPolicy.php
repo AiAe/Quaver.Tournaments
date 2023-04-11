@@ -64,4 +64,11 @@ class TournamentPolicy
 
         return $roundHasNotEndedYet && $userCanUpdate;
     }
+
+    public function viewPlayers(User $user, Tournament $tournament): bool
+    {
+        return $this->update($user, $tournament)
+            || $tournament->userHasStaffRole($user, StaffRole::HeadReferee)
+            || $tournament->userHasStaffRole($user, StaffRole::HeadStreamer);
+    }
 }

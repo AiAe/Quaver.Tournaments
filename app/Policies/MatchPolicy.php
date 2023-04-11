@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Enums\MatchFormat;
 use App\Enums\TournamentStageFormat;
 use App\Models\TournamentMatch;
+use App\Models\TournamentMatchFfaParticipants;
 use App\Models\TournamentStageRound;
 use App\Models\User;
 use Gate;
@@ -68,11 +69,12 @@ class MatchPolicy
 
         $isCaptain = $team->captain()->is($user);
 
-        $noOtherMatches = !$team->ffaMatches()
+        $noOtherMatches = TournamentMatchFfaParticipants::query()
             ->where('tournament_stage_round_id', $match->round->id)
+            ->where('team_id', $team->id)
             ->exists();
 
-        return $isQualifier && $isFfa && $isFuture && $isCaptain && $noOtherMatches;
+        return $isQualifier && $isFfa && $isFuture && $isCaptain && !$noOtherMatches;
     }
 
     public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Tournament;
 
+use App\Enums\TournamentStageFormat;
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
@@ -110,6 +111,8 @@ class TournamentsController extends Controller
 
         // TODO: eager load staff once implemented
         $tournament->load(['stages.rounds.matches.team1', 'stages.rounds.matches.team2']);
-        return view('web.tournaments.schedules', ['tournament' => $tournament]);
+        return view('web.tournaments.schedules', [
+            'tournament' => $tournament
+        ]);
     }
 }

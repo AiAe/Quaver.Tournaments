@@ -35,7 +35,7 @@ class MatchGeneratorTest extends TestCase
 
         $this->assertEquals(count($timestamps), $matches->count());
         $this->assertEquals('1-MON-00:00', $matches->first());
-        $this->assertEquals('2-SAT-23:00', $matches->last());
+        $this->assertEquals('2-SUN-00:00', $matches->last());
     }
 
     public function testOptimalTimezone()

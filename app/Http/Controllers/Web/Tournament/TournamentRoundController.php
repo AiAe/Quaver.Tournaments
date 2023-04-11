@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Tournament;
 
+use App\Enums\TournamentStageFormat;
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use App\Models\TournamentStage;
@@ -62,6 +63,7 @@ class TournamentRoundController extends Controller
         return view('web.tournaments.rounds.show', [
             'tournament' => $tournament,
             'round' => $round,
+            'qualifiers' => ($round->stage->stage_format == TournamentStageFormat::Qualifier)
         ]);
     }
 

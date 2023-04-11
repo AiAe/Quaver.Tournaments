@@ -53,7 +53,8 @@ class TournamentMatch extends Model
 
     public function ffaParticipants(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, 'tournament_match_ffa_participants');
+        return $this->belongsToMany(Team::class, 'tournament_match_ffa_participants')
+            ->withPivot('tournament_stage_round_id');
     }
 
     public function tournament(): Tournament

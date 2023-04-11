@@ -59,21 +59,27 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifier()
     {
-        $this->match->ffaParticipants()->attach($this->team);
+        $this->match->ffaParticipants()->attach($this->team, [
+            'tournament_stage_round_id' => $this->match->round->id
+        ]);
 
         $this->assertTrue($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
     }
 
     public function testWithdrawTeamFromQualifierOrganizer()
     {
-        $this->match->ffaParticipants()->attach($this->team);
+        $this->match->ffaParticipants()->attach($this->team, [
+            'tournament_stage_round_id' => $this->match->round->id
+        ]);
 
         $this->assertTrue($this->tournament->user->can('withdrawTeamFromQualifierLobby', $this->match));
     }
 
     public function testWithdrawTeamFromQualifierNotQualifier()
     {
-        $this->match->ffaParticipants()->attach($this->team);
+        $this->match->ffaParticipants()->attach($this->team, [
+            'tournament_stage_round_id' => $this->match->round->id
+        ]);
 
         $stage = $this->match->round->stage;
         $stage->stage_format = TournamentStageFormat::Swiss;
@@ -84,7 +90,9 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifierTooLate()
     {
-        $this->match->ffaParticipants()->attach($this->team);
+        $this->match->ffaParticipants()->attach($this->team, [
+            'tournament_stage_round_id' => $this->match->round->id
+        ]);
 
         $this->match->timestamp = Carbon::now()->addDays(-1);
         $this->match->save();
@@ -99,7 +107,9 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifierNotCaptain()
     {
-        $this->match->ffaParticipants()->attach($this->team);
+        $this->match->ffaParticipants()->attach($this->team, [
+            'tournament_stage_round_id' => $this->match->round->id
+        ]);
 
         $notCaptain = $this->team->members()->wherePivot('is_captain', false)->first();
         $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));
