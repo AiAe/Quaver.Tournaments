@@ -25,9 +25,9 @@
                             <th style="width: 33%;"></th>
                         </tr>
                         <tr>
-                            <td>{{ Str::limit($match->team1?->name, 15) }}</td>
+                            <td>{{ Str::limit($match->team1?->name??"-", 15) }}</td>
                             <td style="padding: 0 6px;">{{ __('vs') }}</td>
-                            <td>{{ Str::limit($match->team2?->name, 15) }}</td>
+                            <td>{{ Str::limit($match->team2?->name??"-", 15) }}</td>
                         </tr>
                     </table>
                 </div>

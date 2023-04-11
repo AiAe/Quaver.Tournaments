@@ -28,7 +28,7 @@ class TournamentsController extends Controller
 
     public function show(Tournament $tournament)
     {
-        $tournament->load('metas');
+        $tournament->load('metas', 'teams', 'teams.members');
 
         return view('web.tournaments.show', compact('tournament'));
     }
