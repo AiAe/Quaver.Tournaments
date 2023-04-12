@@ -29,11 +29,6 @@ class MatchPolicyTest extends TestCase
         $this->assertTrue($this->captain->can('assignTeamToQualifierLobby', $this->match));
     }
 
-    public function testOrgAssignTeamToQualifier()
-    {
-        $this->assertTrue($this->tournament->user->can('assignTeamToQualifierLobby', $this->match));
-    }
-
     public function testAssignTeamToQualifierNotQualifier()
     {
         $stage = $this->match->round->stage;
@@ -59,27 +54,14 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifier()
     {
-        $this->match->ffaParticipants()->attach($this->team, [
-            'tournament_stage_round_id' => $this->match->round->id
-        ]);
+        $this->match->ffaParticipants()->attach($this->team);
 
         $this->assertTrue($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
     }
 
-    public function testWithdrawTeamFromQualifierOrganizer()
-    {
-        $this->match->ffaParticipants()->attach($this->team, [
-            'tournament_stage_round_id' => $this->match->round->id
-        ]);
-
-        $this->assertTrue($this->tournament->user->can('withdrawTeamFromQualifierLobby', $this->match));
-    }
-
     public function testWithdrawTeamFromQualifierNotQualifier()
     {
-        $this->match->ffaParticipants()->attach($this->team, [
-            'tournament_stage_round_id' => $this->match->round->id
-        ]);
+        $this->match->ffaParticipants()->attach($this->team);
 
         $stage = $this->match->round->stage;
         $stage->stage_format = TournamentStageFormat::Swiss;
@@ -90,9 +72,7 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifierTooLate()
     {
-        $this->match->ffaParticipants()->attach($this->team, [
-            'tournament_stage_round_id' => $this->match->round->id
-        ]);
+        $this->match->ffaParticipants()->attach($this->team);
 
         $this->match->timestamp = Carbon::now()->addDays(-1);
         $this->match->save();
@@ -107,9 +87,7 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifierNotCaptain()
     {
-        $this->match->ffaParticipants()->attach($this->team, [
-            'tournament_stage_round_id' => $this->match->round->id
-        ]);
+        $this->match->ffaParticipants()->attach($this->team);
 
         $notCaptain = $this->team->members()->wherePivot('is_captain', false)->first();
         $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));

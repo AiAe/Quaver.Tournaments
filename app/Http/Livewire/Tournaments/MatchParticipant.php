@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Tournaments;
 
 use App\Models\TournamentMatch;
-use App\Models\TournamentMatchFfaParticipants;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -45,16 +44,8 @@ class MatchParticipant extends Component
 
         $team = $player->teams()->firstWhere('tournament_id', $this->tournament->id);
 
-        // Check if team already in stage matches
-        $player_in_stage_round = TournamentMatchFfaParticipants::query()
-            ->where('tournament_stage_round_id', $this->match->round->id)
-            ->where('team_id', $team->id)
-            ->exists();
-
-        if (!$player_in_stage_round) {
-            $this->match->ffaParticipants()->attach($team, [
-                'tournament_stage_round_id' => $this->match->round->id
-            ]);
+        if (!$this->match->ffaParticipants->contains($team)) {
+            $this->match->ffaParticipants()->attach($team);
 
             createToast('success', '', __('Added'));
         } else {
@@ -67,7 +58,7 @@ class MatchParticipant extends Component
     public function leave()
     {
         try {
-            $this->rateLimit(1, 30);
+            $this->rateLimit(1, 10);
 
             $player = Auth::user();
 
@@ -75,14 +66,8 @@ class MatchParticipant extends Component
 
             $team = $player->teams()->firstWhere('tournament_id', $this->tournament->id);
 
-            // Find player
-            $player_in_stage_round = TournamentMatchFfaParticipants::query()
-                ->where('tournament_stage_round_id', $this->match->round->id)
-                ->where('team_id', $team->id)
-                ->first();
-
-            if($player_in_stage_round) {
-                $player_in_stage_round->delete();
+            if ($this->match->ffaParticipants->contains($team)) {
+                $this->match->ffaParticipants()->detach($team);
 
                 createToast('success', '', __('Successfully withdrawn from the lobby!'));
             } else {

@@ -32,15 +32,12 @@
                             </div>
 
                             @if($loggedUserTeamCaptain)
-                                @php($player_in_stage_round = \App\Models\TournamentMatchFfaParticipants::query()
-                                    ->where('tournament_stage_round_id', $match->round->id)
-                                    ->where('team_id', $loggedUserTeam->id)
-                                    ->first())
-
+                            @php($player_in_stage_round = $loggedUserTeam->ffaMatches()
+                                ->where('tournament_stage_round_id', $match->round->id)
+                                ->first())
                                 <livewire:tournaments.match-participant
                                     :match="$match" :player_in_stage_round="$player_in_stage_round"
                                     wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
-
                             @endif
                         </div>
                     </div>

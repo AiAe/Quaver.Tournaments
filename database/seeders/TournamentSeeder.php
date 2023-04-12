@@ -103,9 +103,7 @@ class TournamentSeeder extends Seeder
 
                     if ($format == TournamentStageFormat::Qualifier) {
                         TournamentMatch::factory(10)
-                            ->hasFfaParticipants($stage->tournament->teams->pluck('id')->random(3), [
-                                'tournament_stage_round_id' => $round->id
-                            ])
+                            ->hasFfaParticipants($stage->tournament->teams->pluck('id')->random(3))
                             ->create(new Sequence(fn($seq) => [
                                 'label' => $seq->index,
                                 'match_format' => MatchFormat::FreeForAll,

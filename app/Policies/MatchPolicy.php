@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Enums\MatchFormat;
 use App\Enums\TournamentStageFormat;
 use App\Models\TournamentMatch;
-use App\Models\TournamentMatchFfaParticipants;
 use App\Models\TournamentStageRound;
 use App\Models\User;
 use Gate;
@@ -59,7 +58,7 @@ class MatchPolicy
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
         $isFuture = $match->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $isFuture && $match->tournament()->userIsOrganizer($user)) return true;
+        if (!($isQualifier && $isFfa && $isFuture)) return false;
 
         $team = $user->teams()
             ->where('tournament_id', $match->tournament()->id)
@@ -69,20 +68,20 @@ class MatchPolicy
 
         $isCaptain = $team->captain()->is($user);
 
-        $noOtherMatches = TournamentMatchFfaParticipants::query()
+        $noOtherMatches = !$team->ffaMatches()
             ->where('tournament_stage_round_id', $match->round->id)
-            ->where('team_id', $team->id)
             ->exists();
 
-        return $isQualifier && $isFfa && $isFuture && $isCaptain && !$noOtherMatches;
+        return $isCaptain && $noOtherMatches;
     }
 
     public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool
     {
         $isQualifier = $match->round->stage->stage_format == TournamentStageFormat::Qualifier;
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
+        $isFuture = $match->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $match->tournament()->userIsOrganizer($user)) return true;
+        if(!$isQualifier && $isFfa && $isFuture) return false;
 
         $isMoreThan1HourAhead = $match->timestamp->copy()->addHours(-1)->isFuture();
 
@@ -95,6 +94,6 @@ class MatchPolicy
         $isCaptain = $team->captain()->is($user);
         $isParticipant = $team->ffaMatches->contains($match);
 
-        return $isQualifier && $isFfa && $isMoreThan1HourAhead && $isCaptain && $isParticipant;
+        return $isMoreThan1HourAhead && $isCaptain && $isParticipant;
     }
 }
