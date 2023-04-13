@@ -1,6 +1,6 @@
 @forelse($matches as $key => $timestamps)
     <div class="round-name d-flex align-items-center">
-        <span></span> {{ \Carbon\Carbon::parse($key)->format('F j l') }}
+        <span>{{ \Carbon\Carbon::parse($key)->format('F j l') }}</span>
     </div>
 
     @foreach($timestamps as $match)
@@ -32,9 +32,9 @@
                             </div>
 
                             @if($loggedUserTeamCaptain)
-                            @php($player_in_stage_round = $loggedUserTeam->ffaMatches()
-                                ->where('tournament_stage_round_id', $match->round->id)
-                                ->first())
+                                @php($player_in_stage_round = $loggedUserTeam->ffaMatches()
+                                    ->where('tournament_stage_round_id', $match->round->id)
+                                    ->first())
                                 <livewire:tournaments.match-participant
                                     :match="$match" :player_in_stage_round="$player_in_stage_round"
                                     wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
@@ -46,5 +46,11 @@
         </div>
     @endforeach
 @empty
-    -
+    <div class="card mb-2">
+        <div class="card-body">
+            <div class="row">
+                <span>{{__('No matches so far...')}}</span>
+            </div>
+        </div>
+    </div>
 @endforelse
