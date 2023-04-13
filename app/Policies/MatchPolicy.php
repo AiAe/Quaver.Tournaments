@@ -14,6 +14,8 @@ class MatchPolicy
 {
     use HandlesAuthorization;
 
+    private static int $maxPlayersInLobby = 10;
+
     public function viewAny(?User $user): bool
     {
         return true;
@@ -58,13 +60,17 @@ class MatchPolicy
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
         $isFuture = $match->timestamp->isFuture();
 
-        if (!($isQualifier && $isFfa && $isFuture)) return false;
+        if (!($isQualifier && $isFfa && $isFuture)) {
+            return false;
+        }
 
         $team = $user->teams()
             ->where('tournament_id', $match->tournament()->id)
             ->first();
 
-        if (!$team) return false;
+        if (!$team) {
+            return false;
+        }
 
         $isCaptain = $team->captain()->is($user);
 
@@ -72,7 +78,9 @@ class MatchPolicy
             ->where('tournament_stage_round_id', $match->round->id)
             ->exists();
 
-        return $isCaptain && $noOtherMatches;
+        $lobbyNotFull = $match->ffaParticipants()->count() < self::$maxPlayersInLobby;
+
+        return $isCaptain && $noOtherMatches && $lobbyNotFull;
     }
 
     public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool
