@@ -13,6 +13,8 @@
             </div>
             <div class="col-lg-12 col-md-12 d-flex align-items-center text-center">
                 <x-tournament.details :tournament="$tournament"/>
+                <a href="{{route('web.tournaments.show', $tournament)}}"
+                   class="stretched-link" title="{{ __('View Tournament') }}"></a>
             </div>
         </div>
     </div>
