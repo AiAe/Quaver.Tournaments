@@ -16,15 +16,11 @@ class GenerateQualifierLobbies extends Component
     public $tournament;
     public $round;
     public $timestamps = [];
-    public $i = 0;
+    public $timestampInput = '';
 
-    public function addTimestamp($i)
+    public function addTimestamp()
     {
-        $i += 1;
-        $this->i = $i;
-        $this->timestamps[] = '';
-
-        $this->emit('initDateTimePicker');
+        $this->timestamps[] = $this->timestampInput;
     }
 
     public function removeTimestamp($i)

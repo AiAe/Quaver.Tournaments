@@ -11,19 +11,32 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="timestamps">
-                        @foreach($this->timestamps as $key => $value)
-                            <div class="form-group mb-2">
-                                <label class="form-label">{{ __('Timestamp') }}</label>
-                                <input type="text" wire:model="timestamps.{{ $key }}"
-                                       class="form-control datetimepicker">
-                            </div>
-                        @endforeach
+
+                    <div class="row">
+                        <label class="form-label" for="timestampInput">{{ __('Timestamp') }}</label>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-9">
+                            <input type="text" wire:model="timestampInput" class="form-control datetimepicker col-9"
+                                   id="timestampInput">
+                        </div>
+                        <div class="col-3">
+                            <button wire:click="addTimestamp()"
+                                    class="btn btn-primary btn-sm col-3">{{ __('Add') }}</button>
+                        </div>
                     </div>
 
-                    <div class="d-flex justify-content-end mt-2">
-                        <button wire:click="addTimestamp({{ $i }})"
-                                class="btn btn-primary btn-sm">{{ __('Add Timestamp') }}</button>
+                    <div class="mt-3">
+                        <ul>
+                            @foreach($this->timestamps as $key => $value)
+                                <li>
+
+                                    <span>{{$value}}</span>
+                                    <button wire:click="removeTimestamp({{$key}})"
+                                            class="btn btn-danger btn-sm list-inline">{{ __('X') }}</button>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -36,11 +49,9 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        Livewire.on('initDateTimePicker', () => {
-            flatpickr(".datetimepicker", {
-                enableTime: true,
-                time_24hr: true
-            });
+        flatpickr(".datetimepicker", {
+            enableTime: true,
+            time_24hr: true
         });
     });
 </script>
