@@ -18,11 +18,11 @@ class Tournament
      */
     public function handle(Request $request, Closure $next)
     {
-        $tournament = $request->route()->parameter('tournament');
+        $tournament = $request->route()->parameter('tournament', false);
         $loggedUser = app('loggedUser');
 
-        $loggedUserTeam = null;
-        $loggedUserTeamCaptain = null;
+        $loggedUserTeam = false;
+        $loggedUserTeamCaptain = false;
 
         // Check if logged user is in team
         if ($tournament && $loggedUser) {

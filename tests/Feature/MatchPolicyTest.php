@@ -26,6 +26,8 @@ class MatchPolicyTest extends TestCase
 
     public function testAssignTeamToQualifier()
     {
+        $this->app->instance('loggedUserTeam', $this->team);
+        $this->app->instance('loggedUserTeamCaptain', $this->team->captain()->is($this->captain));
         $this->assertTrue($this->captain->can('assignTeamToQualifierLobby', $this->match));
     }
 
@@ -48,12 +50,20 @@ class MatchPolicyTest extends TestCase
 
     public function testAssignTeamToQualifierNotCaptain()
     {
+        $this->app->instance('loggedUserTeam', $this->team);
+
         $notCaptain = $this->team->members()->wherePivot('is_captain', false)->first();
+
+        $this->app->instance('loggedUserTeamCaptain', $this->team->captain()->is($notCaptain));
+
         $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));
     }
 
     public function testWithdrawTeamFromQualifier()
     {
+        $this->app->instance('loggedUserTeam', $this->team);
+        $this->app->instance('loggedUserTeamCaptain', $this->team->captain()->is($this->captain));
+
         $this->match->ffaParticipants()->attach($this->team);
 
         $this->assertTrue($this->captain->can('withdrawTeamFromQualifierLobby', $this->match));
@@ -72,6 +82,9 @@ class MatchPolicyTest extends TestCase
 
     public function testWithdrawTeamFromQualifierTooLate()
     {
+        $this->app->instance('loggedUserTeam', $this->team);
+        $this->app->instance('loggedUserTeamCaptain', $this->team->captain()->is($this->captain));
+
         $this->match->ffaParticipants()->attach($this->team);
 
         $this->match->timestamp = Carbon::now()->addDays(-1);
@@ -88,6 +101,9 @@ class MatchPolicyTest extends TestCase
     public function testWithdrawTeamFromQualifierNotCaptain()
     {
         $this->match->ffaParticipants()->attach($this->team);
+
+        $this->app->instance('loggedUserTeam', $this->team);
+        $this->app->instance('loggedUserTeamCaptain', $this->team->captain()->is($this->captain));
 
         $notCaptain = $this->team->members()->wherePivot('is_captain', false)->first();
         $this->assertFalse($notCaptain->can('assignTeamToQualifierLobby', $this->match));
