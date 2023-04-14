@@ -11,15 +11,14 @@
                         <h5>Lobby {{$match->label}}</h5>
                         <p>Referee: Placeholder</p>
                     </div>
-                    @if($loggedUserTeamCaptain)
-                        @php($player_in_stage_round = $loggedUserTeam->ffaMatches()
-                            ->where('tournament_stage_round_id', $match->round->id)
-                            ->first())
-                        <livewire:tournaments.match-participant
-                            class="d-flex justify-content-end mt-2"
-                            :match="$match" :player_in_stage_round="$player_in_stage_round"
-                            wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
-                    @endif
+                    <div>
+                        @if($loggedUserTeamCaptain)
+                            <livewire:tournaments.match-participant
+                                class="d-flex justify-content-end mt-2"
+                                :match="$match"
+                                wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
+                        @endif
+                    </div>
                 </div>
                 <div class="row">
                     @php($participants = $match->ffaParticipants)

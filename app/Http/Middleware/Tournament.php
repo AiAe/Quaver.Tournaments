@@ -19,7 +19,7 @@ class Tournament
     public function handle(Request $request, Closure $next)
     {
         $tournament = $request->route()->parameter('tournament');
-        $loggedUser = $request->attributes->get('loggedUser');
+        $loggedUser = app('loggedUser');
 
         $loggedUserTeam = null;
         $loggedUserTeamCaptain = null;
@@ -34,12 +34,14 @@ class Tournament
             }
         }
 
+        // Accessed with $name
         View::share('tournament', $tournament);
         View::share('loggedUserTeam', $loggedUserTeam);
         View::share('loggedUserTeamCaptain', $loggedUserTeamCaptain);
-        $request->attributes->set('tournament', $tournament);
-        $request->attributes->set('loggedUserTeam', $loggedUserTeam);
-        $request->attributes->set('loggedUserTeamCaptain', $loggedUserTeamCaptain);
+        // Accessed with app('name')
+        app()->instance('tournament', $tournament);
+        app()->instance('loggedUserTeam', $loggedUserTeam);
+        app()->instance('loggedUserTeamCaptain', $loggedUserTeamCaptain);
 
         return $next($request);
     }

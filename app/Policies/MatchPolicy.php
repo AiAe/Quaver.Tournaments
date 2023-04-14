@@ -64,23 +64,22 @@ class MatchPolicy
             return false;
         }
 
-        $team = $user->teams()
-            ->where('tournament_id', $match->tournament()->id)
-            ->first();
-
+        $team = app('loggedUserTeam');
         if (!$team) {
             return false;
         }
 
-        $isCaptain = $team->captain()->is($user);
+        if (!app('loggedUserTeamCaptain')) {
+            return false;
+        }
 
         $noOtherMatches = !$team->ffaMatches()
             ->where('tournament_stage_round_id', $match->round->id)
             ->exists();
 
-        $lobbyNotFull = $match->ffaParticipants()->count() < self::$maxPlayersInLobby;
+        $lobbyNotFull = $match->ffaParticipants->count() < self::$maxPlayersInLobby;
 
-        return $isCaptain && $noOtherMatches && $lobbyNotFull;
+        return $noOtherMatches && $lobbyNotFull;
     }
 
     public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool
@@ -93,15 +92,30 @@ class MatchPolicy
 
         $isMoreThan1HourAhead = $match->timestamp->copy()->addHours(-1)->isFuture();
 
-        $team = $user->teams()
-            ->where('tournament_id', $match->tournament()->id)
-            ->first();
+        $team = app('loggedUserTeam');
 
-        if (!$team) return false;
+        if (!$team) {
+            return false;
+        }
 
-        $isCaptain = $team->captain()->is($user);
+        if (!app('loggedUserTeamCaptain')) {
+            return false;
+        }
+
         $isParticipant = $team->ffaMatches->contains($match);
 
-        return $isMoreThan1HourAhead && $isCaptain && $isParticipant;
+        return $isMoreThan1HourAhead && $isParticipant;
+    }
+
+    public function editStaff(User $user, TournamentMatch $match)
+    {
+        $isFuture = $match->timestamp->isFuture();
+
+        $organizer = $match->tournament()->userIsOrganizer($user);
+        $referee = $match->tournament()->userIsReferee($user);
+        $streamer = $match->tournament()->userIsStreamer($user);
+        $commentator = $match->tournament()->userIsCommentator($user);
+
+        return $organizer || ($isFuture && ($referee || $streamer || $commentator));
     }
 }

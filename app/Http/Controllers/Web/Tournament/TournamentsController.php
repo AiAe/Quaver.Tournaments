@@ -110,8 +110,6 @@ class TournamentsController extends Controller
     {
         $this->authorize('view', $tournament);
 
-        // TODO: eager load staff once implemented
-        $tournament->load(['stages.rounds.matches.team1', 'stages.rounds.matches.team2']);
         return view('web.tournaments.schedules', [
             'tournament' => $tournament
         ]);

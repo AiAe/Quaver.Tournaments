@@ -13,7 +13,7 @@ class UserTournamentsController extends Controller
 
     public function show(Request $request, User $user)
     {
-        $loggedUser = $request->attributes->get('loggedUser');
+        $loggedUser = app('loggedUser');
         $show_unlisted = false;
 
         if ($user->id === $loggedUser->id) {
