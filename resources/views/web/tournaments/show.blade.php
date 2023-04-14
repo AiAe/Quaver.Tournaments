@@ -62,11 +62,10 @@
             </div>
         </div>
 
-        {{--        <div class="col-lg-6">--}}
-        {{--            <h3>Schedule</h3>--}}
-        {{--        </div>--}}
-        {{--        <div class="col-lg-6">--}}
-        {{--            <h3>Prizes</h3>--}}
-        {{--        </div>--}}
+        <div class="col-lg-12 tournaments">
+            <div class="tournament mt-3 pt-1">
+                <x-tournament.details :tournament="$tournament"/>
+            </div>
+        </div>
     </div>
 @endsection

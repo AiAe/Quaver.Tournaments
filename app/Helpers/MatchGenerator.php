@@ -17,8 +17,8 @@ class MatchGenerator
     public static function generateQualifierLobbies(TournamentStageRound $round, array $timestamps)
     {
         $timestamps = collect($timestamps)->sort();
-        $first = $timestamps->first();
-        $last = $timestamps->last();
+        $first = $timestamps->first()->copy();
+        $last = $timestamps->last()->copy();
 
         $isMultiWeek = $last->startOfWeek()->diff($first->startOfWeek())->d / 7 > 0;
 

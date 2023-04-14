@@ -28,11 +28,18 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">{{ __('Linked Discord ID') }}</label>
+                            <label class="form-label">{{ __('Linked Discord ID') }}</label>
+                            <div class="input-group">
+
                                 {{ Form::text('', $loggedUser['discord_user_id'], ['class' => 'form-control', 'readonly' => 'readonly']) }}
-                                <small>{{ __('If you have linked the wrong Discord account, please contact tournament organizer or site admins!') }}</small>
+                                @if($loggedUser['discord_user_id'] == null)
+                                    <div class="input-group-append">
+                                        <a href="{{ route('web.auth.oauth', ['driver' => 'discord', 'redirect' => current_route()]) }}" class="btn btn-discord"
+                                           style="border-bottom-left-radius: 0; border-top-left-radius: 0;">{{ __('Connect Discord') }}</a>
+                                    </div>
+                                @endif
                             </div>
+                            <small>{{ __('If you have linked the wrong Discord account, please contact tournament organizer or site admins!') }}</small>
                         </div>
                     </div>
 

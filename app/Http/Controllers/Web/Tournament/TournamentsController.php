@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Tournament;
 
+use App\Enums\TournamentStageFormat;
 use App\Http\Controllers\Controller;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class TournamentsController extends Controller
 
     public function show(Tournament $tournament)
     {
-        $tournament->load('metas');
+        $tournament->load('metas', 'teams', 'teams.members');
 
         return view('web.tournaments.show', compact('tournament'));
     }
@@ -61,6 +62,7 @@ class TournamentsController extends Controller
                 'discord_webhook_registrations' => ['nullable'],
                 'discord_webhook_matches' => ['nullable'],
                 'discord_webhook_reminders' => ['nullable'],
+                'alerts' => ['nullable', 'array'],
             ]);
         }
 
@@ -108,8 +110,8 @@ class TournamentsController extends Controller
     {
         $this->authorize('view', $tournament);
 
-        // TODO: eager load staff once implemented
-        $tournament->load(['stages.rounds.matches.team1', 'stages.rounds.matches.team2']);
-        return view('web.tournaments.schedules', ['tournament' => $tournament]);
+        return view('web.tournaments.schedules', [
+            'tournament' => $tournament
+        ]);
     }
 }

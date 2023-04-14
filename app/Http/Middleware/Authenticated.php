@@ -20,8 +20,8 @@ class Authenticated
     {
         $user = Auth::user();
 
-        View::share('loggedUser', $user);
-        $request->attributes->set('loggedUser', $user);
+        View::share('loggedUser', $user??false);
+        app()->instance('loggedUser', $user??false);
 
         return $next($request);
     }

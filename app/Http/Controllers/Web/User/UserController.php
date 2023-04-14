@@ -18,17 +18,14 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        $loggedUser = $request->attributes->get('loggedUser');
-        $this->authorize('update', $loggedUser);
+        $this->authorize('update', app('loggedUser'));
 
         return view('web.user.edit');
     }
 
     public function update(Request $request)
     {
-        $loggedUser = \Auth::user();
-
-        $this->authorize('update', $loggedUser);
+        $this->authorize('update', app('loggedUser'));
 
         $validator = Validator::make($request->all(), [
             'timezone_offset' => ['required', 'numeric', 'between:-12,14']

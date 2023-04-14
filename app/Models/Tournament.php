@@ -83,7 +83,28 @@ class Tournament extends Model
 
     public function userIsOrganizer(User $user): bool
     {
-        return $user->is($this->user) || $this->userHasStaffRole($user, StaffRole::Organizer);
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::Organizer);
+    }
+
+    public function userIsReferee(User $user): bool
+    {
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::HeadReferee)
+            || $this->userHasStaffRole($user, StaffRole::Referee);
+    }
+
+    public function userIsStreamer(User $user): bool
+    {
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::HeadStreamer)
+            || $this->userHasStaffRole($user, StaffRole::Streamer);
+    }
+
+    public function userIsCommentator(User $user): bool
+    {
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::Commentator);
     }
 
     public function startsAt(): ?Carbon

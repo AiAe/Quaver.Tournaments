@@ -180,7 +180,29 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end mt-2">
+                    <hr>
+
+                    @php($alerts = $tournament->getMeta('alerts'))
+                    @php($alert = $alerts[0]??[])
+                    <div class="row mt-2">
+                        <div class="col-lg-12">
+                            <label class="form-label">{{ __('Alert') }}</label>
+                            <div class="input-group">
+                                <span class="input-group-text">{{ __('Type') }}</span>
+                                {{ Form::select('alerts[0][type]', \App\Enums\AlertType::array(), $alert['type']??0, ['class' => 'form-control']) }}
+                                <span class="input-group-text">{{ __('Link') }}</span>
+                                {{ Form::text('alerts[0][link]', $alert['link']??null, ['class' => 'form-control']) }}
+                                <span class="input-group-text">{{ __('Link Text') }}</span>
+                                {{ Form::text('alerts[0][link_text]', $alert['link_text']??null, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group mt-2">
+                                <label class="form-label">{{ __('Message') }}</label>
+                                {{ Form::textarea('alerts[0][message]', $alert['message']??null, ['class' => 'form-control', 'rows' => '2']) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
                         {{ Form::submit(__('Save'), ['class' => 'btn btn-primary btn-sm']) }}
                     </div>
 

@@ -24,18 +24,20 @@ Route::controller(AuthController::class)
 Route::get('/', [HomeController::class, 'view'])->name('home');
 
 // Tournament extensions
-Route::prefix('tournaments')->as('tournaments.')->group(function () {
-    Route::get('/{tournament}/mappools', [TournamentsController::class, 'mappools'])->name('mappools');
-    Route::get('/{tournament}/schedules', [TournamentsController::class, 'schedules'])->name('schedules');
+Route::middleware(\App\Http\Middleware\Tournament::class)->group(function () {
+    Route::prefix('tournaments')->as('tournaments.')->group(function () {
+        Route::get('/{tournament}/mappools', [TournamentsController::class, 'mappools'])->name('mappools');
+        Route::get('/{tournament}/schedules', [TournamentsController::class, 'schedules'])->name('schedules');
+    });
+
+    Route::resource('tournaments', TournamentsController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
+    Route::singleton('tournaments.rules', TournamentRulesController::class)->only(['show', 'update']);
+    Route::resource('tournaments.teams', TournamentTeamsController::class)
+        ->only(['index', 'show', 'destroy'])->scoped(['team' => 'slug']);
+    Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index', 'create', 'store', 'destroy']);
+    Route::resource('tournaments.stages', TournamentStageController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show', 'store', 'destroy']); // TODO: Use slug instead of ID
+
+    Route::singleton('users', UserController::class)->only(['edit', 'update']);
+    Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show'])->middleware('auth');
 });
-
-Route::resource('tournaments', TournamentsController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
-Route::singleton('tournaments.rules', TournamentRulesController::class)->only(['show', 'update']);
-Route::resource('tournaments.teams', TournamentTeamsController::class)
-    ->only(['index', 'show', 'destroy'])->scoped(['team' => 'slug']);
-Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index', 'create', 'store', 'destroy']);
-Route::resource('tournaments.stages', TournamentStageController::class)->only(['index', 'store', 'destroy']);
-Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show', 'store', 'destroy']); // TODO: Use slug instead of ID
-
-Route::singleton('users', UserController::class)->only(['edit', 'update']);
-Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show'])->middleware('auth');

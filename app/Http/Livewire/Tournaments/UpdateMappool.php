@@ -31,9 +31,9 @@ class UpdateMappool extends Component
             'category' => ['required', 'string', 'max:255'],
             'sub_category' => ['required', 'string', 'max:255'],
             'mods' => ['nullable', 'string', 'max:255'],
-            'offset' => ['required', 'numeric'],
-            'modded_difficulty' => ['nullable'],
-            'modded_bpm' => ['nullable']
+            'offset' => ['required', 'numeric', 'numeric', 'min:-1000', 'max:1000'],
+            'modded_difficulty' => ['nullable', 'numeric', 'min:1', 'max:1000'],
+            'modded_bpm' => ['nullable', 'numeric', 'min:1', 'max:1000']
         ];
     }
 

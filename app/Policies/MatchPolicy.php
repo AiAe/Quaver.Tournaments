@@ -14,6 +14,8 @@ class MatchPolicy
 {
     use HandlesAuthorization;
 
+    private static int $maxPlayersInLobby = 10;
+
     public function viewAny(?User $user): bool
     {
         return true;
@@ -58,41 +60,62 @@ class MatchPolicy
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
         $isFuture = $match->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $isFuture && $match->tournament()->userIsOrganizer($user)) return true;
+        if (!($isQualifier && $isFfa && $isFuture)) {
+            return false;
+        }
 
-        $team = $user->teams()
-            ->where('tournament_id', $match->tournament()->id)
-            ->first();
+        $team = app('loggedUserTeam');
+        if (!$team) {
+            return false;
+        }
 
-        if (!$team) return false;
-
-        $isCaptain = $team->captain()->is($user);
+        if (!app('loggedUserTeamCaptain')) {
+            return false;
+        }
 
         $noOtherMatches = !$team->ffaMatches()
             ->where('tournament_stage_round_id', $match->round->id)
             ->exists();
 
-        return $isQualifier && $isFfa && $isFuture && $isCaptain && $noOtherMatches;
+        $lobbyNotFull = $match->ffaParticipants->count() < self::$maxPlayersInLobby;
+
+        return $noOtherMatches && $lobbyNotFull;
     }
 
     public function withdrawTeamFromQualifierLobby(User $user, TournamentMatch $match): bool
     {
         $isQualifier = $match->round->stage->stage_format == TournamentStageFormat::Qualifier;
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
+        $isFuture = $match->timestamp->isFuture();
 
-        if ($isQualifier && $isFfa && $match->tournament()->userIsOrganizer($user)) return true;
+        if(!$isQualifier && $isFfa && $isFuture) return false;
 
         $isMoreThan1HourAhead = $match->timestamp->copy()->addHours(-1)->isFuture();
 
-        $team = $user->teams()
-            ->where('tournament_id', $match->tournament()->id)
-            ->first();
+        $team = app('loggedUserTeam');
 
-        if (!$team) return false;
+        if (!$team) {
+            return false;
+        }
 
-        $isCaptain = $team->captain()->is($user);
+        if (!app('loggedUserTeamCaptain')) {
+            return false;
+        }
+
         $isParticipant = $team->ffaMatches->contains($match);
 
-        return $isQualifier && $isFfa && $isMoreThan1HourAhead && $isCaptain && $isParticipant;
+        return $isMoreThan1HourAhead && $isParticipant;
+    }
+
+    public function editStaff(User $user, TournamentMatch $match)
+    {
+        $isFuture = $match->timestamp->isFuture();
+
+        $organizer = $match->tournament()->userIsOrganizer($user);
+        $referee = $match->tournament()->userIsReferee($user);
+        $streamer = $match->tournament()->userIsStreamer($user);
+        $commentator = $match->tournament()->userIsCommentator($user);
+
+        return $organizer || ($isFuture && ($referee || $streamer || $commentator));
     }
 }

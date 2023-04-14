@@ -13,14 +13,18 @@
 @endpush
 
 @section('section')
-
     <div class="d-flex justify-content-between mb-3">
-{{--        @can('update', $tournament)--}}
-{{--            <div>--}}
-{{--                <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"--}}
-{{--                   data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>--}}
-{{--            </div>--}}
-{{--        @endcan--}}
+        @can('update', $tournament)
+            <div>
+                <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                   data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
+            </div>
+
+            @push('modals')
+                <livewire:tournaments.generate-qualifier-lobbies :tournament="$tournament" :round="$round">
+                </livewire:tournaments.generate-qualifier-lobbies>
+            @endpush
+        @endcan
 
         <div></div>
 
@@ -45,9 +49,12 @@
         </div>
     @endif
 
-    @php($matches = collect($round->matches()->with(['team1', 'team2'])->orderBy('timestamp')->get())->groupBy('timestamp'))
+    @php($matches = collect($round->matches()->with(['team1', 'team2', 'ffaParticipants', 'round'])->orderBy('timestamp')->get())->groupBy(function ($item) {
+        return $item->timestamp->format('d-M-y');
+    }))
 
-    <x-matches.list :matches="$matches"/>
+
+    <x-matches.list :matches="$matches" :tournament="$tournament" :qualifiers="$qualifiers"/>
 
     @if($round->mappool_visible)
         <div class="mappools mt-3">
@@ -65,55 +72,3 @@
         </div>
     @endif
 @endsection
-
-@push('modals')
-    @can('update', $tournament)
-        <div class="modal modal-lg fade" id="tournamentGenerate" tabindex="-1"
-             aria-labelledby="tournamentGenerateLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"
-                            id="tournamentGenerateLabel">{{ __('Generate Match') }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    {{ Form::open(['url' => '']) }}
-                    <div class="modal-body">
-                        <div id="timestamps">
-                            <div class="form-group">
-                                <label class="form-label">{{ __('Timestamp') }}</label>
-                                {{ Form::text('timestamps[]', '', ['class' => 'form-control datetimepicker']) }}
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end mt-2">
-                            {{ Form::button('Add timestamp', ['class' => 'btn btn-primary btn-sm', 'id' => 'add_timestamp']) }}
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">{{ __('Generate') }}</button>
-                    </div>
-                    {{ Form::close() }}
-                </div>
-            </div>
-        </div>
-    @endcanany
-@endpush
-
-@push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            flatpickr(".datetimepicker", {
-                enableTime: true
-            });
-
-            const addTimestamp = document.getElementById('add_timestamp');
-
-            addTimestamp.addEventListener('click', function () {
-                let formGroup = document.createElement("div");
-
-            });
-        });
-    </script>
-@endpush

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\Authenticated;
+use App\Http\Middleware\Tournament;
 use App\Models\User;
 use App\Observers\UserObserver;
 use App\Providers\Socialite\DiscordSocialiteProvider;
@@ -11,6 +13,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,7 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Livewire::addPersistentMiddleware([
+            Authenticated::class,
+            Tournament::class
+        ]);
     }
 
     /**

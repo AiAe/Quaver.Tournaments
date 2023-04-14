@@ -17,7 +17,8 @@
     @forelse(
         $tournament->stages()
             ->whereNot('stage_format', TournamentStageFormat::Registration)
-            ->with('rounds', 'rounds.matches', 'rounds.matches.team1', 'rounds.matches.team2')
+            ->with('rounds', 'rounds.matches', 'rounds.matches.team1', 'rounds.matches.team2', 'rounds.stage',
+            'rounds.matches.ffaParticipants', 'rounds.matches.round')
             ->get()
             ->flatMap
             ->rounds
@@ -32,7 +33,9 @@
             <div class="card-body">
                 @php($matches = collect($round->matches)->groupBy('timestamp'))
 
-                <x-matches.list :matches="$matches" :class="'alt'"/>
+                <x-matches.list :matches="$matches" :class="'alt'"
+                                :tournament="$tournament"
+                                :qualifiers="($round->stage->stage_format == TournamentStageFormat::Qualifier)"/>
             </div>
         </div>
     @empty
