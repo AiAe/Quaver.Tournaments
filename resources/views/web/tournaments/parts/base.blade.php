@@ -20,7 +20,13 @@
         @if($alerts)
             @php($has_alerts = true)
             @foreach($alerts as $alert)
-                <x-alerts :alert="$alert"></x-alerts>
+                @php($alert_type = \App\Enums\AlertType::cases()[$alert['type']])
+                <x-alert :alert="$alert"
+                          :classes="$alert_type->style() . ' mt-3'"
+                          :message="$alert['message']"
+                          :link="$alert['link']"
+                          :link_text="$alert['link_text']"
+                ></x-alert>
             @endforeach
         @endif
 
