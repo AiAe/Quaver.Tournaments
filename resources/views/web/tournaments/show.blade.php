@@ -63,7 +63,7 @@
         </div>
 
         <div class="col-lg-12 tournaments">
-            <div class="tournament mt-3">
+            <div class="tournament mt-3 pt-1">
                 <x-tournament.details :tournament="$tournament"/>
             </div>
         </div>
