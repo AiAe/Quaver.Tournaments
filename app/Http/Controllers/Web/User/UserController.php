@@ -25,7 +25,8 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $this->authorize('update', app('loggedUser'));
+        $loggedUser = app('loggedUser');
+        $this->authorize('update', $loggedUser);
 
         $validator = Validator::make($request->all(), [
             'timezone_offset' => ['required', 'numeric', 'between:-12,14']
