@@ -20,14 +20,7 @@
         @if($alerts)
             @php($has_alerts = true)
             @foreach($alerts as $alert)
-                <div class="alert {{ \App\Enums\AlertType::cases()[$alert['type']]->style() }}
-                mt-3 d-flex align-items-center justify-content-between">
-                    <div>{{ $alert['message']??"" }}</div>
-                    @if($alert['link'])
-                        <a href="{{ $alert['link'] }}" target="_blank" rel="noreferrer"
-                           class="btn btn-secondary btn-sm">{{ $alert['link_text']??__('Visit') }}</a>
-                    @endif
-                </div>
+                <x-alerts :alert="$alert"></x-alerts>
             @endforeach
         @endif
 
