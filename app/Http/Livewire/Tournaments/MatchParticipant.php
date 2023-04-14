@@ -56,7 +56,7 @@ class MatchParticipant extends Component
     public function leave()
     {
         try {
-            $this->rateLimit(1, 10);
+            $this->rateLimit(1, 21600);
 
             $player = Auth::user();
 
