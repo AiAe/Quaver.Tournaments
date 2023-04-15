@@ -65,28 +65,28 @@ class MatchAssignment extends Component
         $this->authorize('editStaff', $this->match);
 
         // Check if the spot is free
-        $empty_spot = TournamentMatchStaff::query()
-            ->where('tournament_match_id', $this->match->id)
-            ->where('role', '=', StaffRole::Streamer)
-            ->first();
-
-        if ($this->tournament->userIsHeadStreamer($this->loggedUser) && $empty_spot) {
-            // Remove staff member
-            $empty_spot->delete();
-            $empty_spot = null;
-        }
-
-        if (!$empty_spot) {
-            TournamentMatchStaff::create([
-                'tournament_match_id' => $this->match->id,
-                'user_id' => $this->user_id,
-                'role' => StaffRole::Streamer
-            ]);
-
-            $this->toast_success();
-        } else {
-            $this->toast_error();
-        }
+//        $empty_spot = TournamentMatchStaff::query()
+//            ->where('tournament_match_id', $this->match->id)
+//            ->where('role', '=', StaffRole::Streamer)
+//            ->first();
+//
+//        if ($this->tournament->userIsHeadStreamer($this->loggedUser) && $empty_spot) {
+//            // Remove staff member
+//            $empty_spot->delete();
+//            $empty_spot = null;
+//        }
+//
+//        if (!$empty_spot) {
+//            TournamentMatchStaff::create([
+//                'tournament_match_id' => $this->match->id,
+//                'user_id' => $this->user_id,
+//                'role' => StaffRole::Streamer
+//            ]);
+//
+//            $this->toast_success();
+//        } else {
+//            $this->toast_error();
+//        }
 
         return redirect(request()->header('Referer'));
     }
