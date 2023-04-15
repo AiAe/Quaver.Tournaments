@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TournamentMatchStaff extends Model
 {
     protected $fillable = [
-        'match_id',
+        'tournament_match_id',
         'user_id',
         'role',
     ];

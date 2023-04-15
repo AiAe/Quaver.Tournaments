@@ -1,4 +1,4 @@
-@php use Carbon\Carbon; @endphp
+@php use Carbon\Carbon; use App\Enums\StaffRole @endphp
 @forelse($matches as $date => $timestamps)
     @php($parsed_date = Carbon::parse($date))
     <div class="round-name d-flex align-items-center">
@@ -6,15 +6,17 @@
     </div>
 
     @foreach($timestamps as $match)
+        @php($match_staff = collect($match->staff))
+        @php($match_referee = $match_staff->where('role', StaffRole::Referee)->first())
         <div class="card mb-2">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 class="m-0 p-0">Lobby {{ $match->label }}</h5>
+                        <h5 class="m-0 p-0">{{ __('Lobby') }} {{ $match->label }}</h5>
                         <p class="m-0 p-0">
                             <x-timestamp :timestamp="$match->timestamp"/>
                         </p>
-                        <p class="m-0 p-0">Referee: Placeholder</p>
+                        <p class="m-0 p-0">{{ __('Referee') }}: {{ $match_referee->user->username??"-" }}</p>
                     </div>
                     <div>
                         <div class="d-flex flex-column gap-1 align-items-center">
@@ -24,17 +26,17 @@
                                     :match="$match"
                                     wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
                             @endif
-                            {{--                            @can('editStaff', $match)--}}
-                            {{--                                    <a class="btn btn-warning btn-sm" href="#tournamentMatchAssignment-{{ $match->id }}"--}}
-                            {{--                                       data-bs-toggle="modal"--}}
-                            {{--                                       data-bs-target="#tournamentMatchAssignment-{{ $match->id }}">--}}
-                            {{--                                        {{ __('Staff') }}--}}
-                            {{--                                    </a>--}}
-                            {{--                                @push('modals')--}}
-                            {{--                                    <livewire:tournaments.match-assignment :match="$match">--}}
-                            {{--                                    </livewire:tournaments.match-assignment>--}}
-                            {{--                                @endpush--}}
-                            {{--                            @endcan--}}
+                            @can('editStaff', $match)
+                                <a class="btn btn-warning btn-sm" href="#tournamentMatchAssignment-{{ $match->id }}"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#tournamentMatchAssignment-{{ $match->id }}">
+                                    {{ __('Staff') }}
+                                </a>
+                                @push('modals')
+                                    <livewire:tournaments.match-assignment :match="$match">
+                                    </livewire:tournaments.match-assignment>
+                                @endpush
+                            @endcan
                         </div>
                     </div>
                 </div>
