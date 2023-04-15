@@ -87,11 +87,25 @@ class Tournament extends Model
             || $this->userHasStaffRole($user, StaffRole::Organizer);
     }
 
+    public function userIsHeadReferee(User $user): bool
+    {
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::Organizer)
+            || $this->userHasStaffRole($user, StaffRole::HeadReferee);
+    }
+
     public function userIsReferee(User $user): bool
     {
         return $user->is($this->user)
             || $this->userHasStaffRole($user, StaffRole::HeadReferee)
             || $this->userHasStaffRole($user, StaffRole::Referee);
+    }
+
+    public function userIsHeadStreamer(User $user): bool
+    {
+        return $user->is($this->user)
+            || $this->userHasStaffRole($user, StaffRole::Organizer)
+            || $this->userHasStaffRole($user, StaffRole::HeadStreamer);
     }
 
     public function userIsStreamer(User $user): bool

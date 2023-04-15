@@ -33,7 +33,7 @@ class TournamentStageRound extends Model
 
     public function maps(): HasMany
     {
-        return $this->hasMany(TournamentStageRoundMap::class);
+        return $this->hasMany(TournamentStageRoundMap::class)->orderBy('index', 'asc');
     }
 
     public function matches(): HasMany

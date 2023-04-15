@@ -49,10 +49,10 @@
         </div>
     @endif
 
-    @php($matches = collect($round->matches()->with(['team1', 'team2', 'ffaParticipants', 'round'])->orderBy('timestamp')->get())->groupBy(function ($item) {
+    @php($matches = collect($round->matches()->with(['team1', 'team2', 'ffaParticipants', 'round', 'staff', 'staff.user'])
+        ->orderBy('timestamp')->get())->groupBy(function ($item) {
         return $item->timestamp->format('d-M-y');
     }))
-
 
     <x-matches.list :matches="$matches" :tournament="$tournament" :qualifiers="$qualifiers"/>
 
