@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\TournamentGameMode;
 use App\Enums\UserRoles;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -88,5 +89,10 @@ class User extends Authenticatable
     public function quaverRank(TournamentGameMode $mode)
     {
         return $this->{$mode->rankColumnName()};
+    }
+
+    public function convertTime(Carbon $date)
+    {
+        return $date->shiftTimezone($this->timezone_offset)->tz('UTC');
     }
 }

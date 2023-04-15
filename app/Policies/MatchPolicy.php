@@ -14,7 +14,7 @@ class MatchPolicy
 {
     use HandlesAuthorization;
 
-    private static int $maxPlayersInLobby = 10;
+    private static int $maxPlayersInLobby = 15;
 
     public function viewAny(?User $user): bool
     {
@@ -111,10 +111,12 @@ class MatchPolicy
     {
         $isFuture = $match->timestamp->isFuture();
 
-        $organizer = $match->tournament()->userIsOrganizer($user);
-        $referee = $match->tournament()->userIsReferee($user);
-        $streamer = $match->tournament()->userIsStreamer($user);
-        $commentator = $match->tournament()->userIsCommentator($user);
+        $tournament = $match->tournament();
+
+        $organizer = $tournament->userIsOrganizer($user);
+        $referee = $tournament->userIsReferee($user);
+        $streamer = $tournament->userIsStreamer($user);
+        $commentator = $tournament->userIsCommentator($user);
 
         return $organizer || ($isFuture && ($referee || $streamer || $commentator));
     }
