@@ -93,6 +93,6 @@ class User extends Authenticatable
 
     public function convertTime(Carbon $date)
     {
-        return $date->shiftTimezone($this->timezone_offset)->tz('UTC');
+        return $date->copy()->addHours($this->timezone_offset ?? 0);
     }
 }
