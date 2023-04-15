@@ -31,7 +31,9 @@
             </div>
 
             <div class="card-body">
-                @php($matches = collect($round->matches)->groupBy('timestamp'))
+                @php($matches = collect($round->matches)->groupBy(function ($item) {
+                    return $item->timestamp->format('d-M-y');
+                }))
 
                 <x-matches.list :matches="$matches" :class="'alt'"
                                 :tournament="$tournament"

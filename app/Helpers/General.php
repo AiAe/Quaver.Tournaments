@@ -104,3 +104,8 @@ function list_utc_offsets(): array
         '14' => 'UTC 14:00',
     ];
 }
+
+function format_timezone_offset($string)
+{
+    return sprintf("%+d", $string);
+}
