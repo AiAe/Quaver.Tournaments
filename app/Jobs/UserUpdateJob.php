@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Enums\UserRoles;
 use App\Http\QuaverApi\QuaverApi;
 use App\Models\User;
 use Illuminate\Bus\Batchable;
@@ -24,18 +25,22 @@ class UserUpdateJob implements ShouldQueue
 
     public function handle(): void
     {
-        $user_api = QuaverApi::getUserFull($this->user->quaver_user_id);
+        try {
+            $user_api = QuaverApi::getUserFull($this->user->quaver_user_id);
 
-        if ($user_api) {
-            $this->user->username = $user_api['info']['username'];
-            $this->user->country = $user_api['info']['country'] ?? 'XX';
-            $this->user->quaver_4k_rank = $user_api['keys4']['globalRank'];
-            $this->user->quaver_7k_rank = $user_api['keys7']['globalRank'];
-            $this->user->save();
+            if ($user_api) {
+                $this->user->username = $user_api['info']['username'];
+                $this->user->country = $user_api['info']['country'] ?? 'XX';
+                $this->user->quaver_4k_rank = $user_api['keys4']['globalRank'];
+                $this->user->quaver_7k_rank = $user_api['keys7']['globalRank'];
+                $this->user->save();
 
-            foreach ($this->user->teams as $team) {
-                $team->updateTeamRank();
+                foreach ($this->user->teams as $team) {
+                    $team->updateTeamRank();
+                }
             }
+        } catch (\Exception $e) {
+            $this->user->roles()->create(['role' => UserRoles::Blacklisted]);
         }
     }
 }

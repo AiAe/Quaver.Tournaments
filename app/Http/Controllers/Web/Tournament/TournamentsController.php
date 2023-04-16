@@ -62,6 +62,7 @@ class TournamentsController extends Controller
                 'discord_webhook_registrations' => ['nullable'],
                 'discord_webhook_matches' => ['nullable'],
                 'discord_webhook_reminders' => ['nullable'],
+                'discord_webhook_reminders_staff' => ['nullable'],
                 'alerts' => ['nullable', 'array'],
             ]);
         }

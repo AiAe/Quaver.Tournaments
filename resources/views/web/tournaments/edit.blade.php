@@ -178,6 +178,13 @@
                                 {{ Form::input('password', 'discord_webhook_reminders', $tournament->getMeta('discord_webhook_reminders')??"", ['class' => 'form-control hidden-field']) }}
                             </div>
                         </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('Discord Webhook - Reminders Staff') }}</label>
+                                {{ Form::input('password', 'discord_webhook_reminders_staff', $tournament->getMeta('discord_webhook_reminders_staff')??"", ['class' => 'form-control hidden-field']) }}
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
