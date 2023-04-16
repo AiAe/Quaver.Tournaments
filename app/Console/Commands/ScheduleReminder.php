@@ -68,13 +68,16 @@ class ScheduleReminder extends Command
                                     $minutes = $match->timestamp->diffInMinutes($now);
 
                                     // Check if match starts in an hour
-                                    if (!($minutes <= 59)) continue;
+                                    if (!($minutes <= 300)) continue; // 59
 
                                     $lobby = $match->label;
                                     $timestamp = $match->timestamp;
 
                                     $match_staff = collect($match->staff);
                                     $match_referee = $match_staff->where('role', StaffRole::Referee)->first();
+
+                                    // ToDo handle this properly and send msg to staff that ref is missing
+                                    if(!$match_referee) continue;
 
                                     $referee = $match_referee->user;
 
