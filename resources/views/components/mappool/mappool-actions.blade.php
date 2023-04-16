@@ -1,5 +1,5 @@
 <div>
-    <div class="d-lg-flex d-md-flex d-sm-none d-none mapset-links" style="gap: 10px;">
+    <div class="d-lg-flex d-md-flex d-sm-none d-none mapset-links position-relative" style="gap: 10px; z-index: 5;">
         {{--                        <a href="#" class="btn btn-primary btn-sm">{{ __('Download') }}</a>--}}
         {{--                        <a href="#" class="btn btn-primary btn-sm">{{ __('Download In-Game') }}</a>--}}
         @if($loggedUser && $loggedUser->can('updateMappool', [$tournament, $round]))

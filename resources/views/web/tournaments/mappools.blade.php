@@ -25,14 +25,14 @@
     )
         @if(($loggedUser && $loggedUser->can('updateMappool', [$tournament, $round])) || $round->mappool_visible == 1)
             <div class="mappools">
-                <div class="d-flex justify-content-between align-items-center round-name">
+                <div class="d-flex justify-content-between align-items-center round-name position-relative">
                     <div class="d-flex align-items-center"><span></span>{{ $round->name }}</div>
                     <div class="d-flex" style="gap: 10px;">
                         <x-mappool.mappool-actions :tournament="$tournament"
                                                    :round="$round"></x-mappool.mappool-actions>
                         <div>
                             <a data-bs-toggle="collapse" href="#mapsCollapse{{ $loop->index }}" role="button"
-                               aria-expanded="false" aria-controls="mapsCollapse{{ $loop->index }}">
+                               aria-expanded="false" aria-controls="mapsCollapse{{ $loop->index }}" class="stretched-link">
                                 <i class="bi bi-chevron-down"></i>
                             </a>
                         </div>

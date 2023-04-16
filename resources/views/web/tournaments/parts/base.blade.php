@@ -18,8 +18,9 @@
 
         @php($alerts = $tournament->getMeta('alerts')??[])
         @if($alerts)
-            @php($has_alerts = true)
             @foreach($alerts as $alert)
+                @continue(!$alert['message'])
+                @php($has_alerts = true)
                 @php($alert_type = \App\Enums\AlertType::cases()[$alert['type']])
                 <x-alert :alert="$alert"
                           :classes="$alert_type->style() . ' mt-3'"
