@@ -68,7 +68,7 @@ class ScheduleReminder extends Command
                                     $minutes = $match->timestamp->diffInMinutes($now);
 
                                     // Check if match starts in an hour
-                                    if (!($minutes <= 300)) continue; // 59
+                                    if (!($minutes <= 59)) continue; // 59
 
                                     $lobby = $match->label;
                                     $timestamp = $match->timestamp;
@@ -92,6 +92,9 @@ class ScheduleReminder extends Command
                                     } else {
                                         // ToDo normal stages
                                     }
+
+                                    // Don't send pings if lobby is empty
+                                    if(count($ping_list) == 0) continue;
 
                                     if (!empty($wh_player_reminders)) {
                                         $this->notify($wh_player_reminders, strtr($this->players_message_basic(), [
