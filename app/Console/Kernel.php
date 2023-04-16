@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('cache:prune-stale-tags')->hourly();
         $schedule->command('generate:sitemap')->everySixHours();
         $schedule->command('user:update')->everySixHours();
+        $schedule->command('tournament:schedule-reminder')->everyTenMinutes();
     }
 
     /**
