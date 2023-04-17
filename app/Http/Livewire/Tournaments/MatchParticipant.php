@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tournaments;
 
 use App\Models\TournamentMatch;
+use App\Policies\MatchPolicy;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -35,7 +36,7 @@ class MatchParticipant extends Component
 
         $participants_count = $this->match->ffaParticipants()->count();
 
-        if ($participants_count >= 10) {
+        if ($participants_count >= MatchPolicy::$maxPlayersInLobby) {
             createToast('error', '', __('Lobby is full!'));
             return redirect(request()->header('Referer'));
         }

@@ -14,7 +14,7 @@ class MatchPolicy
 {
     use HandlesAuthorization;
 
-    private static int $maxPlayersInLobby = 15;
+    public static int $maxPlayersInLobby = 15;
 
     public function viewAny(?User $user): bool
     {
