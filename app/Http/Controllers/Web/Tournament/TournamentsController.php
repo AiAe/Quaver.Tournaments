@@ -111,8 +111,10 @@ class TournamentsController extends Controller
     {
         $this->authorize('view', $tournament);
 
-        return view('web.tournaments.schedules', [
-            'tournament' => $tournament
-        ]);
+        return redirect(route('web.tournaments.stages.index', $tournament));
+
+//        return view('web.tournaments.schedules', [
+//            'tournament' => $tournament
+//        ]);
     }
 }

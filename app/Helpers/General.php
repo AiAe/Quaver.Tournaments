@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\TournamentStaff;
+
 if (!function_exists('appVersion')) {
     function appVersion(): string
     {
@@ -108,4 +110,30 @@ function list_utc_offsets(): array
 function format_timezone_offset($string)
 {
     return sprintf("%+d", $string);
+}
+
+function tournament_staff_role($tournament_id, $role, $select = false)
+{
+    $list = [];
+
+    if($select) {
+        $list[null] = __('Select');
+    }
+
+    $tournament_staff = TournamentStaff::query()
+        ->select(['tournament_id', 'staff_role', 'user_id'])
+        ->with(['user' => function ($query) {
+            $query->select(['id', 'username']);
+        }])
+        ->where('tournament_id', $tournament_id)
+        ->where('staff_role', '=', $role)
+        ->get();
+
+    if($tournament_staff) {
+        foreach ($tournament_staff as $staff) {
+            $list[$staff->user_id] = $staff->user->username;
+        }
+    }
+
+    return $list;
 }

@@ -59,9 +59,9 @@
     {{--        {{ __('Bracket') }}--}}
     {{--    </a>--}}
 
-    <x-sidebar.item route="web.tournaments.schedules" :route-params="$tournament->slug" icon="bi-journal">
-        {{ __('Schedules') }}
-    </x-sidebar.item>
+{{--    <x-sidebar.item route="web.tournaments.schedules" :route-params="$tournament->slug" icon="bi-journal">--}}
+{{--        {{ __('Schedules') }}--}}
+{{--    </x-sidebar.item>--}}
 
     <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament->slug" icon="bi-view-list">
         {{ __('Stages') }}

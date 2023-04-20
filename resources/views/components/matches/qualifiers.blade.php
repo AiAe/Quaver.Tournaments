@@ -8,17 +8,34 @@
     @foreach($timestamps as $match)
         @php($match_staff = collect($match->staff))
         @php($match_referee = $match_staff->where('role', StaffRole::Referee)->first())
+        @php($match_streamer = $match_staff->where('role', StaffRole::Streamer)->first())
+        @php($match_commentator1 = $match_staff->where('role', \App\Enums\StaffRole::Commentator)->first()??null)
+        @php($match_commentator2 = $match_staff->where('role', \App\Enums\StaffRole::Commentator)->where('user_id', '!=', $match_commentator1?->user_id)->first()??null)
+
         <div class="card mb-2">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
                         <h5 class="m-0 p-0">{{ __('Lobby') }} {{ $match->label }}</h5>
                         <p class="m-0 p-0">
                             <x-timestamp :timestamp="$match->timestamp"/>
                         </p>
-                        <p class="m-0 p-0">{{ __('Referee') }}: {{ $match_referee->user->username??"-" }}</p>
                     </div>
-                    <div>
+
+                    <div class="col-lg-4">
+                        <div>
+                            {{ __('Referee') }}: {{ $match_referee->user->username??"-" }}
+                        </div>
+                        <div>
+                            {{ __('Streamer') }}: {{ $match_streamer->user->username??"-" }}
+                        </div>
+                        <div>
+                            {{ __('Commentators') }}: {{ $match_commentator1->user->username??"-" }}
+                            / {{ $match_commentator2->user->username??"-" }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
                         <div class="d-flex flex-column gap-1 align-items-center">
                             @if($loggedUserTeamCaptain)
                                 <livewire:tournaments.match-participant
@@ -27,36 +44,32 @@
                                     wire:key="match-{{ $match->id }}"></livewire:tournaments.match-participant>
                             @endif
                             @can('editStaff', $match)
-                                <a class="btn btn-warning btn-sm" href="#tournamentMatchAssignment-{{ $match->id }}"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#tournamentMatchAssignment-{{ $match->id }}">
+                                <a class="btn btn-warning btn-sm" href="{{ route('web.tournaments.rounds.match.edit',
+                                    ['tournament' => $tournament->slug, 'round' => $match->tournament_stage_round_id, 'match' => $match->id]) }}">
                                     {{ __('Staff') }}
                                 </a>
-                                @push('modals')
-                                    <livewire:tournaments.match-assignment :match="$match">
-                                    </livewire:tournaments.match-assignment>
-                                @endpush
                             @endcan
                         </div>
                     </div>
                 </div>
+
                 <div class="row mt-2">
                     @php($participants = $match->ffaParticipants)
                     <div class="table-responsive">
                         <table class="table table-bordered table-dark mb-0">
                             <tr>
                                 @for($i = 0; $i < 5; $i++)
-                                    <td>{{ $participants[$i]['name'] ?? "-" }}</td>
+                                    <td style="width: 20%;">{{ $participants[$i]['name'] ?? "-" }}</td>
                                 @endfor
                             </tr>
                             <tr>
                                 @for($i = 5; $i < 10; $i++)
-                                    <td>{{ $participants[$i]['name'] ?? "-" }}</td>
+                                    <td style="width: 20%;">{{ $participants[$i]['name'] ?? "-" }}</td>
                                 @endfor
                             </tr>
                             <tr>
                                 @for($i = 10; $i < 15; $i++)
-                                    <td>{{ $participants[$i]['name'] ?? "-" }}</td>
+                                    <td style="width: 20%;">{{ $participants[$i]['name'] ?? "-" }}</td>
                                 @endfor
                             </tr>
                         </table>

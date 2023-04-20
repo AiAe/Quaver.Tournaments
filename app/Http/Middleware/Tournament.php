@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\TournamentStaff;
 use Closure;
 use Illuminate\Http\Request;
 use View;
@@ -23,7 +22,7 @@ class Tournament
 
         $loggedUserTeam = false;
         $loggedUserTeamCaptain = false;
-        $staffList = false;
+        $loggedUserCan = [];
 
         // Check if logged user is in team
         if ($tournament) {
@@ -34,27 +33,26 @@ class Tournament
                     $loggedUserTeam = $team;
                     $loggedUserTeamCaptain = $team->captain()->is($loggedUser);
                 }
+                // Manage staff permissions
+                $loggedUserCan['organizer'] = $tournament->userIsOrganizer($loggedUser);
+                $loggedUserCan['head_referee'] = $tournament->userIsHeadReferee($loggedUser);
+                $loggedUserCan['head_streamer'] = $tournament->userIsHeadStreamer($loggedUser);
+                $loggedUserCan['referee'] = $tournament->userIsReferee($loggedUser);
+                $loggedUserCan['streamer'] = $tournament->userIsStreamer($loggedUser);
+                $loggedUserCan['commentator'] = $tournament->userIsCommentator($loggedUser);
             }
-
-            $staffList = TournamentStaff::query()
-                ->select(['tournament_id', 'staff_role', 'user_id'])
-                ->with(['user' => function ($query) {
-                    $query->select(['id', 'username']);
-                }])
-                ->where('tournament_id', $tournament->id)
-                ->get()->pluck('user.username', 'user_id');
         }
 
         // Accessed with $name
         View::share('tournament', $tournament);
         View::share('loggedUserTeam', $loggedUserTeam);
         View::share('loggedUserTeamCaptain', $loggedUserTeamCaptain);
-        View::share('tournamentStaffList', $staffList);
+        View::share('loggedUserCan', $loggedUserCan);
         // Accessed with app('name')
         app()->instance('tournament', $tournament);
         app()->instance('loggedUserTeam', $loggedUserTeam);
         app()->instance('loggedUserTeamCaptain', $loggedUserTeamCaptain);
-        app()->instance('tournamentStaffList', $staffList);
+        app()->instance('loggedUserCan', $loggedUserCan);
 
         return $next($request);
     }

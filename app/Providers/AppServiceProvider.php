@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (config('app.env') == "local") {
-//            Model::preventLazyLoading();
+            Model::preventLazyLoading();
         }
 
         if (config('app.env') == 'production') {
