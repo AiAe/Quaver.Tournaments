@@ -24,6 +24,8 @@ class TournamentMatchController extends Controller
 
     public function update(Request $request, Tournament $tournament, TournamentStageRound $round, TournamentMatch $match)
     {
+        $this->authorize('editStaff', $match);
+
         $validator = Validator::make($request->all(), [
             'referee_id' => ['nullable'],
             'streamer_id' => ['nullable'],
