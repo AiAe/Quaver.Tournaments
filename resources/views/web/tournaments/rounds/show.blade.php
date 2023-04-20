@@ -13,38 +13,40 @@
 @endpush
 
 @section('section')
-    <div class="d-flex justify-content-between mb-3">
-        @can('update', $tournament)
-            <div>
-                <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                   data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
-            </div>
+    @canany(['update', 'delete'], $tournament)
+        <div class="d-flex justify-content-between mb-3">
+            @can('update', $tournament)
+                <div>
+                    <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                       data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
+                </div>
 
-            @push('modals')
-                <livewire:tournaments.generate-qualifier-lobbies :tournament="$tournament" :round="$round">
-                </livewire:tournaments.generate-qualifier-lobbies>
-            @endpush
-        @endcan
+                @push('modals')
+                    <livewire:tournaments.generate-qualifier-lobbies :tournament="$tournament" :round="$round">
+                    </livewire:tournaments.generate-qualifier-lobbies>
+                @endpush
+            @endcan
 
-        <div></div>
+            <div></div>
 
-        @can('delete', $tournament)
-            <div>
-                {{ Form::open(['url' => route('web.tournaments.rounds.destroy', [$tournament, $round]), 'class' => 'd-flex']) }}
-                @method('DELETE')
-                {{ Form::submit(__('Delete Round'), ['class' => 'btn btn-danger btn-sm']) }}
-                {{ Form::close() }}
-            </div>
-        @endcan
-    </div>
+            @can('delete', $tournament)
+                <div>
+                    {{ Form::open(['url' => route('web.tournaments.rounds.destroy', [$tournament, $round]), 'class' => 'd-flex']) }}
+                    @method('DELETE')
+                    {{ Form::submit(__('Delete Round'), ['class' => 'btn btn-danger btn-sm']) }}
+                    {{ Form::close() }}
+                </div>
+            @endcan
+        </div>
+    @endcanany
 
-    @if($round->round_text)
+    @if(!empty($round->round_text))
         <div class="card mb-3">
             <div class="card-header">
                 {{ __('Round information') }}
             </div>
             <div class="card-body">
-                {{ $round->round_text??"" }}
+                {{ $round->round_text }}
             </div>
         </div>
     @endif

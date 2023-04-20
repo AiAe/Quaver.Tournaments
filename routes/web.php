@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\Tournament\TournamentMatchActionsController;
+use App\Http\Controllers\Web\Tournament\TournamentMatchController;
 use App\Http\Controllers\Web\Tournament\TournamentRoundController;
 use App\Http\Controllers\Web\Tournament\TournamentRulesController;
 use App\Http\Controllers\Web\Tournament\TournamentsController;
@@ -37,6 +39,7 @@ Route::middleware(\App\Http\Middleware\Tournament::class)->group(function () {
     Route::resource('tournaments.staff', TournamentStaffController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::resource('tournaments.stages', TournamentStageController::class)->only(['index', 'store', 'destroy']);
     Route::resource('tournaments.rounds', TournamentRoundController::class)->only(['show', 'store', 'destroy']); // TODO: Use slug instead of ID
+    Route::resource('tournaments.rounds.match', TournamentMatchController::class)->only(['edit', 'update', 'destroy']);
 
     Route::singleton('users', UserController::class)->only(['edit', 'update']);
     Route::singleton('users.tournaments', UserTournamentsController::class)->only(['show'])->middleware('auth');

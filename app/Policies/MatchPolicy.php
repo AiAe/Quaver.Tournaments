@@ -88,7 +88,7 @@ class MatchPolicy
         $isFfa = $match->match_format == MatchFormat::FreeForAll;
         $isFuture = $match->timestamp->isFuture();
 
-        if(!$isQualifier && $isFfa && $isFuture) return false;
+        if (!$isQualifier && $isFfa && $isFuture) return false;
 
         $isMoreThan1HourAhead = $match->timestamp->copy()->addHours(-1)->isFuture();
 
@@ -111,13 +111,11 @@ class MatchPolicy
     {
         $isFuture = $match->timestamp->isFuture();
 
-        $tournament = $match->tournament();
+        $userRoles = app('loggedUserCan');
 
-        $organizer = $tournament->userIsOrganizer($user);
-        $referee = $tournament->userIsReferee($user);
-        $streamer = $tournament->userIsStreamer($user);
-        $commentator = $tournament->userIsCommentator($user);
-
-        return $organizer || ($isFuture && ($referee || $streamer || $commentator));
+        return $userRoles['organizer']
+            || ($isFuture && ($userRoles['referee']
+                    || $userRoles['streamer']
+                    || $userRoles['commentator']));
     }
 }

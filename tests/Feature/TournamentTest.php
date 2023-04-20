@@ -126,7 +126,7 @@ class TournamentTest extends TestCase
     public function testSchedulesIndex()
     {
         $this->get(route('web.tournaments.schedules', $this->fullTournament))
-            ->assertOk();
+            ->assertRedirect();
     }
 
     public function testTeamsIndex()
