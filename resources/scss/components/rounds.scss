@@ -19,6 +19,10 @@
         &.alt {
             background: #363636;
         }
+
+        &.current {
+            border: 1px solid $primary;
+        }
     }
 
     .round-name {

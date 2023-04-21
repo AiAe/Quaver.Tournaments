@@ -34,8 +34,18 @@
 
             padding: 4px 12px;
 
+            transition: 0.2s;
+
             &:last-child {
                 margin-bottom: 0;
+            }
+
+            &.current {
+                outline: 1px solid $primary;
+            }
+
+            &:hover {
+                background: $secondary;
             }
         }
     }

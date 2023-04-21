@@ -64,7 +64,7 @@
 {{--    </x-sidebar.item>--}}
 
     <x-sidebar.item route="web.tournaments.stages.index" :route-params="$tournament->slug" icon="bi-view-list">
-        {{ __('Stages') }}
+        {{ __('Stages') }} / {{ __('Schedules') }}
     </x-sidebar.item>
 </x-sidebar.group>
 

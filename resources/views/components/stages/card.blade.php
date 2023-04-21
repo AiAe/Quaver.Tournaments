@@ -24,7 +24,11 @@
             </div>
             <div class="col-lg-6">
                 @forelse($stage->rounds as $round)
-                    <div class="round position-relative">
+                    @php($current_stage = false)
+                    @if(\Carbon\Carbon::now()->between($round->starts_at, $round->ends_at))
+                        @php($current_stage = true)
+                    @endif
+                    <div class="round position-relative {{ ($current_stage) ? 'current' : '' }}">
                         <div class="d-flex justify-content-between align-items-center">
                             {{ $round->name }}
 
