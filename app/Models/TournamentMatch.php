@@ -18,7 +18,8 @@ class TournamentMatch extends Model
 
     protected $casts = [
         'timestamp' => 'datetime',
-        'match_format' => MatchFormat::class
+        'match_format' => MatchFormat::class,
+        'quaver_mp_ids' => 'json'
     ];
 
     protected $guarded = [

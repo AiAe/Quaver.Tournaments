@@ -114,8 +114,8 @@ class MatchPolicy
         $userRoles = app('loggedUserCan');
 
         return $userRoles['organizer']
-            || ($isFuture && ($userRoles['referee']
-                    || $userRoles['streamer']
+            || $userRoles['referee']
+            || ($isFuture && ($userRoles['streamer']
                     || $userRoles['commentator']));
     }
 }
