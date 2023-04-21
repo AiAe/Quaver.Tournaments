@@ -46,7 +46,7 @@
                             @can('editStaff', $match)
                                 <a class="btn btn-warning btn-sm" href="{{ route('web.tournaments.rounds.match.edit',
                                     ['tournament' => $tournament->slug, 'round' => $match->tournament_stage_round_id, 'match' => $match->id]) }}">
-                                    {{ __('Staff') }}
+                                    {{ __('Manage Lobby') }}
                                 </a>
                             @endcan
                         </div>
