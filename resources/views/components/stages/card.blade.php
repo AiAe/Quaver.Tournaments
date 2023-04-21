@@ -28,6 +28,13 @@
                     @if(\Carbon\Carbon::now()->between($round->starts_at, $round->ends_at))
                         @php($current_stage = true)
                     @endif
+
+                    @if($current_stage && $stage->stage_format == \App\Enums\TournamentStageFormat::Qualifier)
+                        <div class="text-warning mb-2 text-center">
+                            {{ __('Visit :round_name and join lobby to play Qualifiers!', ['round_name' => $round->name]) }}
+                        </div>
+                    @endif
+
                     <div class="round position-relative {{ ($current_stage) ? 'current' : '' }}">
                         <div class="d-flex justify-content-between align-items-center">
                             {{ $round->name }}
