@@ -34,6 +34,7 @@ class TournamentMatchController extends Controller
             'referee_resign' => ['nullable'],
             'streamer_take' => ['nullable'],
             'streamer_resign' => ['nullable'],
+            'form_button_action' => ['nullable'],
         ]);
 
         $validator->validate();
@@ -42,7 +43,7 @@ class TournamentMatchController extends Controller
         $loggedUserRoles = app('loggedUserCan');
         $loggedUser = app('loggedUser');
 
-        if ($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee']) {
+        if (($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee']) && !isset($validated['form_button_action'])) {
             $referee_spot = $this->match_spot($match->id, StaffRole::Referee);
 
             if (isset($validated['referee_id'])) {
@@ -85,7 +86,7 @@ class TournamentMatchController extends Controller
             }
         }
 
-        if ($loggedUserRoles['organizer'] || $loggedUserRoles['head_streamer']) {
+        if (($loggedUserRoles['organizer'] || $loggedUserRoles['head_streamer']) && !isset($validated['form_button_action'])) {
             $streamer_spot = $this->match_spot($match->id, StaffRole::Streamer);
 
             if (isset($validated['streamer_id'])) {
@@ -147,7 +148,7 @@ class TournamentMatchController extends Controller
                 $streamer_take = $validated['streamer_take'] ?? null;
                 $streamer_resign = $validated['streamer_resign'] ?? null;
 
-                if($streamer_take || $streamer_resign) {
+                if ($streamer_take || $streamer_resign) {
                     $streamer_spot = $this->match_spot($match->id, StaffRole::Streamer);
 
                     if ($streamer_take && !$streamer_spot) {
@@ -173,7 +174,7 @@ class TournamentMatchController extends Controller
         $this->authorize('delete', $tournament);
 
         // Check if lobby is empty
-        if(count($match->ffaParticipants)) {
+        if (count($match->ffaParticipants)) {
             createToast('error', '', __('Lobby has players in it!'), false);
             return back();
         }

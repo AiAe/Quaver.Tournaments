@@ -12,6 +12,7 @@
                                     'match' => $match->id])]) }}
 @method('PUT')
 
+{{ Form::hidden("form_button_action", 1) }}
 {{ Form::hidden($type, 1) }}
 {{ Form::submit($name, ['class' => 'btn ' . $btn_class??"", 'style' => 'border-top-left-radius: 0; border-bottom-left-radius: 0;']) }}
 {{ Form::close() }}
