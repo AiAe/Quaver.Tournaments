@@ -4,17 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('tournament_matches', function (Blueprint $table) {
-            $table->dropColumn('quaver_mp_id');
-            $table->json('quaver_mp_ids')->nullable();
-        });
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('tournament_matches', function (Blueprint $table) {
+                $table->dropColumn('quaver_mp_id');
+                $table->json('quaver_mp_ids')->nullable();
+            });
+        } else {
+            Schema::table('tournament_matches', function (Blueprint $table) {
+                $table->dropColumn('quaver_mp_id');
+                $table->longText('quaver_mp_ids')->nullable();
+            });
+        }
     }
 
     /**
