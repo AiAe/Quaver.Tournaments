@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.5",
         "kodeine/laravel-meta": "^2.1",
         "laravel/framework": "^v10.0",
+        "laravel/sanctum": "^3.2",
         "laravel/socialite": "^v5.6",
         "laravel/telescope": "^v4.14",
         "laravel/tinker": "^v2.8",

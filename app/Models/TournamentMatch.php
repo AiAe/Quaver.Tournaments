@@ -18,7 +18,8 @@ class TournamentMatch extends Model
 
     protected $casts = [
         'timestamp' => 'datetime',
-        'match_format' => MatchFormat::class
+        'match_format' => MatchFormat::class,
+        'quaver_mp_ids' => 'json'
     ];
 
     protected $guarded = [
@@ -66,5 +67,10 @@ class TournamentMatch extends Model
     public function staff(): HasMany
     {
         return $this->hasMany(TournamentMatchStaff::class);
+    }
+
+    public function mp_link($mp_id): string
+    {
+        return "https://quavergame.com/multiplayer/game/" . $mp_id;
     }
 }
