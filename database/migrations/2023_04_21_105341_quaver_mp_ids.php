@@ -10,17 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (DB::getDriverName() !== 'sqlite') {
-            Schema::table('tournament_matches', function (Blueprint $table) {
-                $table->dropColumn('quaver_mp_id');
-                $table->json('quaver_mp_ids')->nullable();
-            });
-        } else {
-            Schema::table('tournament_matches', function (Blueprint $table) {
-                $table->dropColumn('quaver_mp_id');
-                $table->text('quaver_mp_ids')->nullable();
-            });
-        }
+        Schema::table('tournament_matches', function (Blueprint $table) {
+            $table->dropColumn('quaver_mp_id');
+            $table->json('quaver_mp_ids')->nullable();
+        });
     }
 
     /**
