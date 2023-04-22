@@ -30,9 +30,40 @@
         </div>
     @endcan
 
+    @if($loggedUserCan['referee'])
+        <div class="card mb-2">
+            <div class="card-header">{{ __('Multiplayer Links') }}</div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    {{ __('Please submit the lobby multiplayer link here. ') }}<br>
+                    {{ __('In case lobby had to get divided into more than one lobby, submit both links below (one at a time).') }}
+                </div>
+
+                {{ Form::open(['url' => route('web.tournaments.rounds.match.update',
+                                        ['tournament' => $tournament->slug,
+                                        'round' => $match->tournament_stage_round_id,
+                                        'match' => $match->id])]) }}
+                @method('PUT')
+                <label class="form-label">{{ __('URL') }}</label>
+                <div class="input-group">
+                    {{ Form::text('mp_link', null, ['class' => 'form-control']) }}
+                    <div class="input-group-append">
+                        {{ Form::submit(__('Submit'), ['class' => 'btn btn-primary', 'style' => 'border-top-left-radius: 0; border-bottom-left-radius: 0;']) }}
+                    </div>
+                </div>
+                {{ Form::close() }}
+                @if($match->quaver_mp_ids)
+                    @foreach($match->quaver_mp_ids as $mp_link)
+                        <a href="{{ $match->mp_link($mp_link) }}"
+                           target="_blank" class="d-block">{{ $match->mp_link($mp_link) }}</a>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">{{ __('Assign staff') }}</div>
-
         <div class="card-body">
             @if($loggedUserCan['organizer'] || $loggedUserCan['head_referee'] || $loggedUserCan['head_streamer'])
                 {{ Form::open(['url' => route('web.tournaments.rounds.match.update',

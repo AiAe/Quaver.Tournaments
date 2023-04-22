@@ -9,8 +9,8 @@
         @php($match_staff = collect($match->staff))
         @php($match_referee = $match_staff->where('role', StaffRole::Referee)->first())
         @php($match_streamer = $match_staff->where('role', StaffRole::Streamer)->first())
-        @php($match_commentator1 = $match_staff->where('role', \App\Enums\StaffRole::Commentator)->first()??null)
-        @php($match_commentator2 = $match_staff->where('role', \App\Enums\StaffRole::Commentator)->where('user_id', '!=', $match_commentator1?->user_id)->first()??null)
+        @php($match_commentator1 = $match_staff->where('role', StaffRole::Commentator)->first()??null)
+        @php($match_commentator2 = $match_staff->where('role', StaffRole::Commentator)->where('user_id', '!=', $match_commentator1?->user_id)->first()??null)
 
         <div class="card mb-2">
             <div class="card-body">

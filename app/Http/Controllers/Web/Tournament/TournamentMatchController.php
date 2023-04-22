@@ -35,6 +35,7 @@ class TournamentMatchController extends Controller
             'streamer_take' => ['nullable'],
             'streamer_resign' => ['nullable'],
             'form_button_action' => ['nullable'],
+            'mp_link' => ['nullable']
         ]);
 
         $validator->validate();
@@ -42,6 +43,19 @@ class TournamentMatchController extends Controller
 
         $loggedUserRoles = app('loggedUserCan');
         $loggedUser = app('loggedUser');
+
+        if (!empty($validated['mp_link'])) {
+            $mp_id = (int)basename($validated['mp_link']);
+
+            $mp_links = $match->quaver_mp_ids ?? [];
+
+            if (!in_array($mp_id, $mp_links)) {
+                $mp_links[] = $mp_id;
+
+                $match->quaver_mp_ids = $mp_links;
+                $match->save();
+            }
+        }
 
         if (($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee']) && !isset($validated['form_button_action'])) {
             $referee_spot = $this->match_spot($match->id, StaffRole::Referee);

@@ -19,7 +19,7 @@ class TournamentMatchFactory extends Factory
             'tournament_stage_round_id' => TournamentStageRound::inRandomOrder()->first()->id,
             'label' => $this->faker->word(),
             'match_format' => MatchFormat::OneVsOne,
-            'quaver_mp_id' => [$this->faker->optional()->randomNumber(4)],
+            'quaver_mp_ids' => [$this->faker->optional()->randomNumber(4)],
             'score1' => $this->faker->optional()->randomNumber(1),
             'score2' => $this->faker->optional()->randomNumber(1),
             'team1_id' => Team::inRandomOrder()->first()->id,

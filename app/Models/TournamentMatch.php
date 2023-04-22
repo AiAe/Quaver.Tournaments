@@ -68,4 +68,9 @@ class TournamentMatch extends Model
     {
         return $this->hasMany(TournamentMatchStaff::class);
     }
+
+    public function mp_link($mp_id): string
+    {
+        return "https://quavergame.com/multiplayer/game/" . $mp_id;
+    }
 }
