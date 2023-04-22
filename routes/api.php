@@ -22,9 +22,14 @@ use Illuminate\Support\Facades\Route;
 Route::githubWebhooks('github-webhook-deploy');
 
 Route::prefix('tournaments/{tournament}')
-    ->middleware(['auth:sanctum', 'can:view,tournament'])
+    ->middleware(['auth:sanctum', 'can:update,tournament'])
     ->group(function () {
-        Route::get('/', fn(Tournament $tournament) => $tournament);
+        Route::get('/', function (Tournament $tournament) {
+            // Unset metas since it contains a lot of private data
+            unset($tournament['metas']);
+
+            return $tournament;
+        });
         Route::get('/teams', fn(Tournament $tournament) => $tournament->load('teams.members')->teams);
         Route::get('/stages', fn(Tournament $tournament) => $tournament->load('stages.rounds.maps', 'stages.rounds.matches')->stages);
     });

@@ -36,6 +36,8 @@ class Tournament extends Model
         'status' => TournamentStatus::class
     ];
 
+    public $hideMeta = true;
+
     protected $with = ['metas'];
 
     public function getRouteKeyName(): string
