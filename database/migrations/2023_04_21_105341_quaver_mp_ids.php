@@ -18,7 +18,7 @@ return new class extends Migration {
         } else {
             Schema::table('tournament_matches', function (Blueprint $table) {
                 $table->dropColumn('quaver_mp_id');
-                $table->longText('quaver_mp_ids')->nullable();
+                $table->text('quaver_mp_ids')->nullable();
             });
         }
     }
