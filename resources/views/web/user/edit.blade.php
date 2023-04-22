@@ -34,7 +34,8 @@
                                 {{ Form::text('', $loggedUser['discord_user_id'], ['class' => 'form-control', 'readonly' => 'readonly']) }}
                                 @if($loggedUser['discord_user_id'] == null)
                                     <div class="input-group-append">
-                                        <a href="{{ route('web.auth.oauth', ['driver' => 'discord', 'redirect' => current_route()]) }}" class="btn btn-discord"
+                                        <a href="{{ route('web.auth.oauth', ['driver' => 'discord', 'redirect' => current_route()]) }}"
+                                           class="btn btn-discord"
                                            style="border-bottom-left-radius: 0; border-top-left-radius: 0;">{{ __('Connect Discord') }}</a>
                                     </div>
                                 @endif
@@ -59,6 +60,15 @@
                     {{ Form::close() }}
                 </div>
             </div>
+
+            @can('create', \App\Models\Tournament::class)
+                <div class="card mt-2">
+                    <div class="card-header">{{ __('Token') }}</div>
+                    <div class="card-body">
+                        <livewire:user.token></livewire:user.token>
+                    </div>
+                </div>
+            @endcan
         </div>
     </div>
 @endsection
