@@ -46,7 +46,7 @@ class MatchGenerator
      * @param array $matchUps
      * @return void
      */
-    public static function generateMatchesFromMatchUps(TournamentStageRound $round, array $matchUps)
+    public static function generateMatchesFromMatchUps(TournamentStageRound $round, array $matchUps, $label_start = "lobby")
     {
         $days = 3;
         $maxMatchesPerDay = count($matchUps) / $days + 1;
@@ -65,11 +65,13 @@ class MatchGenerator
 
             // TODO array insert
             $round->matches()->create([
-                'label' => $i, // TODO: figure out labels
-                'team1_id' => $team1->id,
-                'team2_id' => $team2->id,
+                'label' => sprintf("%s-%s", $label_start, $i),
+                'team1_id' => $team1,
+                'team2_id' => $team2,
                 'timestamp' => $timestamp
             ]);
+
+            $i++;
 
             $matchesThisDay++;
         }
@@ -77,9 +79,14 @@ class MatchGenerator
 
     public static int $optimalHour = 19;
 
-    public static function findOptimalHourFromMatchUp(Team $team1, Team $team2): int
+    public static function findOptimalHourFromMatchUp($team1, $team2): int
     {
-        $middleTimezone = self::getMiddleTimezone($team1->timezone_offset, $team2->timezone_offset);
+        $team1 = Team::where('id', $team1)->first();
+        $team1_captain = $team1->captain();
+        $team2 = Team::where('id', $team2)->first();
+        $team2_captain = $team2->captain();
+
+        $middleTimezone = self::getMiddleTimezone($team1->timezone_offset??$team1_captain->timezone_offset, $team2->timezone_offset??$team2_captain->timezone_offset);
         return ((MatchGenerator::$optimalHour - $middleTimezone) % 24) / 24;
     }
 
