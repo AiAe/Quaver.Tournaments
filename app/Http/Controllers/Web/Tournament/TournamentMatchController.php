@@ -35,7 +35,8 @@ class TournamentMatchController extends Controller
             'streamer_take' => ['nullable'],
             'streamer_resign' => ['nullable'],
             'form_button_action' => ['nullable'],
-            'mp_link' => ['nullable']
+            'mp_link' => ['nullable'],
+            'timestamp' => ['nullable', 'date']
         ]);
 
         $validator->validate();
@@ -55,6 +56,11 @@ class TournamentMatchController extends Controller
                 $match->quaver_mp_ids = $mp_links;
                 $match->save();
             }
+        }
+
+        if (!empty($validated['timestamp']) && ($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee'])) {
+            $match->timestamp = $validated['timestamp'];
+            $match->save();
         }
 
         if (($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee']) && !isset($validated['form_button_action'])) {

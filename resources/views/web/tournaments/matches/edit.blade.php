@@ -62,6 +62,27 @@
         </div>
     @endif
 
+    @if($loggedUserCan['organizer'] || $loggedUserCan['head_referee'])
+        <div class="card mb-2">
+            <div class="card-header">{{ __('Match Schedule') }}</div>
+            <div class="card-body">
+                {{ Form::open(['url' => route('web.tournaments.rounds.match.update',
+                                        ['tournament' => $tournament->slug,
+                                        'round' => $match->tournament_stage_round_id,
+                                        'match' => $match->id])]) }}
+                @method('PUT')
+                <label class="form-label">{{ __('Timestamp UTC-0') }}</label>
+                <div class="input-group">
+                    {{ Form::text('timestamp', $match->timestamp, ['class' => 'form-control']) }}
+                    <div class="input-group-append">
+                        {{ Form::submit(__('Update'), ['class' => 'btn btn-primary', 'style' => 'border-top-left-radius: 0; border-bottom-left-radius: 0;']) }}
+                    </div>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">{{ __('Assign staff') }}</div>
         <div class="card-body">
@@ -164,30 +185,66 @@
     </div>
 
     <div class="card mt-2">
-        <table class="table table-dark">
-            <thead>
-            <tr>
-                <th style="width: 25%;">{{ __('Player') }}</th>
-                <th style="width: 25%;">{{ __('Discord ID') }}</th>
-                <th style="width: 25%;">{{ __('Timezone Offset') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($match->ffaParticipants as $participant)
-                @php($captain = $participant->captain())
+        @if($match->round->stage->stage_format == \App\Enums\TournamentStageFormat::Qualifier)
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th style="width: 25%;">{{ __('Player') }}</th>
+                    <th style="width: 25%;">{{ __('Discord ID') }}</th>
+                    <th style="width: 25%;">{{ __('Timezone Offset') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($match->ffaParticipants as $participant)
+                    @php($captain = $participant->captain())
+                    <tr>
+                        <td>
+                            {{ $captain->username }}
+                        </td>
+                        <td>
+                            {{ $captain->discord_user_id }}
+                        </td>
+                        <td>
+                            {{ $captain->timezone_offset }}
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @endif
+
+        @if($match->round->stage->stage_format == \App\Enums\TournamentStageFormat::Swiss)
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">{{ __('Lobby')  }}</th>
+                    <th style="width: 25%" class="text-center">{{ __('Team 1')  }}</th>
+                    <th style="width: 5%" class="text-center">{{ __('')  }}</th>
+                    <th style="width: 5%" class="text-center">{{ __('')  }}</th>
+                    <th style="width: 25%" class="text-center">{{ __('Team 2')  }}</th>
+                </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
-                        {{ $captain->username }}
+                        <div>{{ $match->label }}</div>
+                        <x-timestamp :timestamp="$match->timestamp" :has_title="false"/>
                     </td>
-                    <td>
-                        {{ $captain->discord_user_id }}
+                    <td class="text-center team-name">
+                        {{ Str::limit($match->team1?->name??"-", 15) }}
+                        <br>
+                        {{ $match->team1?->captain()->discord_user_id }}
                     </td>
-                    <td>
-                        {{ $captain->timezone_offset }}
+                    <td class="text-center">{{ $match->score1??"-" }}</td>
+                    <td class="text-center">{{ $match->score2??"-" }}</td>
+                    <td class="text-center  team-name">
+                        {{ Str::limit($match->team2?->name??"-", 15) }}
+                        <br>
+                        {{ $match->team2?->captain()->discord_user_id }}
                     </td>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection
