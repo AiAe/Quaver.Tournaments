@@ -16,17 +16,30 @@
     @canany(['update', 'delete'], $tournament)
         <div class="d-flex justify-content-between mb-3">
             @can('update', $tournament)
-                <div>
-                    <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                       data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
-                </div>
+                @if($round->stage->stage_format == \App\Enums\TournamentStageFormat::Qualifier)
+                    <div>
+                        <a href="#tournamentGenerate" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                           data-bs-target="#tournamentGenerate">{{ __('Generate Qualifiers Lobbies') }}</a>
+                    </div>
 
-                @push('modals')
-                    <livewire:tournaments.generate-qualifier-lobbies :tournament="$tournament" :round="$round">
-                    </livewire:tournaments.generate-qualifier-lobbies>
-                @endpush
+                    @push('modals')
+                        <livewire:tournaments.generate-qualifier-lobbies :tournament="$tournament" :round="$round">
+                        </livewire:tournaments.generate-qualifier-lobbies>
+                    @endpush
+                @endif
+
+                @if($round->stage->stage_format == \App\Enums\TournamentStageFormat::Swiss)
+                    <div>
+                        <a href="#tournamentGenerateSwiss" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                           data-bs-target="#tournamentGenerateSwiss">{{ __('Import CSV') }}</a>
+                    </div>
+
+                    @push('modals')
+                        <livewire:tournaments.generate-swiss-matches :tournament="$tournament" :round="$round">
+                        </livewire:tournaments.generate-swiss-matches>
+                    @endpush
+                @endif
             @endcan
-
             <div></div>
 
             @can('delete', $tournament)
