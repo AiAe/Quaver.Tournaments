@@ -8,6 +8,11 @@
 
         table tr.staff {
             border-bottom: 2px solid #5A5A5A;
+            font-size: 14px;
+        }
+
+        table tr .team-name {
+            font-weight: bold;
         }
     </style>
 @endpush
@@ -40,12 +45,12 @@
                         <div>{{ $match->label }}</div>
                         <x-timestamp :timestamp="$match->timestamp" :has_title="false"/>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center team-name">
                         {{ Str::limit($match->team1?->name??"-", 15) }}
                     </td>
                     <td class="text-center">{{ $match->score1??"-" }}</td>
                     <td class="text-center">{{ $match->score2??"-" }}</td>
-                    <td class="text-center">{{ Str::limit($match->team2?->name??"-", 15) }}</td>
+                    <td class="text-center  team-name">{{ Str::limit($match->team2?->name??"-", 15) }}</td>
                     <td>
                         @can('editStaff', $match)
                             <a class="btn btn-warning btn-sm" href="{{ route('web.tournaments.rounds.match.edit',
