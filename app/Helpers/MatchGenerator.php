@@ -11,8 +11,8 @@ class MatchGenerator
     /**
      * Creates Qualifier lobbies based on an array of timestamps.
      *
-     * @param TournamentStageRound $round Round to insert the lobbies into
-     * @param array $timestamps Array of Carbon timestamps to generate the lobbies at
+     * @param  TournamentStageRound  $round  Round to insert the lobbies into
+     * @param  array  $timestamps  Array of Carbon timestamps to generate the lobbies at
      */
     public static function generateQualifierLobbies(TournamentStageRound $round, array $timestamps)
     {
@@ -42,18 +42,21 @@ class MatchGenerator
      * Creates matches from a nx2 array (array<[Team, Team]>) of teams. Intended to be used on group stage (swiss) stages.
      * Considers team's set timezones to find an optimal time to play.
      *
-     * @param TournamentStageRound $round
-     * @param array $matchUps
+     * @param  TournamentStageRound  $round
+     * @param  array  $matchUps
      * @return void
      */
-    public static function generateMatchesFromMatchUps(TournamentStageRound $round, array $matchUps, $label_start = "lobby")
-    {
+    public static function generateMatchesFromMatchUps(
+        TournamentStageRound $round,
+        array $matchUps,
+        $label_start = "lobby"
+    ) {
         $days = 3;
         $maxMatchesPerDay = count($matchUps) / $days + 1;
 
         $i = 1;
         $matchesThisDay = 0;
-        $currentDay = $round->starts_at->endOfWeek()->copy();
+        $currentDay = $round->starts_at->endOfWeek()->startOfDay()->copy();
         foreach ($matchUps as [$team1, $team2]) {
             if ($matchesThisDay > $maxMatchesPerDay) {
                 $currentDay->addDays(-1);
@@ -63,7 +66,6 @@ class MatchGenerator
             $hour = self::findOptimalHourFromMatchUp($team1, $team2);
             $timestamp = $currentDay->copy()->addHours($hour);
 
-            // TODO array insert
             $round->matches()->create([
                 'label' => sprintf("%s-%s", $label_start, $i),
                 'team1_id' => $team1,
@@ -77,17 +79,20 @@ class MatchGenerator
         }
     }
 
-    public static int $optimalHour = 19;
+    public static int $optimalHour = 17;
 
     public static function findOptimalHourFromMatchUp($team1, $team2): int
     {
         $team1 = Team::where('id', $team1)->first();
         $team1_captain = $team1->captain();
+        $team1Tz = $team1->timezone_offset ?? $team1_captain->timezone_offset ?? 0;
+
         $team2 = Team::where('id', $team2)->first();
         $team2_captain = $team2->captain();
+        $team2Tz = $team2->timezone_offset ?? $team2_captain->timezone_offset ?? 0;
 
-        $middleTimezone = self::getMiddleTimezone($team1->timezone_offset??$team1_captain->timezone_offset, $team2->timezone_offset??$team2_captain->timezone_offset);
-        return ((MatchGenerator::$optimalHour - $middleTimezone) % 24) / 24;
+        $middleTimezone = self::getMiddleTimezone($team1Tz, $team2Tz);
+        return (MatchGenerator::$optimalHour - $middleTimezone) % 24;
     }
 
     public static function getMiddleTimezone(int $timezone1, int $timezone2): int
