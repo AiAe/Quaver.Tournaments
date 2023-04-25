@@ -30,6 +30,6 @@ Route::prefix('tournaments/{tournament}')
             return $tournament;
         });
         Route::get('/teams', fn(Tournament $tournament) => $tournament->load('teams.members')->teams);
-        Route::get('/stages', fn(Tournament $tournament) => $tournament->load('stages.rounds.maps',
+        Route::get('/stages', fn(Tournament $tournament) => $tournament->load('stages.rounds.maps.map',
             'stages.rounds.matches.staff.user')->stages);
     });
