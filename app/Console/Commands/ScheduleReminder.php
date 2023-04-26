@@ -40,6 +40,8 @@ class ScheduleReminder extends Command
                 'stages.rounds.matches',
                 'stages.rounds.matches.ffaParticipants',
                 'stages.rounds.matches.ffaParticipants.members',
+                'stages.rounds.matches.team1',
+                'stages.rounds.matches.team2',
                 'stages.rounds.matches.staff',
                 'stages.rounds.matches.staff.user'
             ])
@@ -63,7 +65,7 @@ class ScheduleReminder extends Command
                             if ($now->between($round->starts_at, $round->ends_at)) {
                                 foreach ($round->matches as $match) {
                                     // Ignore match if notified
-                                    if($match->notified) continue;
+                                    if ($match->notified) continue;
 
                                     $minutes = $match->timestamp->diffInMinutes($now);
 
@@ -75,9 +77,13 @@ class ScheduleReminder extends Command
 
                                     $match_staff = collect($match->staff);
                                     $match_referee = $match_staff->where('role', StaffRole::Referee)->first();
+                                    $match_streamer = $match_staff->where('role', StaffRole::Streamer)->first();
+                                    $match_commentator1 = $match_staff->where('role', StaffRole::Commentator)->first() ?? null;
+                                    $match_commentator2 = $match_staff->where('role', StaffRole::Commentator)
+                                        ->where('user_id', '!=', $match_commentator1?->user_id)->first() ?? null;
 
                                     // ToDo handle this properly and send msg to staff that ref is missing
-                                    if(!$match_referee) continue;
+                                    if (!$match_referee) continue;
 
                                     $referee = $match_referee->user;
 
@@ -90,11 +96,34 @@ class ScheduleReminder extends Command
                                             $ping_list = array_merge($ping_list, $team_members_discord_ids);
                                         }
                                     } else {
-                                        // ToDo normal stages
+                                        $team1_captain = $match->team1->captain();
+                                        $team2_captain = $match->team2->captain();
+
+                                        if ($team1_captain && $team2_captain) {
+                                            $ping_list[] = $team1_captain->discord_user_id;
+                                            $ping_list[] = $team2_captain->discord_user_id;
+                                        }
                                     }
 
                                     // Don't send pings if lobby is empty
-                                    if(count($ping_list) == 0) continue;
+                                    if (count($ping_list) == 0) continue;
+
+                                    $streamed = false;
+                                    if ($match_streamer) {
+                                        $streamed = true;
+                                    }
+
+                                    $commentators_list = [];
+
+                                    if ($streamed) {
+                                        if ($match_commentator1) {
+                                            $commentators_list[] = $match_commentator1->user->discord_user_id;
+                                        }
+
+                                        if ($match_commentator2) {
+                                            $commentators_list[] = $match_commentator2->user->discord_user_id;
+                                        }
+                                    }
 
                                     if (!empty($wh_player_reminders)) {
                                         $this->notify($wh_player_reminders, strtr($this->players_message_basic(), [
@@ -103,7 +132,8 @@ class ScheduleReminder extends Command
                                             '{timestamp}' => $timestamp,
                                             '{referee_username}' => $referee->username,
                                             '{referee_discord}' => sprintf("<@%s>", $referee->discord_user_id),
-                                            '{players}' => "<@" . implode("> <@", $ping_list) . ">"
+                                            '{players}' => "<@" . implode("> <@", $ping_list) . ">",
+                                            '{stream}' => $streamed ? __('Yes') : __('No')
                                         ]));
                                     }
 
@@ -114,7 +144,9 @@ class ScheduleReminder extends Command
                                             '{timestamp}' => $timestamp,
                                             '{referee_username}' => $referee->username,
                                             '{referee_discord}' => sprintf("<@%s>", $referee->discord_user_id),
-                                            '{lobby_password}' => Str::random(8)
+                                            '{lobby_password}' => Str::random(8),
+                                            '{streamer_discord}' => ($match_streamer) ? sprintf("<@%s>", $match_streamer->user->discord_user_id) : 'None',
+                                            '{commentators}' => ($commentators_list) ? "<@" . implode("> <@", $commentators_list) . ">" : 'None'
                                         ]));
                                     }
 
@@ -133,6 +165,7 @@ class ScheduleReminder extends Command
         return <<<HTML
         Lobby **{lobby}** will start {discord_timestamp} - {timestamp} (UTC+0)
         Referee for this lobby is **{referee_username}** - {referee_discord}
+        Streamed: {stream}
 
         **Referee will send invites 10 minutes early!**
 
@@ -146,6 +179,8 @@ class ScheduleReminder extends Command
         return <<<HTML
         Lobby **{lobby}** will start {discord_timestamp} - {timestamp} (UTC+0)
         Referee for this lobby is **{referee_username}** - {referee_discord}
+        Streamer: {streamer_discord}
+        Commentators: {commentators}
 
         **Generated lobby password: {lobby_password}**
 

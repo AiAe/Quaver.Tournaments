@@ -10,6 +10,8 @@ use App\Models\TournamentMatchStaff;
 use App\Models\TournamentStageRound;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Woeler\DiscordPhp\Message\DiscordTextMessage;
+use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 
 class TournamentMatchController extends Controller
 {
@@ -56,11 +58,52 @@ class TournamentMatchController extends Controller
                 $match->quaver_mp_ids = $mp_links;
                 $match->save();
             }
+
+            return back();
         }
 
         if (!empty($validated['timestamp']) && ($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee'])) {
             $match->timestamp = $validated['timestamp'];
             $match->save();
+            $match->refresh();
+
+            $wh_staff_reminders = $tournament->getMeta('discord_webhook_reminders_staff');
+
+            if ($wh_staff_reminders) {
+                // Check if match has staff
+                $match_staff = collect($match->staff);
+                $match_referee = $match_staff->where('role', StaffRole::Referee)->first();
+                $match_streamer = $match_staff->where('role', StaffRole::Streamer)->first();
+                $match_commentator1 = $match_staff->where('role', StaffRole::Commentator)->first() ?? null;
+                $match_commentator2 = $match_staff->where('role', StaffRole::Commentator)
+                    ->where('user_id', '!=', $match_commentator1?->user_id)->first() ?? null;
+
+                $ping_list = [];
+
+                if ($match_referee) $ping_list[] = $match_referee->user->discord_user_id;
+                if ($match_streamer) $ping_list[] = $match_streamer->user->discord_user_id;
+                if ($match_commentator1) $ping_list[] = $match_commentator1->user->discord_user_id;
+                if ($match_commentator2) $ping_list[] = $match_commentator2->user->discord_user_id;
+
+                if ($ping_list) {
+                    $msg = <<<HTML
+                    Lobby **{lobby}** has moved to {new_timestamp} (UTC+0) ({discord_new_timestamp})
+                    If anyone cannot make please resign from your spot!
+                    {pings}
+                    HTML;
+
+                    $discord_message = new DiscordTextMessage();
+                    $discord_message->setContent(strtr($msg, [
+                        '{lobby}' => $match->label,
+                        '{new_timestamp}' => $match->timestamp,
+                        '{discord_new_timestamp}' => sprintf("<t:%s:R>", $match->timestamp->timestamp),
+                        '{pings}' => "<@" . implode("> <@", $ping_list) . ">"
+                    ]));
+                    $discord_webhook = new DiscordWebhook($wh_staff_reminders);
+                    $discord_webhook->send($discord_message);
+                }
+            }
+            return back();
         }
 
         if (($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee']) && !isset($validated['form_button_action'])) {
