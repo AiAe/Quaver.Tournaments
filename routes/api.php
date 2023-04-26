@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Tournament;
+use App\Models\TournamentMatch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +34,23 @@ Route::prefix('tournaments/{tournament}')
         });
         Route::get('/teams', fn(Tournament $tournament) => $tournament->load('teams.members')->teams);
         Route::get('/stages', fn(Tournament $tournament) => $tournament->load('stages.rounds.maps', 'stages.rounds.matches')->stages);
+        Route::post('/match/{match}', function (Request $request, Tournament $tournament, TournamentMatch $match) {
+            $validator = Validator::make($request->all(), [
+                'mp_link' => ['required'],
+                'score1' => ['required', 'numeric'],
+                'score2' => ['required', 'numeric'],
+            ]);
+
+            $validator->validate();
+            $validated = $validator->validated();
+
+            $mp_id = (int)basename($validated['mp_link']);
+            $match->quaver_mp_ids = array_merge($match->quaver_mp_ids??[], [$mp_id]);
+            $match->score1 = $validated['score1'];
+            $match->score2 = $validated['score2'];
+
+            $match->save();
+
+            return "Match updated!";
+        });
     });
