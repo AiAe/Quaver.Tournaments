@@ -28,7 +28,7 @@
                     @endpush
                 @endif
 
-                @if($round->stage->stage_format == \App\Enums\TournamentStageFormat::Swiss)
+                @if($round->stage->stage_format == \App\Enums\TournamentStageFormat::Swiss || $round->stage->stage_format == \App\Enums\TournamentStageFormat::SingleElimination)
                     <div>
                         <a href="#tournamentGenerateSwiss" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                            data-bs-target="#tournamentGenerateSwiss">{{ __('Import CSV') }}</a>
