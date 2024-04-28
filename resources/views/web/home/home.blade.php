@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3 d-none">
             <div class="col-lg-12">
                 <div class="card text-center">
                     <div class="card-body">
