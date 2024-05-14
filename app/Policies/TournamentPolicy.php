@@ -9,10 +9,18 @@ use App\Models\Tournament;
 use App\Models\TournamentStageRound;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class TournamentPolicy
 {
     use HandlesAuthorization;
+
+    public function before(): bool|null
+    {
+        if(!app()->isProduction() && Auth::user() && Auth::user()->hasRole(UserRoles::Admin)) return true;
+
+        return null;
+    }
 
     public function viewAny(?User $user): bool
     {

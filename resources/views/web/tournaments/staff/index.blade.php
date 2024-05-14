@@ -13,6 +13,19 @@
 @endpush
 
 @section('section')
+    <style>
+        .table a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .table a div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <div>{{ $title }}</div>
@@ -28,36 +41,40 @@
             <table class="table table-hover table-dark">
                 <thead>
                 <tr>
-                    <th style="width: 25%;">{{ __('Role') }}</th>
-                    <th>{{ __('User') }}</th>
-                    @can('update', $tournament)
-                        <th style="width: 20%;">{{ __('Actions') }}</th>
-                    @endcan
+                    <th style="width: 15%;">{{ __('Position') }}</th>
+                    <th>{{ __('Member(s)') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($tournament->staff as $staff)
+                @php($staff_enums = \App\Enums\StaffRole::class)
+                @foreach(\App\Enums\StaffRole::names() as $key => $name)
+                    @php($role = $staff_enums::from($key))
+                    @php($members = collect($tournament->staff)->where('staff_role', $role))
                     <tr>
-                        <td>{{ $staff->staff_role->name() }}</td>
+                        <td> {{ $role->name() }}</td>
                         <td>
-                            <a href="{{ $staff->user->quaverUrl() }}" target="_blank" rel="noreferrer">
-                                {{ $staff->user->username }}
-                            </a>
+                            @if(count($members))
+                                @foreach($members as $member)
+                                    <a href="{{ $member->user->quaverUrl() }}" target="_blank">
+                                        <div>
+                                            <img src="{{ countryFlag($member->user->country) }}"
+                                                 alt="{{ $member->user->country }}" height="14">
+                                            {{ $member->user->username }}
+                                        </div>
+                                    </a>
+                                    @can('update', $tournament)
+                                        {{ Form::open(['url' => route('web.tournaments.staff.destroy', ['tournament' => $tournament, 'staff' => $member->id]), 'class' => 'd-inline-block']) }}
+                                        @method('DELETE')
+                                        <a href="#" class="text-danger" onclick="this.closest('form').submit();return false;"><i class="bi bi-x"></i></a>
+                                        {{ Form::close() }}
+                                    @endcan
+                                @endforeach
+                            @else
+                                -
+                            @endif
                         </td>
-                        @can('update', $tournament)
-                            <td>
-                                {{ Form::open(['url' => route('web.tournaments.staff.destroy', ['tournament' => $tournament, 'staff' => $staff->id]), 'class' => 'd-flex']) }}
-                                @method('DELETE')
-                                {{ Form::submit(__('Kick'), ['class' => 'btn btn-danger btn-sm']) }}
-                                {{ Form::close() }}
-                            </td>
-                        @endcan
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="2">{{ __('There is currently no Staff') }}</td>
-                    </tr>
-                @endforelse
+                @endforeach
                 </tbody>
             </table>
         </div>
