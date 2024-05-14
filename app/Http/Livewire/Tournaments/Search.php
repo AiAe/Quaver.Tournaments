@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Tournaments;
 
 use App\Enums\TournamentStatus;
-use App\Enums\UserRoles;
 use App\Models\Tournament;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -76,6 +76,13 @@ class Search extends Component
 
         if (stringHasValue($this->status)) {
             $tournaments->where('status', $this->status);
+        } else {
+            $tournaments->where(function (Builder $query) {
+                $query->where('status', TournamentStatus::RegistrationsOpen);
+                $query->orWhere('status', TournamentStatus::Ongoing);
+                $query->orWhere('status', TournamentStatus::Upcoming);
+            });
+
         }
 
         $tournaments->with('metas', 'teams', 'teams.members');
