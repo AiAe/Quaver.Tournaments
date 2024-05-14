@@ -1,7 +1,7 @@
 @extends('web.tournaments.parts.base')
 
 @push('seo')
-    {!! seo()->for($tournament) !!}
+    {!! seo()->for(new \RalphJSmit\Laravel\SEO\Support\SEOData(title: $tournament->name)) !!}
 @endpush
 
 @push('cover')

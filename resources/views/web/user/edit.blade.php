@@ -1,7 +1,7 @@
 @extends('web.layout.base')
 
 @push('seo')
-    {!! seo() !!}
+    {!! seo()->for(new \RalphJSmit\Laravel\SEO\Support\SEOData(title: 'Settings')) !!}
 @endpush
 
 @section('content')
