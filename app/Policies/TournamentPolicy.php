@@ -14,6 +14,13 @@ class TournamentPolicy
 {
     use HandlesAuthorization;
 
+    public function before(): bool|null
+    {
+        if(!app()->isProduction() && \Auth::user()->hasRole(UserRoles::Admin)) return true;
+
+        return null;
+    }
+
     public function viewAny(?User $user): bool
     {
         return true;
