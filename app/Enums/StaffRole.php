@@ -20,6 +20,7 @@ enum StaffRole: int
     case Composer = 9;
     case PlayTester = 10;
     case Spreadsheeter = 11;
+    case Designer = 12;
 
     public function name(): string
     {
@@ -34,8 +35,9 @@ enum StaffRole: int
             self::Streamer => 'Streamer',
             self::Commentator => 'Commentator',
             self::Composer => 'Composer',
-            self::PlayTester => 'Play Tester',
+            self::PlayTester => 'PlaytTester',
             self::Spreadsheeter => 'Spreadsheeter',
+            self::Designer => 'Designer',
         };
     }
 }
