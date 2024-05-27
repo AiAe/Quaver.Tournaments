@@ -119,6 +119,7 @@ class TournamentMatchController extends Controller
 
         if (!empty($validated['timestamp']) && ($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee'])) {
             $match->timestamp = $validated['timestamp'];
+            $match->notified = 0;
             $match->save();
             $match->refresh();
 
