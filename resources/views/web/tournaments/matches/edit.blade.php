@@ -171,14 +171,46 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-2">
+                <div class="mb-2">
                     <label class="form-label">{{ __('Commentator 1') }}</label>
-                    {{ Form::text('', $match_commentator1->user->username??'', ['class' => 'form-control', 'readonly' => 'readonly']) }}
+                    <div class="input-group">
+                        {{ Form::text('', $match_commentator1->user->username??'', ['class' => 'form-control', 'readonly' => 'readonly']) }}
+
+                        @if($loggedUserCan['commentator'])
+                            @if(!$match_commentator1)
+                                <x-matches.actions.assign :tournament="$tournament" :match="$match"
+                                                          type="commentator_take" :name="__('Take')"
+                                                          btn_class="btn-primary">
+                                </x-matches.actions.assign>
+                            @elseif($match_commentator1->user_id == $loggedUser->id)
+                                <x-matches.actions.assign :tournament="$tournament" :match="$match"
+                                                          type="commentator_resign" :name="__('Resign')"
+                                                          btn_class="btn-danger">
+                                </x-matches.actions.assign>
+                            @endif
+                        @endif
+                    </div>
                 </div>
 
-                <div class="form-group mb-2">
+                <div class="mb-2">
                     <label class="form-label">{{ __('Commentator 2') }}</label>
-                    {{ Form::text('', $match_commentator2->user->username??'', ['class' => 'form-control', 'readonly' => 'readonly']) }}
+                    <div class="input-group">
+                        {{ Form::text('', $match_commentator2->user->username??'', ['class' => 'form-control', 'readonly' => 'readonly']) }}
+
+                        @if($loggedUserCan['commentator'])
+                            @if(!$match_commentator2)
+                                <x-matches.actions.assign :tournament="$tournament" :match="$match"
+                                                          type="commentator_take" :name="__('Take')"
+                                                          btn_class="btn-primary">
+                                </x-matches.actions.assign>
+                            @elseif($match_commentator2->user_id == $loggedUser->id)
+                                <x-matches.actions.assign :tournament="$tournament" :match="$match"
+                                                          type="commentator_resign" :name="__('Resign')"
+                                                          btn_class="btn-danger">
+                                </x-matches.actions.assign>
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

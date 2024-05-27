@@ -36,6 +36,8 @@ class TournamentMatchController extends Controller
             'referee_resign' => ['nullable'],
             'streamer_take' => ['nullable'],
             'streamer_resign' => ['nullable'],
+            'commentator_take' => ['nullable'],
+            'commentator_resign' => ['nullable'],
             'form_button_action' => ['nullable'],
             'mp_link' => ['nullable'],
             'timestamp' => ['nullable', 'date']
@@ -60,6 +62,59 @@ class TournamentMatchController extends Controller
             }
 
             return back();
+        }
+
+        // Handle commentator manual assign/resign
+        if(!empty($validated['commentator_take']) && $loggedUserRoles['commentator']) {
+            $commentator_spot = TournamentMatchStaff::query()
+                ->where('tournament_match_id', $match->id)
+                ->where('role', '=', StaffRole::Commentator)
+                ->where('user_id', '=', $loggedUser->id)
+                ->first();
+
+            if($commentator_spot != null) {
+                $this->spot_taken();
+                return back();
+            }
+
+            $commentator1_spot = TournamentMatchStaff::query()
+                ->where('tournament_match_id', $match->id)
+                ->where('role', '=', StaffRole::Commentator)
+                ->first();
+
+            $commentator2_spot = TournamentMatchStaff::query()
+                ->where('tournament_match_id', $match->id)
+                ->where('role', '=', StaffRole::Commentator);
+
+            if ($commentator1_spot) {
+                $commentator2_spot->where('user_id', '!=', $commentator1_spot->user_id);
+            }
+
+            $commentator2_spot = $commentator2_spot->first();
+
+            if($commentator1_spot == null) {
+                $this->assign_user($match->id, $loggedUser->id, StaffRole::Commentator);
+                $this->assigned_success();
+            } elseif($commentator2_spot == null) {
+                $this->assign_user($match->id, $loggedUser->id, StaffRole::Commentator);
+                $this->assigned_success();
+            } else {
+                // all spots are taken
+                $this->spot_taken();
+            }
+        }
+
+        if(!empty($validated['commentator_resign']) && $loggedUserRoles['commentator']) {
+            $commentator_spot = TournamentMatchStaff::query()
+                ->where('tournament_match_id', $match->id)
+                ->where('role', '=', StaffRole::Commentator)
+                ->where('user_id', '=', $loggedUser->id)
+                ->first();
+
+            if($commentator_spot) {
+                $commentator_spot->delete();
+                $this->discharge_success();
+            }
         }
 
         if (!empty($validated['timestamp']) && ($loggedUserRoles['organizer'] || $loggedUserRoles['head_referee'])) {
