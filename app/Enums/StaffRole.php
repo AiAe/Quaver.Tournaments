@@ -35,7 +35,7 @@ enum StaffRole: int
             self::Streamer => 'Streamer',
             self::Commentator => 'Commentator',
             self::Composer => 'Composer',
-            self::PlayTester => 'PlaytTester',
+            self::PlayTester => 'PlayTester',
             self::Spreadsheeter => 'Spreadsheeter',
             self::Designer => 'Designer',
         };
