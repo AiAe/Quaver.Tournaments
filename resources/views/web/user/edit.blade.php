@@ -42,7 +42,6 @@
                                 </div>
                             @endif
                         </div>
-                        <small>{{ __('If you have linked the wrong Discord account, please contact tournament organizer or site admins!') }}</small>
                     </div>
                 </div>
 
