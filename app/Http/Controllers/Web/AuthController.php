@@ -26,7 +26,8 @@ class AuthController extends Controller
             return $this->sendFailedResponse("{$driver} is not currently supported");
         }
 
-        if (Auth::user() && !empty(Auth::user()->discord_user_id)) {
+        // Allow re-linking Discord
+        if (Auth::user() && $driver !== "discord") {
             return $this->sendFailedResponse(__("You are already logged in!"));
         }
 
