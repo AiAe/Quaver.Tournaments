@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
 
         // Allow re-linking Discord
-        if (Auth::user() && (!empty(Auth::user()->discord_user_id)) && ($driver == "discord" && !str_contains($request->header('referer'), "edit"))) {
+        if (Auth::user() && $driver !== "discord") {
             return $this->sendFailedResponse(__("You are already logged in!"));
         }
 
