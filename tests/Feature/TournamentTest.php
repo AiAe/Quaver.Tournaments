@@ -99,7 +99,7 @@ class TournamentTest extends TestCase
         $this->actingAs($this->organizer)
             ->put(route('web.tournaments.update', $this->tournament), $data)->assertRedirect();
         $this->tournament->refresh();
-        $this->assertEquals('ababa', $this->tournament->discord);
+        $this->assertEquals('https://discord.com', $this->tournament->discord);
     }
 
     public function testDelete()
