@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Enums\TournamentFormat;
+use App\Enums\TournamentStatus;
 use App\Enums\UserRoles;
 use App\Http\QuaverApi\QuaverApi;
 use App\Models\User;
@@ -37,6 +39,17 @@ class UserUpdateJob implements ShouldQueue
 
                 foreach ($this->user->teams as $team) {
                     $team->updateTeamRank();
+                }
+
+                // Update team names
+                $tournaments = $this->user->participatedTournaments()
+                    ->where('status', '!=', TournamentStatus::Concluded)
+                    ->where('format', TournamentFormat::Solo);
+
+                foreach ($tournaments as $tournament) {
+                    $team = $this->user->teams()->firstWhere('tournament_id', $tournament->id);
+                    $team->name = $this->user->username;
+                    $team->save();
                 }
             }
         } catch (\Exception $e) {
