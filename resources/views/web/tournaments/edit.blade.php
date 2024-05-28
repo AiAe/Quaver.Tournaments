@@ -121,7 +121,7 @@
 
                     <hr>
 
-                    <div class="row">
+                    <div class="row gy-3">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Discord URL') }}</label>
@@ -135,9 +135,7 @@
                                 {{ Form::text('twitch', $tournament->getMeta('twitch')??"", ['class' => 'form-control']) }}
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-2">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label">{{ __('Spreadsheet URL') }}</label>
@@ -149,6 +147,13 @@
                             <div class="form-group">
                                 <label class="form-label">{{ __('Twitter URL') }}</label>
                                 {{ Form::text('twitter', $tournament->getMeta('twitter')??"", ['class' => 'form-control']) }}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">{{ __('YouTube URL') }}</label>
+                                {{ Form::text('youtube', $tournament->getMeta('youtube')??"", ['class' => 'form-control']) }}
                             </div>
                         </div>
                     </div>

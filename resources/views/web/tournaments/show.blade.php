@@ -57,6 +57,14 @@
                                 {{ __('Twitch') }}
                             </a>
                         @endif
+                            @if($tournament->getMeta('youtube'))
+                                <a href="{{ $tournament->getMeta('youtube') }}" class="btn btn-youtube btn-sm"
+                                   target="_blank"
+                                   rel="noreferrer">
+                                    <i class="bi bi-youtube"></i>
+                                    {{ __('YouTube') }}
+                                </a>
+                            @endif
                     </div>
                 </div>
             </div>
