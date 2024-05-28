@@ -47,6 +47,7 @@ class UserController extends Controller
             foreach ($tournaments as $tournament) {
                 $team = $loggedUser->teams()->firstWhere('tournament_id', $tournament->id);
                 $team->timezone_offset = $loggedUser->timezone_offset;
+                $team->name = $loggedUser->username;
                 $team->save();
             }
         });

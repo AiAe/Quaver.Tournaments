@@ -37,9 +37,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('app.env') == "local") {
-            Model::preventLazyLoading();
-        }
+//        if (config('app.env') == "local") {
+//            Model::preventLazyLoading();
+//        }
 
         if (config('app.env') == 'production') {
             \URL::forceScheme('https');
