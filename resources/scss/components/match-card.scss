@@ -140,3 +140,72 @@
         }
     }
 }
+
+.round-match-border {
+    border-right: 1px solid #5A5A5A;
+
+    @media (max-width: 1023px) {
+        border-right: none !important;
+
+        .round-match-staff {
+            border-top: 1px solid #5A5A5A;
+        }
+    }
+}
+
+.round-match {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    color: #fff;
+
+    .round-match-team-right-mobile {
+        display: none;
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            display: inline-block;
+        }
+    }
+
+    @media (max-width: map-get($grid-breakpoints, 'sm')) {
+        display: block;
+    }
+
+    * {
+        text-align: center;
+    }
+
+    .round-match-team-left {
+        width: 35%;
+        font-size: 22px;
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            width: 100%;
+        }
+    }
+
+    .round-match-team-right {
+        width: 35%;
+        font-size: 22px;
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            width: 100%;
+            display: none;
+        }
+    }
+
+    .round-match-team-status {
+        width: 30%;
+
+        @media (max-width: map-get($grid-breakpoints, 'sm')) {
+            width: 100%;
+        }
+
+        .badge-result {
+            padding: 9px 19px;
+            font-size: 18px;
+            color: #ffffff !important;
+        }
+    }
+}

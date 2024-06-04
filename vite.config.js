@@ -1,18 +1,12 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-
-const path = require('path');
+import path from 'path'
 
 export default defineConfig({
-    server: {
-        host: '0.0.0.0',
-        hmr: {
-            host: 'localhost'
-        }
-    },
     plugins: [
         laravel({
             input: [
+                'resources/scss/components/*.scss',
                 'resources/scss/app.scss',
                 'resources/js/app.js'
             ],

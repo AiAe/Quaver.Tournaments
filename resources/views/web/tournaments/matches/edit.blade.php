@@ -246,37 +246,39 @@
         @endif
 
         @if($match->round->stage->stage_format == \App\Enums\TournamentStageFormat::Swiss)
-            <table class="table table-dark">
-                <thead>
-                <tr>
-                    <th style="width: 10%;">{{ __('Lobby')  }}</th>
-                    <th style="width: 25%" class="text-center">{{ __('Team 1')  }}</th>
-                    <th style="width: 5%" class="text-center">{{ __('')  }}</th>
-                    <th style="width: 5%" class="text-center">{{ __('')  }}</th>
-                    <th style="width: 25%" class="text-center">{{ __('Team 2')  }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <div>{{ $match->label }}</div>
-                        <x-timestamp :timestamp="$match->timestamp" :has_title="false"/>
-                    </td>
-                    <td class="text-center team-name">
-                        {{ Str::limit($match->team1?->name??"-", 15) }}
-                        <br>
-                        {{ $match->team1?->captain()->discord_user_id }}
-                    </td>
-                    <td class="text-center">{{ $match->score1??"-" }}</td>
-                    <td class="text-center">{{ $match->score2??"-" }}</td>
-                    <td class="text-center  team-name">
-                        {{ Str::limit($match->team2?->name??"-", 15) }}
-                        <br>
-                        {{ $match->team2?->captain()->discord_user_id }}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">{{ __('Lobby')  }}</th>
+                        <th style="width: 25%" class="text-center">{{ __('Team 1')  }}</th>
+                        <th style="width: 5%" class="text-center">{{ __('')  }}</th>
+                        <th style="width: 5%" class="text-center">{{ __('')  }}</th>
+                        <th style="width: 25%" class="text-center">{{ __('Team 2')  }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div>{{ $match->label }}</div>
+                            <x-timestamp :timestamp="$match->timestamp" :has_title="false"/>
+                        </td>
+                        <td class="text-center team-name">
+                            {{ Str::limit($match->team1?->name??"-", 15) }}
+                            <br>
+                            {{ $match->team1?->captain()->discord_user_id }}
+                        </td>
+                        <td class="text-center">{{ $match->score1??"-" }}</td>
+                        <td class="text-center">{{ $match->score2??"-" }}</td>
+                        <td class="text-center  team-name">
+                            {{ Str::limit($match->team2?->name??"-", 15) }}
+                            <br>
+                            {{ $match->team2?->captain()->discord_user_id }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 @endsection

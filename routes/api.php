@@ -37,7 +37,7 @@ Route::prefix('tournaments/{tournament}')
             'stages.rounds.matches.staff.user')->stages);
         Route::post('/match/{match}', function (Request $request, Tournament $tournament, TournamentMatch $match) {
             $validator = Validator::make($request->all(), [
-                'mp_link' => ['required'],
+                'mp_link' => ['nullable'],
                 'score1' => ['required', 'numeric'],
                 'score2' => ['required', 'numeric'],
             ]);
@@ -45,10 +45,17 @@ Route::prefix('tournaments/{tournament}')
             $validator->validate();
             $validated = $validator->validated();
 
-            $mp_id = (int)basename($validated['mp_link']);
-            $match->quaver_mp_ids = array_merge($match->quaver_mp_ids??[], [$mp_id]);
+            if(isset($validated['mp_link']) && $validated['mp_link']) {
+                $mp_id = (int)basename($validated['mp_link']);
+                $match->quaver_mp_ids = array_merge($match->quaver_mp_ids??[], [$mp_id]);
+            }
+
             $match->score1 = $validated['score1'];
             $match->score2 = $validated['score2'];
+
+            if($validated['score1'] || $validated['score2']) {
+                $match->notified = 1;
+            }
 
             $match->save();
 
