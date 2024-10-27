@@ -27,7 +27,7 @@
 @stack('modals')
 
 @auth()
-    @if(empty($loggedUser->timezone_offset))
+    @if($loggedUser->timezone_offset === null)
         @include('web.modals.timezone')
     @endif
 @endauth
